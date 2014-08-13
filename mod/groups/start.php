@@ -787,6 +787,8 @@ function discussion_init() {
 
 	// notifications
 	register_notification_object('object', 'groupforumtopic', elgg_echo('discussion:notification:topic:subject'));
+
+	// cyu - 
 	elgg_register_plugin_hook_handler('notify:entity:message', 'object', 'groupforumtopic_notify_message');
 	elgg_register_event_handler('create', 'annotation', 'discussion_reply_notifications');
 	elgg_register_plugin_hook_handler('notify:annotation:message', 'group_topic_post', 'discussion_create_reply_notification');
@@ -924,14 +926,16 @@ function discussion_add_to_river_menu($hook, $type, $return, $params) {
  * @param array  $params
  */
 function groupforumtopic_notify_message($hook, $type, $message, $params) {
+
 	$entity = $params['entity'];
 	$to_entity = $params['to_entity'];
 	$method = $params['method'];
 
 	if (($entity instanceof ElggEntity) && ($entity->getSubtype() == 'groupforumtopic')) {
-		$descr = $entity->description;
+		$descr = $entity->description; 
 		$title = $entity->title;
 		$url = $entity->getURL();
+
 		$owner = $entity->getOwnerEntity();
 		$group = $entity->getContainerEntity();
 
@@ -983,6 +987,9 @@ function discussion_create_reply_notification($hook, $type, $message, $params) {
  */
 function discussion_reply_notifications($event, $type, $annotation) {
 	global $CONFIG, $NOTIFICATION_HANDLERS;
+
+	// cyu - this function should be disabled so that emails don't get
+	//elgg_log('cyu - mod/groups/start.php : generate notification object ', 'NOTICE');
 
 	if ($annotation->name !== 'group_topic_post') {
 		return;

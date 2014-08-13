@@ -54,6 +54,7 @@ $content_menu = elgg_view_menu('owner_block', array(
 	'class' => 'profile-content-menu',
 ));
 
+
 echo <<<HTML
 
 <div id="profile-owner-block">

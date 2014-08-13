@@ -16,6 +16,7 @@ $read_flag = get_input('read', false);
 if ($delete_flag) {
 	$success_msg = elgg_echo('messages:success:delete');
 	foreach ($message_ids as $guid) {
+		error_log('cyu - delete_flag');
 		$message = get_entity($guid);
 		if ($message && $message->getSubtype() == 'messages' && $message->canEdit()) {
 			$message->delete();

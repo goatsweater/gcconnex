@@ -36,6 +36,7 @@ if (!empty($groups)) {
 		$subscriptions[$method] = get_input($method.'subscriptions', array());
 		foreach ($groups as $group) {
 			if (in_array($group, $subscriptions[$method])) {
+				elgg_log('cyu - method : ' . $user->username . ' ++++ ' . $method, 'NOTICE');
 				add_entity_relationship($user->guid, 'notify'.$method, $group);
 			} else {
 				remove_entity_relationship($user->guid, 'notify'.$method, $group);

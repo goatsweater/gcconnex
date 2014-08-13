@@ -4,6 +4,7 @@
  *
  * @package ElggGroups
  */
+
 $logged_in_user = elgg_get_logged_in_user_entity();
 
 $user_guid = get_input('user_guid');

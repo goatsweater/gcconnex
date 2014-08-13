@@ -38,7 +38,7 @@ if (!empty($vars['invitations']) && is_array($vars['invitations'])) {
 <h4>$group_title</h4>
 <p class="elgg-subtext">$group->briefdescription</p>
 HTML;
-			$alt = $accept_button . $delete_button;
+			$alt = $view_join_reason . $accept_button . $delete_button;
 
 			echo '<li class="pvs">';
 			echo elgg_view_image_block($icon, $body, array('image_alt' => $alt));
@@ -49,3 +49,4 @@ HTML;
 } else {
 		echo '<p class="mtm">' . elgg_echo('groups:invitations:none') . "</p>";
 }
+

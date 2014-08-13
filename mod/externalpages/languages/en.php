@@ -12,7 +12,7 @@ $english = array(
 	'admin:appearance:expages' => "Site Pages",
 	'expages:about' => "About",
 	'expages:terms' => "Terms",
-	'expages:privacy' => "Privacy",
+	'expages:privacy-fr' => "Privacy-fr",
 	'expages:contact' => "Contact",
 
 	'expages:notset' => "This page has not been set up yet.",

@@ -5,6 +5,8 @@
  * @package ElggGroups
  */
 
+elgg_log('cyu - revoked joined', 'NOTICE');
+
 $user_guid = get_input('user_guid', elgg_get_logged_in_user_guid());
 $group_guid = get_input('group_guid');
 

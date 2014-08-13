@@ -1,6 +1,6 @@
 <?php
 /**
- * User dashboard languages
+ * User dashboard languages asd asd
  */
 
 $english = array(
@@ -11,4 +11,4 @@ $english = array(
 	'dashboard:widget:group:noselect' => 'Edit this widget to select a group',
 );
 
-add_translation("en", $english);
+add_translation('en', $english);

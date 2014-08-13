@@ -5,6 +5,8 @@
  * @package Elgg.Core.Plugin
  * @subpackage UserValidationByEmail
  */
+//elgg_log('cyu - /uservalidationbyemail/actions/delete.php : attempting to delete a user...','NOTICE');
+//execute_query('select sleep(500)',);
 
 $user_guids = get_input('user_guids');
 $error = FALSE;

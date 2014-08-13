@@ -13,6 +13,7 @@ if ($draft_warning) {
 	$draft_warning = '<span class="mbm elgg-text-help">' . $draft_warning . '</span>';
 }
 
+
 $action_buttons = '';
 $delete_link = '';
 $preview_button = '';
@@ -162,5 +163,6 @@ $categories_input
 
 	$action_buttons
 </div>
+
 
 ___HTML;

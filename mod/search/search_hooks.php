@@ -279,8 +279,8 @@ function search_tags_hook($hook, $type, $value, $params) {
 
 		// get tags for each tag name requested to find which ones matched.
 		foreach ($search_tag_names as $tag_name) {
+			//elgg_log('cyu - 999 : ' . $tag_name, 'NOTICE');
 			$tags = $entity->getTags($tag_name);
-
 			// @todo make one long tag string and run this through the highlight
 			// function.  This might be confusing as it could chop off
 			// the tag labels.

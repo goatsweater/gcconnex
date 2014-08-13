@@ -245,6 +245,7 @@ function blog_entity_menu_setup($hook, $type, $return, $params) {
  * @return string
  */
 function blog_notify_message($hook, $type, $message, $params) {
+	//elgg_log('cyu - blog notify message invoked', 'NOTICE');
 	$entity = $params['entity'];
 	$to_entity = $params['to_entity'];
 	$method = $params['method'];

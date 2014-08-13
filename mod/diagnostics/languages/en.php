@@ -1,6 +1,6 @@
 <?php
 /**
- * Elgg diagnostics language pack.
+ * Elgg diagnostics language pack. asdf asd
  *
  * @package ElggDiagnostics
  */
@@ -42,4 +42,4 @@ Global variables:
 ------------------------------------------------------------------------',
 );
 
-add_translation("en", $english);
+add_translation('en', $english);

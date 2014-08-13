@@ -4,7 +4,16 @@
  * 
  * @package ElggGroups
  */
+?>
 
+<script>
+		$(document).ready(function() {
+		document.getElementsByName('disable_button').disabled = true;
+	});
+</script>
+
+
+<?php
 $group = $vars['entity'];
 
 $icon = elgg_view_entity_icon($group, 'tiny');

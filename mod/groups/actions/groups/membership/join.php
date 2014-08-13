@@ -10,6 +10,8 @@
  * @package ElggGroups
  */
 
+elgg_log('cyu - joined a group...', 'NOTICE');
+
 global $CONFIG;
 
 $user_guid = get_input('user_guid', elgg_get_logged_in_user_guid());
@@ -19,10 +21,14 @@ $user = get_entity($user_guid);
 
 // access bypass for getting invisible group
 $ia = elgg_set_ignore_access(true);
+
 $group = get_entity($group_guid);
 elgg_set_ignore_access($ia);
 
 if (($user instanceof ElggUser) && ($group instanceof ElggGroup)) {
+
+	// include some kind of popup with text box to submit...
+
 
 	// join or request
 	$join = false;
@@ -59,6 +65,7 @@ if (($user instanceof ElggUser) && ($group instanceof ElggGroup)) {
 			$user->getURL(),
 			$url,
 		));
+
 		if (notify_user($group->owner_guid, $user->getGUID(), $subject, $body)) {
 			system_message(elgg_echo("groups:joinrequestmade"));
 		} else {

@@ -16,7 +16,7 @@ $search_type = get_input('search_type', 'all');
 // @todo is there an example query to demonstrate ^
 // XSS protection is more important that searching for HTML.
 $query = stripslashes(get_input('q', get_input('tag', '')));
-
+$query = '"'.$query.'"';
 // @todo - create function for sanitization of strings for display in 1.8
 // encode <,>,&, quotes and characters above 127
 if (function_exists('mb_convert_encoding')) {
@@ -29,7 +29,7 @@ $display_query = htmlspecialchars($display_query, ENT_QUOTES, 'UTF-8', false);
 
 // check that we have an actual query
 if (!$query) {
-	$title = sprintf(elgg_echo('search:results'), "\"$display_query\"");
+	$title = sprintf(elgg_echo('search:results'), "$display_query");
 	
 	$body  = elgg_view_title(elgg_echo('search:search_error'));
 	$body .= elgg_echo('search:no_query');
@@ -102,11 +102,31 @@ $url = elgg_get_site_url() . "search?$data";
 $menu_item = new ElggMenuItem('all', elgg_echo('all'), $url);
 elgg_register_menu_item('page', $menu_item);
 
+
+$tmp_types = array();
+// groups blogs users files topics tags 
+
+foreach ($types as $type => $subtypes)
+{
+	if (is_array($subtypes) && count($subtypes)) {
+		foreach ($subtypes as $subtype)
+		{
+			elgg_log('cyu - item subtype:'.$subtype, 'NOTICE');
+
+		}
+	} else {
+		elgg_log('cyu - item type:'.$type, 'NOTICE');
+	}
+}
+
+
 foreach ($types as $type => $subtypes) {
 	// @todo when using index table, can include result counts on each of these.
 	if (is_array($subtypes) && count($subtypes)) {
 		foreach ($subtypes as $subtype) {
 			$label = "item:$type:$subtype";
+
+			//elgg_log('cyu - item:type:subtype:'.$label, 'NOTICE');
 
 			$data = htmlspecialchars(http_build_query(array(
 				'q' => $query,
@@ -123,6 +143,8 @@ foreach ($types as $type => $subtypes) {
 		}
 	} else {
 		$label = "item:$type";
+
+		//elgg_log('cyu - item:type:'.$label, 'NOTICE');
 
 		$data = htmlspecialchars(http_build_query(array(
 			'q' => $query,
@@ -167,6 +189,9 @@ if ($search_type == 'all' || $search_type == 'entities') {
 	// if a plugin returns NULL or '' for subtype, pass to generic type search function.
 	// if still NULL or '' or empty(array()) no results found. (== don't show??)
 	foreach ($types as $type => $subtypes) {
+
+
+
 		if ($search_type != 'all' && $entity_type != $type) {
 			continue;
 		}
@@ -264,7 +289,7 @@ if ($search_type == 'tags') {
 }
 $highlighted_query = search_highlight_words($searched_words, $display_query);
 
-$body = elgg_view_title(elgg_echo('search:results', array("\"$highlighted_query\"")));
+$body = elgg_view_title(elgg_echo('search:results', array("$highlighted_query")));
 
 if (!$results_html) {
 	$body .= elgg_view('search/no_results');
@@ -278,6 +303,6 @@ if (!$results_html) {
 $layout_view = search_get_search_view($params, 'layout');
 $layout = elgg_view($layout_view, array('params' => $params, 'body' => $body));
 
-$title = elgg_echo('search:results', array("\"$display_query\""));
+$title = elgg_echo('search:results', array("$display_query"));
 
 echo elgg_view_page($title, $layout);

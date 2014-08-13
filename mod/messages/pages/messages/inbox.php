@@ -6,7 +6,6 @@
 */
 
 gatekeeper();
-
 $page_owner = elgg_get_page_owner_entity();
 
 if (!$page_owner || !$page_owner->canEdit()) {
@@ -24,6 +23,7 @@ elgg_register_title_button();
 
 $title = elgg_echo('messages:user', array($page_owner->name));
 
+
 $list = elgg_list_entities_from_metadata(array(
 	'type' => 'object',
 	'subtype' => 'messages',
@@ -31,12 +31,14 @@ $list = elgg_list_entities_from_metadata(array(
 	'metadata_value' => elgg_get_page_owner_guid(),
 	'owner_guid' => elgg_get_page_owner_guid(),
 	'full_view' => false,
+	'limit' => $display_num_post
 ));
 
 $body_vars = array(
 	'folder' => 'inbox',
 	'list' => $list,
 );
+
 $content = elgg_view_form('messages/process', array(), $body_vars);
 
 $body = elgg_view_layout('content', array(
@@ -44,5 +46,6 @@ $body = elgg_view_layout('content', array(
 	'title' => elgg_echo('messages:inbox'),
 	'filter' => '',
 ));
+
 
 echo elgg_view_page($title, $body);

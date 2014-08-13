@@ -1,7 +1,7 @@
 <?php
 /**
- * Blog English language file.
- *
+ * Blog English language file. asd asd
+ * asd 
  */
 
 $english = array(

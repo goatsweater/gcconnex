@@ -1,14 +1,14 @@
 <?php
 /**
- * Custom Index English language file
+ * Custom Index English language file asd asd
  */
 
 $english = array(	
-	'custom:bookmarks' => "Latest bookmarks",
-	'custom:groups' => "Latest groups",
-	'custom:files' => "Latest files",
-	'custom:blogs' => "Latest blog posts",
-	'custom:members' => "Newest members",
+	'custom:bookmarks' => 'Latest bookmarks',
+	'custom:groups' => 'Latest groups',
+	'custom:files' => 'Latest files',
+	'custom:blogs' => 'Latest blog posts',
+	'custom:members' => 'Newest members',
 );
 					
-add_translation("en", $english);
+add_translation('en', $english);

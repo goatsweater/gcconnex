@@ -1,6 +1,6 @@
 <?php
 /**
- * Elgg garbage collector language pack.
+ * Elgg garbage collector language pack. 
  *
  * @package ElggGarbageCollector
  */
@@ -12,14 +12,16 @@ $english = array(
 	'garbagecollector:monthly' => 'Once a month',
 	'garbagecollector:yearly' => 'Once a year',
 
-	'garbagecollector' => "GARBAGE COLLECTOR\n",
-	'garbagecollector:done' => "DONE\n",
-	'garbagecollector:optimize' => "Optimizing %s ",
+	'garbagecollector' => 'GARBAGE COLLECTOR
+',
+	'garbagecollector:done' => 'DONE
+',
+	'garbagecollector:optimize' => 'Optimizing %s ',
 
-	'garbagecollector:error' => "ERROR",
-	'garbagecollector:ok' => "OK",
+	'garbagecollector:error' => 'ERROR',
+	'garbagecollector:ok' => 'OK',
 
 	'garbagecollector:gc:metastrings' => 'Cleaning up unlinked metastrings: ',
 );
 
-add_translation("en", $english);
+add_translation('en', $english);

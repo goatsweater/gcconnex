@@ -25,6 +25,8 @@ function garbagecollector_init() {
 /**
  * Cron job
  */
+
+// cyu - [TODO the cron that will access this]
 function garbagecollector_cron($hook, $entity_type, $returnvalue, $params) {
 
 	echo elgg_echo('garbagecollector');
@@ -45,19 +47,36 @@ function garbagecollector_cron($hook, $entity_type, $returnvalue, $params) {
 	$period = elgg_get_plugin_setting('period','garbagecollector');
 	elgg_trigger_plugin_hook('gc', 'system', array('period' => $period));
 
+
+	global $CONFIG;
+
+	$connection = mysqli_connect($CONFIG->dbhost, $CONFIG->dbuser, $CONFIG->dbpass, $CONFIG->dbname);
+	if (mysqli_connect_errno($connection)) elgg_log("cyu - Failed to connect to MySQL: ".mysqli_connect_errno(), 'NOTICE');
+	$result = mysqli_query($connection,$query);
+	//mysqli_free_result($result);
+
+
+	// cyu - [TODO we gotta wait for all the select statements to finish or something]
 	// Now we optimize all tables
 	$tables = get_db_tables();
 	foreach ($tables as $table) {
-		echo elgg_echo('garbagecollector:optimize', array($table));
+		elgg_log('cyu - optimizing...'.$table, 'NOTICE');
 
-		if (optimize_table($table) !== false) {
-			echo elgg_echo('garbagecollector:ok');
-		} else {
-			echo elgg_echo('garbagecollector:error');
-		}
 
-		echo "\n";
+
+
+		//echo elgg_echo('garbagecollector:optimize', array($table));
+
+		// if (optimize_table($table) !== false) {
+		// 	echo elgg_echo('garbagecollector:ok');
+		// } else {
+		// 	echo elgg_echo('garbagecollector:error');
+		// }
+
+		//echo "\n";
 	}
+
+	mysqli_close($connection);
 
 	echo elgg_echo('garbagecollector:done');
 }
