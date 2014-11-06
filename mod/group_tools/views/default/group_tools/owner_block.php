@@ -12,9 +12,9 @@ if (!empty($group) && ($group instanceof ElggGroup) && (elgg_get_plugin_setting(
 		$status = elgg_echo("groups:closed");
 		$id = "group_tools_status_closed";
 	}
-	
+
 	$status = ucfirst($status);
-	
+
 	?>
 	<script type="text/javascript">
 		$('div.elgg-owner-block div.elgg-image-block').append("<div id='<?php echo $id; ?>'><?php echo $status;?></div>");
