@@ -1,0 +1,212 @@
+.gcconnex-endorsement-count {
+    display: inline-block;
+    width: 20px;
+    background-color: #3C698E;
+    font-family: arial, sans-serif;
+    color: white;
+    padding: 3px 3px 3px 3px;
+    text-align: center;
+    border: 0px solid cornflowerblue;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-right: 1px solid lightgray;
+    box-shadow: 7px 3px 5px #888888;
+    text-shadow: 1px 1px #888888;
+}
+
+.gcconnex-endorsement-skill {
+    display: inline-block;
+    min-width: 75px;
+    font-family: arial, sans-serif;
+    background-color: darkgray;
+    color: white;
+    padding: 3px 6px 3px 3px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    box-shadow: 5px 3px 5px #888888;
+    margin-left: 0px;
+}
+
+.gcconnex-endorsement-add {
+    color: cornflowerblue;
+    text-shadow: 1px 1px #888888;
+    font-weight: bold;
+    padding: 3 3 3 5px;
+    margin: 0px;
+    cursor: pointer;
+}
+
+.gcconnex-endorsement-retract {
+    color: cornflowerblue;
+    text-shadow: 1px 1px #888888;
+    font-weight: bold;
+    padding: 3 3 3 5px;
+    margin: 0px;
+    cursor: pointer;
+}
+
+.gcconnex-endorsement-add-skill {
+    color: darkgray;
+    text-shadow: 1px 1px #888888;
+    font-family: arial;
+    font-size: 12px;
+    clear: left;
+    padding: 3 3 3 5px;
+    margin: 0px;
+    cursor: pointer;
+}
+
+input.gcconnex-endorsement-input-skill {
+    display: block;
+    clear: left;
+    border: 1px solid lightgray;
+    box-shadow: 1px 1px darkgray;
+    border-radius: 5px;
+    width: 200px;
+}
+
+.gcconnex-endorsement-input-wrapper {
+    margin-top: 10px;
+}
+
+.gcconnex-endorsement-skill-wrapper {
+    padding-top: 10px;
+}
+
+.delete-skill {
+    font-family: arial, sans-serif;
+    font-size: 12px;
+    color: cornflowerblue;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.delete-skill img {
+    height: 15px;
+    width: 15px;
+    position: relative;
+    top: 3px;
+    padding-left: 10px;
+    padding-right: 5px;
+}
+
+.temporarily-added .gcconnex-endorsement-skill {
+    background-color: #e5e500;
+}
+
+/*
+.edit-png {
+    background: url('../img/edit.png');
+    background-size: 20px 20px;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+}*/
+
+
+
+
+
+
+
+
+
+
+
+
+/* education */
+
+
+.experience-title,
+.education-school {
+    padding-top: 5px;
+    font-size: 18px;
+    padding-bottom: 2px;
+}
+
+.experience-dates,
+.education-dates {
+    font-size: 10px;
+    width: auto;
+    border-bottom: 1px solid #d3d3d3;
+    line-height: 12px;
+    padding-top: 7px;
+}
+
+.education-degree ul {
+    padding-left: 15px;
+}
+
+.education-degree li {
+    list-style: disc;
+    padding-left: 0px;
+    font-weight: bold;
+}
+
+.education-field {
+    padding-left: 20px;
+    font-style: italic;
+}
+
+.experience-organization {
+    font-weight: bold;
+    padding-bottom: 10px;
+}
+
+
+.gcconnex-profile-section-wrapper {
+    position: relative;
+    padding: 10px;
+    padding-top: 20px;
+    background-color: #eeeeee;
+    width: initial;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    margin-top: 20px;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+.gcconnex-profile-title {
+    font-family: arial, sans-serif;
+    font-size: 12px;
+    text-align: center;
+    text-shadow: 1px 1px darkgray;
+    padding: 5px;
+    background-color: #3C698E;
+    border: 1px solid lightgray;
+    width: 100px;
+    left: 10px;
+    color: white;
+    z-index: 1;
+    position: absolute;
+    margin-top: -32px;
+}
+
+.edit-control img,
+.save-control img,
+.cancel-control img {
+    height: 15px;
+    width: 15px;
+    padding-right: 10px;
+    position: relative;
+    top: 2px;
+}
+
+.gcconnex-profile-edit-controls {
+    float: right;
+    position: relative;
+    margin-top: -30px;
+}
+
+.edit-control,
+.save-control,
+.cancel-control {
+    font-family: arial, sans-serif;
+    font-size: 12px;
+    color: cornflowerblue;
+    font-weight: bold;
+    z-index: 1;
+    padding-right: 5px;
+    cursor: pointer;
+}

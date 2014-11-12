@@ -29,8 +29,6 @@ $icon = elgg_view_entity_icon($user, 'large', array(
     'use_link' => false,
 ));
 
-$user_information = $user->name.'<br/>'.$user->email.'<br/>'.(string)date("Y-m-d H:i:s",$user->last_login);
-$icon .= '<table class="c_table" style="width:100%"><tr><td><font style="font-size:12px;">'.$user_information.'</font></td></tr></table>';
 
 // grab the actions and admin menu items from user hover
 $menu = elgg_trigger_plugin_hook('register', "menu:user_hover", array('entity' => $user), array());
@@ -70,13 +68,12 @@ $content_menu = elgg_view_menu('owner_block', array(
     'class' => 'profile-content-menu',
 ));
 
-
+//$profile_actions
 echo <<<HTML
 
 <div id="profile-owner-block">
 	$icon
-	$profile_actions
-	$content_menu
+
 	$admin_links
 </div>
 

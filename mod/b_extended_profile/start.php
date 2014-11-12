@@ -1,18 +1,23 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: bryden
+ * Author: Bryden Arndt
  * Date: 11/5/14
  * Time: 3:45 PM
  */
 elgg_register_event_handler('init', 'system', 'b_extended_profile_init');
 
 function b_extended_profile_init() {
-//    elgg_unregister_page_handler('profile');
-//    elgg_register_page_handler('profile', 'extended_profile_handler');
-    elgg_view('');
+    // Register the endorsements js library
+    $url = 'mod/b_extended_profile/js/endorsements/gcconnex-endorsements.js';
+    //$url = elgg_get_simplecache_url('js', 'b_extended_profile/gcconnex-endorsements');
+    elgg_register_js('endorsements-js', $url);
+
+    // Register the endorsements css library
+    $css_url = 'mod/b_extended_profile/css/gcconnex-endorsements.css';
+    elgg_register_css('endorsements-css', $css_url);
 }
 
+/*
 function extended_profile_handler($page) {
 
     if (isset($page[0])) {
@@ -51,4 +56,4 @@ function extended_profile_handler($page) {
     $body = elgg_view_layout('one_column', array('content' => $content));
     echo elgg_view_page($user->name, $body);
     return true;
-}
+}*/
