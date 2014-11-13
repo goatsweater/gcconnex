@@ -17,17 +17,21 @@ $(document).ready(function() {
     $('.save-control').hide();
     $('.cancel-control').hide();
 
-    $('.edit-endorsements').click(editEndorsements);
-    $('.save-endorsements').click(saveEndorsements);
-    $('.cancel-endorsements').click(cancelEndorsements);
+    $('.edit-aboutme').click(editAboutme);
+    $('.save-aboutme').click(saveAboutme);
+    $('.cancel-aboutme').click(cancelAboutme);
 
     $('.edit-education').click(editEducation);
     $('.save-education').click(saveEducation);
     $('.cancel-education').click(cancelEducation);
 
-    $('.edit-experience').click(editExperience);
-    $('.save-experience').click(saveExperience);
-    $('.cancel-experience').click(cancelExperience);
+   // $('.edit-experience').click(editExperience);
+   // $('.save-experience').click(saveExperience);
+   // $('.cancel-experience').click(cancelExperience);
+
+    $('.edit-endorsements').click(editEndorsements);
+    $('.save-endorsements').click(saveEndorsements);
+    $('.cancel-endorsements').click(cancelEndorsements);
 
     // when a user clicks outside of the text box (the one for entering new skills), make it disappear elegantly
     $(document).click(function(event) {
@@ -261,5 +265,37 @@ function cancelEducation() {
  * Purpose
  */
 function saveEducation() {
+
+}
+
+
+/*
+ * Purpose:
+ */
+function editAboutme() {
+    // Edit the About Me blurb
+    $('.gcconnex-profile-aboutme').hide();
+
+    // toggle edit controls
+    $('.edit-aboutme').hide();
+    $('.save-aboutme').show();
+    $('.cancel-aboutme').show();
+
+    // inject the html form for editing education entries/adding new entries
+    $('.gcconnex-about-me').append('<div>TEST</div>');
+
+}
+
+/*
+ * Purpose:
+ */
+function cancelAboutme() {
+
+}
+
+/*
+ * Purpose:
+ */
+function saveAboutme() {
 
 }
