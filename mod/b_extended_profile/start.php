@@ -12,9 +12,10 @@ function b_extended_profile_init() {
     //$url = elgg_get_simplecache_url('js', 'b_extended_profile/gcconnex-endorsements');
     elgg_register_js('endorsements-js', $url);
 
-    // Register the endorsements css library
-    $css_url = 'mod/b_extended_profile/css/gcconnex-endorsements.css';
-    elgg_register_css('endorsements-css', $css_url);
+    // Register the gcconnex profile css libraries
+    $css_url = 'mod/b_extended_profile/css/gcconnex-profile.css';
+    elgg_register_css('gcconnex-css', $css_url);
+    elgg_register_css('font-awesome', 'mod/b_extended_profile/vendors/font-awesome/css/font-awesome.min.css');
 }
 
 /*

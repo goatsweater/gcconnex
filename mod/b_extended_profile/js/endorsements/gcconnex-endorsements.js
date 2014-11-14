@@ -12,26 +12,25 @@
  * Purpose: initialize the script
  */
 $(document).ready(function() {
-    // initialize errythan
-    // hide some of the toggle elements
+    // initialize errythang and hide some of the toggle elements
     $('.save-control').hide();
     $('.cancel-control').hide();
 
-    $('.edit-aboutme').click(editAboutme);
-    $('.save-aboutme').click(saveAboutme);
-    $('.cancel-aboutme').click(cancelAboutme);
+    $('.edit-aboutme').on("click", {section: "aboutme"}, editProfile);
+    $('.save-aboutme').on("click", {section: "aboutme"}, saveProfile);
+    $('.cancel-aboutme').on("click", {section: "aboutme"}, cancelChanges);
 
-    $('.edit-education').click(editEducation);
-    $('.save-education').click(saveEducation);
-    $('.cancel-education').click(cancelEducation);
+    $('.edit-education').on("click", {section: "education"}, editProfile);
+    $('.save-education').on("click", {section: "education"}, saveProfile);
+    $('.cancel-education').on("click", {section: "education"}, cancelChanges);
 
-   // $('.edit-experience').click(editExperience);
-   // $('.save-experience').click(saveExperience);
-   // $('.cancel-experience').click(cancelExperience);
+    $('.edit-experience').on("click", {section: "experience"}, editProfile);
+    $('.save-experience').on("click", {section: "experience"}, saveProfile);
+    $('.cancel-experience').on("click", {section: "experience"}, cancelChanges);
 
-    $('.edit-endorsements').click(editEndorsements);
-    $('.save-endorsements').click(saveEndorsements);
-    $('.cancel-endorsements').click(cancelEndorsements);
+    $('.edit-endorsements').on("click", {section: "endorsements"}, editProfile);
+    $('.save-endorsements').on("click", {section: "endorsements"}, saveProfile);
+    $('.cancel-endorsements').on("click", {section: "endorsements"}, cancelChanges);
 
     // when a user clicks outside of the text box (the one for entering new skills), make it disappear elegantly
     $(document).click(function(event) {
@@ -45,90 +44,161 @@ $(document).ready(function() {
 });
 
 /*
- * Purpose: Turn editing capabilities on
+ * Purpose: To handle all click events on "edit" controls for the gcconnex profile.
+ *
+ * Porpoise: Porpoises are small cetaceans of the family Phocoenidae; they are related to whales and dolphins.
+ *   They are distinct from dolphins, although the word "porpoise" has been used to refer to any small dolphin,
+ *   especially by sailors and fishermen.
  */
-function editEndorsements() {
-    // inject the html to add ability to add skills
-    $('.gcconnex-endorsement-wrapper').append('<div class="gcconnex-endorsement-input-wrapper">' +
-    '<input type="text" class="gcconnex-endorsement-input-skill" onkeyup="checkForEnter(event)"/>' +
-    '<span class="gcconnex-endorsement-add-skill">+ add new skill</span>' +
-    '</div>');
-    // hide the text box which is only to be shown when toggled by the link
-    $('.gcconnex-endorsement-input-skill').hide();
+function editProfile(event) {
 
-    // the profile owner would like to type in a new skill
-    $('.gcconnex-endorsement-add-skill').click(function () {
-        $('.gcconnex-endorsement-input-skill').fadeIn('slowly').focus() ;
-        $('.gcconnex-endorsement-add-skill').hide();
-    });
+    var $section = event.data.section; // which edit button is the user clicking on?
 
-    // hide the edit, show the save icon
-    $('.edit-endorsements').hide();
-    $('.save-endorsements').show();
-    $('.cancel-endorsements').show();
+    // toggle the edit, save, cancel buttons
+    $('.edit-' + $section).hide();
+    $('.save-' + $section).show();
+    $('.cancel-' + $section).show();
 
-    $('.gcconnex-endorsement-add').hide();
-    $('.gcconnex-endorsement-retract').hide();
-    $('.delete-skill').show();
+    switch ($section) {
+        case 'aboutme':
+            // Edit the About Me blurb
+            $('.gcconnex-profile-aboutme').hide();
+
+            // inject the html form for editing education entries/adding new entries
+            $('.gcconnex-about-me').append('<textarea id="elm1" class="elm1 elgg-input-longtext" name="description" cols="50" rows="10" ></textarea>');
+
+            break;
+        case 'education':
+            // Edit the edumacation
+            $('.education-dates').hide();
+            $('.education-school').hide();
+            $('.education-degree').hide();
+            $('.education-field').hide();
+
+            // inject the html form for editing education entries/adding new entries
+            $('.gcconnex-education').append('<div>TEST</div>');
+
+            break;
+        case 'experience':
+            break;
+        case 'endorsements':
+            // inject the html to add ability to add skills
+            $('.gcconnex-endorsement-wrapper').append('<div class="gcconnex-endorsement-input-wrapper">' +
+            '<input type="text" class="gcconnex-endorsement-input-skill" onkeyup="checkForEnter(event)"/>' +
+            '<span class="gcconnex-endorsement-add-skill">+ add new skill</span>' +
+            '</div>');
+            // hide the text box which is only to be shown when toggled by the link
+            $('.gcconnex-endorsement-input-skill').hide();
+
+            // the profile owner would like to type in a new skill
+            $('.gcconnex-endorsement-add-skill').click(function () {
+                $('.gcconnex-endorsement-input-skill').fadeIn('slowly').focus() ;
+                $('.gcconnex-endorsement-add-skill').hide();
+            });
+
+            $('.gcconnex-endorsement-add').hide();
+            $('.gcconnex-endorsement-retract').hide();
+            $('.delete-skill').show();
+
+            break;
+        default:
+
+    }
 }
 
 /*
- * Purpose: Do nothing with the changes made to the skills list
+ * Purpose: Save any changes made to the profile
  */
-function cancelEndorsements() {
-    $('.gcconnex-endorsement-input-wrapper').remove();
+function saveProfile(event) {
 
-    $('.save-endorsements').hide();
-    $('.cancel-endorsements').hide();
-    $('.edit-endorsements').show();
+    var $section = event.data.section;
 
-    $('.delete-skill').hide();
-    $('.gcconnex-endorsement-skill-wrapper').removeClass('endorsement-markedForDelete');
+    switch ($section) {
+        case "aboutme":
+            break;
+        case "education":
+            break;
+        case "experience":
+            break;
+        case "endorsements":
 
-    $('.gcconnex-endorsement-skill-wrapper').show();
-    $('.temporarily-added').remove();
+            $('.gcconnex-endorsement-input-wrapper').remove();
+
+            $('.save-endorsements').hide();
+            $('.cancel-endorsements').hide();
+            $('.edit-endorsements').show();
+
+            $('.delete-skill').hide();
+
+            var skillsToAdd = [];
+
+            $(".temporarily-added .gcconnex-endorsement-skill").each(function () {
+                skillsToAdd.push($(this).text())
+            });
+
+            if (confirm("Are you sure you would like to save changes? Any endorsements for skills that you have removed will be permanently deleted.")) {
+                // this is where skills are deleted (if they have been marked for deletion by the user)
+                $('.gcconnex-endorsement-skill-wrapper').removeClass('temporarily-added');
+                $('.endorsement-markedForDelete').remove();
+            }
+            else {
+                // show() the skills that have been hidden() (marked for deletion)
+                $('.gcconnex-enxorsement-skill-wrapper').show();
+            }
+
+            $.ajaxSetup({
+                cache: false
+            });
+
+            // prep the skills array
+            var pathname = '../mod/b_extended_profile/saveEndorsements.php';
+            var user = elgg.get_page_owner_guid();
+            // save functions
+            $('.endorsements-message')
+                .html('loading, please standby')
+                .load(pathname, 'user=' + user + 'skills=' + skillsToAdd);
+            // @todo: show add or retract links based on status of endorsement
+            break;
+        default:
+            break;
+    }
 }
 
 /*
- * Purpose: Save any changes made to the skills in the list (added/deleted skills)
+ * Purpose: Handle click event on the cancel button for all profile changes
  */
-function saveEndorsements() {
-    $('.gcconnex-endorsement-input-wrapper').remove();
+function cancelChanges(event) {
 
-    $('.save-endorsements').hide();
-    $('.cancel-endorsements').hide();
-    $('.edit-endorsements').show();
+    var $section = event.data.section;
 
-    $('.delete-skill').hide();
+    switch ($section) {
+        case "aboutme":
+            break;
+        case "education":
+            $('.save-education').hide();
+            $('.cancel-education').hide();
+            $('.edit-education').show();
 
-    var skillsToAdd = [];
+            $('.temporarily-added').remove();
+            break;
+        case "experience":
+            break;
+        case "endorsements":
+            $('.gcconnex-endorsement-input-wrapper').remove();
 
-    $(".temporarily-added .gcconnex-endorsement-skill").each(function() {
-        skillsToAdd.push($(this).text())
-    });
+            $('.save-endorsements').hide();
+            $('.cancel-endorsements').hide();
+            $('.edit-endorsements').show();
 
-    if(confirm("Are you sure you would like to save changes? Any endorsements for skills that you have removed will be permanently deleted.")) {
-        // this is where skills are deleted (if they have been marked for deletion by the user)
-        $('.gcconnex-endorsement-skill-wrapper').removeClass('temporarily-added');
-        $('.endorsement-markedForDelete').remove();
+            $('.delete-skill').hide();
+            $('.gcconnex-endorsement-skill-wrapper').removeClass('endorsement-markedForDelete');
+
+            $('.gcconnex-endorsement-skill-wrapper').show();
+            $('.temporarily-added').remove();
+            break;
+        default:
+            break;
     }
-    else {
-        // show() the skills that have been hidden() (marked for deletion)
-        $('.gcconnex-enxorsement-skill-wrapper').show();
-    }
-
-    $.ajaxSetup ({
-        cache: false
-    });
-
-    // prep the skills array
-    var pathname = '../mod/b_extended_profile/saveEndorsements.php';
-    var user =  elgg.get_page_owner_guid();
-    // save functions
-    $('.endorsements-message')
-        .html('loading, please standby')
-        .load(pathname, 'user=' + user + 'skills=' + skillsToAdd);
-    // @todo: show add or retract links based on status of endorsement
 }
 
 /*
@@ -224,78 +294,3 @@ function deleteSkill() {
     $(this).parent('.gcconnex-endorsement-skill-wrapper').addClass('endorsement-markedForDelete').hide();
 }
 
-/*
- * Purpose: Edit the education section in order to add, edit or delete entries
- */
-function editEducation() {
-    // Edit the edumacation
-    $('.education-dates').hide();
-    $('.education-school').hide();
-    $('.education-degree').hide();
-    $('.education-field').hide();
-
-    // toggle edit controls
-    $('.edit-education').hide();
-    $('.save-education').show();
-    $('.cancel-education').show();
-
-    // inject the html form for editing education entries/adding new entries
-    $('.gcconnex-education').append('<div>TEST</div>');
-
-}
-
-/*
- * Purpose: 
- */
-function cancelEducation() {
-    //$('.gcconnex-endorsement-input-wrapper').remove();
-
-    $('.save-education').hide();
-    $('.cancel-education').hide();
-    $('.edit-education').show();
-
-    //$('.delete-skill').hide();
-    //$('.gcconnex-endorsement-skill-wrapper').removeClass('education-markedForDelete');
-
-    //$('.gcconnex-endorsement-skill-wrapper').show();
-    $('.temporarily-added').remove();
-}
-
-/*
- * Purpose
- */
-function saveEducation() {
-
-}
-
-
-/*
- * Purpose:
- */
-function editAboutme() {
-    // Edit the About Me blurb
-    $('.gcconnex-profile-aboutme').hide();
-
-    // toggle edit controls
-    $('.edit-aboutme').hide();
-    $('.save-aboutme').show();
-    $('.cancel-aboutme').show();
-
-    // inject the html form for editing education entries/adding new entries
-    $('.gcconnex-about-me').append('<div>TEST</div>');
-
-}
-
-/*
- * Purpose:
- */
-function cancelAboutme() {
-
-}
-
-/*
- * Purpose:
- */
-function saveAboutme() {
-
-}

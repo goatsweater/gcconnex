@@ -210,3 +210,44 @@ input.gcconnex-endorsement-input-skill {
     padding-right: 5px;
     cursor: pointer;
 }
+
+
+/* Font-awesome coloring and styling for social media links on gcconnex profiles */
+.fa {
+    padding-right: 5px;
+}
+.fa-google-plus {
+    color: #DD4939;
+}
+
+.fa-facebook {
+    color: #3C5B98;
+}
+
+.fa-instagram {
+    color: #6C5245
+}
+
+.fa-twitter {
+    color: #55AEEE;
+}
+
+.fa-linkedin {
+    color: #1A86BC;
+}
+
+.fa-tumblr {
+    color: #34465D;
+}
+
+.fa-pinterest {
+    color: #CB1F28;
+}
+
+.fa-flickr {
+    color: #0061C9;
+}
+
+.fa-youtube {
+    color: #D82A27;
+}
