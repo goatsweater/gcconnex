@@ -13,21 +13,21 @@ echo '<div id="profile-details" class="elgg-body pll">';
 echo "<h1>{$user->name}</h1>";
 echo '<h3>Consultant (false field)</h3><br>';
 echo 'TBS-SCT (false field)<br>';
-echo '<i class="fa fa-phone"></i>' . $user->phone . '<br>';
-echo '<i class="fa fa-mobile-phone"></i>' . $user->mobile . '<br>';
-echo '<i class="fa fa-envelope"></i>' . $user->email . '<br>';
-echo '<i class="fa fa-globe"></i><a href=' . $user->website . ">{$user->website}</a><br><br>";
+echo '<i class="fa fa-fw fa-phone"></i>' . $user->phone . '<br>';
+echo '<i class="fa fa-fw fa-mobile-phone"></i>' . $user->mobile . '<br>';
+echo '<i class="fa fa-fw fa-envelope"></i>' . $user->email . '<br>';
+echo '<i class="fa fa-fw fa-globe"></i><a href=' . $user->website . ">{$user->website}</a><br><br>";
 
-echo '<i class="fa fa-lg fa-facebook"></i>';
-echo '<i class="fa fa-lg fa-google-plus"></i>';
-echo '<i class="fa fa-lg fa-github"></i>';
-echo '<i class="fa fa-lg fa-twitter"></i>';
-echo '<i class="fa fa-lg fa-linkedin"></i>';
-echo '<i class="fa fa-lg fa-pinterest"></i>';
-echo '<i class="fa fa-lg fa-tumblr"></i>';
-echo '<i class="fa fa-lg fa-instagram"></i>';
-echo '<i class="fa fa-lg fa-flickr"></i>';
-echo '<i class="fa fa-lg fa-youtube"></i>';
+echo '<i class="fa fa-fw fa-lg fa-facebook"></i>';
+echo '<i class="fa fa-fw fa-lg fa-google-plus"></i>';
+echo '<i class="fa fa-fw fa-lg fa-github"></i>';
+echo '<i class="fa fa-fw fa-lg fa-twitter"></i>';
+echo '<i class="fa fa-fw fa-lg fa-linkedin"></i>';
+echo '<i class="fa fa-fw fa-lg fa-pinterest"></i>';
+echo '<i class="fa fa-fw fa-lg fa-tumblr"></i>';
+echo '<i class="fa fa-fw fa-lg fa-instagram"></i>';
+echo '<i class="fa fa-fw fa-lg fa-flickr"></i>';
+echo '<i class="fa fa-fw fa-lg fa-youtube"></i>';
 
 
 echo elgg_view("profile/status", array("entity" => $user));
