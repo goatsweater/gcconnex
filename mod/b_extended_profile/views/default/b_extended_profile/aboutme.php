@@ -1,4 +1,6 @@
 <?php
+elgg_load_js('extended_tinymce');
+elgg_load_js('elgg.extended_tinymce');
 ?>
 <div class="gcconnex-profile-section-wrapper gcconnex-about-me"><div class="gcconnex-profile-title">About Me</div>
     <?php
@@ -9,10 +11,11 @@
         echo '<span class="cancel-control cancel-aboutme hidden"><img src="' . elgg_get_site_url() . 'mod/b_extended_profile/img/cancel.png">Cancel</span>';
         echo '</span>';
     }
-
     $user = elgg_get_page_owner_entity();
-    $aboutme = $user->description;
+    $value = $user->description;
 
-    echo '<div class="gcconnex-profile-aboutme">' . $aboutme . '</div>'; ?>
+    echo '<div class="gcconnex-profile-aboutme-display">' . $value . '</div>';
+
+    ?>
 
 </div>

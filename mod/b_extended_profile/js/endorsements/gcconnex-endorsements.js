@@ -62,21 +62,29 @@ function editProfile(event) {
     switch ($section) {
         case 'aboutme':
             // Edit the About Me blurb
-            $('.gcconnex-profile-aboutme').hide();
-
-            // inject the html form for editing education entries/adding new entries
-            $('.gcconnex-about-me').append('<textarea id="elm1" class="elm1 elgg-input-longtext" name="description" cols="50" rows="10" ></textarea>');
-
+            $.get(elgg.normalize_url('ajax/view/b_extended_profile/edit_aboutme'),
+                {
+                    param: elgg.get_logged_in_user_guid()
+                },
+                function(data) {
+                        // Output in a DIV with id=somewhere
+                        $('.gcconnex-profile-aboutme-display').after('<div class="gcconnex-aboutme-edit-wrapper">' + data + '</div>');
+                });
+                $('.gcconnex-profile-aboutme-display').hide();
             break;
         case 'education':
             // Edit the edumacation
-            $('.education-dates').hide();
-            $('.education-school').hide();
-            $('.education-degree').hide();
-            $('.education-field').hide();
+            $.get(elgg.normalize_url('ajax/view/b_extended_profile/edit_education'),
+                {
+                    param: elgg.get_logged_in_user_guid()
+                },
+                function(data) {
+                    // Output in a DIV with id=somewhere
+                    $('.gcconnex-education').append('<div class="gcconnex-education-edit-wrapper">' + data + '</div>');
+                });
+            $('.gcconnex-profile-education-display').hide();
 
             // inject the html form for editing education entries/adding new entries
-            $('.gcconnex-education').append('<div>TEST</div>');
 
             break;
         case 'experience':
@@ -171,13 +179,19 @@ function cancelChanges(event) {
 
     var $section = event.data.section;
 
+    $('.edit-' + $section).show();
+    $('.save-' + $section).hide();
+    $('.cancel-' + $section).hide();
+
     switch ($section) {
         case "aboutme":
+
+            // show the about me
+            $('.gcconnex-profile-aboutme-display').show();
+            $('.gcconnex-aboutme-edit-wrapper').remove();
+
             break;
         case "education":
-            $('.save-education').hide();
-            $('.cancel-education').hide();
-            $('.edit-education').show();
 
             $('.temporarily-added').remove();
             break;
@@ -186,9 +200,7 @@ function cancelChanges(event) {
         case "endorsements":
             $('.gcconnex-endorsement-input-wrapper').remove();
 
-            $('.save-endorsements').hide();
-            $('.cancel-endorsements').hide();
-            $('.edit-endorsements').show();
+
 
             $('.delete-skill').hide();
             $('.gcconnex-endorsement-skill-wrapper').removeClass('endorsement-markedForDelete');

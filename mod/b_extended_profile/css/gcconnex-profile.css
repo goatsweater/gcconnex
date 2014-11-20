@@ -159,7 +159,6 @@ input.gcconnex-endorsement-input-skill {
     padding: 10px;
     padding-top: 20px;
     background-color: #eeeeee;
-    width: initial;
     border: 1px solid lightgray;
     border-radius: 5px;
     margin-top: 20px;
@@ -209,6 +208,31 @@ input.gcconnex-endorsement-input-skill {
     z-index: 1;
     padding-right: 5px;
     cursor: pointer;
+}
+
+
+.b-user-menu {
+    display: inline;
+    float: right;
+    border-left: 3px solid #EEE;
+    height: 229px;
+    padding-top: 5px;
+}
+
+.profile-content-menu a {
+    color: #808080;
+}
+.profile-content-menu li > a:hover {
+    background: none repeat scroll 0% 0% #3C698E;
+    color: #FFF;
+    text-decoration: none;
+    border-radius: 0px;
+}
+
+#profile-details {
+    display: inline-block;
+    width: 400px;
+
 }
 
 

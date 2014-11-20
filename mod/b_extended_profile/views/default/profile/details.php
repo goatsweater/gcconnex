@@ -13,7 +13,7 @@ echo '<div id="profile-details" class="elgg-body pll">';
 echo "<h1>{$user->name}</h1>";
 echo '<h3>Consultant (false field)</h3><br>';
 echo 'TBS-SCT (false field)<br>';
-echo '<i class="fa fa-fw fa-phone"></i>' . $user->phone . '<br>';
+echo '<i title="Telephone" class="fa fa-fw fa-phone"></i>' . $user->phone . '<br>';
 echo '<i class="fa fa-fw fa-mobile-phone"></i>' . $user->mobile . '<br>';
 echo '<i class="fa fa-fw fa-envelope"></i>' . $user->email . '<br>';
 echo '<i class="fa fa-fw fa-globe"></i><a href=' . $user->website . ">{$user->website}</a><br><br>";
@@ -115,5 +115,6 @@ $content_menu = elgg_view_menu('owner_block', array(
 ));
 
 echo '</div>';
-//echo '<div class="b-user-menu">' . $content_menu . '</div>';
 
+echo '<div class="b-user-menu">' . $content_menu . '</div>';
+echo '<div class="b-user-menu2">' . $admin_links . '</div>';
