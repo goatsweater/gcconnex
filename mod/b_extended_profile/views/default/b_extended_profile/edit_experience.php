@@ -6,23 +6,23 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
     $user_guid = $_GET["param"];
     $user = get_user($user_guid);
 
-    $value = $user->education;
+    $value = $user->experience;
 
 
 
-    echo 'School Name: ';
+    echo 'Name of organization: ';
 
     $params = array(
-        'name' => 'education',
+        'name' => 'experience',
         'value' => $value,
     );
 
     echo elgg_view("input/text", $params);
 
+    echo '<br>Title: ' . elgg_view("input/text", array('name' => 'title', 'value' => 'Friday'));
     echo '<br>Start Date: ' . elgg_view("input/text", array('name' => 'startdate', 'value' => ''));
     echo 'End Date: ' . elgg_view("input/text", array('name' => 'enddate', 'value' => ''));
-    echo '<br>Program: ' . elgg_view("input/text", array('name' => 'program', 'value' => 'Friday'));
-    echo '<br>Field of Study: ' . elgg_view("input/text", array('name' => 'fieldofstudy', 'value' => 'Friday'));
+    echo '<br>Responsibilities: ' . elgg_view("input/text", array('name' => 'responsibilities', 'value' => 'Friday'));
     echo '<br>';
 
 

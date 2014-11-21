@@ -19,5 +19,6 @@ function b_extended_profile_init() {
 
     elgg_register_ajax_view('b_extended_profile/edit_aboutme');
     elgg_register_ajax_view('b_extended_profile/edit_education');
+    elgg_register_ajax_view('b_extended_profile/edit_experience');
     //elgg_register_action('b_extended_profile/update/aboutme', elgg_get_plugins_path() . "b_extended_profile/actions/update_profile/edit_aboutme.php");
 }

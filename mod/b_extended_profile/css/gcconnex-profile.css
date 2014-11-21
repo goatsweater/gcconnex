@@ -236,6 +236,21 @@ input.gcconnex-endorsement-input-skill {
 }
 
 
+.elgg-input-text[name='education'] {
+    width: 300px;
+}
+
+.elgg-input-text[name='startdate'],
+.elgg-input-text[name='enddate'] {
+    width: 100px;
+}
+.elgg-input-text[name='program'] {
+    width: 300px;
+}
+.elgg-input-text[name='fieldofstudy'] {
+    width: 300px;
+}
+
 /* Font-awesome coloring and styling for social media links on gcconnex profiles */
 .fa {
 }
