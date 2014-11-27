@@ -128,21 +128,44 @@ function saveProfile(event) {
 
     var $section = event.data.section;
 
+    // toggle the edit, save, cancel buttons
+    $('.edit-' + $section).show();
+    $('.save-' + $section).hide();
+    $('.cancel-' + $section).hide();
+
     switch ($section) {
         case "aboutme":
+            var about_me = $('.mceContentBody').contents();
+
+            elgg.action('edit_extended_profile', {
+                data: {
+                    guid: elgg.get_logged_in_user_guid(),
+                    section: 'aboutme',
+                    description: about_me
+                },
+                success: function() {
+                    // do something on success
+                }
+            });
             break;
         case "education":
+            var about_me = $('.elgg-input-text').html();
+
+            elgg.action('edit_extended_profile', {
+                data: {
+                    guid: elgg.get_logged_in_user_guid(),
+                    description: about_me
+                },
+                success: function() {
+                    // do something on success
+                }
+            });
             break;
         case "experience":
             break;
         case "endorsements":
 
             $('.gcconnex-endorsement-input-wrapper').remove();
-
-            $('.save-endorsements').hide();
-            $('.cancel-endorsements').hide();
-            $('.edit-endorsements').show();
-
             $('.delete-skill').hide();
 
             var skillsToAdd = [];
@@ -211,6 +234,8 @@ function cancelChanges(event) {
             $('.gcconnex-education-edit-wrapper').remove();
             break;
         case "experience":
+            $('.gcconnex-profile-experience-display').show();
+            $('.gcconnex-experience-edit-wrapper').remove();
             break;
         case "endorsements":
             $('.gcconnex-endorsement-input-wrapper').remove();

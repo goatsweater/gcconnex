@@ -35,6 +35,6 @@ else {  // In case this view will be called via elgg_view()
 
 <script type="text/javascript">
     tinyMCE.init({
-		mode : "textareas",
+		mode : "textareas"
 	});
 </script>
