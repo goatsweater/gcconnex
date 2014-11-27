@@ -6,9 +6,19 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
     $user_guid = $_GET["param"];
     $user = get_user($user_guid);
 
-    $value = $user->education;
+    $education = array(
+        'school' => 'Algonquin',
+        'startdate' => 'Monday',
+        'enddate' => 'Friday',
+        'program' => 'Computer Engineering Tech.',
+        'field' => 'Computer Sciences'
+    );
 
+    $user->education = array('0' => array($education), '1' => 'test');
 
+    $value = $user->education[0]['school'];
+
+    var_dump($value);
 
     echo 'School Name: ';
 
