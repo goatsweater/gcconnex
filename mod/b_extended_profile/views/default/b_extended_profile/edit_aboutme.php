@@ -13,7 +13,8 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
 
     $params = array(
         'name' => 'description',
-        'class' => 'gcconnex-description',
+        //'class' => 'gcconnex-description',
+        'class' => 'mceContentBody',
         'value' => $value,
     );
 

@@ -134,7 +134,7 @@ function saveProfile(event) {
 
     switch ($section) {
         case "aboutme":
-            var $about_me = $('.gcconnex-description').val();
+            var $about_me = tinyMCE.activeEditor.getContent();
 
             elgg.action('edit_extended_profile', {
 
@@ -155,6 +155,7 @@ function saveProfile(event) {
 
             elgg.action('edit_extended_profile', {
                     guid: elgg.get_logged_in_user_guid(),
+                    section: 'education',
                     school: $school,
                     startdate: $startdate,
                     enddate: $enddate,

@@ -2,35 +2,48 @@
 if (elgg_is_xhr()) {  //This is an Ajax call!
 
     $user_guid = get_input('guid');
-
-    $school = get_input('school', 'default school');
-    $startdate = get_input('startdate', 'Error');
-    $enddate = get_input('enddate');
-    $program = get_input('program');
-    $field = get_input('field');
-
-    // create education object
-    $education = new ElggObject();
-    $education->subtype = "education";
-    $education->title = "edu title";
-    $education->description ="edu description";
-
-    $education->owner_guid = $user_guid;
-    $education->school = $school;
-    $education->startdate = $startdate;
-    $education->enddate = $enddate;
-    $education->program = $program;
-    $education->field = $field;
-
-    $education_guid = $education->save();
-
     $user = get_user($user_guid);
 
+    $section = get_input('section');
 
-    //$user->__set('education', $education)
-    $user->education = $education_guid;
+    switch ($section) {
+        case 'aboutme':
+            $user->description = get_input('description');
+            $user->save();
+            break;
+        case 'education':
+            $school = get_input('school', 'default school');
+            $startdate = get_input('startdate', 'Error');
+            $enddate = get_input('enddate');
+            $program = get_input('program');
+            $field = get_input('field');
 
-    $user->save();
+            // create education object
+            $education = new ElggObject();
+            $education->subtype = "education";
+            $education->title = "edu title";
+            $education->description ="edu description";
+
+            $education->owner_guid = $user_guid;
+            $education->school = $school;
+            $education->startdate = $startdate;
+            $education->enddate = $enddate;
+            $education->program = $program;
+            $education->field = $field;
+
+            $education_guid = $education->save();
+
+
+
+            //$user->__set('education', $education)
+            $user->education = $education_guid;
+
+            $user->save();
+            break;
+        default:
+    }
+
+
 
     system_message(elgg_echo("profile:saved"));
 
