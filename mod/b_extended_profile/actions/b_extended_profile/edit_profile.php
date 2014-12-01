@@ -1,116 +1,42 @@
 <?php
-/**
- * Elgg profile edit action
- *
- */
+if (elgg_is_xhr()) {  //This is an Ajax call!
 
-elgg_make_sticky_form('profile:edit');
+    $user_guid = get_input('guid');
 
-$guid = get_input('guid');
-$owner = get_entity($guid);
+    $school = get_input('school', 'default school');
+    $startdate = get_input('startdate', 'Error');
+    $enddate = get_input('enddate');
+    $program = get_input('program');
+    $field = get_input('field');
 
-if (!$owner || !($owner instanceof ElggUser) || !$owner->canEdit()) {
-    register_error(elgg_echo('profile:edit:fail'));
-    forward(REFERER);
-}
+    // create education object
+    $education = new ElggObject();
+    $education->subtype = "education";
+    $education->title = "edu title";
+    $education->description ="edu description";
 
-// grab the defined profile field names and their load the values from POST.
-// each field can have its own access, so sort that too.
-$input = array();
-$accesslevel = get_input('accesslevel');
+    $education->owner_guid = $user_guid;
+    $education->school = $school;
+    $education->startdate = $startdate;
+    $education->enddate = $enddate;
+    $education->program = $program;
+    $education->field = $field;
 
-if (!is_array($accesslevel)) {
-    $accesslevel = array();
-}
+    $education_guid = $education->save();
 
-/**
- * wrapper for recursive array walk decoding
- */
-function profile_array_decoder(&$v) {
-    $v = _elgg_html_decode($v);
-}
+    $user = get_user($user_guid);
 
-$profile_fields = elgg_get_config('profile_fields');
-foreach ($profile_fields as $shortname => $valuetype) {
-    // the decoding is a stop gap to prevent &amp;&amp; showing up in profile fields
-    // because it is escaped on both input (get_input()) and output (view:output/text). see #561 and #1405.
-    // must decode in utf8 or string corruption occurs. see #1567.
-    $value = get_input($shortname);
-    if (is_array($value)) {
-        array_walk_recursive($value, 'profile_array_decoder');
-    } else {
-        $value = _elgg_html_decode($value);
-    }
 
-    // limit to reasonable sizes
-    // @todo - throwing away changes due to this is dumb!
-    if (!is_array($value) && $valuetype != 'longtext' && elgg_strlen($value) > 250) {
-        $error = elgg_echo('profile:field_too_long', array(elgg_echo("profile:{$shortname}")));
-        register_error($error);
-        forward(REFERER);
-    }
+    //$user->__set('education', $education)
+    $user->education = $education_guid;
 
-    if ($value && $valuetype == 'url' && !preg_match('~^https?\://~i', $value)) {
-        $value = "http://$value";
-    }
+    $user->save();
 
-    if ($valuetype == 'tags') {
-        $value = string_to_tag_array($value);
-    }
-
-    $input[$shortname] = $value;
-}
-
-// display name is handled separately
-$name = strip_tags(get_input('name'));
-if ($name) {
-    if (elgg_strlen($name) > 50) {
-        register_error(elgg_echo('user:name:fail'));
-    } elseif ($owner->name != $name) {
-        $owner->name = $name;
-        $owner->save();
-    }
-}
-
-// go through custom fields
-if (sizeof($input) > 0) {
-    foreach ($input as $shortname => $value) {
-        $options = array(
-            'guid' => $owner->guid,
-            'metadata_name' => $shortname,
-            'limit' => false
-        );
-        elgg_delete_metadata($options);
-
-        if (!is_null($value) && ($value !== '')) {
-            // only create metadata for non empty values (0 is allowed) to prevent metadata records with empty string values #4858
-
-            if (isset($accesslevel[$shortname])) {
-                $access_id = (int) $accesslevel[$shortname];
-            } else {
-                // this should never be executed since the access level should always be set
-                $access_id = ACCESS_DEFAULT;
-            }
-            if (is_array($value)) {
-                $i = 0;
-                foreach ($value as $interval) {
-                    $i++;
-                    $multiple = ($i > 1) ? TRUE : FALSE;
-                    create_metadata($owner->guid, $shortname, $interval, 'text', $owner->guid, $access_id, $multiple);
-                }
-            } else {
-                create_metadata($owner->getGUID(), $shortname, $value, 'text', $owner->getGUID(), $access_id);
-            }
-        }
-    }
-
-    $owner->save();
-
-    // Notify of profile update
-    elgg_trigger_event('profileupdate', $owner->type, $owner);
-
-    elgg_clear_sticky_form('profile:edit');
     system_message(elgg_echo("profile:saved"));
-}
 
-forward($owner->getUrl());
+}
+else {  // In case this view will be called via elgg_view()
+    echo 'An error has occurred. Please ask the system administrator to grep: FMBKRL267KVD';
+
+}
+?>

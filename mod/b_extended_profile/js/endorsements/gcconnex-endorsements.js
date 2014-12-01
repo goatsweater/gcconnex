@@ -64,10 +64,9 @@ function editProfile(event) {
             // Edit the About Me blurb
             $.get(elgg.normalize_url('ajax/view/b_extended_profile/edit_aboutme'),
                 {
-                    param: elgg.get_logged_in_user_guid()
+                    guid: elgg.get_logged_in_user_guid()
                 },
                 function(data) {
-                        // Output in a DIV with id=somewhere
                         $('.gcconnex-profile-aboutme-display').after('<div class="gcconnex-aboutme-edit-wrapper">' + data + '</div>');
                 });
             $('.gcconnex-profile-aboutme-display').hide();
@@ -76,7 +75,7 @@ function editProfile(event) {
             // Edit the edumacation
             $.get(elgg.normalize_url('ajax/view/b_extended_profile/edit_education'),
                 {
-                    param: elgg.get_logged_in_user_guid()
+                    guid: elgg.get_logged_in_user_guid(),
                 },
                 function(data) {
                     // Output in a DIV with id=somewhere
@@ -135,31 +134,47 @@ function saveProfile(event) {
 
     switch ($section) {
         case "aboutme":
-            var about_me = $('.mceContentBody').contents();
+            var $about_me = $('.gcconnex-description').val();
 
             elgg.action('edit_extended_profile', {
-                data: {
+
                     guid: elgg.get_logged_in_user_guid(),
                     section: 'aboutme',
-                    description: about_me
+                    description: $about_me
                 },
-                success: function() {
+                function() {
                     // do something on success
-                }
-            });
+                });
             break;
         case "education":
-            var about_me = $('.elgg-input-text').html();
+            var $school = $('.gcconnex-education-school').val();
+            var $startdate = $('.gcconnex-education-startdate').val();
+            var $enddate = $('.gcconnex-education-enddate').val();
+            var $program = $('.gcconnex-education-program').val();
+            var $field = $('.gcconnex-education-field').val();
 
+            elgg.action('edit_extended_profile', {
+                    guid: elgg.get_logged_in_user_guid(),
+                    school: $school,
+                    startdate: $startdate,
+                    enddate: $enddate,
+                    program: $program,
+                    field: $field
+                });
+            /*
             elgg.action('edit_extended_profile', {
                 data: {
                     guid: elgg.get_logged_in_user_guid(),
-                    description: about_me
+                    school: 'Highland High',
+                    startdate: 'funday',
+                    enddate: 'endday',
+                    program: 'program',
+                    field: 'field'
                 },
                 success: function() {
                     // do something on success
                 }
-            });
+            });*/
             break;
         case "experience":
             break;

@@ -1,12 +1,10 @@
 <?php
 
-//elgg_load_js('extended_tinymce');
-//elgg_load_js('elgg.extended_tinymce');
-
 if (elgg_is_xhr()) {  //This is an Ajax call!
 
     //$user_guid = $_GET["user"];
-    $user_guid = $_GET["param"];
+
+    $user_guid = $_GET["guid"];
     $user = get_user($user_guid);
 
     $value = $user->description;
@@ -15,6 +13,7 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
 
     $params = array(
         'name' => 'description',
+        'class' => 'gcconnex-description',
         'value' => $value,
     );
 
@@ -26,10 +25,11 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
     );
 
     echo elgg_view('input/access', $params);
+
 }
 
 else {  // In case this view will be called via elgg_view()
-    echo 'the other test';
+    echo 'ERROR: Tell sys admin to grep for: AFJ367FAXB'; // random alphanumeric string to grep later if needed
 }
 ?>
 

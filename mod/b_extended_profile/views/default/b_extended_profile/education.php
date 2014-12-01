@@ -9,12 +9,17 @@
         echo '<span class="save-control save-education hidden"><img src="' . elgg_get_site_url() . 'mod/b_extended_profile/img/save.png">Save</span>';
         echo '<span class="cancel-control cancel-education hidden"><img src="' . elgg_get_site_url() . 'mod/b_extended_profile/img/cancel.png">Cancel</span>';
     echo '</span>';
-}?>
+        echo '    <div class="gcconnex-profile-education-display">';
+        $user_guid = elgg_get_logged_in_user_guid();
+        $user = get_user($user_guid);
+        $education_guid = $user->education;
+        $education = get_entity($education_guid);
+        echo '<div class="gcconnex-profile-label education-dates">' . $education->startdate . ' - ' . $education->enddate . '</div>';
 
-    <div class="gcconnex-profile-education-display">
-        <div class="gcconnex-profile-label education-dates">2002-2009</div>
-        <div class="gcconnex-profile-label education-school">Algonquin College</div>
-        <div class="gcconnex-profile-label education-degree"><ul><li>Computer Engineering Technology</li></ul></div>
-        <div class="gcconnex-profile-label education-field">Computer Sciences</div>
+        echo ' <div class="gcconnex-profile-label education-school">' . $education->school . '</div>';
+        echo '<div class="gcconnex-profile-label education-degree"><ul><li>' . $education->program . '</li></ul></div>';
+        echo '<div class="gcconnex-profile-label education-field">' . $education->field . '</div>';
+    }?>
+
     </div>
 </div>
