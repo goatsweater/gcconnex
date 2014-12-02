@@ -18,9 +18,9 @@ function b_extended_profile_init() {
     elgg_register_css('font-awesome', 'mod/b_extended_profile/vendors/font-awesome/css/font-awesome.min.css');
 
     // register ajax views
-    elgg_register_ajax_view('b_extended_profile/edit_aboutme');
+    elgg_register_ajax_view('b_extended_profile/edit_about-me');
     elgg_register_ajax_view('b_extended_profile/edit_education');
-    elgg_register_ajax_view('b_extended_profile/edit_experience');
+    elgg_register_ajax_view('b_extended_profile/edit_work-experience');
 
     // register, set, action!
     $action_path = elgg_get_plugins_path() . 'b_extended_profile/actions/b_extended_profile/';

@@ -25,7 +25,7 @@
             $sec = str_replace(' ', '-', $section);
             $sec = strtolower($sec);
 
-            echo '<div class="gcconnex-profile-section-wrapper gcconnex-"' . $sec . '>';
+            echo '<div class="gcconnex-profile-section-wrapper gcconnex-' . $sec . '">';
             echo '<div class="gcconnex-profile-title">' . $section . '</div>';
 
             if (elgg_get_logged_in_user_entity() == elgg_get_page_owner_entity()) {
