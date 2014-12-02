@@ -16,17 +16,17 @@ $(document).ready(function() {
     $('.save-control').hide();
     $('.cancel-control').hide();
 
-    $('.edit-aboutme').on("click", {section: "aboutme"}, editProfile);
-    $('.save-aboutme').on("click", {section: "aboutme"}, saveProfile);
-    $('.cancel-aboutme').on("click", {section: "aboutme"}, cancelChanges);
+    $('.edit-about-me').on("click", {section: "about-me"}, editProfile);
+    $('.save-about-me').on("click", {section: "about-me"}, saveProfile);
+    $('.cancel-about-me').on("click", {section: "about-me"}, cancelChanges);
 
     $('.edit-education').on("click", {section: "education"}, editProfile);
     $('.save-education').on("click", {section: "education"}, saveProfile);
     $('.cancel-education').on("click", {section: "education"}, cancelChanges);
 
-    $('.edit-experience').on("click", {section: "experience"}, editProfile);
-    $('.save-experience').on("click", {section: "experience"}, saveProfile);
-    $('.cancel-experience').on("click", {section: "experience"}, cancelChanges);
+    $('.edit-work-experience').on("click", {section: "work-experience"}, editProfile);
+    $('.save-work-experience').on("click", {section: "work-experience"}, saveProfile);
+    $('.cancel-work-experience').on("click", {section: "work-experience"}, cancelChanges);
 
     $('.edit-endorsements').on("click", {section: "endorsements"}, editProfile);
     $('.save-endorsements').on("click", {section: "endorsements"}, saveProfile);
@@ -60,16 +60,16 @@ function editProfile(event) {
     $('.cancel-' + $section).show();
 
     switch ($section) {
-        case 'aboutme':
+        case 'about-me':
             // Edit the About Me blurb
-            $.get(elgg.normalize_url('ajax/view/b_extended_profile/edit_aboutme'),
+            $.get(elgg.normalize_url('ajax/view/b_extended_profile/edit_about-me'),
                 {
                     guid: elgg.get_logged_in_user_guid()
                 },
                 function(data) {
-                        $('.gcconnex-profile-aboutme-display').after('<div class="gcconnex-aboutme-edit-wrapper">' + data + '</div>');
+                        $('.gcconnex-profile-about-me-display').after('<div class="gcconnex-about-me-edit-wrapper">' + data + '</div>');
                 });
-            $('.gcconnex-profile-aboutme-display').hide();
+            $('.gcconnex-profile-about-me-display').hide();
             break;
         case 'education':
             // Edit the edumacation
@@ -83,17 +83,17 @@ function editProfile(event) {
                 });
             $('.gcconnex-profile-education-display').hide();
             break;
-        case 'experience':
+        case 'work-experience':
             // Edit the experience for this user
-            $.get(elgg.normalize_url('ajax/view/b_extended_profile/edit_experience'),
+            $.get(elgg.normalize_url('ajax/view/b_extended_profile/edit_work-experience'),
                 {
                     param: elgg.get_logged_in_user_guid()
                 },
                 function(data) {
                     // Output in a DIV with id=somewhere
-                    $('.gcconnex-experience').append('<div class="gcconnex-experience-edit-wrapper">' + data + '</div>');
+                    $('.gcconnex-work-experience').append('<div class="gcconnex-work-experience-edit-wrapper">' + data + '</div>');
                 });
-            $('.gcconnex-profile-experience-display').hide();
+            $('.gcconnex-profile-work-experience-display').hide();
             break;
         case 'endorsements':
             // inject the html to add ability to add skills
@@ -133,18 +133,17 @@ function saveProfile(event) {
     $('.cancel-' + $section).hide();
 
     switch ($section) {
-        case "aboutme":
+        case "about-me":
             var $about_me = tinyMCE.activeEditor.getContent();
 
             elgg.action('edit_extended_profile', {
 
                     guid: elgg.get_logged_in_user_guid(),
-                    section: 'aboutme',
+                    section: 'about-me',
                     description: $about_me
-                },
-                function() {
-                    // do something on success
                 });
+            $('.gcconnex-about-me-edit-wrapper').remove();
+            $('.gcconnex-profile-about-me-display').html($about_me).show();
             break;
         case "education":
             var $school = $('.gcconnex-education-school').val();
@@ -162,22 +161,10 @@ function saveProfile(event) {
                     program: $program,
                     field: $field
                 });
-            /*
-            elgg.action('edit_extended_profile', {
-                data: {
-                    guid: elgg.get_logged_in_user_guid(),
-                    school: 'Highland High',
-                    startdate: 'funday',
-                    enddate: 'endday',
-                    program: 'program',
-                    field: 'field'
-                },
-                success: function() {
-                    // do something on success
-                }
-            });*/
+            $('.gcconnex-education-edit-wrapper').remove();
+            //$('.gcconnex-profile');
             break;
-        case "experience":
+        case "work-experience":
             break;
         case "endorsements":
 
@@ -238,20 +225,20 @@ function cancelChanges(event) {
     $('.cancel-' + $section).hide();
 
     switch ($section) {
-        case "aboutme":
+        case "about-me":
 
             // show the about me
-            $('.gcconnex-profile-aboutme-display').show();
-            $('.gcconnex-aboutme-edit-wrapper').remove();
+            $('.gcconnex-profile-about-me-display').show();
+            $('.gcconnex-about-me-edit-wrapper').remove();
 
             break;
         case "education":
             $('.gcconnex-profile-education-display').show();
             $('.gcconnex-education-edit-wrapper').remove();
             break;
-        case "experience":
-            $('.gcconnex-profile-experience-display').show();
-            $('.gcconnex-experience-edit-wrapper').remove();
+        case "work-experience":
+            $('.gcconnex-profile-work-experience-display').show();
+            $('.gcconnex-work-experience-edit-wrapper').remove();
             break;
         case "endorsements":
             $('.gcconnex-endorsement-input-wrapper').remove();
