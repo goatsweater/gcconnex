@@ -117,14 +117,14 @@ input.gcconnex-endorsement-input-skill {
 /* education */
 
 
-.experience-title,
+.work-experience-title,
 .education-school {
     padding-top: 5px;
     font-size: 18px;
     padding-bottom: 2px;
 }
 
-.experience-dates,
+.work-experience-dates,
 .education-dates {
     font-size: 10px;
     width: auto;
@@ -148,7 +148,7 @@ input.gcconnex-endorsement-input-skill {
     font-style: italic;
 }
 
-.experience-organization {
+.work-experience-organization {
     font-weight: bold;
     padding-bottom: 10px;
 }

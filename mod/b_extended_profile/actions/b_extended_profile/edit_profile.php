@@ -7,22 +7,22 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
     $section = get_input('section');
 
     switch ($section) {
-        case 'aboutme':
-            $user->description = get_input('description');
+        case 'about-me':
+            $user->description = get_input('description', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0001.');
             $user->save();
             break;
         case 'education':
-            $school = get_input('school', 'default school');
-            $startdate = get_input('startdate', 'Error');
-            $enddate = get_input('enddate');
-            $program = get_input('program');
-            $field = get_input('field');
+            $school = get_input('school', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0002.');
+            $startdate = get_input('startdate', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0003.');
+            $enddate = get_input('enddate', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0004.');
+            $program = get_input('program', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0005.');
+            $field = get_input('field', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0006.');
 
             // create education object
             $education = new ElggObject();
             $education->subtype = "education";
-            $education->title = "edu title";
-            $education->description ="edu description";
+            $education->title = $school;
+            $education->description = $program;
 
             $education->owner_guid = $user_guid;
             $education->school = $school;
@@ -33,23 +33,52 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
 
             $education_guid = $education->save();
 
-
-
             //$user->__set('education', $education)
             $user->education = $education_guid;
+
+            $user->save();
+            break;
+        case 'work-experience':
+            $organization = get_input('organization', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0011.');
+            $startdate = get_input('startdate', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0012.');
+            $enddate = get_input('enddate', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0013.');
+            $title = get_input('title', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0014.');
+            $responsibilities = get_input('responsibilities', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0015.');
+
+            // create work experience object
+            $work = new ElggObject();
+            $work->subtype = "work";
+            $work->title = $title;
+            $work->description = $responsibilities;
+
+            $work->owner_guid = $user_guid;
+            $work->organization = $organization;
+            $work->startdate = $startdate;
+            $work->enddate = $enddate;
+            $work->title = $title;
+            $work->responsibilities = $responsibilities;
+
+            $work_guid = $work->save();
+
+            $user->work = $work_guid;
+
+            $user->save();
+            break;
+        case 'endorsements':
+            $skillsToAdd = get_input('skillsadded', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0021.');
+            $skillsToRemove = get_input('skillsremoved', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0022.');
+
+            $user->skills = $skillsToAdd;
 
             $user->save();
             break;
         default:
     }
 
-
-
     system_message(elgg_echo("profile:saved"));
 
 }
 else {  // In case this view will be called via elgg_view()
-    echo 'An error has occurred. Please ask the system administrator to grep: FMBKRL267KVD';
-
+    system_message('An error has occurred. Please ask the system administrator to grep: FMBKRL267KVD');
 }
 ?>

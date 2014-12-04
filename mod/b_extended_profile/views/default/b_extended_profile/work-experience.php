@@ -1,8 +1,13 @@
 <?php
-?>
-    <div class="gcconnex-profile-experience-display">
-        <div class="experience-dates">August 2008 - April 2014</div>
-        <div class="experience-title">Human Resources Manager</div>
-        <div class="experience-organization">Harris/Decima Inc.</div>
-        <div class="experience-description">Responsible for the staffing levels in the call-centre, benefits administration, policy interpretation and part-time hiring at the Ottawa location. Prepared bi-weekly payroll reports including reimbursements, address changes, increases, bonuses and retroactive adjustments.</div>
-    </div>
+$user_guid = elgg_get_logged_in_user_guid();
+$user = get_user($user_guid);
+
+$work_guid = $user->work;
+$work = get_entity($work_guid);
+
+echo '<div class="gcconnex-profile-work-experience-display">';
+echo '<div class="work-experience-dates">' . $work->startdate . ' - ' . $work->enddate . '</div>';
+echo '<div class="work-experience-title">' . $work->title . '</div>';
+echo '<div class="work-experience-organization">' . $work->organization . '</div>';
+echo '<div class="work-experience-responsibilities">' . $work->responsibilities . '</div>';
+echo '</div>';
