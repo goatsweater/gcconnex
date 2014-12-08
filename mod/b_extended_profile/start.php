@@ -21,6 +21,7 @@ function b_extended_profile_init() {
     elgg_register_ajax_view('b_extended_profile/about-me');
     elgg_register_ajax_view('b_extended_profile/education');
     elgg_register_ajax_view('b_extended_profile/work-experience');
+    elgg_register_ajax_view('b_extended_profile/endorsements');
 
     elgg_register_ajax_view('b_extended_profile/edit_about-me');
     elgg_register_ajax_view('b_extended_profile/edit_education');

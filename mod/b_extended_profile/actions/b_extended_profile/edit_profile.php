@@ -68,7 +68,35 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
             $skillsToAdd = get_input('skillsadded', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0021.');
             $skillsToRemove = get_input('skillsremoved', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0022.');
 
-            $user->skills = $skillsToAdd;
+            $skill_guids = array();
+
+            foreach ($skillsToAdd as $new_skill) {
+                $skill = new ElggObject();
+                $skill->subtype = "MySkill";
+                $skill->title = $new_skill;
+                $skill_guids[] = $skill->save();
+            }
+
+            if ($user->skills == NULL) {
+                $user->skills = $skill_guids;
+            }
+            else {
+                $stack = $user->skills;
+                array_merge($stack, $skill_guids);
+                $user->skills = $stack;
+            }
+            /*
+            else {
+                if(is_array($user->skills)) {
+                    $temp = $user->skills;
+                    $user->skills = array_merge($skillsToAdd, $temp);
+                }
+                else {
+                    $user->skills = array($skillsToAdd, $user->skills);
+                    //$user->skills += $skillsToAdd;
+                }
+            }*/
+
 
             $user->save();
             break;
