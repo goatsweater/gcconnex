@@ -212,7 +212,6 @@ function saveProfile(event) {
             break;
         case "endorsements":
 
-            $('.gcconnex-endorsement-input-wrapper').remove();
             $('.delete-skill').hide();
 
             var $added = [];
@@ -228,6 +227,15 @@ function saveProfile(event) {
                 //$('.gcconnex-endorsements-skill-wrapper').removeClass('temporarily-added');
                 //$('.endorsement-markedForDelete').remove();
                 // save the information the user just edited
+                /*
+                 elgg.action($(this).attr('href'), {
+                 success: function() {
+                 var item = $(link).closest('.elgg-item');
+                 item.remove();
+                 }
+                 });
+                * */
+
                 elgg.action('edit_extended_profile', {
                     guid: elgg.get_logged_in_user_guid(),
                     section: 'endorsements',
@@ -235,20 +243,24 @@ function saveProfile(event) {
                     skillsremoved: $removed
                 });
 
+                $('.gcconnex-endorsement-input-wrapper').remove();
+
+                $.get(elgg.normalize_url('ajax/view/b_extended_profile/endorsements'),
+                    {
+                        guid: elgg.get_logged_in_user_guid()
+                    },
+                    function(data) {
+                        // Output in a DIV with id=somewhere
+                        $('.gcconnex-endorsements').append(data);
+                    });
+
             }
             else {
                 // show() the skills that have been hidden() (marked for deletion)
                 $('.gcconnex-enxorsement-skill-wrapper').show();
             }
 
-            $.get(elgg.normalize_url('ajax/view/b_extended_profile/endorsements'),
-                {
-                    guid: elgg.get_logged_in_user_guid()
-                },
-                function(data) {
-                    // Output in a DIV with id=somewhere
-                    $('.gcconnex-endorsements').append(data);
-                });
+
 
             /*
             $.get(elgg.normalize_url('ajax/view/b_extended_profile/save_endorsements'),
@@ -327,9 +339,7 @@ function cancelChanges(event) {
                 });
             break;
         case "endorsements":
-            $('.gcconnex-endorsement-input-wrapper').remove();
-
-
+            $('.gcconnex-endorsements-input-wrapper').remove();
 
             $('.delete-skill').hide();
             $('.gcconnex-endorsements-skill-wrapper').removeClass('endorsements-markedForDelete');

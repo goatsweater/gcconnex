@@ -1,6 +1,7 @@
 # Elgg htaccess directives
 
 <Files "htaccess_dist">
+	AllowOverride All
 	order allow,deny
 	deny from all
 </Files>

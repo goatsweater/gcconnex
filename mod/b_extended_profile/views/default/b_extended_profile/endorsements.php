@@ -8,9 +8,6 @@ $skill_guids = $user->skills;
 echo '<div class="gcconnex-profile-endorsements-display">';
 echo '<div class="gcconnex-endorsements-skills-list-wrapper">';
 
-var_dump($skill_guids);
-echo '<br>';
-
 //$user->skills = NULL;
 
 if (is_array($skill_guids)) {

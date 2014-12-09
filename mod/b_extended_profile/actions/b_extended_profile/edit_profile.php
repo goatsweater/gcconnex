@@ -74,6 +74,7 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
                 $skill = new ElggObject();
                 $skill->subtype = "MySkill";
                 $skill->title = $new_skill;
+                $skill->owner_guid = $user_guid;
                 $skill_guids[] = $skill->save();
             }
 
@@ -82,21 +83,8 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
             }
             else {
                 $stack = $user->skills;
-                array_merge($stack, $skill_guids);
-                $user->skills = $stack;
+                $user->skills = array_merge($stack, $skill_guids);
             }
-            /*
-            else {
-                if(is_array($user->skills)) {
-                    $temp = $user->skills;
-                    $user->skills = array_merge($skillsToAdd, $temp);
-                }
-                else {
-                    $user->skills = array($skillsToAdd, $user->skills);
-                    //$user->skills += $skillsToAdd;
-                }
-            }*/
-
 
             $user->save();
             break;

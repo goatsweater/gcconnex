@@ -3,6 +3,8 @@
  * Elgg user display (details)
  * @uses $vars['entity'] The user entity
  */
+elgg_load_js('lightbox');
+elgg_load_css('lightbox');
 
 $user = elgg_get_page_owner_entity();
 
@@ -18,7 +20,7 @@ echo '<i class="fa fa-fw fa-mobile-phone"></i>' . $user->mobile . '<br>';
 echo '<i class="fa fa-fw fa-envelope"></i>' . $user->email . '<br>';
 echo '<i class="fa fa-fw fa-globe"></i><a href=' . $user->website . ">{$user->website}</a><br><br>";
 
-echo '<i class="fa fa-fw fa-lg fa-facebook"></i>';
+echo '<a href="http://www.facebook.com/' . $user->facebook . '"><i class="fa fa-fw fa-lg fa-facebook"></i></a>';
 echo '<i class="fa fa-fw fa-lg fa-google-plus"></i>';
 echo '<i class="fa fa-fw fa-lg fa-github"></i>';
 echo '<i class="fa fa-fw fa-lg fa-twitter"></i>';
@@ -29,10 +31,20 @@ echo '<i class="fa fa-fw fa-lg fa-instagram"></i>';
 echo '<i class="fa fa-fw fa-lg fa-flickr"></i>';
 echo '<i class="fa fa-fw fa-lg fa-youtube"></i>';
 
-
 echo elgg_view("profile/status", array("entity" => $user));
 
+$content = elgg_view('output/url', array(
+    'href' => 'ajax/view/b_extended_profile/edit_basic',
+    'class' => 'elgg-lightbox iframe',
+    'text' => 'Edit'
+));
 
+echo $content;
+/*
+echo '<script "text/javascript">';
+echo '$(".iframe").fancybox()';
+echo '</script>';
+*/
 /*
 $even_odd = null;
 if (is_array($profile_fields) && sizeof($profile_fields) > 0) {
@@ -109,6 +121,7 @@ if (elgg_is_admin_logged_in() && elgg_get_logged_in_user_guid() != elgg_get_page
 }
 
 // content links
+$content_menu_title = "Personal Content";
 $content_menu = elgg_view_menu('owner_block', array(
     'entity' => elgg_get_page_owner_entity(),
     'class' => 'profile-content-menu',
@@ -116,5 +129,5 @@ $content_menu = elgg_view_menu('owner_block', array(
 
 echo '</div>';
 
-echo '<div class="b-user-menu">' . $content_menu . '</div>';
+echo '<div class="b-user-menu">' . $content_menu_title . $content_menu . '</div>';
 echo '<div class="b-user-menu2">' . $admin_links . '</div>';

@@ -27,6 +27,8 @@ function b_extended_profile_init() {
     elgg_register_ajax_view('b_extended_profile/edit_education');
     elgg_register_ajax_view('b_extended_profile/edit_work-experience');
 
+    elgg_register_ajax_view('b_extended_profile/edit_basic');
+
     // register, set, action!
     $action_path = elgg_get_plugins_path() . 'b_extended_profile/actions/b_extended_profile/';
     elgg_register_action('edit_extended_profile', $action_path . 'edit_profile.php');
