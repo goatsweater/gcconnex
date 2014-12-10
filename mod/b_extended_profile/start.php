@@ -31,5 +31,5 @@ function b_extended_profile_init() {
 
     // register, set, action!
     $action_path = elgg_get_plugins_path() . 'b_extended_profile/actions/b_extended_profile/';
-    elgg_register_action('edit_extended_profile', $action_path . 'edit_profile.php');
+    elgg_register_action('b_extended_profile/edit_profile', $action_path . 'edit_profile.php');
 }
