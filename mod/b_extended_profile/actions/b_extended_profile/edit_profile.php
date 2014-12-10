@@ -7,16 +7,6 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
     $section = get_input('section');
 
     switch ($section) {
-        case 'basic':
-            $fields = array('name', 'title', 'department', 'phone', 'mobile', 'email', 'website', 'facebook', 'google', 'github',
-                'twitter', 'linkedin', 'pinterest', 'tumblr', 'instagram', 'flickr', 'youtube');
-
-            foreach ($fields as $field) {
-                $value = get_input($field);
-                $user->set($field, $value);
-            }
-            $user->save();
-            break;
         case 'about-me':
             $user->description = get_input('description', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0001.');
             $user->save();
@@ -106,7 +96,20 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
     system_message(elgg_echo("profile:saved"));
 
 }
-else {  // In case this view will be called via elgg_view()
-    system_message('An error has occurred. Please ask the system administrator to grep: FMBKRL267KVD');
+else {  // In case this view will be called via the elgg_view_form() action, then we know it's the basic profile only
+
+    $user_guid = elgg_get_logged_in_user_guid(); //get_input('guid');
+    $user = get_user($user_guid);
+
+    $fields = array('name', 'title', 'department', 'phone', 'mobile', 'email', 'website', 'facebook', 'google', 'github',
+        'twitter', 'linkedin', 'pinterest', 'tumblr', 'instagram', 'flickr', 'youtube');
+
+    foreach ($fields as $field) {
+        $value = get_input($field);
+        $user->set($field, $value);
+    }
+    $user->save();
+
+    system_message(elgg_echo("profile:saved"));
 }
 ?>
