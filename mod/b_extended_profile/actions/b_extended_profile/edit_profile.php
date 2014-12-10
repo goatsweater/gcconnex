@@ -5,7 +5,7 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
     $user = get_user($user_guid);
 
     $section = get_input('section');
-git 
+
     switch ($section) {
         case 'basic':
             $fields = array('name', 'title', 'department', 'phone', 'mobile', 'email', 'website', 'facebook', 'google', 'github',
