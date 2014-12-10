@@ -30,9 +30,10 @@
                     echo '<span class="save-control save-' . $sec . ' hidden"><img src="' . elgg_get_site_url() . 'mod/b_extended_profile/img/save.png">Save</span>';
                     echo '<span class="cancel-control cancel-' . $sec . ' hidden"><img src="' . elgg_get_site_url() . 'mod/b_extended_profile/img/cancel.png">Cancel</span>';
                     echo '</span>';
-
-                    echo elgg_view('b_extended_profile/' . $sec);
                 }
+
+                echo elgg_view('b_extended_profile/' . $sec);
+
                 echo '</div>';
             }
         ?>

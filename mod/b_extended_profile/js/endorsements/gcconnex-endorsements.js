@@ -1,5 +1,5 @@
 /*
- * Purpose: Provides 'LinkedIn-like endorsements' functionality for use on user profiles
+ * Purpose: Provides 'LinkedIn-like endorsements' functionality for use on user profiles and handles ajax for profile edits
  *
  * License: GPL v2.0
  * Full license here: http://www.gnu.org/licenses/gpl-2.0.html
@@ -16,6 +16,7 @@ $(document).ready(function() {
     $('.save-control').hide();
     $('.cancel-control').hide();
 
+    //link the edit/save/cancel buttons with the appropriate functions on click..
     $('.edit-about-me').on("click", {section: "about-me"}, editProfile);
     $('.save-about-me').on("click", {section: "about-me"}, saveProfile);
     $('.cancel-about-me').on("click", {section: "about-me"}, cancelChanges);
@@ -32,7 +33,7 @@ $(document).ready(function() {
     $('.save-endorsements').on("click", {section: "endorsements"}, saveProfile);
     $('.cancel-endorsements').on("click", {section: "endorsements"}, cancelChanges);
 
-    // when a user clicks outside of the text box (the one for entering new skills), make it disappear elegantly
+    // when a user clicks outside of the input text box (the one for entering new skills in the endorsements area), make it disappear elegantly
     $(document).click(function(event) {
         if(!$(event.target).closest('.gcconnex-endorsements-input-wrapper').length) {
             if($('.gcconnex-endorsements-input-skill').is(":visible")) {

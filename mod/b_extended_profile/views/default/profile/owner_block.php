@@ -26,7 +26,9 @@ if (!$user) {
 
 $icon = elgg_view_entity_icon($user, 'large', array(
     'use_hover' => false,
-    'use_link' => false,
+    //'href' => 'avatar/edit/' . $user->username,
+    //'class' => 'elgg-lightbox iframe',
+    'use_link' => false, //true,
 ));
 
 

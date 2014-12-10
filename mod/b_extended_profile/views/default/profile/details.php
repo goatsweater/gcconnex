@@ -33,11 +33,31 @@ echo '<i class="fa fa-fw fa-lg fa-youtube"></i>';
 
 echo elgg_view("profile/status", array("entity" => $user));
 
+$menu = elgg_trigger_plugin_hook('register', "menu:user_hover", array('entity' => $user), array());
+$builder = new ElggMenuBuilder($menu);
+$menu = $builder->getMenu();
+$actions = elgg_extract('action', $menu, array());
+$admin = elgg_extract('admin', $menu, array());
+
+$profile_actions = '';
+if (elgg_is_logged_in() && $actions) {
+    $profile_actions = '<ul class="elgg-menu profile-action-menu mvm">';
+    foreach ($actions as $action) {
+        $profile_actions .= '<li>' . $action->getContent(array('class' => 'elgg-button elgg-button-action')) . '</li>';
+    }
+    $profile_actions .= '</ul>';
+}
+
+echo $profile_actions;
+
 $content = elgg_view('output/url', array(
     'href' => 'ajax/view/b_extended_profile/edit_basic',
     'class' => 'elgg-lightbox iframe',
     'text' => 'Edit'
 ));
+
+
+
 
 echo $content;
 /*

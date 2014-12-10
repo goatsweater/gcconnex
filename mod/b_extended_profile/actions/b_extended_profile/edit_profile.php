@@ -7,6 +7,16 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
     $section = get_input('section');
 
     switch ($section) {
+        case 'basic':
+            $fields = array('name', 'title', 'department', 'phone', 'mobile', 'email', 'website', 'facebook', 'google', 'github',
+                'twitter', 'linkedin', 'pinterest', 'tumblr', 'instagram', 'flickr', 'youtube');
+
+            foreach ($fields as $field) {
+                $value = get_input($field);
+                $user->set($field, $value);
+            }
+            $user->save();
+            break;
         case 'about-me':
             $user->description = get_input('description', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0001.');
             $user->save();
@@ -89,6 +99,8 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
             $user->save();
             break;
         default:
+            system_message(elgg_echo("profile:saved"));
+
     }
 
     system_message(elgg_echo("profile:saved"));
