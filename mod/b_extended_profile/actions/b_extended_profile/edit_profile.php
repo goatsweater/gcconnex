@@ -101,13 +101,22 @@ else {  // In case this view will be called via the elgg_view_form() action, the
     $user_guid = elgg_get_logged_in_user_guid(); //get_input('guid');
     $user = get_user($user_guid);
 
-    $fields = array('name', 'title', 'department', 'phone', 'mobile', 'email', 'website', 'facebook', 'google', 'github',
-        'twitter', 'linkedin', 'pinterest', 'tumblr', 'instagram', 'flickr', 'youtube');
+    $fields = array('name', 'title', 'department', 'phone', 'mobile', 'email');
 
     foreach ($fields as $field) {
         $value = get_input($field);
         $user->set($field, $value);
     }
+
+    $weblink = array('website', 'facebook', 'google', 'github', 'twitter', 'linkedin', 'pinterest', 'tumblr', 'instagram', 'flickr', 'youtube');
+
+    foreach ($weblink as $link) {
+        $value = get_input($link);
+        if (filter_var($value, FILTER_VALIDATE_URL) !== false) {
+            $user->set($link, $value);
+        }
+    }
+
     $user->save();
 
     system_message(elgg_echo("profile:saved"));

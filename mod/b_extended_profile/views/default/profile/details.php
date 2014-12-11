@@ -12,36 +12,39 @@ $profile_fields = elgg_get_config('profile_fields');
 
 // username, title, phone, mobile, email, website
 echo '<div id="profile-details" class="elgg-body pll">';
-echo "<h1>{$user->name}</h1>";
+echo '<h1>' . $user->name . '</h1>';
 echo '<h3>' . $user->title . '</h3><br>';
 echo $user->department . '<br>';
 echo '<i title="Telephone" class="fa fa-fw fa-phone"></i>' . $user->phone . '<br>';
 echo '<i class="fa fa-fw fa-mobile-phone"></i>' . $user->mobile . '<br>';
-echo '<i class="fa fa-fw fa-envelope"></i>' . $user->email . '<br>';
-echo '<i class="fa fa-fw fa-globe"></i><a href=' . $user->website . ">{$user->website}</a><br><br>";
+echo '<i class="fa fa-fw fa-envelope"></i><a href="mailto:' . $user->email . '">' . $user->email . '</a><br>';
+echo '<i class="fa fa-fw fa-globe"></i><a href='
 
-echo '<a href="' . $user->facebook . '"><i class="fa fa-fw fa-lg fa-facebook"></i></a>';
-echo '<i class="fa fa-fw fa-lg fa-google-plus"></i>';
-echo '<i class="fa fa-fw fa-lg fa-github"></i>';
-echo '<i class="fa fa-fw fa-lg fa-twitter"></i>';
-echo '<i class="fa fa-fw fa-lg fa-linkedin"></i>';
-echo '<i class="fa fa-fw fa-lg fa-pinterest"></i>';
-echo '<i class="fa fa-fw fa-lg fa-tumblr"></i>';
-echo '<i class="fa fa-fw fa-lg fa-instagram"></i>';
-echo '<i class="fa fa-fw fa-lg fa-flickr"></i>';
-echo '<i class="fa fa-fw fa-lg fa-youtube"></i>';
+    . $user->website . '>' . $user->website . '</a><br><br>';
+
+$social = array('facebook', 'google', 'github', 'twitter', 'linkedin', 'pinterest', 'tumblr', 'instagram', 'flickr', 'youtube');
+
+foreach ($social as $media) {
+
+    if ($link = $user->get($media)) {
+        if ($media == 'google') { $media = 'google-plus'; }
+        echo '<a href="' . $link . '"><i class="fa fa-fw fa-lg fa-' . $media . '"></i></a>';
+    }
+}
+
 
 echo elgg_view("profile/status", array("entity" => $user));
 
+if (elgg_get_logged_in_user_entity() == elgg_get_page_owner_entity()) {
 
+    $content = elgg_view('output/url', array(
+        'href' => 'ajax/view/b_extended_profile/edit_basic',
+        'class' => 'elgg-lightbox iframe',
+        'text' => 'Edit'
+    ));
 
-$content = elgg_view('output/url', array(
-    'href' => 'ajax/view/b_extended_profile/edit_basic',
-    'class' => 'elgg-lightbox iframe',
-    'text' => 'Edit'
-));
-
-echo $content;
+    echo $content;
+}
 /*
 echo '<script "text/javascript">';
 echo '$(".iframe").fancybox()';
