@@ -13,14 +13,14 @@ $profile_fields = elgg_get_config('profile_fields');
 // username, title, phone, mobile, email, website
 echo '<div id="profile-details" class="elgg-body pll">';
 echo "<h1>{$user->name}</h1>";
-echo '<h3>Consultant (false field)</h3><br>';
-echo 'TBS-SCT (false field)<br>';
+echo '<h3>' . $user->title . '</h3><br>';
+echo $user->department . '<br>';
 echo '<i title="Telephone" class="fa fa-fw fa-phone"></i>' . $user->phone . '<br>';
 echo '<i class="fa fa-fw fa-mobile-phone"></i>' . $user->mobile . '<br>';
 echo '<i class="fa fa-fw fa-envelope"></i>' . $user->email . '<br>';
 echo '<i class="fa fa-fw fa-globe"></i><a href=' . $user->website . ">{$user->website}</a><br><br>";
 
-echo '<a href="http://www.facebook.com/' . $user->facebook . '"><i class="fa fa-fw fa-lg fa-facebook"></i></a>';
+echo '<a href="' . $user->facebook . '"><i class="fa fa-fw fa-lg fa-facebook"></i></a>';
 echo '<i class="fa fa-fw fa-lg fa-google-plus"></i>';
 echo '<i class="fa fa-fw fa-lg fa-github"></i>';
 echo '<i class="fa fa-fw fa-lg fa-twitter"></i>';
@@ -33,31 +33,13 @@ echo '<i class="fa fa-fw fa-lg fa-youtube"></i>';
 
 echo elgg_view("profile/status", array("entity" => $user));
 
-$menu = elgg_trigger_plugin_hook('register', "menu:user_hover", array('entity' => $user), array());
-$builder = new ElggMenuBuilder($menu);
-$menu = $builder->getMenu();
-$actions = elgg_extract('action', $menu, array());
-$admin = elgg_extract('admin', $menu, array());
 
-$profile_actions = '';
-if (elgg_is_logged_in() && $actions) {
-    $profile_actions = '<ul class="elgg-menu profile-action-menu mvm">';
-    foreach ($actions as $action) {
-        $profile_actions .= '<li>' . $action->getContent(array('class' => 'elgg-button elgg-button-action')) . '</li>';
-    }
-    $profile_actions .= '</ul>';
-}
-
-echo $profile_actions;
 
 $content = elgg_view('output/url', array(
     'href' => 'ajax/view/b_extended_profile/edit_basic',
     'class' => 'elgg-lightbox iframe',
     'text' => 'Edit'
 ));
-
-
-
 
 echo $content;
 /*
