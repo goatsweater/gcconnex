@@ -1,3 +1,3 @@
 <?php
 
-echo elgg_view_form('b_extended_profile/edit_profile');
+echo elgg_view_form('b_extended_profile/edit_profile', array('target' => '_parent'));

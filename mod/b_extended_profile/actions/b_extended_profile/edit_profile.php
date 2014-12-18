@@ -19,6 +19,34 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
             $field = get_input('field', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0006.');
 
             // create education object
+            $education_guids = array();
+
+            foreach ($school as $k => $v) {
+                $education = new ElggObject();
+                $education->subtype = "education";
+                $education->title = $v;
+                $education->description = $program[$k];
+
+                $education->owner_guid = $user_guid;
+                $education->school = $v;
+                $education->startdate = $startdate[$k];
+                $education->enddate = $enddate[$k];
+                $education->program = $program[$k];
+                $education->field = $field[$k];
+
+                $education_guids[] = $education->save();
+            }
+
+            if ($user->education == NULL) {
+                $user->education = $education_guids;
+            }
+            else {
+                $stack = array($user->education);
+                $user->education = array_merge($stack, $education_guids);
+                $user->stack = $stack;
+                $user->educ = $education_guids;
+            }
+            /*
             $education = new ElggObject();
             $education->subtype = "education";
             $education->title = $school;
@@ -31,10 +59,9 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
             $education->program = $program;
             $education->field = $field;
 
-            $education_guid = $education->save();
-
+            $education_guids[] = $education->save();
+*/
             //$user->__set('education', $education)
-            $user->education = $education_guid;
 
             $user->save();
             break;
@@ -117,8 +144,11 @@ else {  // In case this view will be called via the elgg_view_form() action, the
         }
     }
 
+    $user->micro = get_input('micro');
     $user->save();
 
     system_message(elgg_echo("profile:saved"));
+
+    forward($user->getURL());
 }
 ?>

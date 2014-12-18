@@ -23,8 +23,8 @@ foreach ($fields as $field) {
     echo elgg_view("input/text", $params);
 }
 
-$__elgg_ts = time();
-$__elgg_token = generate_action_token($__elgg_ts);
+echo '<br> ' . var_dump($user-micro);
+echo elgg_view('input/checkbox', array('name' => 'micro', 'checked' => $user->micro));
+echo 'I would like to opt-in to micro-assignments';
 
-
-echo elgg_view('input/button', array('type' => 'submit', 'value' => 'Save', 'target' => 'edit_extended_profile'));
+echo elgg_view('input/button', array('type' => 'submit', 'value' => 'Save'));

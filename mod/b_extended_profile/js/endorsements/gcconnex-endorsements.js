@@ -33,6 +33,12 @@ $(document).ready(function() {
     $('.save-endorsements').on("click", {section: "endorsements"}, saveProfile);
     $('.cancel-endorsements').on("click", {section: "endorsements"}, cancelChanges);
 
+    $('.gcconnex-education-add-another').on("click", {section: "education"}, addMore);
+
+    $(".iframe").fancybox({
+        'width' : 800,
+        'height' : 500
+    });
     // when a user clicks outside of the input text box (the one for entering new skills in the endorsements area), make it disappear elegantly
     $(document).click(function(event) {
         if(!$(event.target).closest('.gcconnex-endorsements-input-wrapper').length) {
@@ -113,7 +119,13 @@ function editProfile(event) {
 
             $('.gcconnex-endorsement-add').hide();
             $('.gcconnex-endorsement-retract').hide();
+
+            $('.gcconnex-endorsements-skill').each(function(){
+                $(this).after('<span class="delete-">Delete this skill</span>'); //goes in here i think..
+            });
             $('.delete-skill').show();
+            //$('.delete-' + newSkillDashed).on('click', deleteSkill);           // bind the deleteSkill function to the 'Delete this skill' link
+
 
             break;
         default:
@@ -137,7 +149,7 @@ function saveProfile(event) {
         case "about-me":
             var $about_me = tinyMCE.activeEditor.getContent();
             // save the information the user just edited
-            elgg.action('edit_extended_profile', {
+            elgg.action('b_extended_profile/edit_profile', {
                     guid: elgg.get_logged_in_user_guid(),
                     section: 'about-me',
                     description: $about_me
@@ -154,14 +166,33 @@ function saveProfile(event) {
                 });
             break;
         case "education":
-            var $school = $('.gcconnex-education-school').val();
-            var $startdate = $('.gcconnex-education-startdate').val();
-            var $enddate = $('.gcconnex-education-enddate').val();
-            var $program = $('.gcconnex-education-program').val();
-            var $field = $('.gcconnex-education-field').val();
+
+            //var $school = $('.gcconnex-education-school').val();
+            var $school = [];
+            $('.gcconnex-education-school').each(function() {
+                $school.push($(this).val());
+            });
+
+            var $startdate = [];
+            $('.gcconnex-education-startdate').each(function() {
+                $startdate.push($(this).val());
+            });
+
+            var $enddate = [];
+            $('.gcconnex-education-enddate').each(function() {
+                $enddate.push($(this).val());
+            });
+            var $program = [];
+            $('.gcconnex-education-program').each(function() {
+                $program.push($(this).val());
+            });
+            var $field = [];
+            $('.gcconnex-education-field').each(function() {
+                $field.push($(this).val());
+            });
 
             // save the information the user just edited
-            elgg.action('edit_extended_profile', {
+            elgg.action('b_extended_profile/edit_profile', {
                     guid: elgg.get_logged_in_user_guid(),
                     section: 'education',
                     school: $school,
@@ -190,7 +221,7 @@ function saveProfile(event) {
             var $responsibilities = $('.gcconnex-work-experience-responsibilities').val();
 
             // save the information the user just edited
-            elgg.action('edit_extended_profile', {
+            elgg.action('b_extended_profile/edit_profile', {
                 guid: elgg.get_logged_in_user_guid(),
                 section: 'work-experience',
                 organization: $organization,
@@ -228,16 +259,8 @@ function saveProfile(event) {
                 //$('.gcconnex-endorsements-skill-wrapper').removeClass('temporarily-added');
                 //$('.endorsement-markedForDelete').remove();
                 // save the information the user just edited
-                /*
-                 elgg.action($(this).attr('href'), {
-                 success: function() {
-                 var item = $(link).closest('.elgg-item');
-                 item.remove();
-                 }
-                 });
-                * */
 
-                elgg.action('edit_extended_profile', {
+                elgg.action('b_extended_profile/edit_profile', {
                     guid: elgg.get_logged_in_user_guid(),
                     section: 'endorsements',
                     skillsadded: $added,
@@ -261,30 +284,6 @@ function saveProfile(event) {
                 $('.gcconnex-enxorsement-skill-wrapper').show();
             }
 
-
-
-            /*
-            $.get(elgg.normalize_url('ajax/view/b_extended_profile/save_endorsements'),
-                {
-                    param: elgg.get_logged_in_user_guid()
-                },
-                function(data) {
-                    // Output in a DIV with id=somewhere
-                    $('.gcconnex-endorsements').append('<div class="gcconnex-endorsements-edit-wrapper">' + data + '</div>');
-                });
-                */
-
-            //$('.gcconnex-profile-endorsements-display').hide();
-
-            // prep the skills array
-            /*
-            var pathname = '../mod/b_extended_profile/saveEndorsements.php';
-            var user = elgg.get_page_owner_guid();
-            // save functions
-            $('.endorsements-message')
-                .html('loading, please standby')
-                .load(pathname, 'user=' + user + 'skills=' + skillsToAdd);
-                */
             // @todo: show add or retract links based on status of endorsement
             break;
         default:
@@ -446,3 +445,10 @@ function deleteSkill() {
     $(this).parent('.gcconnex-endorsements-skill-wrapper').addClass('endorsements-markedForDelete').hide();
 }
 
+function addMore() {
+    $.get(elgg.normalize_url('ajax/view/input/education'), '',
+        function(data) {
+            // Output in a DIV with id=somewhere
+            $('.gcconnex-education-all').append(data);
+        });
+}

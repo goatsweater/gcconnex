@@ -18,9 +18,7 @@ echo $user->department . '<br>';
 echo '<i title="Telephone" class="fa fa-fw fa-phone"></i>' . $user->phone . '<br>';
 echo '<i class="fa fa-fw fa-mobile-phone"></i>' . $user->mobile . '<br>';
 echo '<i class="fa fa-fw fa-envelope"></i><a href="mailto:' . $user->email . '">' . $user->email . '</a><br>';
-echo '<i class="fa fa-fw fa-globe"></i><a href='
-
-    . $user->website . '>' . $user->website . '</a><br><br>';
+echo '<i class="fa fa-fw fa-globe"></i><a href=' . $user->website . '>' . $user->website . '</a><br><br>';
 
 $social = array('facebook', 'google', 'github', 'twitter', 'linkedin', 'pinterest', 'tumblr', 'instagram', 'flickr', 'youtube');
 
@@ -35,6 +33,7 @@ foreach ($social as $media) {
 
 echo elgg_view("profile/status", array("entity" => $user));
 
+
 if (elgg_get_logged_in_user_entity() == elgg_get_page_owner_entity()) {
 
     $content = elgg_view('output/url', array(
@@ -45,6 +44,9 @@ if (elgg_get_logged_in_user_entity() == elgg_get_page_owner_entity()) {
 
     echo $content;
 }
+
+
+
 /*
 echo '<script "text/javascript">';
 echo '$(".iframe").fancybox()';
