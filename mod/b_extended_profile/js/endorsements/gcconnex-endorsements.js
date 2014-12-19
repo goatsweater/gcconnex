@@ -168,6 +168,19 @@ function saveProfile(event) {
         case "education":
 
             //var $school = $('.gcconnex-education-school').val();
+            var $education_guid = [];
+            var $delete_guid = [];
+            $('.gcconnex-education-entry').each(function() {
+                if ( $(this).is(":hidden") ) {
+                    $delete_guid.push($(this).data('guid'));
+                }
+                else {
+                    $education_guid.push($(this).data('guid'));
+                }
+            });
+
+
+
             var $school = [];
             $('.gcconnex-education-school').each(function() {
                 $school.push($(this).val());
@@ -194,6 +207,8 @@ function saveProfile(event) {
             // save the information the user just edited
             elgg.action('b_extended_profile/edit_profile', {
                     guid: elgg.get_logged_in_user_guid(),
+                    delete: $delete_guid,
+                    eguid: $education_guid,
                     section: 'education',
                     school: $school,
                     startdate: $startdate,
@@ -451,4 +466,8 @@ function addMore() {
             // Output in a DIV with id=somewhere
             $('.gcconnex-education-all').append(data);
         });
+}
+
+function deleteEducation(identifier) {
+    $(identifier).closest('.gcconnex-education-entry').hide();
 }

@@ -11,9 +11,15 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
 
     echo '<div class="gcconnex-education-all">';
 
-    foreach ($education_guid as $guid) { // display the input/education view for each education entry
-        echo elgg_view('input/education', array('guid' => $guid));
+    if (is_array($education_guid)) {
+        foreach ($education_guid as $guid) { // display the input/education view for each education entry
+            echo elgg_view('input/education', array('guid' => $guid));
+        }
     }
+    else {
+        echo elgg_view('input/education', array('guid' => $education_guid));
+    }
+
 
     echo '</div>';
 

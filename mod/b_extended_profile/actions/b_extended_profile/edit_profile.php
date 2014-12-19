@@ -12,6 +12,7 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
             $user->save();
             break;
         case 'education':
+            $eguid = get_input('eguid', '');
             $school = get_input('school', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0002.');
             $startdate = get_input('startdate', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0003.');
             $enddate = get_input('enddate', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0004.');
@@ -21,30 +22,47 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
             // create education object
             $education_guids = array();
 
-            foreach ($school as $k => $v) {
-                $education = new ElggObject();
-                $education->subtype = "education";
-                $education->title = $v;
+            //if(!(is_array($eguid))) { $eguid = array($eguid); }
+
+            foreach ($eguid as $k => $v) {
+                if ($v == "new") {
+                    $education = new ElggObject();
+                    $education->subtype = "education";
+                    $education->owner_guid = $user_guid;
+                }
+                else {
+                    $education = get_entity($v);
+                }
+
+                $education->title = $school[$k];
                 $education->description = $program[$k];
 
-                $education->owner_guid = $user_guid;
-                $education->school = $v;
+                $education->school = $school[$k];
                 $education->startdate = $startdate[$k];
                 $education->enddate = $enddate[$k];
                 $education->program = $program[$k];
                 $education->field = $field[$k];
 
-                $education_guids[] = $education->save();
+                if($v == "new") {
+                    $education_guids[] = $education->save();
+                }
             }
 
             if ($user->education == NULL) {
                 $user->education = $education_guids;
             }
             else {
-                $stack = array($user->education);
-                $user->education = array_merge($stack, $education_guids);
-                $user->stack = $stack;
-                $user->educ = $education_guids;
+                $stack = $user->education;
+                if (!(is_array($stack))) { $stack = array($stack); }
+
+                if ($education_guids != NULL) {
+                    $user->education = array_merge($stack, $education_guids);
+                    $user->stack = $stack;
+                    $user->educ = $education_guids;
+                }
+                //$user->education = NULL; //for dev testing.. delete later
+                //$user->stack = NULL;
+                //$user->educ = NULL;
             }
             /*
             $education = new ElggObject();

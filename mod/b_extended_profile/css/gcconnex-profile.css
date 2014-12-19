@@ -46,8 +46,10 @@
     cursor: pointer;
 }
 
+.gcconnex-education-add-another,
+.education-delete,
 .gcconnex-endorsements-add-skill {
-    color: darkgray;
+    color: cornflowerblue;
     text-shadow: 1px 1px #888888;
     font-family: arial;
     font-size: 12px;
@@ -117,6 +119,9 @@ input.gcconnex-endorsements-input-skill {
 
 /* education */
 
+.gcconnex-profile-education-display {
+    padding-bottom: 10px;
+}
 
 .work-experience-title,
 .education-school {
