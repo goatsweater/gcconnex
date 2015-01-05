@@ -4,6 +4,7 @@ $user = get_user($user_guid);
 
 $education_guid = $user->education;
 
+
 if (is_array($education_guid)) {
 
     foreach ($education_guid as $guid) {

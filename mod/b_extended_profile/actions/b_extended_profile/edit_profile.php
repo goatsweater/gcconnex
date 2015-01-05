@@ -13,6 +13,7 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
             break;
         case 'education':
             $eguid = get_input('eguid', '');
+            $delete = get_input('delete', '');
             $school = get_input('school', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0002.');
             $startdate = get_input('startdate', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0003.');
             $enddate = get_input('enddate', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0004.');
@@ -24,6 +25,31 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
 
             //if(!(is_array($eguid))) { $eguid = array($eguid); }
 
+
+            $education_list = $user->education;
+
+            //delete education entries
+            error_log("Delete array: " . $delete);
+
+            foreach ($delete as $delete_guid) {
+                if ($delete_guid != NULL) {
+                    error_log("Delete guid: " . $delete_guid);
+
+                    $delete = get_entity($delete_guid);
+                    $delete->delete();
+
+                    if(($key = array_search($delete_guid, $education_list)) !== false) {
+                        unset($education_list[$key]);
+                        error_log("Delete key: " . $key);
+                        error_log("Deleteed guid: " . $delete_guid);
+
+                    }
+                }
+            }
+
+            $user->education = $education_list;
+
+            //create new education entries
             foreach ($eguid as $k => $v) {
                 if ($v == "new") {
                     $education = new ElggObject();
@@ -60,27 +86,9 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
                     $user->stack = $stack;
                     $user->educ = $education_guids;
                 }
-                //$user->education = NULL; //for dev testing.. delete later
-                //$user->stack = NULL;
-                //$user->educ = NULL;
+
             }
-            /*
-            $education = new ElggObject();
-            $education->subtype = "education";
-            $education->title = $school;
-            $education->description = $program;
-
-            $education->owner_guid = $user_guid;
-            $education->school = $school;
-            $education->startdate = $startdate;
-            $education->enddate = $enddate;
-            $education->program = $program;
-            $education->field = $field;
-
-            $education_guids[] = $education->save();
-*/
-            //$user->__set('education', $education)
-
+            //$user->education = NULL;
             $user->save();
             break;
         case 'work-experience':
@@ -132,6 +140,7 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
             }
 
             $user->save();
+            
             break;
         default:
             system_message(elgg_echo("profile:saved"));

@@ -170,6 +170,7 @@ function saveProfile(event) {
             //var $school = $('.gcconnex-education-school').val();
             var $education_guid = [];
             var $delete_guid = [];
+
             $('.gcconnex-education-entry').each(function() {
                 if ( $(this).is(":hidden") ) {
                     $delete_guid.push($(this).data('guid'));
@@ -179,28 +180,26 @@ function saveProfile(event) {
                 }
             });
 
-
-
             var $school = [];
-            $('.gcconnex-education-school').each(function() {
+            $('.gcconnex-education-school').not(":hidden").each(function() {
                 $school.push($(this).val());
             });
 
             var $startdate = [];
-            $('.gcconnex-education-startdate').each(function() {
+            $('.gcconnex-education-startdate').not(":hidden").each(function() {
                 $startdate.push($(this).val());
             });
 
             var $enddate = [];
-            $('.gcconnex-education-enddate').each(function() {
+            $('.gcconnex-education-enddate').not(":hidden").each(function() {
                 $enddate.push($(this).val());
             });
             var $program = [];
-            $('.gcconnex-education-program').each(function() {
+            $('.gcconnex-education-program').not(":hidden").each(function() {
                 $program.push($(this).val());
             });
             var $field = [];
-            $('.gcconnex-education-field').each(function() {
+            $('.gcconnex-education-field').not(":hidden").each(function() {
                 $field.push($(this).val());
             });
 
