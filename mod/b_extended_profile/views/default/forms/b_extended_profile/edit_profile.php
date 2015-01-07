@@ -86,6 +86,10 @@
     .gcconnex-basic-field {
         width: 150px;
         height: 28px;
+        margin-left: -1px;
+        border: 1px solid lightgray;
+        border-top-right-radius: 3px;
+        border-bottom-right-radius: 3px;
     }
     .submit-basic-profile {
         width: 100%;
@@ -159,6 +163,10 @@ foreach ($fields as $field => $field_link) {
 
 echo '</div>';
 echo '<div class="basic-profile-micro-assignments">';
+
+echo 'Micro-assignments are short-duration assignments that are posted on GCconnex and available to all public servants regardless of department.' .
+    ' They are short in duration and scope. <p>In order to opt-in for micro-assignments, you must have your manager\'s approval prior to clicking' .
+    ' the checkbox below.<p>';
 
 echo elgg_view('input/checkbox', array('name' => 'micro', 'checked' => ($user->micro == "on") ? "on" : FALSE));
 echo 'I would like to opt-in to micro-assignments';

@@ -59,6 +59,13 @@
     cursor: pointer;
 }
 
+.gcconnex-education-entry {
+    margin: 15px;
+    background-color: lightgray;
+    padding: 15px;
+    border-radius: 5px;
+}
+
 input.gcconnex-endorsements-input-skill {
     display: block;
     clear: left;
@@ -241,7 +248,6 @@ input.gcconnex-endorsements-input-skill {
 
 }
 
-
 .elgg-input-text[name='education'] {
     width: 300px;
 }
@@ -257,7 +263,9 @@ input.gcconnex-endorsements-input-skill {
     width: 300px;
 }
 
-/* Font-awesome coloring and styling for social media links on gcconnex profiles */
+/*
+ Colouring and styling for the "font-awesome" social media links on gcconnex profiles.
+ */
 .fa {
 }
 .fa-google-plus {
