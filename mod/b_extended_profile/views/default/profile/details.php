@@ -5,6 +5,8 @@
  */
 elgg_load_js('lightbox');
 elgg_load_css('lightbox');
+elgg_load_js('basic-profile');
+
 
 $user = elgg_get_page_owner_entity();
 
@@ -38,7 +40,7 @@ if (elgg_get_logged_in_user_entity() == elgg_get_page_owner_entity()) {
 
     $content = elgg_view('output/url', array(
         'href' => 'ajax/view/b_extended_profile/edit_basic',
-        'class' => 'elgg-lightbox iframe',
+        'class' => 'elgg-lightbox iframe gcconnex-basic-profile-edit',
         'text' => 'Edit'
     ));
 

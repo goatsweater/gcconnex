@@ -8,9 +8,9 @@ elgg_register_event_handler('init', 'system', 'b_extended_profile_init');
 
 function b_extended_profile_init() {
     // Register the endorsements js library
-    $url = 'mod/b_extended_profile/js/endorsements/gcconnex-endorsements.js';
-    //$url = elgg_get_simplecache_url('js', 'b_extended_profile/gcconnex-endorsements');
-    elgg_register_js('endorsements-js', $url);
+    $url = 'mod/b_extended_profile/js/endorsements/';
+    elgg_register_js('endorsements-js', $url . "gcconnex-endorsements.js");
+    elgg_register_js('basic-profile', $url . "basic-profile.js");
 
     // Register the gcconnex profile css libraries
     $css_url = 'mod/b_extended_profile/css/gcconnex-profile.css';

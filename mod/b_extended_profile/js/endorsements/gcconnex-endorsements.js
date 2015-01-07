@@ -35,10 +35,7 @@ $(document).ready(function() {
 
     $('.gcconnex-education-add-another').on("click", {section: "education"}, addMore);
 
-    $(".iframe").fancybox({
-        'width' : 800,
-        'height' : 500
-    });
+
     // when a user clicks outside of the input text box (the one for entering new skills in the endorsements area), make it disappear elegantly
     $(document).click(function(event) {
         if(!$(event.target).closest('.gcconnex-endorsements-input-wrapper').length) {

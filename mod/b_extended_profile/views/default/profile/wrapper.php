@@ -5,6 +5,7 @@
     elgg_load_js('endorsements-js');
     elgg_load_css('gcconnex-css');
     elgg_load_css('font-awesome');
+
 ?>
 
 <div class="profile elgg-col-3of3">
