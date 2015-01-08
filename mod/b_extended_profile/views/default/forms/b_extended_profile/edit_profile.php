@@ -103,76 +103,95 @@
 $guid = elgg_get_logged_in_user_guid();
 $user = get_user($guid);
 
+// pre-populate which fields to display on the "edit basic profile" overlay
 $fields = array('Name', 'Title', 'Department', 'Phone', 'Mobile', 'Email', 'Website');
 
 echo '<h1>Edit Basic Profile</h1>';
-echo '<div class="basic-profile">';
-echo '<div class="basic-profile-standard-field-wrapper">';
+echo '<div class="basic-profile">'; // outer container for all content (except the form title above) for css styling
+echo '<div class="basic-profile-standard-field-wrapper">'; // container for css styling, used to group profile content and display them seperately from other fields
 
 
-foreach ($fields as $field) {
+foreach ($fields as $field) { // create a label and input box for each field on the basic profile (see $fields above)
 
-    echo '<div class="basic-profile-field-wrapper">';
+    echo '<div class="basic-profile-field-wrapper">'; // field wrapper for css styling
 
-    echo '<br><div class="basic-profile-label ' . $field . '-label">' . $field . ': </div>';
-    $field = strtolower($field);
-    $value = $user->get($field);
+        echo '<br><div class="basic-profile-label ' . $field . '-label">' . $field . ': </div>'; // field label
 
-    $params = array(
-        'name' => $field,
-        'class' => 'gcconnex-basic-' . $field,
-        'value' => $value,
-    );
+        $field = strtolower($field);
+        $value = $user->get($field);
 
-    echo '<div class="basic-profile-field">';
-    echo elgg_view("input/text", $params);
-    echo '</div>'; //close div class = basic-profile-field
+        // setup the input for this field
+        $params = array(
+            'name' => $field,
+            'class' => 'gcconnex-basic-' . $field,
+            'value' => $value,
+        );
+
+        echo '<div class="basic-profile-field">'; // field wrapper for css styling
+            echo elgg_view("input/text", $params); // input field
+        echo '</div>'; //close div class = basic-profile-field
+
     echo '</div>'; //close div class = basic-profile-field-wrapper
 }
 
 echo '</div>';
 
-echo '<div class="basic-profile-social-media-wrapper">';
+echo '<div class="basic-profile-social-media-wrapper">'; // container for css styling, used to group profile content and display them seperately from other fields
 
-// setup the social media fields
-$fields = array('Facebook' => "http://www.facebook.com/", 'Google' => "http://www.google.com/+", 'GitHub' => "https://github.com/",
+// pre-populate the social media fields and their prepended link for user profiles
+$fields = array('Facebook' => "http://www.facebook.com/", 'Google Plus' => "http://www.google.com/+", 'GitHub' => "https://github.com/",
     'Twitter' => "https://twitter.com/", 'Linkedin' => "http://ca.linkedin.com/in/", 'Pinterest' => "http://www.pinterest.com/",
     'Tumblr' => "https://www.tumblr.com/blog/", 'Instagram' => "http://instagram.com/", 'Flickr' => "http://flickr.com/", 'Youtube' => "http://www.youtube.com/");
 
-foreach ($fields as $field => $field_link) {
+foreach ($fields as $field => $field_link) { // create a label and input box for each social media field on the basic profile
 
-    echo '<div class="basic-profile-field-wrapper social-media-field-wrapper">';
-    echo '<br><div class="basic-profile-label social-media-label ' . $field . '-label">' . $field . ': </div>';
+    echo '<div class="basic-profile-field-wrapper social-media-field-wrapper">'; //field wrapper for css styling
 
-    $field = strtolower($field);
-    $value = $user->get($field);
+        echo '<br><div class="basic-profile-label social-media-label ' . $field . '-label">' . $field . ': </div>';
+       $field = str_replace(' ', '-', $field); // create a css friendly version of the section name
 
-    echo '<div class="input-group">';
-    echo '<span class="input-group-addon">' . $field_link . "</span>";
-    $params = array(
-        'name' => $field,
-        'class' => 'form-control gcconnex-basic-field gcconnex-basic-' . $field,
-        'placeholder' => 'Username',
-        'value' => $value
-    );
+        $field = strtolower($field);
+        $value = $user->get($field);
 
-    echo elgg_view("input/text", $params);
-    echo '</div>';
+        echo '<div class="input-group">'; // input wrapper for prepended link and input box, excludes the input label
+
+            echo '<span class="input-group-addon">' . $field_link . "</span>"; // prepended link
+
+            // setup the input for this field
+            $params = array(
+                'name' => $field,
+                'class' => 'form-control gcconnex-basic-field gcconnex-basic-' . $field,
+                'placeholder' => 'Username',
+                'value' => $value
+            );
+
+            echo elgg_view("input/text", $params); // input field
+
+        echo '</div>'; // close div class="input-group"
+
     echo '</div>'; // close div class = basic-profile-field-wrapper
 }
 
-echo '</div>';
-echo '<div class="basic-profile-micro-assignments">';
+echo '</div>'; // close div class="basic-profile-social-media-wrapper"
+
+echo '<div class="basic-profile-micro-assignments">'; // container for css styling, used to group profile content and display them seperately from other fields
 
 echo 'Micro-assignments are short-duration assignments that are posted on GCconnex and available to all public servants regardless of department.' .
     ' They are short in duration and scope. <p>In order to opt-in for micro-assignments, you must have your manager\'s approval prior to clicking' .
     ' the checkbox below.<p>';
 
-echo elgg_view('input/checkbox', array('name' => 'micro', 'checked' => ($user->micro == "on") ? "on" : FALSE));
+echo elgg_view('input/checkbox', array(
+    'name' => 'micro',
+    'checked' => ($user->micro == "on") ? "on" : FALSE)); // elgg has a hard time saving checkbox status natively, so check the string value instead
 echo 'I would like to opt-in to micro-assignments';
 echo '</div>';
 
-echo '<div class="submit-basic-profile">';
-echo elgg_view('input/button', array('type' => 'submit', 'value' => 'Save'));
-echo '</div>';
-echo '</div>';
+echo '<div class="submit-basic-profile">'; // container for css styling, used to group profile content and display them seperately from other fields
+
+// create the save button for saving user profile
+echo elgg_view('input/button', array(
+    'type' => 'submit',
+    'value' => 'Save'));
+
+echo '</div>'; // close div class="submit-basic-profile"
+echo '</div>'; // close div class="basic-profile"

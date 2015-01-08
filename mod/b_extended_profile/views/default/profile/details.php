@@ -1,18 +1,21 @@
 <?php
-/**
- * Elgg user display (details)
- * @uses $vars['entity'] The user entity
+/*
+ * Author: Bryden Arndt
+ * Date: 01/07/2015
+ * Purpose: Display the profile details for the user profile in question.
+ * Requires: gcconnex-profile.js should already be loaded at this point to handle edit/save/cancel toggles and other ajax requests related to profile sections
+ * font-awesome css should be loaded already
  */
-elgg_load_js('lightbox');
-elgg_load_css('lightbox');
-elgg_load_js('basic-profile');
 
+elgg_load_js('lightbox'); // overlay for editing the basic profile fields
+elgg_load_css('lightbox'); // css for it..
 
 $user = elgg_get_page_owner_entity();
 
 $profile_fields = elgg_get_config('profile_fields');
 
-// username, title, phone, mobile, email, website
+// display the username, title, phone, mobile, email, website
+// fa classes are the font-awesome icons
 echo '<div id="profile-details" class="elgg-body pll">';
 echo '<h1>' . $user->name . '</h1>';
 echo '<h3>' . $user->title . '</h3><br>';
@@ -22,12 +25,13 @@ echo '<i class="fa fa-fw fa-mobile-phone"></i>' . $user->mobile . '<br>';
 echo '<i class="fa fa-fw fa-envelope"></i><a href="mailto:' . $user->email . '">' . $user->email . '</a><br>';
 echo '<i class="fa fa-fw fa-globe"></i><a href=' . $user->website . '>' . $user->website . '</a><br><br>';
 
+// pre-populate the social media links that we may or may not display depending on whether the user has entered anything for each one..
 $social = array('facebook', 'google', 'github', 'twitter', 'linkedin', 'pinterest', 'tumblr', 'instagram', 'flickr', 'youtube');
 
 foreach ($social as $media) {
 
     if ($link = $user->get($media)) {
-        if ($media == 'google') { $media = 'google-plus'; }
+        if ($media == 'google') { $media = 'google-plus'; } // the google font-awesome class is called "google-plus", so convert "google" to that..
         echo '<a href="' . $link . '"><i class="fa fa-fw fa-lg fa-' . $media . '"></i></a>';
     }
 }
@@ -48,52 +52,6 @@ if (elgg_get_logged_in_user_entity() == elgg_get_page_owner_entity()) {
 }
 
 
-
-/*
-echo '<script "text/javascript">';
-echo '$(".iframe").fancybox()';
-echo '</script>';
-*/
-/*
-$even_odd = null;
-if (is_array($profile_fields) && sizeof($profile_fields) > 0) {
-    foreach ($profile_fields as $shortname => $valtype) {
-        if ($shortname == "description") {
-            // skip about me and put at bottom
-            continue;
-        }
-        $value = $user->$shortname;
-
-        if (!empty($value)) {
-
-            // fix profile URLs populated by https://github.com/Elgg/Elgg/issues/5232
-            // @todo Replace with upgrade script, only need to alter users with last_update after 1.8.13
-            if ($valtype == 'url' && $value == 'http://') {
-                $user->$shortname = '';
-                continue;
-            }
-
-            // validate urls
-            if ($valtype == 'url' && !preg_match('~^https?\://~i', $value)) {
-                $value = "http://$value";
-            }
-
-            // this controls the alternating class
-            $even_odd = ( 'odd' != $even_odd ) ? 'odd' : 'even';
-            ?>
-            <div class="<?php echo $even_odd; ?>">
-                <b><?php echo elgg_echo("profile:{$shortname}"); ?>: </b>
-                <?php
-                echo elgg_view("output/{$valtype}", array('value' => $value));
-                ?>
-            </div>
-        <?php
-        }
-    }
-}
-
-
-*/
 
 $user = elgg_get_page_owner_entity();
 

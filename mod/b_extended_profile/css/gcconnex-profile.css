@@ -46,8 +46,6 @@
     cursor: pointer;
 }
 
-.gcconnex-education-add-another,
-.education-delete,
 .gcconnex-endorsements-add-skill {
     color: cornflowerblue;
     text-shadow: 1px 1px #888888;
@@ -115,8 +113,10 @@ input.gcconnex-endorsements-input-skill {
 
 
 
-
-
+/* about me */
+.about-me-longtext {
+    width: 98%;
+}
 
 
 
