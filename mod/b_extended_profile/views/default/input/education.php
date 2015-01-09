@@ -1,5 +1,5 @@
 <?php
-/**
+/*
  * Author: Bryden Arndt
  * Date: 15/12/14
  * Time: 1:33 PM

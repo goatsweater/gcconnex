@@ -92,6 +92,75 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
             $user->save();
             break;
         case 'work-experience':
+
+            $eguid = get_input('eguid', '');
+            $delete = get_input('delete', '');
+
+            $organization = get_input('organization', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0011.');
+            $startdate = get_input('startdate', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0012.');
+            $enddate = get_input('enddate', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0013.');
+            $title = get_input('title', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0014.');
+            $responsibilities = get_input('responsibilities', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0015.');
+
+            // create work experience object
+            $work_experience_guids = array();
+
+            $experience_list = $user->work;
+
+            foreach ($delete as $delete_guid) {
+                if ($delete_guid != NULL) {
+
+                    $delete = get_entity($delete_guid);
+                    $delete->delete();
+
+                    if(($key = array_search($delete_guid, $experience_list)) !== false) {
+                        unset($experience_list[$key]);
+                    }
+                }
+            }
+
+            $user->work = $experience_list;
+
+            //create new work experience entries
+            foreach ($eguid as $k => $v) {
+                if ($v == "new") {
+                    $experience = new ElggObject();
+                    $experience->subtype = "experience";
+                    $experience->owner_guid = $user_guid;
+                }
+                else {
+                    $experience = get_entity($v);
+                }
+
+                $experience->title = $title[$k];
+                $experience->description = $responsibilities[$k];
+
+                $experience->organization = $organization[$k];
+                $experience->title = $title[$k];
+                $experience->startdate = $startdate[$k];
+                $experience->enddate = $enddate[$k];
+                $experience->responsibiltiies = $responsibilities[$k];
+
+                if($v == "new") {
+                    $work_experience_guids[] = $experience->save();
+                }
+            }
+
+            if ($user->work == NULL) {
+                $user->work = $work_experience_guids;
+            }
+            else {
+                $stack = $user->work;
+                if (!(is_array($stack))) { $stack = array($stack); }
+
+                if ($work_experience_guids != NULL) {
+                    $user->work = array_merge($stack, $work_experience_guids);                }
+
+            }
+            $user->save();
+            break;
+
+            /*
             $organization = get_input('organization', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0011.');
             $startdate = get_input('startdate', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0012.');
             $enddate = get_input('enddate', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0013.');
@@ -116,7 +185,8 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
             $user->work = $work_guid;
 
             $user->save();
-            break;
+            break;*/
+
         case 'endorsements':
             $skillsToAdd = get_input('skillsadded', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0021.');
             $skillsToRemove = get_input('skillsremoved', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0022.');

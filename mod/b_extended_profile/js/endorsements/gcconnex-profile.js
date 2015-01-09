@@ -225,6 +225,69 @@ function saveProfile(event) {
                 });
             break;
         case "work-experience":
+
+            var $work_experience_guid = [];
+            var $delete_guid = [];
+
+            $('.gcconnex-work-experience-entry').each(function() {
+                if ( $(this).is(":hidden") ) {
+                    $delete_guid.push($(this).data('guid'));
+                }
+                else {
+                    $work_experience_guid.push($(this).data('guid'));
+                }
+            });
+
+            var $organization = [];
+            $('.gcconnex-work-experience-organization').not(":hidden").each(function() {
+                $organization.push($(this).val());
+            });
+
+            var $title = [];
+            $('.gcconnex-work-experience-title').not(":hidden").each(function() {
+                $title.push($(this).val());
+            });
+
+            var $startdate = [];
+            $('.gcconnex-work-experience-startdate').not(":hidden").each(function() {
+                $startdate.push($(this).val());
+            });
+
+            var $enddate = [];
+            $('.gcconnex-work-experience-enddate').not(":hidden").each(function() {
+                $enddate.push($(this).val());
+            });
+
+            var $responsibilities = [];
+            $('.gcconnex-work-experience-responsibilities').not(":hidden").each(function() {
+                $responsibilities.push($(this).val());
+            });
+
+            // save the information the user just edited
+            elgg.action('b_extended_profile/edit_profile', {
+                guid: elgg.get_logged_in_user_guid(),
+                delete: $delete_guid,
+                eguid: $work_experience_guid,
+                section: 'work-experience',
+                organization: $organization,
+                title: $title,
+                startdate: $startdate,
+                enddate: $enddate,
+                responsibilities: $responsibilities
+            });
+            $('.gcconnex-work-experience-edit-wrapper').remove();
+
+            // fetch and display the information we just saved
+            $.get(elgg.normalize_url('ajax/view/b_extended_profile/work-experience'),
+                {
+                    guid: elgg.get_logged_in_user_guid()
+                },
+                function(data) {
+                    // Output in a DIV with id=somewhere
+                    $('.gcconnex-work-experience').append(data);
+                });
+            break;
+            /*
             var $organization = $('.gcconnex-work-experience-organization').val();
             var $startdate = $('.gcconnex-work-experience-startdate').val();
             var $enddate = $('.gcconnex-work-experience-enddate').val();
@@ -252,7 +315,8 @@ function saveProfile(event) {
                     // Output in a DIV with id=somewhere
                     $('.gcconnex-work-experience').append(data);
                 });
-            break;
+
+            break;*/
         case "endorsements":
 
             $('.delete-skill').hide();
@@ -456,14 +520,16 @@ function deleteSkill() {
     $(this).parent('.gcconnex-endorsements-skill-wrapper').addClass('endorsements-markedForDelete').hide();
 }
 
-function addMore() {
-    $.get(elgg.normalize_url('ajax/view/input/education'), '',
+function addMore(identifier) {
+    var another = $(identifier).data('type');
+    $.get(elgg.normalize_url('ajax/view/input/' + another), '',
         function(data) {
             // Output in a DIV with id=somewhere
-            $('.gcconnex-education-all').append(data);
+            $('.gcconnex-' + another + '-all').append(data);
         });
 }
 
 function deleteEducation(identifier) {
+    //@todo: closest of any entry type is hidden..
     $(identifier).closest('.gcconnex-education-entry').hide();
 }

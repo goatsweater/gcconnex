@@ -100,6 +100,7 @@
 
 <?php
 
+
 $guid = elgg_get_logged_in_user_guid();
 $user = get_user($guid);
 

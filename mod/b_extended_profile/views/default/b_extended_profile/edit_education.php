@@ -31,7 +31,7 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
     echo '</div>';
 
     // create an "add more" button at the bottom of the education input fields so that the user can continue to add more education entries as needed
-    echo '<br><div class="gcconnex-education-add-another elgg-button elgg-button-action btn" onclick="addMore()">+ add more education</div>';
+    echo '<br><div class="gcconnex-education-add-another elgg-button elgg-button-action btn" data-type="education" onclick="addMore(this)">+ add more education</div>';
 
     // allow the user to edit the access settings for education entries
     echo '<br>Allow education details to be viewable by: ';

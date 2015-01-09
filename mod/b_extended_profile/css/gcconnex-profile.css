@@ -57,7 +57,9 @@
     cursor: pointer;
 }
 
-.gcconnex-education-entry {
+
+.gcconnex-education-entry,
+.gcconnex-work-experience-entry {
     margin: 15px;
     background-color: lightgray;
     padding: 15px;
@@ -159,6 +161,15 @@ input.gcconnex-endorsements-input-skill {
 .education-field {
     padding-left: 20px;
     font-style: italic;
+}
+
+.gcconnex-work-experience-organization,
+.gcconnex-work-experience-title {
+    width: 300px;
+}
+
+.gcconnex-work-experience-responsibilities {
+    width: 98%;
 }
 
 .work-experience-organization {

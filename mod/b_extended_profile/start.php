@@ -36,6 +36,7 @@ function b_extended_profile_init() {
 
     // input views
     elgg_register_ajax_view('input/education');
+    elgg_register_ajax_view('input/work-experience');
 
     elgg_register_ajax_view('b_extended_profile/edit_basic'); // ajax view for editing the basic profile fields like name, title, department, email, etc.
 

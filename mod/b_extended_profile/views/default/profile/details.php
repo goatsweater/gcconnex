@@ -9,6 +9,7 @@
 
 elgg_load_js('lightbox'); // overlay for editing the basic profile fields
 elgg_load_css('lightbox'); // css for it..
+elgg_load_js('basic-profile'); // load js file to init the lightbox overlay (sets the width)
 
 $user = elgg_get_page_owner_entity();
 
