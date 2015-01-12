@@ -105,7 +105,8 @@ function editProfile(event) {
             '<input type="text" class="gcconnex-endorsements-input-skill" onkeyup="checkForEnter(event)"/>' +
             '<span class="gcconnex-endorsements-add-skill">+ add new skill</span>' +
             '</div>');
-            // hide the text box which is only to be shown when toggled by the link
+
+            // hide the skill entry text box which is only to be shown when toggled by the link
             $('.gcconnex-endorsements-input-skill').hide();
 
             // the profile owner would like to type in a new skill
@@ -114,15 +115,12 @@ function editProfile(event) {
                 $('.gcconnex-endorsements-add-skill').hide();
             });
 
-            $('.gcconnex-endorsement-add').hide();
-            $('.gcconnex-endorsement-retract').hide();
-
+            // create a "delete this skill" link for each skill
             $('.gcconnex-endorsements-skill').each(function(){
-                $(this).after('<span class="delete-">Delete this skill</span>'); //goes in here i think..
+                $(this).after('<img class="delete-skill-img" src="' + elgg.get_site_url() + 'mod/b_extended_profile/img/delete.png"><span class="delete-skill" onclick="deleteEntry(this)" data-type="skill">Delete this skill</span>'); //goes in here i think..
             });
-            $('.delete-skill').show();
-            //$('.delete-' + newSkillDashed).on('click', deleteSkill);           // bind the deleteSkill function to the 'Delete this skill' link
 
+            //$('.delete-skill').show();
 
             break;
         default:
@@ -287,59 +285,31 @@ function saveProfile(event) {
                     $('.gcconnex-work-experience').append(data);
                 });
             break;
-            /*
-            var $organization = $('.gcconnex-work-experience-organization').val();
-            var $startdate = $('.gcconnex-work-experience-startdate').val();
-            var $enddate = $('.gcconnex-work-experience-enddate').val();
-            var $title = $('.gcconnex-work-experience-title').val();
-            var $responsibilities = $('.gcconnex-work-experience-responsibilities').val();
 
-            // save the information the user just edited
-            elgg.action('b_extended_profile/edit_profile', {
-                guid: elgg.get_logged_in_user_guid(),
-                section: 'work-experience',
-                organization: $organization,
-                startdate: $startdate,
-                enddate: $enddate,
-                title: $title,
-                responsibilities: $responsibilities
-            });
-            $('.gcconnex-work-experience-edit-wrapper').remove();
-
-            // fetch and display the information we just saved
-            $.get(elgg.normalize_url('ajax/view/b_extended_profile/work-experience'),
-                {
-                    guid: elgg.get_logged_in_user_guid()
-                },
-                function(data) {
-                    // Output in a DIV with id=somewhere
-                    $('.gcconnex-work-experience').append(data);
-                });
-
-            break;*/
         case "endorsements":
 
-            $('.delete-skill').hide();
+            //$('.delete-skill').hide();
 
-            var $added = [];
+            var $skills_added = [];
+            var $delete_guid = [];
 
-            $(".temporarily-added .gcconnex-endorsements-skill").each(function () {
-                $added.push($(this).text())
+            $('.gcconnex-skill-entry').each(function() {
+                if ( $(this).is(":hidden") ) {
+                    $delete_guid.push($(this).data('guid'));
+                }
+                if ( $(this).hasClass("temporarily-added") ) {
+                    $skills_added.push($(this).data('skill'));
+                }
             });
 
-            var $removed = [];
-
             if (confirm("Are you sure you would like to save changes? Any endorsements for skills that you have removed will be permanently deleted.")) {
-                // this is where skills are deleted (if they have been marked for deletion by the user)
-                //$('.gcconnex-endorsements-skill-wrapper').removeClass('temporarily-added');
-                //$('.endorsement-markedForDelete').remove();
                 // save the information the user just edited
 
                 elgg.action('b_extended_profile/edit_profile', {
                     guid: elgg.get_logged_in_user_guid(),
-                    section: 'endorsements',
-                    skillsadded: $added,
-                    skillsremoved: $removed
+                    section: 'skill',
+                    skillsadded: $skills_added,
+                    skillsremoved: $delete_guid
                 });
 
                 $('.gcconnex-endorsement-input-wrapper').remove();
@@ -416,7 +386,8 @@ function cancelChanges(event) {
         case "endorsements":
             $('.gcconnex-endorsements-input-wrapper').remove();
 
-            $('.delete-skill').hide();
+            $('.delete-skill').remove();
+            $('.delete-skill-img').remove();
             $('.gcconnex-endorsements-skill-wrapper').removeClass('endorsements-markedForDelete');
 
             $('.gcconnex-endorsements-skill-wrapper').show();
@@ -446,15 +417,15 @@ function checkForEnter(event) {
  */
 function addNewSkill(newSkill) {
 
-    var newSkillDashed = newSkill.replace(/\s+/g, '-'); // replace spaces with '-' for css classes
+    var newSkillDashed = newSkill.replace(/\s+/g, '-').toLowerCase(); // replace spaces with '-' for css classes
 
     // @todo: cap the list of skills at ~8-10 in order not to have "too many" on each profile
     // inject HTML for newly added skill
-    $('.gcconnex-endorsements-skills-list-wrapper').append('<div class="gcconnex-endorsements-skill-wrapper temporarily-added">' +
+    $('.gcconnex-endorsements-skills-list-wrapper').append('<div class="gcconnex-skill-entry temporarily-added" data-skill="' + newSkill + '">' +
     '<span title="Number of endorsements" class="gcconnex-endorsements-count endorsement-count-' +
     newSkillDashed +
     '">0</span>' +
-    '<span title="Test" class="gcconnex-endorsements-skill">' +
+    '<span data-type="' + newSkillDashed + '" class="gcconnex-endorsements-skill">' +
     newSkill +
     '</span>' +
     '<span title="Endorse this skill" class="gcconnex-endorsements-add add-endorsement-' +
@@ -529,7 +500,13 @@ function addMore(identifier) {
         });
 }
 
-function deleteEducation(identifier) {
-    //@todo: closest of any entry type is hidden..
-    $(identifier).closest('.gcconnex-education-entry').hide();
+/*
+ * Purpose: Delete an entry based on the value of the data-type attribute in the delete link
+ */
+function deleteEntry(identifier) {
+    // get the entry-type name
+    var entryType = $(identifier).data('type');
+
+    // mark the entry for deletion and hide it from view
+    $(identifier).closest('.gcconnex-' + entryType + '-entry').hide();
 }

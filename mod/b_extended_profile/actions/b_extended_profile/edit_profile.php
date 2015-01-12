@@ -160,34 +160,7 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
             $user->save();
             break;
 
-            /*
-            $organization = get_input('organization', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0011.');
-            $startdate = get_input('startdate', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0012.');
-            $enddate = get_input('enddate', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0013.');
-            $title = get_input('title', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0014.');
-            $responsibilities = get_input('responsibilities', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0015.');
-
-            // create work experience object
-            $work = new ElggObject();
-            $work->subtype = "work";
-            $work->title = $title;
-            $work->description = $responsibilities;
-
-            $work->owner_guid = $user_guid;
-            $work->organization = $organization;
-            $work->startdate = $startdate;
-            $work->enddate = $enddate;
-            $work->title = $title;
-            $work->responsibilities = $responsibilities;
-
-            $work_guid = $work->save();
-
-            $user->work = $work_guid;
-
-            $user->save();
-            break;*/
-
-        case 'endorsements':
+        case 'skill':
             $skillsToAdd = get_input('skillsadded', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0021.');
             $skillsToRemove = get_input('skillsremoved', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0022.');
 
@@ -200,6 +173,19 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
                 $skill->owner_guid = $user_guid;
                 $skill_guids[] = $skill->save();
             }
+
+            $skill_list = $user->skills;
+
+            foreach ($skillsToRemove as $remove_guid) {
+                $skill = get_entity($remove_guid);
+                $skill->delete();
+
+                if(($key = array_search($remove_guid, $skill_list)) !== false) {
+                    unset($skill_list[$key]);
+                }
+            }
+
+            $user->skills = $skill_list;
 
             if ($user->skills == NULL) {
                 $user->skills = $skill_guids;

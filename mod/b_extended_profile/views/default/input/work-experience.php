@@ -44,6 +44,6 @@ echo '<br>Responsibilities: ' . elgg_view("input/text", array(
         'value' => $work_experience->responsibilities));
 
 // create a delete button for each work experience entry
-echo '<br><div class="elgg-button elgg-button-action btn" onclick="deleteWorkExperience(this)">Delete this entry</div>';
+echo '<br><div class="elgg-button elgg-button-action btn" onclick="deleteEntry(this)" data-type="work-experience">Delete this entry</div>';
 
 echo '</div>'; // close div class="gcconnex-work-experience-entry"

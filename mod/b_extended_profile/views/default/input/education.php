@@ -44,6 +44,6 @@ echo '<div class="gcconnex-education-entry" data-guid="' . $guid . '">'; // educ
             'value' => $education->field));
 
     // create a delete button for each education entry
-    echo '<br><div class="elgg-button elgg-button-action btn" onclick="deleteEducation(this)">Delete this entry</div>';
+    echo '<br><div class="elgg-button elgg-button-action btn" onclick="deleteEntry(this)" data-type="education">Delete this entry</div>';
 
 echo '</div>'; // close div class="gcconnex-education-entry"

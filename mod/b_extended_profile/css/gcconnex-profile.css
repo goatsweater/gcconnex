@@ -91,7 +91,7 @@ input.gcconnex-endorsements-input-skill {
     cursor: pointer;
 }
 
-.delete-skill img {
+.delete-skill-img {
     height: 15px;
     width: 15px;
     position: relative;
@@ -128,7 +128,8 @@ input.gcconnex-endorsements-input-skill {
 
 /* education */
 
-.gcconnex-profile-education-display {
+.gcconnex-profile-education-display,
+.gcconnex-profile-work-experience-display {
     padding-bottom: 10px;
 }
 
