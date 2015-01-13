@@ -33,15 +33,12 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
 
             foreach ($delete as $delete_guid) {
                 if ($delete_guid != NULL) {
-                    error_log("Delete guid: " . $delete_guid);
 
                     $delete = get_entity($delete_guid);
                     $delete->delete();
 
                     if(($key = array_search($delete_guid, $education_list)) !== false) {
                         unset($education_list[$key]);
-                        error_log("Delete key: " . $key);
-                        error_log("Deleteed guid: " . $delete_guid);
 
                     }
                 }

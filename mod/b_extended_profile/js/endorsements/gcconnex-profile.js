@@ -450,17 +450,27 @@ function addNewSkill(newSkill) {
 /*
  * Purpose: Increase the endorsement count by one, for a specific skill for a specific user
  */
-function addEndorsement() {
+function addEndorsement(identifier) {
     // A user is endorsing a skill! Do stuff about it..
-    var targetSkill = $(this).siblings('.gcconnex-endorsements-skill').text(); //.text();
+    //var targetSkill = $(this).siblings('.gcconnex-endorsements-skill').text(); //.text();
+
+    var skill_guid = $(identifier).data('guid');
+
+    elgg.action('b_extended_profile/add_endorsement', {
+        guid: elgg.get_logged_in_user_guid(),
+        skill: skill_guid,
+    });
+
+
+    var targetSkill = $(identifier).data('skill');
     var targetSkillDashed = targetSkill.replace(/\s+/g, '-'); // replace spaces with '-' for css classes
 
     $('.add-endorsement-' + targetSkillDashed).hide();
     $('.retract-endorsement-' + targetSkillDashed).show();
 
-    var endorse_count = $('.endorsements-count-' + targetSkillDashed).val();
+    var endorse_count = $('.gcconnex-endorsements-count-' + targetSkillDashed).text();
     endorse_count++;
-    $('.endorsements-count-' + targetSkillDashed).val(endorse_count);
+    $('.gcconnex-endorsements-count-' + targetSkillDashed).text(endorse_count);
 
     // @todo: add the endorsing user's profile image to the list of endorsers for this skill
 }

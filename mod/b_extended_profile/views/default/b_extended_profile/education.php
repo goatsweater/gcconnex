@@ -1,5 +1,5 @@
 <?php
-$user_guid = elgg_get_logged_in_user_guid();
+$user_guid = elgg_get_page_owner_guid();
 $user = get_user($user_guid);
 
 $education_guid = $user->education;

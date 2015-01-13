@@ -32,7 +32,7 @@
     color: cornflowerblue;
     text-shadow: 1px 1px #888888;
     font-weight: bold;
-    padding: 3 3 3 5px;
+    padding: 3px 3px 3px 5px;
     margin: 0px;
     cursor: pointer;
 }
@@ -41,7 +41,7 @@
     color: cornflowerblue;
     text-shadow: 1px 1px #888888;
     font-weight: bold;
-    padding: 3 3 3 5px;
+    padding: 3px 3px 3px 5px;
     margin: 0px;
     cursor: pointer;
 }
@@ -52,7 +52,7 @@
     font-family: arial;
     font-size: 12px;
     clear: left;
-    padding: 3 3 3 5px;
+    padding: 3px 3px 3px 5px;
     margin: 0px;
     cursor: pointer;
 }
@@ -65,6 +65,7 @@
     padding: 15px;
     border-radius: 5px;
 }
+
 
 input.gcconnex-endorsements-input-skill {
     display: block;
