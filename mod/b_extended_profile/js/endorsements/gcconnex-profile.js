@@ -168,7 +168,9 @@ function saveProfile(event) {
 
             $('.gcconnex-education-entry').each(function() {
                 if ( $(this).is(":hidden") ) {
-                    $delete_guid.push($(this).data('guid'));
+                    if ($(this).data(guid) != "new") {
+                        $delete_guid.push($(this).data('guid'));
+                    }
                 }
                 else {
                     $education_guid.push($(this).data('guid'));
@@ -197,6 +199,7 @@ function saveProfile(event) {
             $('.gcconnex-education-field').not(":hidden").each(function() {
                 $field.push($(this).val());
             });
+            var $access = $('.gcconnex-education-access').val();
 
             // save the information the user just edited
             elgg.action('b_extended_profile/edit_profile', {
@@ -208,7 +211,8 @@ function saveProfile(event) {
                     startdate: $startdate,
                     enddate: $enddate,
                     program: $program,
-                    field: $field
+                    field: $field,
+                    access: $access
                 });
             $('.gcconnex-education-edit-wrapper').remove();
 

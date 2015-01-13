@@ -3,13 +3,14 @@ $user_guid = elgg_get_page_owner_guid();
 $user = get_user($user_guid);
 
 $education_guid = $user->education;
-
+//var_dump($education_guid);
 
 if (is_array($education_guid)) {
 
     foreach ($education_guid as $guid) {
 
         $education = get_entity($guid);
+        //var_dump($education->access_id);
 
         echo '<div class="gcconnex-profile-education-display gcconnex-education-' . $education->guid . '">';
         echo '<div class="gcconnex-profile-label education-dates">' . $education->startdate . ' - ' . $education->enddate . '</div>';
@@ -23,6 +24,7 @@ if (is_array($education_guid)) {
 else if ($education_guid != NULL) {
 
     $education = get_entity($education_guid);
+    //var_dump($education->access_id);
 
     echo '<div class="gcconnex-profile-education-display">';
     echo '<div class="gcconnex-profile-label education-dates">' . $education->startdate . ' - ' . $education->enddate . '</div>';

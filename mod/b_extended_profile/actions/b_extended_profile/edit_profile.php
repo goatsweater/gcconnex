@@ -19,27 +19,23 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
             $enddate = get_input('enddate', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0004.');
             $program = get_input('program', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0005.');
             $field = get_input('field', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0006.');
+            $access = get_input('access', 'ERROR: Ask your admin to grep: 5321GDS1111661353BB.');
 
             // create education object
             $education_guids = array();
 
-            //if(!(is_array($eguid))) { $eguid = array($eguid); }
-
-
             $education_list = $user->education;
-
-            //delete education entries
-            error_log("Delete array: " . $delete);
 
             foreach ($delete as $delete_guid) {
                 if ($delete_guid != NULL) {
 
-                    $delete = get_entity($delete_guid);
-                    $delete->delete();
-
+                    if ($delete = get_entity($delete_guid)) {
+                        $delete->delete();
+                    }
+                    //error_log('Delete GUID: ' . $delete_guid . ' LIST: ' . $education_list);
                     if(($key = array_search($delete_guid, $education_list)) !== false) {
                         unset($education_list[$key]);
-
+                        //error_log('Key: ' . $key);
                     }
                 }
             }
@@ -65,6 +61,7 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
                 $education->enddate = $enddate[$k];
                 $education->program = $program[$k];
                 $education->field = $field[$k];
+                $education->access_id = $access;
 
                 if($v == "new") {
                     $education_guids[] = $education->save();
@@ -85,6 +82,8 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
                 }
 
             }
+            //$user->education = NULL;
+            $user->education_access = $access;
             //$user->education = NULL;
             $user->save();
             break;
