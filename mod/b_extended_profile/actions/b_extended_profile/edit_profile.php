@@ -32,10 +32,8 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
                     if ($delete = get_entity($delete_guid)) {
                         $delete->delete();
                     }
-                    //error_log('Delete GUID: ' . $delete_guid . ' LIST: ' . $education_list);
                     if(($key = array_search($delete_guid, $education_list)) !== false) {
                         unset($education_list[$key]);
-                        //error_log('Key: ' . $key);
                     }
                 }
             }
@@ -66,6 +64,9 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
                 if($v == "new") {
                     $education_guids[] = $education->save();
                 }
+                else {
+                    $education->save();
+                }
             }
 
             if ($user->education == NULL) {
@@ -77,15 +78,13 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
 
                 if ($education_guids != NULL) {
                     $user->education = array_merge($stack, $education_guids);
-                    $user->stack = $stack;
-                    $user->educ = $education_guids;
                 }
 
             }
-            //$user->education = NULL;
+
             $user->education_access = $access;
-            //$user->education = NULL;
             $user->save();
+
             break;
         case 'work-experience':
 
@@ -97,6 +96,7 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
             $enddate = get_input('enddate', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0013.');
             $title = get_input('title', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0014.');
             $responsibilities = get_input('responsibilities', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0015.');
+            $access = get_input('access', 'ERROR: Ask your admin to grep: 5321GDS1111661353BB.');
 
             // create work experience object
             $work_experience_guids = array();
@@ -106,8 +106,9 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
             foreach ($delete as $delete_guid) {
                 if ($delete_guid != NULL) {
 
-                    $delete = get_entity($delete_guid);
-                    $delete->delete();
+                    if ($delete = get_entity($delete_guid)) {
+                        $delete->delete();
+                    }
 
                     if(($key = array_search($delete_guid, $experience_list)) !== false) {
                         unset($experience_list[$key]);
@@ -136,9 +137,13 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
                 $experience->startdate = $startdate[$k];
                 $experience->enddate = $enddate[$k];
                 $experience->responsibiltiies = $responsibilities[$k];
+                $experience->access_id = $access;
 
                 if($v == "new") {
                     $work_experience_guids[] = $experience->save();
+                }
+                else {
+                    $experience->save();
                 }
             }
 
@@ -150,15 +155,17 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
                 if (!(is_array($stack))) { $stack = array($stack); }
 
                 if ($work_experience_guids != NULL) {
-                    $user->work = array_merge($stack, $work_experience_guids);                }
-
+                    $user->work = array_merge($stack, $work_experience_guids);
+                }
             }
+            $user->work_access = $access;
             $user->save();
             break;
 
         case 'skill':
             $skillsToAdd = get_input('skillsadded', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0021.');
             $skillsToRemove = get_input('skillsremoved', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0022.');
+            $access = ACCESS_LOGGED_IN; // ACCESS_PUBLIC == 2, which is the integer for defining information as accessible to all logged in users
 
             $skill_guids = array();
 
@@ -167,6 +174,8 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
                 $skill->subtype = "MySkill";
                 $skill->title = $new_skill;
                 $skill->owner_guid = $user_guid;
+                $skill->access_id = $access;
+                $skill->endorsements = NULL;
                 $skill_guids[] = $skill->save();
             }
 
@@ -188,7 +197,11 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
             }
             else {
                 $stack = $user->skills;
-                $user->skills = array_merge($stack, $skill_guids);
+                if (!(is_array($stack))) { $stack = array($stack); }
+
+                if ($skill_guids != NULL) {
+                    $user->skills = array_merge($stack, $skill_guids);
+                }
             }
 
             $user->save();

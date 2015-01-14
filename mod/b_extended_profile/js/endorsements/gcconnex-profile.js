@@ -168,7 +168,7 @@ function saveProfile(event) {
 
             $('.gcconnex-education-entry').each(function() {
                 if ( $(this).is(":hidden") ) {
-                    if ($(this).data(guid) != "new") {
+                    if ($(this).data('guid') != "new") {
                         $delete_guid.push($(this).data('guid'));
                     }
                 }
@@ -233,7 +233,9 @@ function saveProfile(event) {
 
             $('.gcconnex-work-experience-entry').each(function() {
                 if ( $(this).is(":hidden") ) {
-                    $delete_guid.push($(this).data('guid'));
+                    if ( $(this).data('guid') != "new" ) {
+                        $delete_guid.push($(this).data('guid'));
+                    }
                 }
                 else {
                     $work_experience_guid.push($(this).data('guid'));
@@ -264,6 +266,7 @@ function saveProfile(event) {
             $('.gcconnex-work-experience-responsibilities').not(":hidden").each(function() {
                 $responsibilities.push($(this).val());
             });
+            var $access = $('.gcconnex-work-experience-access').val();
 
             // save the information the user just edited
             elgg.action('b_extended_profile/edit_profile', {
@@ -275,7 +278,8 @@ function saveProfile(event) {
                 title: $title,
                 startdate: $startdate,
                 enddate: $enddate,
-                responsibilities: $responsibilities
+                responsibilities: $responsibilities,
+                access: $access
             });
             $('.gcconnex-work-experience-edit-wrapper').remove();
 
@@ -455,44 +459,50 @@ function addNewSkill(newSkill) {
  * Purpose: Increase the endorsement count by one, for a specific skill for a specific user
  */
 function addEndorsement(identifier) {
-    // A user is endorsing a skill! Do stuff about it..
-    //var targetSkill = $(this).siblings('.gcconnex-endorsements-skill').text(); //.text();
-
+    // A user is endorsing a skill! Do some things about it..
     var skill_guid = $(identifier).data('guid');
 
     elgg.action('b_extended_profile/add_endorsement', {
         guid: elgg.get_logged_in_user_guid(),
-        skill: skill_guid,
+        skill: skill_guid
     });
 
 
     var targetSkill = $(identifier).data('skill');
-    var targetSkillDashed = targetSkill.replace(/\s+/g, '-'); // replace spaces with '-' for css classes
+    var targetSkillDashed = targetSkill.replace(/\s+/g, '-').toLowerCase(); // replace spaces with '-' for css classes
 
-    $('.add-endorsement-' + targetSkillDashed).hide();
-    $('.retract-endorsement-' + targetSkillDashed).show();
 
     var endorse_count = $('.gcconnex-endorsements-count-' + targetSkillDashed).text();
     endorse_count++;
     $('.gcconnex-endorsements-count-' + targetSkillDashed).text(endorse_count);
 
-    // @todo: add the endorsing user's profile image to the list of endorsers for this skill
+    $(identifier).after('<span class="gcconnex-endorsement-retract retract-endorsement-' + targetSkillDashed + '" onclick="retractEndorsement(this)" data-guid="' + skill_guid + '" data-skill="' + targetSkill + '">-</span>')
+    $('.add-endorsement-' + targetSkillDashed).remove();
 }
 
 /*
  * Purpose: Retract a previous endorsement for a specific skill for a specific user
  */
-function retractEndorsement() {
+function retractEndorsement(identifier) {
     // A user is retracting their endorsement for a skill! Do stuff about it..
-    var targetSkill = $(this).siblings('.gcconnex-endorsements-skill').text(); //.text();
-    var targetSkillDashed = targetSkill.replace(/\s+/g, '-'); // replace spaces with '-' for css classes
+    var skill_guid = $(identifier).data('guid');
 
-    $('.add-endorsement-' + targetSkillDashed).show();
-    $('.retract-endorsement-' + targetSkillDashed).hide();
+    elgg.action('b_extended_profile/retract_endorsement', {
+        guid: elgg.get_logged_in_user_guid(),
+        skill: skill_guid
+    });
 
-    var endorse_count = $('.endorsements-count-' + targetSkillDashed).val();
+
+    var targetSkill = $(identifier).data('skill');
+    var targetSkillDashed = targetSkill.replace(/\s+/g, '-').toLowerCase(); // replace spaces with '-' for css classes
+
+
+    var endorse_count = $('.gcconnex-endorsements-count-' + targetSkillDashed).text();
     endorse_count--;
-    $('.endorsements-count-' + targetSkillDashed).val(endorse_count);
+    $('.gcconnex-endorsements-count-' + targetSkillDashed).text(endorse_count);
+
+    $(identifier).after('<span class="gcconnex-endorsement-add add-endorsement-' + targetSkillDashed + '" onclick="addEndorsement(this)" data-guid="' + skill_guid + '" data-skill="' + targetSkill + '">+</span>');
+    $('.retract-endorsement-' + targetSkillDashed).remove();
 }
 
 /*
