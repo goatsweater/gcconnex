@@ -85,7 +85,7 @@ function editProfile(event) {
                     // Output in a DIV with id=somewhere
                     $('.gcconnex-education').append('<div class="gcconnex-education-edit-wrapper">' + data + '</div>');
                 });
-            $('.gcconnex-profile-education-display').remove();
+            $('.gcconnex-profile-education-display').hide();
             break;
         case 'work-experience':
             // Edit the experience for this user
@@ -145,21 +145,28 @@ function saveProfile(event) {
             var $about_me = tinyMCE.activeEditor.getContent();
             // save the information the user just edited
             elgg.action('b_extended_profile/edit_profile', {
+                data: {
                     guid: elgg.get_logged_in_user_guid(),
                     section: 'about-me',
                     description: $about_me
-                });
+                },
+                success: function() {            // fetch and display the information we just saved
+                    $.get(elgg.normalize_url('ajax/view/b_extended_profile/about-me'),
+                        {
+                            guid: elgg.get_logged_in_user_guid()
+                        },
+                        function(data) {
+                            // Output in a DIV with id=somewhere
+                            $('.gcconnex-profile-about-me-display').remove();
+                            $('.gcconnex-about-me').append('<div class="gcconnex-profile-about-me-display">' + data + '</div>');
+                        });
+                }
+            });
+
             $('.gcconnex-about-me-edit-wrapper').remove();
 
-            // fetch and display the information we just saved
-            $.get(elgg.normalize_url('ajax/view/b_extended_profile/about-me'),
-                {
-                    guid: elgg.get_logged_in_user_guid()
-                },
-                function(data) {
-                    $('.gcconnex-about-me').append(data);
-                });
             break;
+
         case "education":
 
             //var $school = $('.gcconnex-education-school').val();
@@ -203,6 +210,7 @@ function saveProfile(event) {
 
             // save the information the user just edited
             elgg.action('b_extended_profile/edit_profile', {
+                data: {
                     guid: elgg.get_logged_in_user_guid(),
                     delete: $delete_guid,
                     eguid: $education_guid,
@@ -213,18 +221,21 @@ function saveProfile(event) {
                     program: $program,
                     field: $field,
                     access: $access
+                },
+                success: function() {            // fetch and display the information we just saved
+                    $.get(elgg.normalize_url('ajax/view/b_extended_profile/education'),
+                        {
+                            guid: elgg.get_logged_in_user_guid()
+                        },
+                        function(data) {
+                            // Output in a DIV with id=somewhere
+                            $('.gcconnex-education-display').remove();
+                            $('.gcconnex-education').append('<div class="gcconnex-education-display">' + data + '</div>');
+                        });
+                }
                 });
             $('.gcconnex-education-edit-wrapper').remove();
 
-            // fetch and display the information we just saved
-            $.get(elgg.normalize_url('ajax/view/b_extended_profile/education'),
-                {
-                    guid: elgg.get_logged_in_user_guid()
-                },
-                function(data) {
-                    // Output in a DIV with id=somewhere
-                    $('.gcconnex-education').append(data);
-                });
             break;
         case "work-experience":
 
@@ -270,33 +281,38 @@ function saveProfile(event) {
 
             // save the information the user just edited
             elgg.action('b_extended_profile/edit_profile', {
-                guid: elgg.get_logged_in_user_guid(),
-                delete: $delete_guid,
-                eguid: $work_experience_guid,
-                section: 'work-experience',
-                organization: $organization,
-                title: $title,
-                startdate: $startdate,
-                enddate: $enddate,
-                responsibilities: $responsibilities,
-                access: $access
+                data: {
+                    guid: elgg.get_logged_in_user_guid(),
+                    delete: $delete_guid,
+                    eguid: $work_experience_guid,
+                    section: 'work-experience',
+                    organization: $organization,
+                    title: $title,
+                    startdate: $startdate,
+                    enddate: $enddate,
+                    responsibilities: $responsibilities,
+                    access: $access
+                },
+                success: function() {
+                    $.get(elgg.normalize_url('ajax/view/b_extended_profile/work-experience'),
+                        {
+                            guid: elgg.get_logged_in_user_guid()
+                        },
+                        function(data) {
+                            // Output in a DIV with id=somewhere
+                            $('.gcconnex-work-experience-display').remove();
+                            $('.gcconnex-work-experience').append('<div class="gcconnex-work-experience-display">' + data + '</div>');
+                        });
+                }
             });
             $('.gcconnex-work-experience-edit-wrapper').remove();
 
             // fetch and display the information we just saved
-            $.get(elgg.normalize_url('ajax/view/b_extended_profile/work-experience'),
-                {
-                    guid: elgg.get_logged_in_user_guid()
-                },
-                function(data) {
-                    // Output in a DIV with id=somewhere
-                    $('.gcconnex-work-experience').append(data);
-                });
+
+            //$('.gcconnex-profile-work-experience-display').hide();
             break;
 
         case "endorsements":
-
-            //$('.delete-skill').hide();
 
             var $skills_added = [];
             var $delete_guid = [];
@@ -310,33 +326,28 @@ function saveProfile(event) {
                 }
             });
 
-            if (confirm("Are you sure you would like to save changes? Any endorsements for skills that you have removed will be permanently deleted.")) {
-                // save the information the user just edited
+            //if ($delete_guid.length !== 0) {
+                if (confirm("Are you sure you would like to save changes? Any endorsements that are attached to skills that you have removed will be permanently deleted.")) {
+                    // save the information the user just edited
 
-                elgg.action('b_extended_profile/edit_profile', {
-                    guid: elgg.get_logged_in_user_guid(),
-                    section: 'skill',
-                    skillsadded: $skills_added,
-                    skillsremoved: $delete_guid
-                });
-
-                $('.gcconnex-endorsement-input-wrapper').remove();
-
-                $.get(elgg.normalize_url('ajax/view/b_extended_profile/endorsements'),
-                    {
-                        guid: elgg.get_logged_in_user_guid()
-                    },
-                    function(data) {
-                        // Output in a DIV with id=somewhere
-                        $('.gcconnex-endorsements').append(data);
+                    elgg.action('b_extended_profile/edit_profile', {
+                        guid: elgg.get_logged_in_user_guid(),
+                        section: 'skill',
+                        skillsadded: $skills_added,
+                        skillsremoved: $delete_guid
                     });
 
-            }
-            else {
-                // show() the skills that have been hidden() (marked for deletion)
-                $('.gcconnex-enxorsement-skill-wrapper').show();
-            }
+                    $('.delete-skill-img').remove();
+                    $('.delete-skill').remove();
+                    $('.gcconnex-endorsements-input-wrapper').remove();
+                    $('.gcconnex-skill-entry').removeClass('temporarily-added');
 
+                }
+                else {
+                    // show() the skills that have been hidden() (marked for deletion)
+                    $('.gcconnex-enxorsement-skill-wrapper').show();
+                }
+            //}
             // @todo: show add or retract links based on status of endorsement
             break;
         default:
@@ -359,37 +370,16 @@ function cancelChanges(event) {
         case "about-me":
             // show the about me
             $('.gcconnex-about-me-edit-wrapper').remove();
-            $.get(elgg.normalize_url('ajax/view/b_extended_profile/about-me'),
-                {
-                    guid: elgg.get_logged_in_user_guid()
-                },
-                function(data) {
-                    // Output in a DIV with id=somewhere
-                    $('.gcconnex-about-me').append(data);
-                });
+            $('.gcconnex-profile-about-me-display').show();
             break;
         case "education":
             //$('.gcconnex-profile-education-display').show();
             $('.gcconnex-education-edit-wrapper').remove();
-            $.get(elgg.normalize_url('ajax/view/b_extended_profile/education'),
-                {
-                    guid: elgg.get_logged_in_user_guid()
-                },
-                function(data) {
-                    // Output in a DIV with id=somewhere
-                    $('.gcconnex-education').append(data);
-                });
+            $('.gcconnex-profile-education-display').show();
             break;
         case "work-experience":
             $('.gcconnex-work-experience-edit-wrapper').remove();
-            $.get(elgg.normalize_url('ajax/view/b_extended_profile/work-experience'),
-                {
-                    guid: elgg.get_logged_in_user_guid()
-                },
-                function(data) {
-                    // Output in a DIV with id=somewhere
-                    $('.gcconnex-work-experience').append(data);
-                });
+            $('.gcconnex-profile-work-experience-display').show();
             break;
         case "endorsements":
             $('.gcconnex-endorsements-input-wrapper').remove();
@@ -430,20 +420,10 @@ function addNewSkill(newSkill) {
     // @todo: cap the list of skills at ~8-10 in order not to have "too many" on each profile
     // inject HTML for newly added skill
     $('.gcconnex-endorsements-skills-list-wrapper').append('<div class="gcconnex-skill-entry temporarily-added" data-skill="' + newSkill + '">' +
-    '<span title="Number of endorsements" class="gcconnex-endorsements-count endorsement-count-' +
-    newSkillDashed +
-    '">0</span>' +
-    '<span data-type="' + newSkillDashed + '" class="gcconnex-endorsements-skill">' +
-    newSkill +
-    '</span>' +
-    '<span title="Endorse this skill" class="gcconnex-endorsements-add add-endorsement-' +
-    newSkillDashed +
-    '">+</span>' +
-    '<span title="Remove your endorsement for this skill" class="gcconnex-endorsements-retract retract-endorsement-' +
-    newSkillDashed +
-    '">-</span><span class="delete-skill delete-' +
-    newSkillDashed +
-    '">Delete this skill</span></div>');
+    '<span title="Number of endorsements" class="gcconnex-endorsements-count endorsement-count-' + newSkillDashed + '">0</span>' +
+    '<span data-type="' + newSkillDashed + '" class="gcconnex-endorsements-skill">' + newSkill + '</span>' +
+    '<img class="delete-skill-img" src="' + elgg.get_site_url() + 'mod/b_extended_profile/img/delete.png">' +
+    '<span class="delete-skill" data-type="skill" onclick="deleteEntry(this)">Delete this skill</span></div>');
 
     $('.gcconnex-endorsements-input-skill').val('');                                 // clear the text box
     $('.gcconnex-endorsements-input-skill').hide();                                  // hide the text box
@@ -531,6 +511,11 @@ function deleteEntry(identifier) {
     // get the entry-type name
     var entryType = $(identifier).data('type');
 
-    // mark the entry for deletion and hide it from view
-    $(identifier).closest('.gcconnex-' + entryType + '-entry').hide();
+    if ($(identifier).closest('.gcconnex-' + entryType + '-entry').hasClass('temporarily-added')) {
+        $(identifier).closest('.gcconnex-' + entryType + '-entry').remove();
+    }
+    else {
+        // mark the entry for deletion and hide it from view
+        $(identifier).closest('.gcconnex-' + entryType + '-entry').hide();
+    }
 }

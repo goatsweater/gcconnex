@@ -103,6 +103,8 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
 
             $experience_list = $user->work;
 
+            if (!(is_array($delete))) { $delete = array($delete); }
+
             foreach ($delete as $delete_guid) {
                 if ($delete_guid != NULL) {
 
@@ -204,6 +206,7 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
                 }
             }
 
+            //$user->skills = null;
             $user->save();
             
             break;

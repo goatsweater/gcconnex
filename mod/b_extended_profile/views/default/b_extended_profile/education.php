@@ -1,7 +1,13 @@
 <?php
-$user_guid = elgg_get_page_owner_guid();
-$user = get_user($user_guid);
 
+if (elgg_is_xhr()) {
+    $user_guid = $_GET["guid"];
+}
+else {
+    $user_guid = elgg_get_page_owner_guid();
+}
+
+$user = get_user($user_guid);
 $education_guid = $user->education;
 
 if (is_array($education_guid)) {
