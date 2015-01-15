@@ -255,6 +255,10 @@ input.gcconnex-endorsements-input-skill {
     border-radius: 0px;
 }
 
+.profile {
+    float: none;
+}
+
 #profile-details {
     display: inline-block;
     width: 400px;
