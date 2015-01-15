@@ -20,12 +20,24 @@ if (is_array($skill_guids)) {
         echo '<div class="gcconnex-skill-entry" data-guid="' . $skill_guid . '">';
             echo '<div class="gcconnex-endorsements-count gcconnex-endorsements-count-' . $skill_class . '">' . count($skill->endorsements) . '</div><div class="gcconnex-endorsements-skill" data-type="skill">' . $skill->title . '</div>';
 
+        $endorsements = $skill->endorsements;
+        if(!(is_array($endorsements))) { $endorsements = array($endorsements); }
+
             if (elgg_get_page_owner_guid() != elgg_get_logged_in_user_guid()) {
-                if($result = array_search(elgg_get_logged_in_user_guid(), $skill->endorsements) == true || $skill->endorsements == NULL) {
+                if(in_array(elgg_get_logged_in_user_guid(), $endorsements) == false || empty($endorsements)) {
+                    error_log('SKILL: ' . $skill->title);
+                    error_log('Logged in user: ' . elgg_get_logged_in_user_guid());
+                    error_log('Endorsements: ' . $endorsements);
+                    error_log('Search result: ' . in_array(elgg_get_logged_in_user_guid(), $endorsements));
+
                     echo '<span class="gcconnex-endorsement-add add-endorsement-' . $skill_class . '" onclick="addEndorsement(this)" data-guid="' . $skill->guid . '" data-skill="' . $skill->title . '">+</span>';
                 }
                 else {
                     echo '<span class="gcconnex-endorsement-retract retract-endorsement-' . $skill_class . '" onclick="retractEndorsement(this)" data-guid="' . $skill->guid . '" data-skill="' . $skill->title . '">-</span>';
+                    error_log('SKILL: ' . $skill->title);
+                    error_log('Logged in user: ' . elgg_get_logged_in_user_guid());
+                    error_log('Endorsements: ' . $skill->endorsements);
+                    error_log('Search result: ' . in_array(elgg_get_logged_in_user_guid(), $skill->endorsements));
                 }
             }
         // @todo: add the endorsing user's profile image to the list of endorsers for this skill
