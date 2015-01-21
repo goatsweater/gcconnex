@@ -43,7 +43,7 @@ elgg_load_css('font-awesome'); // font-awesome icons for social media and some o
 
                 echo elgg_view('b_extended_profile/' . $sec); // call the proper view for the section
 
-                echo '</div>';
+                echo '</div>'; // close div class=gcconnex-profile-secction-wrapper
             }
         ?>
     </div>

@@ -13,6 +13,7 @@ if(!(is_array($skill_guids))) {
     $skill_guids = array($skill_guids);
 }
 
+// if the skill list isn't empty, and a logged-in user is viewing this page... show skills
 if (is_array($skill_guids) && elgg_is_logged_in()) {
     foreach($skill_guids as $skill_guid) {
         $skill = get_entity($skill_guid);
@@ -44,9 +45,9 @@ if (is_array($skill_guids) && elgg_is_logged_in()) {
             }
         // @todo: add the endorsing user's profile image to the list of endorsers for this skill
         echo '</div>'; // close div class=gcconnex-skill-entry
-
-
     }
+    echo '</div>';  // close div class=gcconnex-endorsements-skills-list-wrapper
+    echo '</div>'; // close div class=gcconnex-profile-endorsements-display
 }
 else {
 
@@ -61,4 +62,4 @@ else {
     */
 }
 
-echo '</div></div><div class="endorsements-message"></div>';
+//echo '</div></div><div class="endorsements-message"></div>';
