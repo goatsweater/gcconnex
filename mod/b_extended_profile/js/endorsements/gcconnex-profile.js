@@ -519,3 +519,19 @@ function deleteEntry(identifier) {
         $(identifier).closest('.gcconnex-' + entryType + '-entry').hide();
     }
 }
+
+/*
+ * Purpose: Remove the message box that informs users they need to re-enter their skills into the new system
+ */
+function removeOldSkills() {
+    elgg.action('b_extended_profile/edit_profile', {
+        data: {
+            guid: elgg.get_logged_in_user_guid(),
+            section: 'old-skills'
+        },
+        success: function() {
+            $('.gcconnex-old-skills').remove();
+        }
+    });
+
+}

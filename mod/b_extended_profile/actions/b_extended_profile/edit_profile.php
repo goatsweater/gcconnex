@@ -167,7 +167,7 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
         case 'skill':
             $skillsToAdd = get_input('skillsadded', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0021.');
             $skillsToRemove = get_input('skillsremoved', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0022.');
-            $access = ACCESS_LOGGED_IN; // ACCESS_PUBLIC == 2, which is the integer for defining information as accessible to all logged in users
+            $access = ACCESS_LOGGED_IN;
 
             $skill_guids = array();
 
@@ -181,7 +181,7 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
                 $skill_guids[] = $skill->save();
             }
 
-            $skill_list = $user->skills;
+            $skill_list = $user->gc_skills;
 
             foreach ($skillsToRemove as $remove_guid) {
                 $skill = get_entity($remove_guid);
@@ -192,23 +192,27 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
                 }
             }
 
-            $user->skills = $skill_list;
+            $user->gc_skills = $skill_list;
 
-            if ($user->skills == NULL) {
-                $user->skills = $skill_guids;
+            if ($user->gc_skills == NULL) {
+                $user->gc_skills = $skill_guids;
             }
             else {
-                $stack = $user->skills;
+                $stack = $user->gc_skills;
                 if (!(is_array($stack))) { $stack = array($stack); }
 
                 if ($skill_guids != NULL) {
-                    $user->skills = array_merge($stack, $skill_guids);
+                    $user->gc_skills = array_merge($stack, $skill_guids);
                 }
             }
 
-            //$user->skills = null;
+            //$user->gc_skills = null; // dev stuff... delete me
+            //$user->skillsupgraded = NULL; // dev stuff.. delete me
             $user->save();
             
+            break;
+        case 'old-skills':
+            $user->skillsupgraded = TRUE;
             break;
         default:
             system_message(elgg_echo("profile:saved"));
