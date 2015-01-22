@@ -183,12 +183,19 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
 
             $skill_list = $user->gc_skills;
 
-            foreach ($skillsToRemove as $remove_guid) {
-                $skill = get_entity($remove_guid);
-                $skill->delete();
+            if (!(is_array($skill_list))) { $skill_list = array($skill_list); }
+            if (!(is_array($skillsToRemove))) { $skillsToRemove = array($skillsToRemove); }
 
-                if(($key = array_search($remove_guid, $skill_list)) !== false) {
-                    unset($skill_list[$key]);
+            foreach ($skillsToRemove as $remove_guid) {
+                if ($remove_guid != NULL) {
+
+                    if ($remove = get_entity($remove_guid)) {
+                        $remove->delete();
+                    }
+
+                    if (($key = array_search($remove_guid, $skill_list)) !== false) {
+                        unset($skill_list[$key]);
+                    }
                 }
             }
 

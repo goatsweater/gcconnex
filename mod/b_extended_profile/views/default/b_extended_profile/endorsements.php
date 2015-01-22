@@ -23,14 +23,14 @@ $skill_guids = $user->gc_skills;
 echo '<div class="gcconnex-profile-endorsements-display">';
 echo '<div class="gcconnex-endorsements-skills-list-wrapper">';
 
-if ($skill_guids == NULL) {
+if ($skill_guids == NULL || empty($skill_guids)) {
     echo 'Begin entering your skills by clicking "Edit" in the top right corner of this box.</div></div>';
 }
 else {
-//$user->skills = NULL;
     if (!(is_array($skill_guids))) {
         $skill_guids = array($skill_guids);
     }
+    var_dump($skill_guids);
 }
 
 // if the skill list isn't empty, and a logged-in user is viewing this page... show skills
