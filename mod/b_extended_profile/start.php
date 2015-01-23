@@ -15,6 +15,12 @@ function b_extended_profile_init() {
     elgg_register_js('gcconnex-profile', $url . "gcconnex-profile.js"); // js file containing code for edit, save, cancel toggles and the events that they trigger, plus more
     elgg_register_js('basic-profile', $url . "basic-profile.js"); // js file containing fancybox initialization mainly to override width of the overlay
 
+    // Register vendor js libraries
+    $url = 'mod/b_extended_profile/vendors/';
+    elgg_register_js('typeahead', $url . 'typeahead/dist/typeahead.bundle.js'); // developer version typeahead js file !!! COMMENT THIS OuT AND ENABLE MINIFIED VERSIoN IN PRODcd
+    // elgg_register_js('typeahead', $url . 'typeahead/dist/typeahead.bundle.min.js'); // minified typeahead js file
+
+
     // Register the gcconnex profile css libraries
     $css_url = 'mod/b_extended_profile/css/gcconnex-profile.css';
     elgg_register_css('gcconnex-css', $css_url);
