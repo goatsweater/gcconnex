@@ -245,14 +245,12 @@ else {  // In case this view will be called via the elgg_view_form() action, the
 
     foreach ($weblink as $link) {
         $value = get_input($link);
-        if (filter_var($value, FILTER_VALIDATE_URL) !== false) {
+        if (filter_var($value, FILTER_VALIDATE_URL) == false) {
             $user->set($link, $value);
         }
     }
 
-    error_log("Micro: " . get_input('micro'));
     $user->micro = get_input('micro');
-    error_log("user->Micro:" . $user->micro);
     $user->save();
 
     system_message(elgg_echo("profile:saved"));

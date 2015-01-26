@@ -140,9 +140,16 @@ echo '</div>';
 echo '<div class="basic-profile-social-media-wrapper">'; // container for css styling, used to group profile content and display them seperately from other fields
 
 // pre-populate the social media fields and their prepended link for user profiles
-$fields = array('Facebook' => "http://www.facebook.com/", 'Google Plus' => "http://www.google.com/+", 'GitHub' => "https://github.com/",
-    'Twitter' => "https://twitter.com/", 'Linkedin' => "http://ca.linkedin.com/in/", 'Pinterest' => "http://www.pinterest.com/",
-    'Tumblr' => "https://www.tumblr.com/blog/", 'Instagram' => "http://instagram.com/", 'Flickr' => "http://flickr.com/", 'Youtube' => "http://www.youtube.com/");
+$fields = array('Facebook' => "http://www.facebook.com/",
+    'Google Plus' => "http://www.google.com/",
+    'GitHub' => "https://github.com/",
+    'Twitter' => "https://twitter.com/",
+    'Linkedin' => "http://ca.linkedin.com/in/",
+    'Pinterest' => "http://www.pinterest.com/",
+    'Tumblr' => "https://www.tumblr.com/blog/",
+    'Instagram' => "http://instagram.com/",
+    'Flickr' => "http://flickr.com/",
+    'Youtube' => "http://www.youtube.com/");
 
 foreach ($fields as $field => $field_link) { // create a label and input box for each social media field on the basic profile
 
@@ -159,10 +166,22 @@ foreach ($fields as $field => $field_link) { // create a label and input box for
             echo '<span class="input-group-addon">' . $field_link . "</span>"; // prepended link
 
             // setup the input for this field
+            $placeholder = "test";
+            if ($field == "facebook") { $placeholder = "User.Name"; }
+            if ($field == "google-plus") { $placeholder = "############"; }
+            if ($field == "github") { $placeholder = "User"; }
+            if ($field == "twitter") { $placeholder = "@user"; }
+            if ($field == "linkedin") { $placeholder = "CustomURL"; }
+            if ($field == "pinterest") { $placeholder = "Username"; }
+            if ($field == "tumblr") { $placeholder = "Username"; }
+            if ($field == "instagram") { $placeholder = "@user"; }
+            if ($field == "flickr") { $placeholder = "Username"; }
+            if ($field == "youtube") { $placeholder = "Username"; }
+
             $params = array(
                 'name' => $field,
                 'class' => 'form-control gcconnex-basic-field gcconnex-basic-' . $field,
-                'placeholder' => 'Username',
+                'placeholder' => $placeholder,
                 'value' => $value
             );
 

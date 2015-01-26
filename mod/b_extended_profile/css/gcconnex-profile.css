@@ -291,14 +291,24 @@ input.gcconnex-endorsements-input-skill {
     padding-top: 5px;
 }
 
+.b-user-menu-title {
+    background: none repeat scroll 0% 0% #3C698E;
+    color: #FFF;
+    text-decoration: none;
+    border-radius: 0 5px 0 0;
+    margin-top: -5px;
+    padding: 5px 15px;
+}
+
 .profile-content-menu a {
     color: #808080;
 }
 .profile-content-menu li > a:hover {
-    background: none repeat scroll 0% 0% #3C698E;
-    color: #FFF;
+    border-left: 3px solid #3C698E;
     text-decoration: none;
     border-radius: 0px;
+    background: none repeat scroll 0% 0% white;
+    color: black;
 }
 
 .profile {

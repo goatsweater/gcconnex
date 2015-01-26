@@ -33,6 +33,17 @@ $social = array('facebook', 'google', 'github', 'twitter', 'linkedin', 'pinteres
 foreach ($social as $media) {
 
     if ($link = $user->get($media)) {
+        if ($media == 'facebook') { $link = "http://www.facebook.com/" . $link; }
+        if ($media == 'google') { $link = "http://plus.google.com/" . $link; }
+        if ($media == 'github') { $link = "https://github.com/" . $link; }
+        if ($media == 'twitter') { $link = "https://twitter.com/" . $link; }
+        if ($media == 'linkedin') { $link = "http://ca.linkedin.com/in/" . $link; }
+        if ($media == 'pinterest') { $link = "http://www.pinterest.com/" . $link; }
+        if ($media == 'tumblr') { $link = "https://www.tumblr.com/blog/" . $link; }
+        if ($media == 'instagram') { $link = "http://instagram.com/" . $link; }
+        if ($media == 'flickr') { $link = "http://flickr.com/" . $link; }
+        if ($media == 'youtube') { $link = "http://www.youtube.com/" . $link; }
+
         if ($media == 'google') { $media = 'google-plus'; } // the google font-awesome class is called "google-plus", so convert "google" to that..
         echo '<a href="' . $link . '"><i class="fa fa-fw fa-lg fa-' . $media . '"></i></a>';
     }
@@ -98,5 +109,5 @@ $content_menu = elgg_view_menu('owner_block', array(
 
 echo '</div>';
 
-echo '<div class="b-user-menu">' . $content_menu_title . $content_menu . '</div>';
-echo '<div class="b-user-menu2">' . $admin_links . '</div>';
+echo '<div class="b-user-menu"><div class="b-user-menu-title">' . $content_menu_title . '</div>' . $content_menu . '</div>';
+echo '<div class="b-admin-menu">' . $admin_links . '</div>';
