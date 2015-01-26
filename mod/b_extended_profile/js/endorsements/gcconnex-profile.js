@@ -109,19 +109,19 @@ function editProfile(event) {
             var newSkill = new Bloodhound({
                 datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
                 queryTokenizer: Bloodhound.tokenizers.whitespace,
-                local: [{ value: 'test' }, { value: 'bryden' }, { value: 'arndt' }, { value: 'anjali' }, { value: 'wildgen' }, { value: 'love' }, { value: 'and' }, { value: 'marriage' }, { value: 'algonquin' }],
                 //prefetch: '../data/films/post_1960.json',
                 //remote: '../data/films/queries/%QUERY.json'
                 remote: {
-                    url: 'http://api.themoviedb.org/3/search/movie?query=%QUERY&api_key=470fd2ec8853e25d2f8d86f685d2270e',
-                    filter: function (movies) {
+                    url: elgg.get_site_url() + 'mod/b_extended_profile/actions/b_extended_profile/autoskill.php?query=%QUERY',
+                    //url: 'http://api.themoviedb.org/3/search/movie?query=%QUERY&api_key=470fd2ec8853e25d2f8d86f685d2270e',
+                    /*filter: function (query) {
                         // Map the remote source JSON array to a JavaScript object array
-                        return $.map(movies.results, function (movie) {
+                        return $.map(query.value, function (skill) {
                             return {
-                                value: movie.original_title
+                                value: skill.original_title
                             };
                         });
-                    }
+                    }*/
                 }
             });
 
@@ -130,6 +130,7 @@ function editProfile(event) {
             $('.typeahead').typeahead(null, {
                 name: 'newSkill',
                 displayKey: 'value',
+                limit: 10,
                 source: newSkill.ttAdapter()
             });
 
