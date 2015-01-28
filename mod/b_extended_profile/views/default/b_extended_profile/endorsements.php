@@ -30,7 +30,6 @@ else {
     if (!(is_array($skill_guids))) {
         $skill_guids = array($skill_guids);
     }
-    var_dump($skill_guids);
 }
 
 // if the skill list isn't empty, and a logged-in user is viewing this page... show skills

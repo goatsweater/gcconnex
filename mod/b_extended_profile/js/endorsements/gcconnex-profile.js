@@ -16,6 +16,27 @@ $(document).ready(function() {
     $('.save-control').hide();
     $('.cancel-control').hide();
 
+    $('.edit-control').hover(function() {
+            $(this).addClass('edit-hover');
+        },
+        function(){
+            $(this).removeClass('edit-hover');
+        });
+
+    $('.cancel-control').hover(function() {
+            $(this).addClass('cancel-hover');
+        },
+        function(){
+            $(this).removeClass('cancel-hover');
+        });
+
+    $('.save-control').hover(function() {
+            $(this).addClass('save-hover');
+        },
+        function(){
+            $(this).removeClass('save-hover');
+        });
+
     //link the edit/save/cancel buttons with the appropriate functions on click..
     $('.edit-about-me').on("click", {section: "about-me"}, editProfile);
     $('.save-about-me').on("click", {section: "about-me"}, saveProfile);
@@ -460,16 +481,14 @@ function addNewSkill(newSkill) {
     // @todo: cap the list of skills at ~8-10 in order not to have "too many" on each profile
     // inject HTML for newly added skill
     $('.gcconnex-endorsements-skills-list-wrapper').append('<div class="gcconnex-skill-entry temporarily-added" data-skill="' + newSkill + '">' +
-    '<span title="Number of endorsements" class="gcconnex-endorsements-count endorsement-count-' + newSkillDashed + '">0</span>' +
-    '<span data-type="' + newSkillDashed + '" class="gcconnex-endorsements-skill">' + newSkill + '</span>' +
+    '<span title="Number of endorsements" class="gcconnex-endorsements-count" data-skill="' + newSkillDashed + '">0</span>' +
+    '<span data-skill="' + newSkillDashed + '" class="gcconnex-endorsements-skill">' + newSkill + '</span>' +
     '<img class="delete-skill-img" src="' + elgg.get_site_url() + 'mod/b_extended_profile/img/delete.png">' +
     '<span class="delete-skill" data-type="skill" onclick="deleteEntry(this)">Delete this skill</span></div>');
 
     $('.gcconnex-endorsements-input-skill').val('');                                 // clear the text box
     $('.typeahead').typeahead('val', '');                                           // clear the typeahead box
     $('.gcconnex-endorsements-input-skill').hide();                                  // hide the text box
-    $('.add-endorsement-' + newSkillDashed).hide();                                 // hide the '+' button
-    $('.retract-endorsements-' + newSkillDashed).hide();                             // hide the '-' button
     $('.gcconnex-endorsements-add-skill').show();                                    // show the 'add a new skill' link
     $('.add-endorsements-' + newSkillDashed).on('click', addEndorsement);            // bind the addEndoresement function to the '+'
     $('.retract-endorsements-' + newSkillDashed).on('click', retractEndorsement);    // bind the retractEndorsement function to the '-'

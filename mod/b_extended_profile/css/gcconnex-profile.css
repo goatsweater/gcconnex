@@ -2,6 +2,28 @@
     margin-bottom: 20px;
 }
 
+.gcconnex-profile-name {
+    padding-bottom: 20px;
+}
+
+.gcconnex-profile-name h1 {
+    float: left;
+}
+
+.gcconnex-basic-profile-edit {
+    top: 10px;
+    position: relative;
+    padding-left: 10px;
+}
+
+.gcconnex-profile-social-media-links {
+    padding-top: 10px;
+}
+
+.gcconnex-profile-contact-info {
+    padding-top: 5px;
+}
+
 .gcconnex-profile-button {
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
@@ -167,10 +189,13 @@ input.gcconnex-endorsements-input-skill {
     width: 98%;
 }
 
+.gcconnex-about-me-edit-wrapper {
+    padding-top: 12px;
+}
 
-
-
-
+.nav.elgg-menu.elgg-menu-longtext.elgg-menu-hz.elgg-menu-longtext-default {
+    display: none;
+}
 
 
 /* education */
@@ -264,10 +289,25 @@ input.gcconnex-endorsements-input-skill {
     top: 2px;
 }
 
+.cancel-control.cancel-hover {
+    background-color: #FFA500;
+    color: #FFF;
+}
+
+.save-control.save-hover {
+    background-color: #78ab46;
+    color: white;
+}
+
+.edit-control.edit-hover {
+    background-color: #C1CDCD;
+}
+
 .gcconnex-profile-edit-controls {
     float: right;
     position: relative;
-    margin-top: -30px;
+    margin-top: -20px;
+    margin-right: -11px;
 }
 
 .edit-control,
@@ -278,8 +318,17 @@ input.gcconnex-endorsements-input-skill {
     color: #3C698E;
     font-weight: bold;
     z-index: 1;
-    padding-right: 5px;
     cursor: pointer;
+    padding: 5px 15px 5px 5px;
+    position: relative;
+    background-color: rgb(208, 208, 208);
+    border-bottom: 1px solid darkgray;
+    border-left: 1px solid darkgray;
+}
+
+.edit-control,
+.cancel-control {
+    border-top-right-radius: 5px;
 }
 
 
@@ -307,7 +356,7 @@ input.gcconnex-endorsements-input-skill {
     border-left: 3px solid #3C698E;
     text-decoration: none;
     border-radius: 0px;
-    background: none repeat scroll 0% 0% white;
+    background: none repeat scroll 0% 0% #EEE;
     color: black;
 }
 
@@ -318,7 +367,7 @@ input.gcconnex-endorsements-input-skill {
 #profile-details {
     display: inline-block;
     width: 400px;
-
+    padding-bottom: 5px;
 }
 
 .elgg-input-text[name='education'] {
@@ -339,6 +388,21 @@ input.gcconnex-endorsements-input-skill {
 /*
  Colouring and styling for the "font-awesome" social media links on gcconnex profiles.
  */
+.profile-icons {
+    width: 17px;
+    height: 17px;
+}
+
+.profile-detail-icon {
+    vertical-align: bottom;
+    padding-top: 5px;
+    padding-right: 5px;
+}
+
+.social-media-icons {
+    padding-right: 5px;
+}
+
 .fa {
 }
 .fa-google-plus {
@@ -377,6 +441,13 @@ input.gcconnex-endorsements-input-skill {
     color: #D82A27;
 }
 
+.fa-github {
+    color: #333;
+}
+
+#textarea {
+    width: 99%;
+}
 /*
  * Twitter typeahead.js styling
  */

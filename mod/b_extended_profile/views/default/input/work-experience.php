@@ -38,8 +38,9 @@ echo 'End Date: ' . elgg_view("input/text", array(
         'value' => $work_experience->enddate));
 
 // enter responsibilities
-echo '<br>Responsibilities: ' . elgg_view("input/text", array(
+echo '<br>Responsibilities: ' . elgg_view("input/textarea", array(
         'name' => 'responsibilities',
+        'id' => 'textarea',
         'class' => 'gcconnex-work-experience-responsibilities',
         'value' => $work_experience->responsibilities));
 
@@ -47,3 +48,4 @@ echo '<br>Responsibilities: ' . elgg_view("input/text", array(
 echo '<br><div class="elgg-button elgg-button-action btn" onclick="deleteEntry(this)" data-type="work-experience">Delete this entry</div>';
 
 echo '</div>'; // close div class="gcconnex-work-experience-entry"
+?>

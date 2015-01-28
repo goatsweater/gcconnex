@@ -19,17 +19,33 @@ $profile_fields = elgg_get_config('profile_fields');
 // display the username, title, phone, mobile, email, website
 // fa classes are the font-awesome icons
 echo '<div id="profile-details" class="elgg-body pll">';
-echo '<h1>' . $user->name . '</h1>';
-echo '<h3>' . $user->title . '</h3><br>';
-echo $user->department . '<br>';
-echo '<i title="Telephone" class="fa fa-fw fa-phone"></i>' . $user->phone . '<br>';
-echo '<i class="fa fa-fw fa-mobile-phone"></i>' . $user->mobile . '<br>';
-echo '<i class="fa fa-fw fa-envelope"></i><a href="mailto:' . $user->email . '">' . $user->email . '</a><br>';
-echo '<i class="fa fa-fw fa-globe"></i><a href=' . $user->website . '>' . $user->website . '</a><br><br>';
+echo '<div class="gcconnex-profile-name">';
+echo '<h1><span>' . $user->name . '</span></h1>';
+
+if (elgg_get_logged_in_user_entity() == elgg_get_page_owner_entity()) {
+
+    $content = elgg_view('output/url', array(
+        'href' => 'ajax/view/b_extended_profile/edit_basic',
+        'class' => 'elgg-lightbox iframe gcconnex-basic-profile-edit',
+        'text' => 'Edit Profile'
+    ));
+
+    echo $content;
+}
+echo '</div>'; // close div class="gcconnex-profile-name"
+echo '<h3>' . $user->title . '</h3>';
+echo '<div class="gcconnex-profile-dept">' . $user->department . '</div>';
+echo '<div class="gcconnex-profile-contact-info">';
+echo '<img class="profile-icons profile-detail-icon" src="' . elgg_get_site_url() . 'mod/b_extended_profile/img/telephone.png">' . $user->phone . '<br>';
+echo '<img class="profile-icons profile-detail-icon" src="' . elgg_get_site_url() . 'mod/b_extended_profile/img/mobile.png">' . $user->mobile . '<br>';
+echo '<img class="profile-icons profile-detail-icon" src="' . elgg_get_site_url() . 'mod/b_extended_profile/img/envelope.png"><a href="mailto:' . $user->email . '">' . $user->email . '</a><br>';
+echo '<img class="profile-icons profile-detail-icon" src="' . elgg_get_site_url() . 'mod/b_extended_profile/img/globe.png"><a href=' . $user->website . '>' . $user->website . '</a><br>';
+echo '</div>'; // close div class="gcconnex-profile-contact-info"
 
 // pre-populate the social media links that we may or may not display depending on whether the user has entered anything for each one..
 $social = array('facebook', 'google', 'github', 'twitter', 'linkedin', 'pinterest', 'tumblr', 'instagram', 'flickr', 'youtube');
 
+echo '<div class="gcconnex-profile-social-media-links">';
 foreach ($social as $media) {
 
     if ($link = $user->get($media)) {
@@ -45,24 +61,15 @@ foreach ($social as $media) {
         if ($media == 'youtube') { $link = "http://www.youtube.com/" . $link; }
 
         if ($media == 'google') { $media = 'google-plus'; } // the google font-awesome class is called "google-plus", so convert "google" to that..
-        echo '<a href="' . $link . '"><i class="fa fa-fw fa-lg fa-' . $media . '"></i></a>';
+        echo '<a href="' . $link . '"><img class="profile-icons social-media-icons" src="' . elgg_get_site_url() . 'mod/b_extended_profile/img/social-media/' . $media . '.png"></a>';
     }
 }
-
+echo '</div>'; // close div class="gcconnex-profile-social-media-links"
 
 echo elgg_view("profile/status", array("entity" => $user));
 
 
-if (elgg_get_logged_in_user_entity() == elgg_get_page_owner_entity()) {
 
-    $content = elgg_view('output/url', array(
-        'href' => 'ajax/view/b_extended_profile/edit_basic',
-        'class' => 'elgg-lightbox iframe gcconnex-basic-profile-edit',
-        'text' => 'Edit'
-    ));
-
-    echo $content;
-}
 
 
 

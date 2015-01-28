@@ -18,6 +18,7 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
     // setup the about-me longtext input
     $params = array(
         'name' => 'description',
+        'id' => 'aboutme',
         'class' => 'mceContentBody about-me-longtext',
         'value' => $value,
     );
@@ -45,6 +46,7 @@ else {  // In case this view will be called via elgg_view()
 <!-- initialize and load the longtext wysiwyg editor -->
 <script type="text/javascript">
     tinyMCE.init({
-		mode : "textareas"
-	});
+        mode : "exact",
+        elements: "aboutme"
+    });
 </script>

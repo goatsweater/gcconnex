@@ -138,7 +138,7 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
                 $experience->title = $title[$k];
                 $experience->startdate = $startdate[$k];
                 $experience->enddate = $enddate[$k];
-                $experience->responsibiltiies = $responsibilities[$k];
+                $experience->responsibilities = $responsibilities[$k];
                 $experience->access_id = $access;
 
                 if($v == "new") {
