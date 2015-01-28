@@ -10,10 +10,11 @@
     float: left;
 }
 
+.gcconnex-basic-profile-actions,
 .gcconnex-basic-profile-edit {
-    top: 10px;
+    top: 5px;
     position: relative;
-    padding-left: 10px;
+    margin-left: 10px;
 }
 
 .gcconnex-profile-social-media-links {

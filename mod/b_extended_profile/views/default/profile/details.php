@@ -26,11 +26,37 @@ if (elgg_get_logged_in_user_entity() == elgg_get_page_owner_entity()) {
 
     $content = elgg_view('output/url', array(
         'href' => 'ajax/view/b_extended_profile/edit_basic',
-        'class' => 'elgg-lightbox iframe gcconnex-basic-profile-edit',
+        'class' => 'elgg-lightbox iframe gcconnex-basic-profile-edit elgg-button',
         'text' => 'Edit Profile'
     ));
 
     echo $content;
+}
+else {
+    $menu = elgg_trigger_plugin_hook('register', "menu:user_hover", array('entity' => $user), array());
+    $builder = new ElggMenuBuilder($menu);
+    $menu = $builder->getMenu();
+    $actions = elgg_extract('action', $menu, array());
+    $admin = elgg_extract('admin', $menu, array());
+
+    $profile_actions = '';
+    if (elgg_is_logged_in() && $actions) {
+        foreach ($actions as $action) {
+            $profile_actions .= $action->getContent(array('class' => 'gcconnex-basic-profile-actions elgg-button'));
+        }
+    }
+    echo $profile_actions;
+    /*
+    $site_url = elgg_get_site_url();
+    $url = elgg_add_action_tokens_to_url($site_url . "actions/friends/add");
+
+    $content = elgg_view('output/url', array(
+        'href' => $url,
+        'class' => 'elgg-btn gcconnex-basic-profile-edit',
+        'text' => 'Add User'
+    ));
+
+    echo $content;*/
 }
 echo '</div>'; // close div class="gcconnex-profile-name"
 echo '<h3>' . $user->title . '</h3>';
