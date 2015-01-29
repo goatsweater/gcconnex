@@ -171,7 +171,7 @@ input.gcconnex-endorsements-input-skill {
 }
 
 .temporarily-added .gcconnex-endorsements-skill {
-    background-color: #e5e500;
+    background-color: #FFA500;
 }
 
 /*
@@ -188,6 +188,10 @@ input.gcconnex-endorsements-input-skill {
 /* about me */
 .about-me-longtext {
     width: 98%;
+}
+
+.gcconnex-profile-about-me-display {
+    padding-top: 10px;
 }
 
 .gcconnex-about-me-edit-wrapper {
@@ -373,6 +377,14 @@ input.gcconnex-endorsements-input-skill {
 
 .elgg-input-text[name='education'] {
     width: 300px;
+}
+
+.gcconnex-work-experience-startdate,
+.gcconnex-work-experience-enddate,
+.gcconnex-work-experience-start-year,
+.gcconnex-work-experience-end-year
+{
+    width: 100px;
 }
 
 .elgg-input-text[name='startdate'],

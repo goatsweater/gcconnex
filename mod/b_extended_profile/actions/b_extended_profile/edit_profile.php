@@ -93,7 +93,9 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
 
             $organization = get_input('organization', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0011.');
             $startdate = get_input('startdate', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0012.');
+            $startyear = get_input('startyear', 'ERROR: Ask your admin to grep: 51325GASFDGGGGGGAA.');
             $enddate = get_input('enddate', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0013.');
+            $endyear = get_input('endyear', 'ERROR: Ask your admin to grep: 513ADGGGAFDLLLLAA.');
             $title = get_input('title', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0014.');
             $responsibilities = get_input('responsibilities', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0015.');
             $access = get_input('access', 'ERROR: Ask your admin to grep: 5321GDS1111661353BB.');
@@ -137,7 +139,9 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
                 $experience->organization = $organization[$k];
                 $experience->title = $title[$k];
                 $experience->startdate = $startdate[$k];
+                $experience->startyear = $startyear[$k];
                 $experience->enddate = $enddate[$k];
+                $experience->endyear = $endyear[$k];
                 $experience->responsibilities = $responsibilities[$k];
                 $experience->access_id = $access;
 

@@ -17,7 +17,7 @@ if (is_array($work_experience_guid)) {
         $experience = get_entity($guid);
 
         echo '<div class="gcconnex-profile-work-experience-display gcconnex-work-experience-' . $experience->guid . '">';
-        echo '<div class="gcconnex-profile-label work-experience-dates">' . $experience->startdate . ' - ' . $experience->enddate . '</div>';
+        echo '<div class="gcconnex-profile-label work-experience-dates">' . $experience->startdate . ', ' . $experience->startyear . ' - ' . $experience->enddate . ', ' . $experience->endyear . '</div>';
         echo '<div class="gcconnex-profile-label work-experience-title">' . $experience->title . '</div>';
         echo '<div class="gcconnex-profile-label work-experience-organization">' . $experience->organization . '</div>';
         echo '<div class="gcconnex-profile-label work-experience-responsibilities">' . $experience->responsibilities . '</div>';
@@ -28,7 +28,7 @@ if (is_array($work_experience_guid)) {
     $experience = get_entity($work_experience_guid);
 
     echo '<div class="gcconnex-profile-work-experience-display gcconnex-work-experience-' . $experience->guid . '">';
-    echo '<div class="gcconnex-profile-label work-experience-dates">' . $experience->startdate . ' - ' . $experience->enddate . '</div>';
+    echo '<div class="gcconnex-profile-label work-experience-dates">' . $experience->startdate . ', ' . $experience->startyear . ' - ' . $experience->enddate . ', ' . $experience->endyear . '</div>';
     echo '<div class="gcconnex-profile-label work-experience-title">' . $experience->title . '</div>';
     echo '<div class="gcconnex-profile-label work-experience-organization">' . $experience->organization . '</div>';
     echo '<div class="gcconnex-profile-label work-experience-responsibilities">' . $experience->responsibilities . '</div>';

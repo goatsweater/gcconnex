@@ -87,7 +87,7 @@ foreach ($social as $media) {
         if ($media == 'youtube') { $link = "http://www.youtube.com/" . $link; }
 
         if ($media == 'google') { $media = 'google-plus'; } // the google font-awesome class is called "google-plus", so convert "google" to that..
-        echo '<a href="' . $link . '"><img class="profile-icons social-media-icons" src="' . elgg_get_site_url() . 'mod/b_extended_profile/img/social-media/' . $media . '.png"></a>';
+        echo '<a href="' . $link . '" target="_blank"><img class="profile-icons social-media-icons" src="' . elgg_get_site_url() . 'mod/b_extended_profile/img/social-media/' . $media . '.png"></a>';
     }
 }
 echo '</div>'; // close div class="gcconnex-profile-social-media-links"

@@ -26,16 +26,32 @@ echo '<br>Title: ' . elgg_view("input/text", array(
         'value' => $work_experience->title));
 
 // enter start date
-echo '<br>Start Date: ' . elgg_view("input/text", array(
+echo '<br>Start Date: ' . elgg_view("input/pulldown", array(
         'name' => 'startdate',
         'class' => 'gcconnex-work-experience-startdate',
+        'options' => array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'),
         'value' => $work_experience->startdate));
 
+echo 'Year: ' . elgg_view("input/text", array(
+        'name' => 'start-year',
+        'class' => 'gcconnex-work-experience-start-year',
+        'maxlength' => 4,
+        'onkeypress' => "return isNumberKey(event)",
+        'value' => $work_experience->startyear));
+
 // enter end date
-echo 'End Date: ' . elgg_view("input/text", array(
+echo '<br>End Date: ' . elgg_view("input/pulldown", array(
         'name' => 'enddate',
         'class' => 'gcconnex-work-experience-enddate',
+        'options' => array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'),
         'value' => $work_experience->enddate));
+
+echo 'Year: ' . elgg_view("input/text", array(
+        'name' => 'end-year',
+        'class' => 'gcconnex-work-experience-end-year',
+        'maxlength' => 4,
+        'onkeypress' => "return isNumberKey(event)",
+        'value' => $work_experience->endyear));
 
 // enter responsibilities
 echo '<br>Responsibilities: ' . elgg_view("input/textarea", array(

@@ -320,11 +320,19 @@ function saveProfile(event) {
                 $startdate.push($(this).val());
             });
 
+            var $startyear = [];
+            $('.gcconnex-work-experience-start-year').not(":hidden").each(function() {
+                $startyear.push($(this).val());
+            });
             var $enddate = [];
             $('.gcconnex-work-experience-enddate').not(":hidden").each(function() {
                 $enddate.push($(this).val());
             });
 
+            var $endyear = [];
+            $('.gcconnex-work-experience-end-year').not(":hidden").each(function() {
+                $endyear.push($(this).val());
+            });
             var $responsibilities = [];
             $('.gcconnex-work-experience-responsibilities').not(":hidden").each(function() {
                 $responsibilities.push($(this).val());
@@ -341,7 +349,9 @@ function saveProfile(event) {
                     organization: $organization,
                     title: $title,
                     startdate: $startdate,
+                    startyear: $startyear,
                     enddate: $enddate,
+                    endyear: $endyear,
                     responsibilities: $responsibilities,
                     access: $access
                 },
@@ -368,6 +378,10 @@ function saveProfile(event) {
 
             var $skills_added = [];
             var $delete_guid = [];
+
+            if ($('.gcconnex-endorsements-input-skill').is(":visible")) {
+                skillSubmit();
+            }
 
             $('.gcconnex-skill-entry').each(function() {
                 if ( $(this).is(":hidden") ) {
@@ -398,6 +412,9 @@ function saveProfile(event) {
                 else {
                     // show() the skills that have been hidden() (marked for deletion)
                     $('.gcconnex-enxorsement-skill-wrapper').show();
+                    $('.edit-' + $section).hide();
+                    $('.save-' + $section).show();
+                    $('.cancel-' + $section).show();
                 }
             //}
             // @todo: show add or retract links based on status of endorsement
@@ -461,6 +478,16 @@ function checkForEnter(event) {
         // @todo: add a max length to newSkill
         addNewSkill(newSkill);
     }
+}
+
+/*
+ * Purpose: Only allow numbers to be entered for the year inputs
+ */
+function isNumberKey(evt){
+    var charCode = (evt.which) ? evt.which : event.keyCode
+    if (charCode > 31 && (charCode < 48 || charCode > 57))
+        return false;
+    return true;
 }
 
 /*
