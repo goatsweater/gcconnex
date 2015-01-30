@@ -50,9 +50,9 @@ $(document).ready(function() {
     $('.save-work-experience').on("click", {section: "work-experience"}, saveProfile);
     $('.cancel-work-experience').on("click", {section: "work-experience"}, cancelChanges);
 
-    $('.edit-endorsements').on("click", {section: "endorsements"}, editProfile);
-    $('.save-endorsements').on("click", {section: "endorsements"}, saveProfile);
-    $('.cancel-endorsements').on("click", {section: "endorsements"}, cancelChanges);
+    $('.edit-skills').on("click", {section: "skills"}, editProfile);
+    $('.save-skills').on("click", {section: "skills"}, saveProfile);
+    $('.cancel-skills').on("click", {section: "skills"}, cancelChanges);
 
     $('.gcconnex-education-add-another').on("click", {section: "education"}, addMore);
 
@@ -120,11 +120,11 @@ function editProfile(event) {
                 });
             $('.gcconnex-profile-work-experience-display').hide();
             break;
-        case 'endorsements':
+        case 'skills':
             // inject the html to add ability to add skills
-            $('.gcconnex-endorsements').append('<div class="gcconnex-endorsements-input-wrapper">' +
+            $('.gcconnex-skills').append('<div class="gcconnex-endorsements-input-wrapper">' +
             '<input type="text" class="gcconnex-endorsements-input-skill typeahead" onkeyup="checkForEnter(event)"/>' +
-            '<span class="gcconnex-endorsements-add-skill">+ add new skill</span>' +
+            '<span class="gcconnex-endorsements-add-skill">' + elgg.echo('gcconnex_profile:gc_skill:add') + '</span>' +
             '</div>');
 
             var newSkill = new Bloodhound({
@@ -134,15 +134,6 @@ function editProfile(event) {
                 //remote: '../data/films/queries/%QUERY.json'
                 remote: {
                     url: elgg.get_site_url() + 'mod/b_extended_profile/actions/b_extended_profile/autoskill.php?query=%QUERY',
-                    //url: 'http://api.themoviedb.org/3/search/movie?query=%QUERY&api_key=470fd2ec8853e25d2f8d86f685d2270e',
-                    /*filter: function (query) {
-                        // Map the remote source JSON array to a JavaScript object array
-                        return $.map(query.value, function (skill) {
-                            return {
-                                value: skill.original_title
-                            };
-                        });
-                    }*/
                 }
             });
 
@@ -169,7 +160,7 @@ function editProfile(event) {
 
             // create a "delete this skill" link for each skill
             $('.gcconnex-endorsements-skill').each(function(){
-                $(this).after('<img class="delete-skill-img" src="' + elgg.get_site_url() + 'mod/b_extended_profile/img/delete.png"><span class="delete-skill" onclick="deleteEntry(this)" data-type="skill">Delete this skill</span>'); //goes in here i think..
+                $(this).after('<img class="delete-skill-img" src="' + elgg.get_site_url() + 'mod/b_extended_profile/img/delete.png"><span class="delete-skill" onclick="deleteEntry(this)" data-type="skill">' + elgg.echo('gcconnex_profile:gc_skill:delete') + '</span>'); //goes in here i think..
             });
 
             //$('.delete-skill').show();
@@ -246,14 +237,31 @@ function saveProfile(event) {
                 $startdate.push($(this).val());
             });
 
+            var $startyear = [];
+            $('.gcconnex-education-start-year').not(":hidden").each(function() {
+                $startyear.push($(this).val());
+            });
+
             var $enddate = [];
             $('.gcconnex-education-enddate').not(":hidden").each(function() {
                 $enddate.push($(this).val());
             });
+
+            var $endyear = [];
+            $('.gcconnex-education-start-year').not(":hidden").each(function() {
+                $endyear.push($(this).val());
+            });
+
+            var $ongoing = [];
+            $('.gcconnex-education-ongoing').not(":hidden").each(function() {
+                $ongoing.push($(this).prop('checked'));
+            });
+
             var $program = [];
             $('.gcconnex-education-program').not(":hidden").each(function() {
                 $program.push($(this).val());
             });
+
             var $field = [];
             $('.gcconnex-education-field').not(":hidden").each(function() {
                 $field.push($(this).val());
@@ -269,7 +277,10 @@ function saveProfile(event) {
                     section: 'education',
                     school: $school,
                     startdate: $startdate,
+                    startyear: $startyear,
                     enddate: $enddate,
+                    endyear: $endyear,
+                    ongoing: $ongoing,
                     program: $program,
                     field: $field,
                     access: $access
@@ -382,7 +393,7 @@ function saveProfile(event) {
             //$('.gcconnex-profile-work-experience-display').hide();
             break;
 
-        case "endorsements":
+        case "skills":
 
             var $skills_added = [];
             var $delete_guid = [];
@@ -406,7 +417,7 @@ function saveProfile(event) {
 
                     elgg.action('b_extended_profile/edit_profile', {
                         guid: elgg.get_logged_in_user_guid(),
-                        section: 'skill',
+                        section: 'skills',
                         skillsadded: $skills_added,
                         skillsremoved: $delete_guid
                     });
@@ -458,14 +469,14 @@ function cancelChanges(event) {
             $('.gcconnex-work-experience-edit-wrapper').remove();
             $('.gcconnex-profile-work-experience-display').show();
             break;
-        case "endorsements":
+        case "skills":
             $('.gcconnex-endorsements-input-wrapper').remove();
 
             $('.delete-skill').remove();
             $('.delete-skill-img').remove();
-            $('.gcconnex-endorsements-skill-wrapper').removeClass('endorsements-markedForDelete');
+            $('.gcconnex-skills-skill-wrapper').removeClass('endorsements-markedForDelete');
 
-            $('.gcconnex-endorsements-skill-wrapper').show();
+            $('.gcconnex-skills-skill-wrapper').show();
             $('.temporarily-added').remove();
             break;
         default:
@@ -501,12 +512,12 @@ function isNumberKey(evt){
 /*
  * Purpose: disable the end date inputs when a user selects "I'm currently still working here"
  */
-function toggleEndDate(guid) {
-    $('.gcconnex-work-experience-enddate-' + guid).attr('disabled', function(index, attr) {
+function toggleEndDate(guid, section) {
+    $('.gcconnex-' + section + '-enddate-' + guid).attr('disabled', function(index, attr) {
         return attr == 'disabled' ? null : 'disabled';
     });
 
-    $('.gcconnex-work-experience-end-year-' + guid).attr('disabled', function(index, attr) {
+    $('.gcconnex-' + section + '-end-year-' + guid).attr('disabled', function(index, attr) {
         return attr == 'disabled' ? null : 'disabled';
     });
 }
@@ -528,7 +539,7 @@ function addNewSkill(newSkill) {
 
     // @todo: cap the list of skills at ~8-10 in order not to have "too many" on each profile
     // inject HTML for newly added skill
-    $('.gcconnex-endorsements-skills-list-wrapper').append('<div class="gcconnex-skill-entry temporarily-added" data-skill="' + newSkill + '">' +
+    $('.gcconnex-skills-skills-list-wrapper').append('<div class="gcconnex-skill-entry temporarily-added" data-skill="' + newSkill + '">' +
     '<span title="Number of endorsements" class="gcconnex-endorsements-count" data-skill="' + newSkillDashed + '">0</span>' +
     '<span data-skill="' + newSkillDashed + '" class="gcconnex-endorsements-skill">' + newSkill + '</span>' +
     '<img class="delete-skill-img" src="' + elgg.get_site_url() + 'mod/b_extended_profile/img/delete.png">' +

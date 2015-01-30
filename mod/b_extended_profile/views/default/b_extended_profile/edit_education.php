@@ -7,7 +7,19 @@
  */
 
 if (elgg_is_xhr()) {  //This is an Ajax call!
+    // allow the user to edit the access settings for education entries
+    echo elgg_echo('gcconnex_profile:education:access');
 
+    $access_id = $user->education_access;
+    //echo 'Access: ';
+    //var_dump($access_id);
+    $params = array(
+        'name' => "accesslevel['education']",
+        'value' => $access_id,
+        'class' => 'gcconnex-education-access'
+    );
+
+    echo elgg_view('input/access', $params);
     //$user_guid = $_GET["user"];
     $user_guid = $_GET["guid"];
     $user = get_user($user_guid);
@@ -31,21 +43,7 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
     echo '</div>';
 
     // create an "add more" button at the bottom of the education input fields so that the user can continue to add more education entries as needed
-    echo '<br><div class="gcconnex-education-add-another elgg-button elgg-button-action btn" data-type="education" onclick="addMore(this)">+ add more education</div>';
-
-    // allow the user to edit the access settings for education entries
-    echo '<br>Allow education details to be viewable by: ';
-
-    $access_id = $user->education_access;
-    //echo 'Access: ';
-    //var_dump($access_id);
-    $params = array(
-        'name' => "accesslevel['education']",
-        'value' => $access_id,
-        'class' => 'gcconnex-education-access'
-    );
-
-    echo elgg_view('input/access', $params);
+    echo '<div class="gcconnex-education-add-another elgg-button elgg-button-action btn" data-type="education" onclick="addMore(this)">' . elgg_echo('gcconnex_profile:education:add') . '</div>';
 }
 
 else {  // In case this view will be called via elgg_view()

@@ -28,15 +28,6 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
 
     $access_id = ACCESS_DEFAULT; // @todo: set this access based on user settings
 
-    // setup the access level input field
-    $params = array(
-        'name' => "accesslevel['description']",
-        'value' => $access_id,
-    );
-
-    // access level input field
-    echo elgg_view('input/access', $params);
-
 }
 
 else {  // In case this view will be called via elgg_view()

@@ -16,7 +16,10 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
             $delete = get_input('delete', '');
             $school = get_input('school', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0002.');
             $startdate = get_input('startdate', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0003.');
+            $startyear = get_input('startyear');
             $enddate = get_input('enddate', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0004.');
+            $endyear = get_input('endyear');
+            $ongoing = get_input('ongoing');
             $program = get_input('program', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0005.');
             $field = get_input('field', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0006.');
             $access = get_input('access', 'ERROR: Ask your admin to grep: 5321GDS1111661353BB.');
@@ -56,7 +59,10 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
 
                 $education->school = $school[$k];
                 $education->startdate = $startdate[$k];
+                $education->startyear = $startyear[$k];
                 $education->enddate = $enddate[$k];
+                $education->endyear = $endyear[$k];
+                $education->ongoing = $ongoing[$k];
                 $education->program = $program[$k];
                 $education->field = $field[$k];
                 $education->access_id = $access;
@@ -170,7 +176,7 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
             $user->save();
             break;
 
-        case 'skill':
+        case 'skills':
             $skillsToAdd = get_input('skillsadded', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0021.');
             $skillsToRemove = get_input('skillsremoved', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0022.');
             $access = ACCESS_LOGGED_IN;

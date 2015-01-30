@@ -22,7 +22,10 @@ elgg_load_css('font-awesome'); // font-awesome icons for social media and some o
     <div class="b_extended_profile">
         <?php
             // pre-populate the sections so that we can build the profile
-            $sections = array('About Me', 'Education', 'Work Experience', 'Endorsements');
+            $sections = array(elgg_echo('gcconnex_profile:about_me'),
+                elgg_echo('gcconnex_profile:education'),
+                elgg_echo('gcconnex_profile:experience'),
+                elgg_echo('gcconnex_profile:gc_skills'));
 
             // create the div wrappers and edit/save/cancel toggles for each profile section
             foreach($sections as $section) {
@@ -35,9 +38,9 @@ elgg_load_css('font-awesome'); // font-awesome icons for social media and some o
                 if (elgg_get_logged_in_user_entity() == elgg_get_page_owner_entity()) {
                     // create the edit/save/cancel toggles for this section
                     echo '<span class="gcconnex-profile-edit-controls">';
-                    echo '<span class="edit-control edit-' . $sec . '"><img src="' . elgg_get_site_url() . 'mod/b_extended_profile/img/edit.png">Edit</span>';
-                    echo '<span class="save-control save-' . $sec . ' hidden"><img src="' . elgg_get_site_url() . 'mod/b_extended_profile/img/save.png">Save</span>';
-                    echo '<span class="cancel-control cancel-' . $sec . ' hidden"><img src="' . elgg_get_site_url() . 'mod/b_extended_profile/img/cancel.png">Cancel</span>';
+                    echo '<span class="edit-control edit-' . $sec . '"><img src="' . elgg_get_site_url() . 'mod/b_extended_profile/img/edit.png">' . elgg_echo('gcconnex_profile:edit') . '</span>';
+                    echo '<span class="save-control save-' . $sec . ' hidden"><img src="' . elgg_get_site_url() . 'mod/b_extended_profile/img/save.png">' . elgg_echo('gcconnex_profile:save') . '</span>';
+                    echo '<span class="cancel-control cancel-' . $sec . ' hidden"><img src="' . elgg_get_site_url() . 'mod/b_extended_profile/img/cancel.png">' . elgg_echo('gcconnex_profile:cancel') . '</span>';
                     echo '</span>';
                 }
 

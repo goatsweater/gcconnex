@@ -194,13 +194,14 @@ input.gcconnex-endorsements-input-skill {
     padding-top: 10px;
 }
 
-.gcconnex-about-me-edit-wrapper {
-    padding-top: 12px;
-}
-
 .nav.elgg-menu.elgg-menu-longtext.elgg-menu-hz.elgg-menu-longtext-default {
     display: none;
 }
+
+.gcconnex-about-me-edit-wrapper {
+    padding-top: 10px;
+}
+
 
 
 /* education */
@@ -382,7 +383,11 @@ input.gcconnex-endorsements-input-skill {
 .gcconnex-work-experience-startdate,
 .gcconnex-work-experience-enddate,
 .gcconnex-work-experience-start-year,
-.gcconnex-work-experience-end-year
+.gcconnex-work-experience-end-year,
+.gcconnex-education-startdate,
+.gcconnex-education-enddate,
+.gcconnex-education-start-year,
+.gcconnex-education-end-year
 {
     width: 100px;
 }

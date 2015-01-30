@@ -19,7 +19,7 @@ if (is_array($work_experience_guid)) {
         echo '<div class="gcconnex-profile-work-experience-display gcconnex-work-experience-' . $experience->guid . '">';
         echo '<div class="gcconnex-profile-label work-experience-dates">' .$experience->startdate . ', ' . $experience->startyear . ' - ';
         if ($experience->ongoing == 'true') {
-            echo 'Present';
+            echo elgg_echo('gcconnex_profile:experience:present');
         }
         else {
             echo $experience->enddate . ', ' . $experience->endyear;

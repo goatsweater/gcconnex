@@ -107,7 +107,7 @@ $user = get_user($guid);
 // pre-populate which fields to display on the "edit basic profile" overlay
 $fields = array('Name', 'Title', 'Department', 'Phone', 'Mobile', 'Email', 'Website');
 
-echo '<h1>Edit Basic Profile</h1>';
+echo '<h1>' . elgg_echo('gcconnex_profile:basic:header') . '</h1>';
 echo '<div class="basic-profile">'; // outer container for all content (except the form title above) for css styling
 echo '<div class="basic-profile-standard-field-wrapper">'; // container for css styling, used to group profile content and display them seperately from other fields
 
@@ -116,9 +116,9 @@ foreach ($fields as $field) { // create a label and input box for each field on 
 
     echo '<div class="basic-profile-field-wrapper">'; // field wrapper for css styling
 
-        echo '<br><div class="basic-profile-label ' . $field . '-label">' . $field . ': </div>'; // field label
-
         $field = strtolower($field);
+        echo '<br><div class="basic-profile-label ' . $field . '-label">' . elgg_echo('gcconnex_profile:basic:' . $field) . ': </div>'; // field label
+
         $value = $user->get($field);
 
         // setup the input for this field

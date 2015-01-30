@@ -27,7 +27,7 @@ if (elgg_get_logged_in_user_entity() == elgg_get_page_owner_entity()) {
     $content = elgg_view('output/url', array(
         'href' => 'ajax/view/b_extended_profile/edit_basic',
         'class' => 'elgg-lightbox iframe gcconnex-basic-profile-edit elgg-button',
-        'text' => 'Edit Profile'
+        'text' => elgg_echo('gcconnex_profile:edit_profile')
     ));
 
     echo $content;
@@ -134,7 +134,7 @@ if (elgg_is_admin_logged_in() && elgg_get_logged_in_user_guid() != elgg_get_page
 }
 
 // content links
-$content_menu_title = "Personal Content";
+$content_menu_title = elgg_echo('gcconnex_profile:user_content');
 $content_menu = elgg_view_menu('owner_block', array(
     'entity' => elgg_get_page_owner_entity(),
     'class' => 'profile-content-menu',

@@ -17,7 +17,14 @@ if (is_array($education_guid)) {
         $education = get_entity($guid);
 
         echo '<div class="gcconnex-profile-education-display gcconnex-education-' . $education->guid . '">';
-        echo '<div class="gcconnex-profile-label education-dates">' . $education->startdate . ' - ' . $education->enddate . '</div>';
+        echo '<div class="gcconnex-profile-label education-dates">' . $education->startdate . ', ' . $education->startyear . ' - ';
+        if ($education->ongoing == 'true') {
+            echo elgg_echo('gcconnex_profile:education:present');
+        }
+        else {
+            echo $education->enddate . ', ' . $education->endyear;
+        }
+        echo '</div>';
 
         echo '<div class="gcconnex-profile-label education-school">' . $education->school . '</div>';
         echo '<div class="gcconnex-profile-label education-degree"><ul><li>' . $education->program . '</li></ul></div>';
