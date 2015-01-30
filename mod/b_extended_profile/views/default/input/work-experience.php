@@ -39,19 +39,46 @@ echo 'Year: ' . elgg_view("input/text", array(
         'onkeypress' => "return isNumberKey(event)",
         'value' => $work_experience->startyear));
 
-// enter end date
-echo '<br>End Date: ' . elgg_view("input/pulldown", array(
-        'name' => 'enddate',
-        'class' => 'gcconnex-work-experience-enddate',
-        'options' => array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'),
-        'value' => $work_experience->enddate));
+// disable the end dates if the user is still currently working here
 
-echo 'Year: ' . elgg_view("input/text", array(
-        'name' => 'end-year',
-        'class' => 'gcconnex-work-experience-end-year',
+$params = array(
+    'name' => 'enddate',
+    'class' => 'gcconnex-work-experience-enddate gcconnex-work-experience-enddate-' . $work_experience->guid,
+    'options' => array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'),
+    'value' => $work_experience->enddate);
+if ($work_experience->ongoing == 'true') {
+        $params['disabled'] = 'true';
+}
+
+echo '<br>End Date: ' . elgg_view("input/pulldown", $params);
+
+unset($params);
+
+
+$params = array('name' => 'end-year',
+        'class' => 'gcconnex-work-experience-end-year gcconnex-work-experience-end-year-' . $work_experience->guid,
         'maxlength' => 4,
         'onkeypress' => "return isNumberKey(event)",
-        'value' => $work_experience->endyear));
+        'value' => $work_experience->endyear);
+if ($work_experience->ongoing == 'true') {
+        $params['disabled'] = 'true';
+}
+
+echo 'Year: ' . elgg_view("input/text", $params);
+
+unset($params);
+
+$params = array(
+    'name' => 'ongoing',
+    'class' => 'gcconnex-work-experience-ongoing',
+    'onclick' => 'toggleEndDate(' . $work_experience->guid . ')',
+);
+if ($work_experience->ongoing == 'true') {
+        $params['checked'] = $work_experience->ongoing;
+}
+
+echo  '<label>' . elgg_view('input/checkbox', $params);
+echo 'I still work here</label>';
 
 // enter responsibilities
 echo '<br>Responsibilities: ' . elgg_view("input/textarea", array(

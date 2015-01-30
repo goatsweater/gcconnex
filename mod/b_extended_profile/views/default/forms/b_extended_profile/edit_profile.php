@@ -204,7 +204,7 @@ echo elgg_view('input/checkbox', array(
     'name' => 'micro',
     'checked' => ($user->micro == "on") ? "on" : FALSE)); // elgg has a hard time saving checkbox status natively, so check the string value instead
 echo 'I would like to opt-in to micro-assignments';
-echo '</div>';
+echo '</div>'; // close div class="basic-profile-micro-assignments
 
 echo '<div class="submit-basic-profile">'; // container for css styling, used to group profile content and display them seperately from other fields
 

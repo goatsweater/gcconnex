@@ -324,6 +324,7 @@ function saveProfile(event) {
             $('.gcconnex-work-experience-start-year').not(":hidden").each(function() {
                 $startyear.push($(this).val());
             });
+
             var $enddate = [];
             $('.gcconnex-work-experience-enddate').not(":hidden").each(function() {
                 $enddate.push($(this).val());
@@ -333,6 +334,12 @@ function saveProfile(event) {
             $('.gcconnex-work-experience-end-year').not(":hidden").each(function() {
                 $endyear.push($(this).val());
             });
+
+            var $ongoing = [];
+            $('.gcconnex-work-experience-ongoing').not(":hidden").each(function() {
+                $ongoing.push($(this).prop('checked'));
+            });
+
             var $responsibilities = [];
             $('.gcconnex-work-experience-responsibilities').not(":hidden").each(function() {
                 $responsibilities.push($(this).val());
@@ -352,6 +359,7 @@ function saveProfile(event) {
                     startyear: $startyear,
                     enddate: $enddate,
                     endyear: $endyear,
+                    ongoing: $ongoing,
                     responsibilities: $responsibilities,
                     access: $access
                 },
@@ -484,10 +492,23 @@ function checkForEnter(event) {
  * Purpose: Only allow numbers to be entered for the year inputs
  */
 function isNumberKey(evt){
-    var charCode = (evt.which) ? evt.which : event.keyCode
+    var charCode = (evt.which) ? evt.which : event.keyCode;
     if (charCode > 31 && (charCode < 48 || charCode > 57))
         return false;
     return true;
+}
+
+/*
+ * Purpose: disable the end date inputs when a user selects "I'm currently still working here"
+ */
+function toggleEndDate(guid) {
+    $('.gcconnex-work-experience-enddate-' + guid).attr('disabled', function(index, attr) {
+        return attr == 'disabled' ? null : 'disabled';
+    });
+
+    $('.gcconnex-work-experience-end-year-' + guid).attr('disabled', function(index, attr) {
+        return attr == 'disabled' ? null : 'disabled';
+    });
 }
 
 /*
