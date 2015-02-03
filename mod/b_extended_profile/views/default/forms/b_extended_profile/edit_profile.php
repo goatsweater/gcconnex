@@ -117,7 +117,7 @@ foreach ($fields as $field) { // create a label and input box for each field on 
     echo '<div class="basic-profile-field-wrapper">'; // field wrapper for css styling
 
         $field = strtolower($field);
-        echo '<br><div class="basic-profile-label ' . $field . '-label">' . elgg_echo('gcconnex_profile:basic:' . $field) . ': </div>'; // field label
+        echo '<br><div class="basic-profile-label ' . $field . '-label">' . elgg_echo('gcconnex_profile:basic:' . $field) . 'x</div>'; // field label
 
         $value = $user->get($field);
 

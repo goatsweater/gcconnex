@@ -12,6 +12,8 @@ $education_guid = $user->education;
 
 if (is_array($education_guid)) {
 
+    usort($education_guid, "sortDate");
+
     foreach ($education_guid as $guid) {
 
         $education = get_entity($guid);

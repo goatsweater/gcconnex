@@ -12,7 +12,9 @@ $work_experience_guid = $user->work;
 
 if (is_array($work_experience_guid)) {
 
-    foreach ($work_experience_guid as $guid) {
+    usort($work_experience_guid, "sortDate");
+
+        foreach ($work_experience_guid as $guid) {
 
         $experience = get_entity($guid);
 

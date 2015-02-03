@@ -56,3 +56,57 @@ function b_extended_profile_init() {
     elgg_register_action('b_extended_profile/retract_endorsement', $action_path . 'retract_endorsement.php');
 
 }
+
+/*
+ * Purpose: To sort education and work experience entities by their start date.. called within cmpEndYear when the end years are equal so that the list is ordered by both start and end dates.
+ */
+function cmpStartDate($foo, $bar)
+{
+    $a = get_entity($foo);
+    $b = get_entity($bar);
+error_log("hi mom");
+    if ($a->startyear == $b->startyear) {
+        return (0);
+    }
+    else if ($a->startyear > $b->startyear) {
+        error_log($a->startyear . " is more than " . $b->startyear);
+        return (-1);
+    }
+    else if ($a->startyear < $b->startyear) {
+        error_log($a->startyear . " is less than " . $b->startyear);
+        return (1);
+    }
+}
+
+/*
+ * Purpose: To sort education and work experience entities by their date..
+ */
+function sortDate($foo, $bar)
+{
+
+    $a = get_entity($foo);
+    $b = get_entity($bar);
+
+    if ($a->ongoing == "true" && $b->ongoing == "true") {
+        return (0);
+    }
+    else if ($a->ongoing == "true" && $b->ongoing != "true") {
+        return (-1);
+    }
+    else if ($a->ongoing != "true" && $b->ongoing == "true") {
+        return (1);
+    }
+    else {
+        if ($a->endyear == $b->endyear) {
+            // @todo: sort by enddate entry (months, saved as strings..)
+            return (cmpStartDate($foo, $bar));
+        }
+        else if ($a->endyear > $b->endyear) {
+            return (-1);
+        }
+        else if ($a->endyear < $b->endyear) {
+            return (1);
+        }
+    }
+}
+
