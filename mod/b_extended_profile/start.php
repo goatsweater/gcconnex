@@ -58,7 +58,7 @@ function b_extended_profile_init() {
 }
 
 /*
- * Purpose: To sort education and work experience entities by their start date.. called within cmpEndYear when the end years are equal so that the list is ordered by both start and end dates.
+ * Purpose: To sort education and work experience entities by their start date.. called before cmpEndYear so that the list is ordered by both start and end dates.
  */
 function cmpStartDate($foo, $bar)
 {
@@ -79,9 +79,9 @@ error_log("hi mom");
 }
 
 /*
- * Purpose: To sort education and work experience entities by their date..
+ * Purpose: To sort education and work experience entities by their end date.. called after cmpStartYear so that the list is ordered by both start and end dates.
  */
-function sortDate($foo, $bar)
+function cmpEndDate($foo, $bar)
 {
 
     $a = get_entity($foo);
@@ -99,7 +99,7 @@ function sortDate($foo, $bar)
     else {
         if ($a->endyear == $b->endyear) {
             // @todo: sort by enddate entry (months, saved as strings..)
-            return (cmpStartDate($foo, $bar));
+            return (0);
         }
         else if ($a->endyear > $b->endyear) {
             return (-1);

@@ -46,17 +46,7 @@ else {
         }
     }
     echo $profile_actions;
-    /*
-    $site_url = elgg_get_site_url();
-    $url = elgg_add_action_tokens_to_url($site_url . "actions/friends/add");
 
-    $content = elgg_view('output/url', array(
-        'href' => $url,
-        'class' => 'elgg-btn gcconnex-basic-profile-edit',
-        'text' => 'Add User'
-    ));
-
-    echo $content;*/
 }
 echo '</div>'; // close div class="gcconnex-profile-name"
 echo '<h3>' . $user->title . '</h3>';

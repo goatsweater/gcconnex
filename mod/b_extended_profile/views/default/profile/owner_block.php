@@ -30,13 +30,17 @@ if (!$user) {
 }
 
 // @todo: create a link to edit the user profile picture
-$icon = elgg_view_entity_icon($user, 'large', array(
-    'use_hover' => false,
-    //'href' => 'avatar/edit/' . $user->username,
-    //'class' => 'elgg-lightbox iframe',
-    'use_link' => false, //true,
-));
-
+if (elgg_get_logged_in_user_guid() == elgg_get_page_owner_guid()) {
+    $icon = elgg_view_entity_icon($user, 'large', array(
+        'use_hover' => false,
+        'href' => 'avatar/edit/' . $user->username,
+    ));
+}
+else {
+    $icon = elgg_view_entity_icon($user, 'large', array(
+        'use_hover' => false,
+    ));
+}
 
 
 //$profile_actions
