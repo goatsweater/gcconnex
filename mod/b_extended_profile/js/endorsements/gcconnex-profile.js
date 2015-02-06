@@ -572,12 +572,13 @@ function addEndorsement(identifier) {
     var targetSkillDashed = targetSkill.replace(/\s+/g, '-').toLowerCase(); // replace spaces with '-' for css classes
 
 
-    var endorse_count = $('.gcconnex-endorsements-count-' + targetSkillDashed).text();
+    var endorse_count = $('.gcconnex-skill-entry[data-guid="' + skill_guid + '"]').find('.gcconnex-endorsements-count').text();
     endorse_count++;
-    $('.gcconnex-endorsements-count-' + targetSkillDashed).text(endorse_count);
+    $('.gcconnex-skill-entry[data-guid="' + skill_guid + '"]').find('.gcconnex-endorsements-count').text(endorse_count);
 
-    $(identifier).after('<span class="gcconnex-endorsement-retract retract-endorsement-' + targetSkillDashed + '" onclick="retractEndorsement(this)" data-guid="' + skill_guid + '" data-skill="' + targetSkill + '">-</span>')
-    $('.add-endorsement-' + targetSkillDashed).remove();
+    $('.gcconnex-skill-entry[data-guid="' + skill_guid + '"]').append('<span class="gcconnex-endorsement-retract" onclick="retractEndorsement(this)" data-guid="' + skill_guid + '" data-skill="' + targetSkill + '">-</span>')
+    $('.gcconnex-skill-entry[data-guid="' + skill_guid + '"]').find('.gcconnex-endorsement-add').remove();
+    //$('.add-endorsement-' + targetSkillDashed).remove();
 }
 
 /*
@@ -597,13 +598,14 @@ function retractEndorsement(identifier) {
     var targetSkillDashed = targetSkill.replace(/\s+/g, '-').toLowerCase(); // replace spaces with '-' for css classes
 
 
-    //$('.gcconnex-skill-entry').find('');
-    var endorse_count = $('.gcconnex-endorsements-count-' + targetSkillDashed).text();
+    var endorse_count = $('.gcconnex-skill-entry[data-guid="' + skill_guid + '"]').find('.gcconnex-endorsements-count').text();
     endorse_count--;
-    $('.gcconnex-endorsements-count-' + targetSkillDashed).text(endorse_count);
+    $('.gcconnex-skill-entry[data-guid="' + skill_guid + '"]').find('.gcconnex-endorsements-count').text(endorse_count);
 
-    $(identifier).after('<span class="gcconnex-endorsement-add add-endorsement-' + targetSkillDashed + '" onclick="addEndorsement(this)" data-guid="' + skill_guid + '" data-skill="' + targetSkill + '">+</span>');
-    $('.retract-endorsement-' + targetSkillDashed).remove();
+    $('.gcconnex-skill-entry[data-guid="' + skill_guid + '"]').append('<span class="gcconnex-endorsement-add" onclick="addEndorsement(this)" data-guid="' + skill_guid + '" data-skill="' + targetSkill + '">+</span>')
+
+    //$(identifier).after('<span class="gcconnex-endorsement-add add-endorsement-' + targetSkillDashed + '" onclick="addEndorsement(this)" data-guid="' + skill_guid + '" data-skill="' + targetSkill + '">+</span>');
+    $('.gcconnex-skill-entry[data-guid="' + skill_guid + '"]').find('.gcconnex-endorsement-retract').remove();
 }
 
 /*
@@ -658,16 +660,15 @@ function removeOldSkills() {
 }
 
 var entityMap = {
-    "&": "",
-    "<": "",
-    ">": "",
-    '"': '',
+    "<": "<",
+    ">": ">",
+    '"': '&quot;',
     "'": '\'',
-    "/": ''
+    "/": '\/'
 };
 
 function escapeHtml(string) {
-    return String(string).replace(/[&<>"'\/]/g, function (s) {
+    return String(string).replace(/[<>"'\/]/g, function (s) {
         return entityMap[s];
     });
 }

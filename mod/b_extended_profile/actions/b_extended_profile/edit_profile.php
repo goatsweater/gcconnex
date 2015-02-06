@@ -54,17 +54,17 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
                     $education = get_entity($v);
                 }
 
-                $education->title = $school[$k];
-                $education->description = $program[$k];
+                $education->title = htmlentities($school[$k]);
+                $education->description = htmlentities($program[$k]);
 
-                $education->school = $school[$k];
+                $education->school = htmlentities($school[$k]);
                 $education->startdate = $startdate[$k];
                 $education->startyear = $startyear[$k];
                 $education->enddate = $enddate[$k];
                 $education->endyear = $endyear[$k];
                 $education->ongoing = $ongoing[$k];
-                $education->program = $program[$k];
-                $education->field = $field[$k];
+                $education->program = htmlentities($program[$k]);
+                $education->field = htmlentities($field[$k]);
                 $education->access_id = $access;
 
                 if($v == "new") {
@@ -140,11 +140,10 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
                     $experience = get_entity($v);
                 }
 
-                $experience->title = $title[$k];
-                $experience->description = $responsibilities[$k];
+                $experience->title = htmlentities($title[$k]);
+                $experience->description = htmlentities($responsibilities[$k]);
 
-                $experience->organization = $organization[$k];
-                $experience->title = $title[$k];
+                $experience->organization = htmlentities($organization[$k]);
                 $experience->startdate = $startdate[$k];
                 $experience->startyear = $startyear[$k];
                 $experience->enddate = $enddate[$k];
@@ -186,7 +185,7 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
             foreach ($skillsToAdd as $new_skill) {
                 $skill = new ElggObject();
                 $skill->subtype = "MySkill";
-                $skill->title = $new_skill;
+                $skill->title = htmlentities($new_skill);
                 $skill->owner_guid = $user_guid;
                 $skill->access_id = $access;
                 $skill->endorsements = NULL;
