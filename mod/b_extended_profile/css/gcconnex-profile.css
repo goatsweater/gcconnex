@@ -98,21 +98,11 @@
 }
 
 .gcconnex-endorsement-add {
-    color: cornflowerblue;
-    text-shadow: 1px 1px #888888;
-    font-weight: bold;
-    padding: 3px 3px 3px 5px;
-    margin: 0px;
-    cursor: pointer;
+    margin-left: 10px;
 }
 
 .gcconnex-endorsement-retract {
-    color: cornflowerblue;
-    text-shadow: 1px 1px #888888;
-    font-weight: bold;
-    padding: 3px 3px 3px 5px;
-    margin: 0px;
-    cursor: pointer;
+    margin-left: 10px;
 }
 
 .gcconnex-endorsements-add-skill {

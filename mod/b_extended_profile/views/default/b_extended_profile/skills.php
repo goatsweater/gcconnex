@@ -51,11 +51,11 @@ if (is_array($skill_guids) && elgg_is_logged_in()) {
                     error_log('Endorsements: ' . $endorsements);
                     error_log('Search result: ' . in_array(elgg_get_logged_in_user_guid(), $endorsements));
 
-                    echo '<span class="gcconnex-endorsement-add add-endorsement-' . $skill_class . '" onclick="addEndorsement(this)" data-guid="' . $skill->guid . '" data-skill="' . $skill->title . '">+</span>';
+                    echo '<span class="gcconnex-endorsement-add elgg-button" onclick="addEndorsement(this)" data-guid="' . $skill->guid . '" data-skill="' . $skill->title . '">Endorse</span>';
                 }
                 else {
                     // user has endorsed this skill for this user.. present the option to retract endorsement
-                    echo '<span class="gcconnex-endorsement-retract retract-endorsement-' . $skill_class . '" onclick="retractEndorsement(this)" data-guid="' . $skill->guid . '" data-skill="' . $skill->title . '">-</span>';
+                    echo '<span class="gcconnex-endorsement-retract elgg-button" onclick="retractEndorsement(this)" data-guid="' . $skill->guid . '" data-skill="' . $skill->title . '">Retract Endorsement</span>';
                     error_log('SKILL: ' . $skill->title);
                     error_log('Logged in user: ' . elgg_get_logged_in_user_guid());
                     error_log('Endorsements: ' . $endorsements);
