@@ -10,6 +10,16 @@ else {
 $user = get_user($user_guid);
 $education_guid = $user->education;
 
+if ($education_guid == NULL || empty($education_guid)) {
+    echo elgg_echo('gcconnex_profile:education:empty') . '</div></div>';
+}
+else {
+    if (!(is_array($education_guid))) {
+        $education_guid = array($education_guid);
+    }
+}
+
+
 if (is_array($education_guid)) {
 
     usort($education_guid, "sortDate");
@@ -33,16 +43,4 @@ if (is_array($education_guid)) {
         echo '<div class="gcconnex-profile-label education-field">' . $education->field . '</div>';
         echo '</div>';
     }
-}
-else if ($education_guid != NULL) {
-
-    $education = get_entity($education_guid);
-
-    echo '<div class="gcconnex-profile-education-display">';
-    echo '<div class="gcconnex-profile-label education-dates">' . $education->startdate . ' - ' . $education->enddate . '</div>';
-
-    echo '<div class="gcconnex-profile-label education-school">' . $education->school . '</div>';
-    echo '<div class="gcconnex-profile-label education-degree"><ul><li>' . $education->program . '</li></ul></div>';
-    echo '<div class="gcconnex-profile-label education-field">' . $education->field . '</div>';
-    echo '</div>';
 }

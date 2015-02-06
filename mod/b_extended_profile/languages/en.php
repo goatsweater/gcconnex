@@ -20,6 +20,8 @@ $english = array(
     'gcconnex_profile:cancel' => 'Cancel',
     'gcconnex_profile:save' => 'Save',
     'gcconnex_profile:present' => 'Present', // for work and education time ranges.. from XX date to Present
+    'gcconnex_profile:about_me:empty' => 'Begin entering a description about yourself by clicking "Edit" in the top right corner of this box.',// prompt to add first skill
+
 
     // BASIC PROFILE FORM
     'gcconnex_profile:basic:header' => 'Edit Basic Profile',
@@ -60,6 +62,7 @@ $english = array(
     'gcconnex_profile:education:add' => '+ add more education',
     'gcconnex_profile:education:access' => 'Allow education details to be viewable by: ',
     'gcconnex_profile:education:present' => 'Present',
+    'gcconnex_profile:education:empty' => 'Begin entering your education details by clicking "Edit" in the top right corner of this box.',
 
     // WORK EXPERIENCE
     'gcconnex_profile:experience:organization' => 'Name of Organization: ',
@@ -73,12 +76,13 @@ $english = array(
     'gcconnex_profile:experience:add' => '+ add more work experience',
     'gcconnex_profile:experience:access' => 'Allow work experience details to be viewable by: ',
     'gcconnex_profile:experience:present' => 'Present',
+    'gcconnex_profile:experience:empty' => 'Begin entering your work experience by clicking "Edit" in the top right corner of this box.',
 
     // SKILLS
     'gcconnex_profile:gc_skill:add' => '+ add new skill',
     'gcconnex_profile:gc_skill:delete' => 'Delete this skill',
     'gcconnex_profile:gc_skill:save' => 'Are you sure you would like to save changes? Any endorsements that are attached to skills that you have removed will be permanently deleted.',
-    'gcconnex_profile:gc_skill:empty' => 'Begin entering your skills by clicking "Edit" in the top right corner of this box.'// prompt to add first skill
+    'gcconnex_profile:gc_skill:empty' => 'Begin entering your skills by clicking "Edit" in the top right corner of this box.'
     // leftover skills
 
 );

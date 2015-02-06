@@ -535,13 +535,14 @@ function skillSubmit() {
  */
 function addNewSkill(newSkill) {
 
-    var newSkillDashed = newSkill.replace(/\s+/g, '-').toLowerCase(); // replace spaces with '-' for css classes
+    //var newSkillDashed = newSkill.replace(/\s+/g, '-').toLowerCase(); // replace spaces with '-' for css classes
 
+    newSkill = escapeHtml(newSkill);
     // @todo: cap the list of skills at ~8-10 in order not to have "too many" on each profile
     // inject HTML for newly added skill
     $('.gcconnex-skills-skills-list-wrapper').append('<div class="gcconnex-skill-entry temporarily-added" data-skill="' + newSkill + '">' +
-    '<span title="Number of endorsements" class="gcconnex-endorsements-count" data-skill="' + newSkillDashed + '">0</span>' +
-    '<span data-skill="' + newSkillDashed + '" class="gcconnex-endorsements-skill">' + newSkill + '</span>' +
+    '<span title="Number of endorsements" class="gcconnex-endorsements-count" data-skill="' + newSkill + '">0</span>' +
+    '<span data-skill="' + newSkill + '" class="gcconnex-endorsements-skill">' + newSkill + '</span>' +
     '<img class="delete-skill-img" src="' + elgg.get_site_url() + 'mod/b_extended_profile/img/delete.png">' +
     '<span class="delete-skill" data-type="skill" onclick="deleteEntry(this)">Delete this skill</span></div>');
 
@@ -549,9 +550,9 @@ function addNewSkill(newSkill) {
     $('.typeahead').typeahead('val', '');                                           // clear the typeahead box
     $('.gcconnex-endorsements-input-skill').hide();                                  // hide the text box
     $('.gcconnex-endorsements-add-skill').show();                                    // show the 'add a new skill' link
-    $('.add-endorsements-' + newSkillDashed).on('click', addEndorsement);            // bind the addEndoresement function to the '+'
-    $('.retract-endorsements-' + newSkillDashed).on('click', retractEndorsement);    // bind the retractEndorsement function to the '-'
-    $('.delete-' + newSkillDashed).on('click', deleteSkill);                        // bind the deleteSkill function to the 'Delete this skill' link
+    $('.add-endorsements-' + newSkill).on('click', addEndorsement);            // bind the addEndoresement function to the '+'
+    $('.retract-endorsements-' + newSkill).on('click', retractEndorsement);    // bind the retractEndorsement function to the '-'
+    $('.delete-' + newSkill).on('click', deleteSkill);                        // bind the deleteSkill function to the 'Delete this skill' link
 }
 
 /*
@@ -596,6 +597,7 @@ function retractEndorsement(identifier) {
     var targetSkillDashed = targetSkill.replace(/\s+/g, '-').toLowerCase(); // replace spaces with '-' for css classes
 
 
+    //$('.gcconnex-skill-entry').find('');
     var endorse_count = $('.gcconnex-endorsements-count-' + targetSkillDashed).text();
     endorse_count--;
     $('.gcconnex-endorsements-count-' + targetSkillDashed).text(endorse_count);
@@ -653,4 +655,19 @@ function removeOldSkills() {
         }
     });
 
+}
+
+var entityMap = {
+    "&": "",
+    "<": "",
+    ">": "",
+    '"': '',
+    "'": '\'',
+    "/": ''
+};
+
+function escapeHtml(string) {
+    return String(string).replace(/[&<>"'\/]/g, function (s) {
+        return entityMap[s];
+    });
 }

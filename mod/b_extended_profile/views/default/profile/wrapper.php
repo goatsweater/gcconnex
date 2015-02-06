@@ -21,14 +21,28 @@ elgg_load_css('font-awesome'); // font-awesome icons for social media and some o
     </div>
     <div class="b_extended_profile">
         <?php
-            // pre-populate the sections so that we can build the profile
-            $sections = array(elgg_echo('gcconnex_profile:about_me'),
-                elgg_echo('gcconnex_profile:education'),
-                elgg_echo('gcconnex_profile:experience'),
-                elgg_echo('gcconnex_profile:gc_skills'));
+        //@todo: only show sections if they have content
 
+        // pre-populate the sections that are not empty so that we can build the profile
+        $sections = array();
+
+        if ($user = get_user(elgg_get_page_owner_guid()))
+        {
+            if ($user->get("description") != null || elgg_get_page_owner_guid() == elgg_get_logged_in_user_guid()) {
+                    $sections[] = elgg_echo('gcconnex_profile:about_me');
+                }
+            if ($user->get("education") != null || elgg_get_page_owner_guid() == elgg_get_logged_in_user_guid()) {
+                $sections[] = elgg_echo('gcconnex_profile:education');
+            }
+            if ($user->get("work") != null || elgg_get_page_owner_guid() == elgg_get_logged_in_user_guid()) {
+                $sections[] = elgg_echo('gcconnex_profile:experience');
+            }
+            if ($user->get("gc_skills") != null || elgg_get_page_owner_guid() == elgg_get_logged_in_user_guid()) {
+                $sections[] = elgg_echo('gcconnex_profile:gc_skills');
+            }
+        }
             // create the div wrappers and edit/save/cancel toggles for each profile section
-            foreach($sections as $section) {
+            foreach ($sections as $section) {
                 $sec = str_replace(' ', '-', $section); // create a css friendly version of the section name
                 $sec = strtolower($sec); // finish making it css friendly...
 
@@ -48,6 +62,7 @@ elgg_load_css('font-awesome'); // font-awesome icons for social media and some o
 
                 echo '</div>'; // close div class=gcconnex-profile-secction-wrapper
             }
+
         ?>
     </div>
 </div>

@@ -64,7 +64,7 @@ function cmpStartDate($foo, $bar)
 {
     $a = get_entity($foo);
     $b = get_entity($bar);
-error_log("hi mom");
+
     if ($a->startyear == $b->startyear) {
         return (0);
     }
@@ -81,7 +81,7 @@ error_log("hi mom");
 /*
  * Purpose: To sort education and work experience entities by their end date.. called after cmpStartYear so that the list is ordered by both start and end dates.
  */
-function cmpEndDate($foo, $bar)
+function sortDate($foo, $bar)
 {
 
     $a = get_entity($foo);
@@ -99,7 +99,7 @@ function cmpEndDate($foo, $bar)
     else {
         if ($a->endyear == $b->endyear) {
             // @todo: sort by enddate entry (months, saved as strings..)
-            return (0);
+            return (cmpStartDate($a, $b));
         }
         else if ($a->endyear > $b->endyear) {
             return (-1);

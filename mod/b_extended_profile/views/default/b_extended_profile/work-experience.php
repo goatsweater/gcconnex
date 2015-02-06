@@ -9,6 +9,14 @@ else {
 $user = get_user($user_guid);
 $work_experience_guid = $user->work;
 
+if ($work_experience_guid == NULL || empty($work_experience_guid)) {
+    echo elgg_echo('gcconnex_profile:experience:empty') . '</div></div>';
+}
+else {
+    if (!(is_array($work_experience_guid))) {
+        $work_experience_guid = array($work_experience_guid);
+    }
+}
 
 if (is_array($work_experience_guid)) {
 
@@ -32,14 +40,4 @@ if (is_array($work_experience_guid)) {
         echo '<div class="gcconnex-profile-label work-experience-responsibilities">' . $experience->responsibilities . '</div>';
         echo '</div>';
     }
-} else if ($work_experience_guid != NULL) {
-
-    $experience = get_entity($work_experience_guid);
-
-    echo '<div class="gcconnex-profile-work-experience-display gcconnex-work-experience-' . $experience->guid . '">';
-    echo '<div class="gcconnex-profile-label work-experience-dates">' . $experience->startdate . ', ' . $experience->startyear . ' - ' . $experience->enddate . ', ' . $experience->endyear . '</div>';
-    echo '<div class="gcconnex-profile-label work-experience-title">' . $experience->title . '</div>';
-    echo '<div class="gcconnex-profile-label work-experience-organization">' . $experience->organization . '</div>';
-    echo '<div class="gcconnex-profile-label work-experience-responsibilities">' . $experience->responsibilities . '</div>';
-    echo '</div>';
 }
