@@ -11,7 +11,7 @@ $query = htmlspecialchars($_GET['query']);
 $result = array();
 
 foreach ($skills as $s) {
-    if (strpos($s, $query) !== FALSE) {
+    if (strpos(strtolower($s), strtolower($query)) !== FALSE) {
         $result[] = array('value' => $s);
     }
 }

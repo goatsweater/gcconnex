@@ -21,7 +21,7 @@ $user = get_user($user_guid);
 // wrap the about-me field in a wrapper for css styling
 echo '<div class="gcconnex-profile-about-me-display">';
 
-if ($skill_guids == NULL || empty($skill_guids)) {
+if ($user->description == NULL || empty($user->description)) {
     echo elgg_echo('gcconnex_profile:about_me:empty');
 }
 else {
