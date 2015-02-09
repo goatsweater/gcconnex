@@ -11,6 +11,17 @@ elgg_load_js('lightbox'); // overlay for editing the basic profile fields
 elgg_load_css('lightbox'); // css for it..
 elgg_load_js('basic-profile'); // load js file to init the lightbox overlay (sets the width)
 elgg_load_js('typeahead');
+?>
+<script>
+    $(window).load(function() {
+        $(".gcconnex-basic-profile-edit").fancybox({
+            autoDimensions: false,
+            width: '60%',
+            height: '80%'
+        })
+    });
+</script>
+<?php
 
 $user = elgg_get_page_owner_entity();
 
@@ -26,7 +37,7 @@ if (elgg_get_logged_in_user_entity() == elgg_get_page_owner_entity()) {
 
     $content = elgg_view('output/url', array(
         'href' => 'ajax/view/b_extended_profile/edit_basic',
-        'class' => 'elgg-lightbox iframe gcconnex-basic-profile-edit elgg-button',
+        'class' => 'elgg-lightbox gcconnex-basic-profile-edit elgg-button',
         'text' => elgg_echo('gcconnex_profile:edit_profile')
     ));
 
@@ -52,10 +63,23 @@ echo '</div>'; // close div class="gcconnex-profile-name"
 echo '<h3>' . $user->title . '</h3>';
 echo '<div class="gcconnex-profile-dept">' . $user->department . '</div>';
 echo '<div class="gcconnex-profile-contact-info">';
-echo '<img class="profile-icons profile-detail-icon" src="' . elgg_get_site_url() . 'mod/b_extended_profile/img/telephone.png">' . $user->phone . '<br>';
-echo '<img class="profile-icons profile-detail-icon" src="' . elgg_get_site_url() . 'mod/b_extended_profile/img/mobile.png">' . $user->mobile . '<br>';
-echo '<img class="profile-icons profile-detail-icon" src="' . elgg_get_site_url() . 'mod/b_extended_profile/img/envelope.png"><a href="mailto:' . $user->email . '">' . $user->email . '</a><br>';
-echo '<img class="profile-icons profile-detail-icon" src="' . elgg_get_site_url() . 'mod/b_extended_profile/img/globe.png"><a href=' . $user->website . '>' . $user->website . '</a><br>';
+
+if ($user->phone != null) {
+    echo '<img class="profile-icons profile-detail-icon" src="' . elgg_get_site_url() . 'mod/b_extended_profile/img/telephone.png">' . $user->phone . '<br>';
+}
+
+if ($user->mobile != null) {
+    echo '<img class="profile-icons profile-detail-icon" src="' . elgg_get_site_url() . 'mod/b_extended_profile/img/mobile.png">' . $user->mobile . '<br>';
+}
+
+if ($user->email != null) {
+    echo '<img class="profile-icons profile-detail-icon" src="' . elgg_get_site_url() . 'mod/b_extended_profile/img/envelope.png"><a href="mailto:' . $user->email . '">' . $user->email . '</a><br>';
+}
+
+if ($user->website != null) {
+    echo '<img class="profile-icons profile-detail-icon" src="' . elgg_get_site_url() . 'mod/b_extended_profile/img/globe.png"><a href=' . $user->website . '>' . $user->website . '</a><br>';
+}
+
 echo '</div>'; // close div class="gcconnex-profile-contact-info"
 
 // pre-populate the social media links that we may or may not display depending on whether the user has entered anything for each one..

@@ -19,6 +19,7 @@
         float: left;
         text-align: right;
         width: 120px;
+        padding-top: 4px;
     }
 
     .social-media-label {
@@ -28,6 +29,13 @@
 
     .basic-profile-field {
         margin: 3px;
+        float: left;
+    }
+
+    .elgg-input-text.form-control.gcconnex-basic-field.gcconnex-social-media {
+        height: 16px;
+        border-top-left-radius: 0px;
+        border-bottom-left-radius: 0px;
     }
 
     .table th,td {
@@ -36,19 +44,11 @@
 
 
     .c_table {
-        border: 1px solid;
-        margin: 5px 0px;
-        padding:0px 10px 0px 10px;
-        width: 100%;
-        background-repeat: no-repeat;
-        background-position: 10px center;
-        color: #00529B;
-        background-color: #BDE5F8;
-        background-image: url('info.png');
+        display: none;
     }
 
     .input-group-addon {
-        padding: 6px 12px;
+        padding: 6px 0px 6px 12px;
         font-size: 14px;
         font-weight: 400;
         line-height: 1;
@@ -74,10 +74,14 @@
     }
 
     .basic-profile-standard-field-wrapper,
+    .basic-profile-social-media-wrapper {
+        float: left;
+    }
+
+    .basic-profile-standard-field-wrapper,
     .basic-profile-social-media-wrapper,
     .basic-profile-micro-assignments {
         width: 375px;
-        float: left;
     }
 
     .social-media-field-wrapper {
@@ -117,7 +121,7 @@ foreach ($fields as $field) { // create a label and input box for each field on 
     echo '<div class="basic-profile-field-wrapper">'; // field wrapper for css styling
 
         $field = strtolower($field);
-        echo '<br><div class="basic-profile-label ' . $field . '-label">' . elgg_echo('gcconnex_profile:basic:' . $field) . 'x</div>'; // field label
+        echo '<br><div class="basic-profile-label ' . $field . '-label">' . elgg_echo('gcconnex_profile:basic:' . $field) . '</div>'; // field label
 
         $value = $user->get($field);
 
@@ -155,8 +159,8 @@ foreach ($fields as $field => $field_link) { // create a label and input box for
 
     echo '<div class="basic-profile-field-wrapper social-media-field-wrapper">'; //field wrapper for css styling
 
-        echo '<br><div class="basic-profile-label social-media-label ' . $field . '-label">' . $field . ': </div>';
-       $field = str_replace(' ', '-', $field); // create a css friendly version of the section name
+        //echo '<div class="basic-profile-label social-media-label ' . $field . '-label">' . $field . ': </div>';
+    $field = str_replace(' ', '-', $field); // create a css friendly version of the section name
 
         $field = strtolower($field);
         $value = $user->get($field);
@@ -180,7 +184,7 @@ foreach ($fields as $field => $field_link) { // create a label and input box for
 
             $params = array(
                 'name' => $field,
-                'class' => 'form-control gcconnex-basic-field gcconnex-basic-' . $field,
+                'class' => 'form-control gcconnex-basic-field gcconnex-social-media gcconnex-basic-' . $field,
                 'placeholder' => $placeholder,
                 'value' => $value
             );
