@@ -87,6 +87,12 @@ echo '<br>' . elgg_echo('gcconnex_profile:experience:responsibilities') . elgg_v
         'class' => 'gcconnex-work-experience-responsibilities',
         'value' => $work_experience->responsibilities));
 
+echo elgg_echo('gcconnex_profile:experience:colleagues') . elgg_view("input/text", array(
+        'name' => 'colleagues',
+        'class' => 'gcconnex-work-experience-colleagues userfind',
+        'value' => $work_experience->colleagues));
+
+
 // create a delete button for each work experience entry
 echo '<br><div class="elgg-button elgg-button-action btn" onclick="deleteEntry(this)" data-type="work-experience">' . elgg_echo('gcconnex_profile:experience:delete') . '</div>';
 

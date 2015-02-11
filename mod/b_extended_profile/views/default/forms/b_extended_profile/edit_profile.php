@@ -5,7 +5,6 @@
     .c_table {
         border:1px solid #ccc;
         background-color: orangered;
-        width: 600px;
     }
 
     h1 {
@@ -39,7 +38,7 @@
     }
 
     .table th,td {
-        padding:10px;
+        padding: 10px;
     }
 
 
@@ -68,23 +67,15 @@
         border-collapse: separate;
     }
 
-    .basic-profile {
-        width: 100%;
-        height: 100%;
-    }
-
     .basic-profile-standard-field-wrapper,
-    .basic-profile-social-media-wrapper {
+    .basic-profile-social-media-wrapper,
+    .basic-profile-micro-assignments {
         float: left;
     }
 
     .basic-profile-standard-field-wrapper,
-    .basic-profile-social-media-wrapper,
-    .basic-profile-micro-assignments {
+    .basic-profile-social-media-wrapper {
         width: 375px;
-    }
-
-    .social-media-field-wrapper {
     }
 
     .gcconnex-basic-field {
@@ -95,10 +86,15 @@
         border-top-right-radius: 3px;
         border-bottom-right-radius: 3px;
     }
-    .submit-basic-profile {
-        width: 100%;
+
+    p {
+        padding-top: 5px;
     }
 
+    .gcconnex-micro-checkbox {
+        padding: 5px;
+        font-weight: bold;
+    }
 </style>
 
 
@@ -163,6 +159,7 @@ foreach ($fields as $field => $field_link) { // create a label and input box for
     $field = str_replace(' ', '-', $field); // create a css friendly version of the section name
 
         $field = strtolower($field);
+    if ($field == "google-plus") { $field = "google"; }
         $value = $user->get($field);
 
         echo '<div class="input-group">'; // input wrapper for prepended link and input box, excludes the input label
@@ -172,7 +169,7 @@ foreach ($fields as $field => $field_link) { // create a label and input box for
             // setup the input for this field
             $placeholder = "test";
             if ($field == "facebook") { $placeholder = "User.Name"; }
-            if ($field == "google-plus") { $placeholder = "############"; }
+            if ($field == "google") { $placeholder = "############"; }
             if ($field == "github") { $placeholder = "User"; }
             if ($field == "twitter") { $placeholder = "@user"; }
             if ($field == "linkedin") { $placeholder = "CustomURL"; }
@@ -200,15 +197,14 @@ echo '</div>'; // close div class="basic-profile-social-media-wrapper"
 
 echo '<div class="basic-profile-micro-assignments">'; // container for css styling, used to group profile content and display them seperately from other fields
 
-echo 'Micro-assignments are short-duration assignments that are posted on GCconnex and available to all public servants regardless of department.' .
-    ' They are short in duration and scope. <p>In order to opt-in for micro-assignments, you must have your manager\'s approval prior to clicking' .
-    ' the checkbox below.<p>';
+echo elgg_echo('gcconnex_profile:basic:micro_confirmation');
+echo '<div class="gcconnex-micro-checkbox">';
 
 echo elgg_view('input/checkbox', array(
     'name' => 'micro',
     'checked' => ($user->micro == "on") ? "on" : FALSE)); // elgg has a hard time saving checkbox status natively, so check the string value instead
-echo 'I would like to opt-in to micro-assignments';
-echo '</div>'; // close div class="basic-profile-micro-assignments
+echo elgg_echo('gcconnex_profile:basic:micro_checkbox') . '</div>'; // close div class="gcconnex-micro-checkbox"
+
 
 echo '<div class="submit-basic-profile">'; // container for css styling, used to group profile content and display them seperately from other fields
 
@@ -218,4 +214,7 @@ echo elgg_view('input/button', array(
     'value' => 'Save'));
 
 echo '</div>'; // close div class="submit-basic-profile"
+
+echo '</div>'; // close div class="basic-profile-micro-assignments
+
 echo '</div>'; // close div class="basic-profile"

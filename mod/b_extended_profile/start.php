@@ -45,7 +45,7 @@ function b_extended_profile_init() {
     elgg_register_ajax_view('input/work-experience');
 
     // auto-complete
-    elgg_register_ajax_view('input/autoskill');
+//    elgg_register_ajax_view('input/autoskill');
 
     elgg_register_ajax_view('b_extended_profile/edit_basic'); // ajax view for editing the basic profile fields like name, title, department, email, etc.
 
@@ -54,7 +54,9 @@ function b_extended_profile_init() {
     elgg_register_action('b_extended_profile/edit_profile', $action_path . 'edit_profile.php');
     elgg_register_action('b_extended_profile/add_endorsement', $action_path . 'add_endorsement.php');
     elgg_register_action('b_extended_profile/retract_endorsement', $action_path . 'retract_endorsement.php');
+    elgg_register_action('b_extended_profile/user_find', $action_path . 'userfind.php', "public");
 
+    elgg_register_plugin_hook_handler('cron', 'hourly', 'userfind_updatelist');
 }
 
 /*
@@ -110,3 +112,20 @@ function sortDate($foo, $bar)
     }
 }
 
+function userfind_updatelist() {
+
+    $user_entitites = elgg_get_entities(array(
+            'types' => 'user',
+            'limit' => false,
+        ));
+
+    $username = array();
+
+    foreach($user_entitites as $ue) {
+        $username[$ue->name] = $ue->guid;
+    }
+    $fp = fopen(elgg_get_plugins_path() . 'b_extended_profile/actions/b_extended_profile/usernames.json', 'w');
+    fwrite($fp, json_encode($username));
+    fclose($fp);
+
+}

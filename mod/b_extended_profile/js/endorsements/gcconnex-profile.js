@@ -117,13 +117,34 @@ function editProfile(event) {
                 function(data) {
                     // Output in a DIV with id=somewhere
                     $('.gcconnex-work-experience').append('<div class="gcconnex-work-experience-edit-wrapper">' + data + '</div>');
+                    var userName = new Bloodhound({
+                        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+                        queryTokenizer: Bloodhound.tokenizers.whitespace,
+                        //prefetch: '../data/films/post_1960.json',
+                        //remote: '../data/films/queries/%QUERY.json'
+                        remote: {
+                            url: elgg.get_site_url() + 'mod/b_extended_profile/actions/b_extended_profile/userfind.php?query=%QUERY',
+                        }
+                    });
+
+                    userName.initialize();
+
+                    $('.userfind').typeahead(null, {
+                        name: 'userName',
+                        displayKey: 'value',
+                        limit: 10,
+                        source: userName.ttAdapter()
+                    });
                 });
             $('.gcconnex-profile-work-experience-display').hide();
+
+
             break;
+
         case 'skills':
             // inject the html to add ability to add skills
             $('.gcconnex-skills').append('<div class="gcconnex-endorsements-input-wrapper">' +
-            '<input type="text" class="gcconnex-endorsements-input-skill typeahead" onkeyup="checkForEnter(event)"/>' +
+            '<input type="text" class="gcconnex-endorsements-input-skill" onkeyup="checkForEnter(event)"/>' +
             '<span class="gcconnex-endorsements-add-skill">' + elgg.echo('gcconnex_profile:gc_skill:add') + '</span>' +
             '</div>');
 
@@ -139,15 +160,15 @@ function editProfile(event) {
 
             newSkill.initialize();
 
-            $('.typeahead').typeahead(null, {
+            $('.gcconnex-endorsements-input-skill').typeahead(null, {
                 name: 'newSkill',
                 displayKey: 'value',
                 limit: 10,
                 source: newSkill.ttAdapter()
             });
 
-            $('.typeahead').on('typeahead:selected', skillSubmit);
-            $('.typeahead').on('typeahead:autocompleted', skillSubmit);
+            $('.gcconnex-endorsements-input-skill').on('typeahead:selected', skillSubmit);
+            $('.gcconnex-endorsements-input-skill').on('typeahead:autocompleted', skillSubmit);
 
             // hide the skill entry text box which is only to be shown when toggled by the link
             $('.gcconnex-endorsements-input-skill').hide();
@@ -526,7 +547,7 @@ function toggleEndDate(guid, section) {
  * Purpose: to trigger the submission of a skill that was selected or auto-completed from the typeahead suggestion list
  */
 function skillSubmit() {
-    var myVal = $('.typeahead').typeahead('val');
+    var myVal = $('.gcconnex-endorsements-input-skill').typeahead('val');
     addNewSkill(myVal);
 }
 
@@ -547,7 +568,7 @@ function addNewSkill(newSkill) {
     '<span class="delete-skill" data-type="skill" onclick="deleteEntry(this)">Delete this skill</span></div>');
 
     $('.gcconnex-endorsements-input-skill').val('');                                 // clear the text box
-    $('.typeahead').typeahead('val', '');                                           // clear the typeahead box
+    $('.gcconnex-endorsements-input-skill').typeahead('val', '');                                           // clear the typeahead box
     $('.gcconnex-endorsements-input-skill').hide();                                  // hide the text box
     $('.gcconnex-endorsements-add-skill').show();                                    // show the 'add a new skill' link
     $('.add-endorsements-' + newSkill).on('click', addEndorsement);            // bind the addEndoresement function to the '+'
@@ -624,6 +645,26 @@ function addMore(identifier) {
         function(data) {
             // Output in a DIV with id=somewhere
             $('.gcconnex-' + another + '-all').append(data);
+            if (another == "work-experience") {
+                var userName = new Bloodhound({
+                    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+                    queryTokenizer: Bloodhound.tokenizers.whitespace,
+                    //prefetch: '../data/films/post_1960.json',
+                    //remote: '../data/films/queries/%QUERY.json'
+                    remote: {
+                        url: elgg.get_site_url() + 'mod/b_extended_profile/actions/b_extended_profile/userfind.php?query=%QUERY',
+                    }
+                });
+
+                userName.initialize();
+
+                $('.userfind').typeahead(null, {
+                    name: 'userName',
+                    displayKey: 'value',
+                    limit: 10,
+                    source: userName.ttAdapter()
+                });
+            }
         });
 }
 

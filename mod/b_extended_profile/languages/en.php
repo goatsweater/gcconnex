@@ -76,6 +76,7 @@ $english = array(
     'gcconnex_profile:experience:add' => '+ add more work experience',
     'gcconnex_profile:experience:access' => 'Allow work experience details to be viewable by: ',
     'gcconnex_profile:experience:present' => 'Present',
+    'gcconnex_profile:experience:colleagues' => 'Colleagues: ',
     'gcconnex_profile:experience:empty' => 'Begin entering your work experience by clicking "Edit" in the top right corner of this box.',
 
     // SKILLS
