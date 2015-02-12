@@ -6,15 +6,11 @@
  */
 
 
-/*
-  $user_entitities = elgg_get_entities(array(
+$user_entitities = elgg_get_entities(array(
     'types' => 'user',
     'callback' => 'my_get_entity_callback',
     'limit' => false,
 ));
-*/
-
-$users = fopen("usernames.json", "r");
 
 $query = htmlspecialchars($_GET['query']);
 $result = array();

@@ -117,13 +117,15 @@ function editProfile(event) {
                 function(data) {
                     // Output in a DIV with id=somewhere
                     $('.gcconnex-work-experience').append('<div class="gcconnex-work-experience-edit-wrapper">' + data + '</div>');
+                    //elgg.security.refreshToken();
+
                     var userName = new Bloodhound({
                         datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
                         queryTokenizer: Bloodhound.tokenizers.whitespace,
                         //prefetch: '../data/films/post_1960.json',
                         //remote: '../data/films/queries/%QUERY.json'
                         remote: {
-                            url: elgg.get_site_url() + 'mod/b_extended_profile/actions/b_extended_profile/userfind.php?query=%QUERY',
+                            url: elgg.get_site_url() + "actions/b_extended/profile/userfind.php?query=%query" + elgg.security.tokens.__elgg_token
                         }
                     });
 
