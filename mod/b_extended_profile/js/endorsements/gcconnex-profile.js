@@ -13,6 +13,10 @@
  */
 $(document).ready(function() {
     // initialize errythang and hide some of the toggle elements
+    elgg.register_hook_handler('init', 'system', basic_profile_init);
+
+
+
     $('.save-control').hide();
     $('.cancel-control').hide();
 
@@ -248,7 +252,7 @@ function saveProfile(event) {
             });
 
             var $endyear = [];
-            $('.gcconnex-education-start-year').not(":hidden").each(function() {
+            $('.gcconnex-education-end-year').not(":hidden").each(function() {
                 $endyear.push($(this).val());
             });
 
@@ -670,5 +674,13 @@ var entityMap = {
 function escapeHtml(string) {
     return String(string).replace(/[<>"'\/]/g, function (s) {
         return entityMap[s];
+    });
+}
+
+function basic_profile_init() {
+    $(".gcconnex-basic-profile-edit").fancybox({
+        autoDimensions: false,
+        height: 'auto',
+        width: 760
     });
 }

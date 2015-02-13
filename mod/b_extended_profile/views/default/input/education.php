@@ -37,7 +37,7 @@ echo '<div class="gcconnex-education-entry" data-guid="' . $guid . '">'; // educ
         'name' => 'enddate',
         'class' => 'gcconnex-education-enddate gcconnex-education-enddate-' . $education->guid,
         'options' => array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'),
-        'value' => $educaation->enddate);
+        'value' => $education->enddate);
     if ($education->ongoing == 'true') {
         $params['disabled'] = 'true';
     }

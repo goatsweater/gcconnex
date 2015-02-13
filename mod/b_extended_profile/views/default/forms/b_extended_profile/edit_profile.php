@@ -2,11 +2,6 @@
     body {
         font-family: arial;
     }
-    .c_table {
-        border:1px solid #ccc;
-        background-color: orangered;
-        width: 600px;
-    }
 
     h1 {
         padding: 0px;
@@ -68,20 +63,20 @@
         border-collapse: separate;
     }
 
-    .basic-profile {
-        width: 100%;
-        height: 100%;
-    }
-
     .basic-profile-standard-field-wrapper,
-    .basic-profile-social-media-wrapper {
+    .basic-profile-social-media-wrapper,
+    .basic-profile-micro-assignments,
+    .submit-basic-profile {
         float: left;
     }
 
     .basic-profile-standard-field-wrapper,
-    .basic-profile-social-media-wrapper,
-    .basic-profile-micro-assignments {
+    .basic-profile-social-media-wrapper {
         width: 375px;
+    }
+
+    .basic-profile-micro-assignments {
+        width: 750px;
     }
 
     .social-media-field-wrapper {
@@ -94,9 +89,6 @@
         border: 1px solid lightgray;
         border-top-right-radius: 3px;
         border-bottom-right-radius: 3px;
-    }
-    .submit-basic-profile {
-        width: 100%;
     }
 
 </style>
@@ -219,3 +211,5 @@ echo elgg_view('input/button', array(
 
 echo '</div>'; // close div class="submit-basic-profile"
 echo '</div>'; // close div class="basic-profile"
+
+?>
