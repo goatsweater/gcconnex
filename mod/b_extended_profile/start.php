@@ -34,6 +34,7 @@ function b_extended_profile_init() {
     elgg_register_ajax_view('b_extended_profile/education');
     elgg_register_ajax_view('b_extended_profile/work-experience');
     elgg_register_ajax_view('b_extended_profile/endorsements');
+    elgg_register_ajax_view('b_extended_profile/user_avatar');
 
     // edit views
     elgg_register_ajax_view('b_extended_profile/edit_about-me');
@@ -56,7 +57,75 @@ function b_extended_profile_init() {
     elgg_register_action('b_extended_profile/retract_endorsement', $action_path . 'retract_endorsement.php');
     elgg_register_action('b_extended_profile/user_find', $action_path . 'userfind.php', "public");
 
-    elgg_register_plugin_hook_handler('cron', 'hourly', 'userfind_updatelist');
+    //elgg_register_plugin_hook_handler('cron', 'hourly', 'userfind_updatelist');
+    elgg_register_page_handler('userfind', 'userfind_page_handler');
+}
+
+/*
+ * Purpose: return a list of usernames for user-suggest
+ */
+function userfind_page_handler() {
+
+    //$user_friends = elgg_get_entities_from_relationship(array('guid' => elgg_get_logged_in_user_guid()));
+
+    $user = elgg_get_logged_in_user_entity();
+    $user_friends = get_user_friends(elgg_get_logged_in_user_guid());
+    //error_log(var_dump($user_friends));
+
+
+    $query = htmlspecialchars($_GET['query']);
+
+    foreach ($user_friends as $u) {
+        //error_log('Friend: ' . var_dump($friend));
+
+        if (strpos(strtolower($u->get('name')), strtolower($query)) !== FALSE) {
+            $result[] = array('value' => $u->get('name'), 'guid' => $u->get('guid'));
+            //error_log('Result: ' . var_dump($result));
+        }
+    }
+    echo json_encode($result);
+    return json_encode($result);
+}
+
+/*
+ * Purpose: To list colleagues' avatars
+ */
+
+function list_avatars($guids, $size, $limit) {
+
+    if ( $limit == 0 ) {
+        $limit = 999;
+    }
+
+    $list = "";
+    $list .= '<div class="list-avatars">';
+    $list .= '<div class="gcconnex-avatars-expand btn elgg-button">...</div>';
+
+    if ($guids == null) {
+        return false;
+    }
+    else {
+        if (!is_array($guids)) {
+            $guids = array($guids);
+        }
+
+        // display each avatar, up until the limit is reached
+        for ( $i=0; $i<$limit; $i++) {
+            if( ($user = get_user($guids[$i])) == true ) {
+                $list .= '<div class="gcconnex-avatar-in-list" data-guid="' . $guids[$i] . '">';
+                $list .= elgg_view_entity_icon($user, $size, array(
+                    'use_hover' => true,
+                ));
+                $list .= '</div>'; // close div class="gcconnex-avatar-in-list"f
+            }
+            else {
+                break;
+            }
+        }
+    }
+
+    $list .= '</div>'; // close div class="list-avatars"
+    return $list;
 }
 
 /*

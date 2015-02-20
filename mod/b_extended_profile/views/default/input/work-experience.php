@@ -6,7 +6,6 @@
  * Purpose: This is a collection of input fields that are grouped together to create an entry for work experience (designed to be entered for a user's profile).
  */
 
-
 $work_experience = get_entity($vars['guid']); // get the guid of the work experience entry that is being requested for display
 
 $guid = ($work_experience != NULL)? $vars['guid'] : "new"; // if the work experience guid isn't given, this must be a new entry
@@ -87,11 +86,15 @@ echo '<br>' . elgg_echo('gcconnex_profile:experience:responsibilities') . elgg_v
         'class' => 'gcconnex-work-experience-responsibilities',
         'value' => $work_experience->responsibilities));
 
-echo elgg_echo('gcconnex_profile:experience:colleagues') . elgg_view("input/text", array(
+
+echo '<div class="colleagues-label">' . elgg_echo('gcconnex_profile:experience:colleagues') . '</div>';
+echo '<div class="colleagues-list">' . list_avatars($work_experience->colleagues, "small", 0) . '</div>';
+
+
+echo elgg_view("input/text", array(
         'name' => 'colleagues',
         'class' => 'gcconnex-work-experience-colleagues userfind',
-        'value' => $work_experience->colleagues));
-
+));
 
 // create a delete button for each work experience entry
 echo '<br><div class="elgg-button elgg-button-action btn" onclick="deleteEntry(this)" data-type="work-experience">' . elgg_echo('gcconnex_profile:experience:delete') . '</div>';

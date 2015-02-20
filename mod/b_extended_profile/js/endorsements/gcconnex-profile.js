@@ -121,26 +121,49 @@ function editProfile(event) {
 
                     var userName = new Bloodhound({
                         datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+                        //datumTokenizer: function(d) { return Bloodhound.tokenizers.obj.whitespace(d.value); },
                         queryTokenizer: Bloodhound.tokenizers.whitespace,
                         //prefetch: '../data/films/post_1960.json',
                         //remote: '../data/films/queries/%QUERY.json'
                         remote: {
-                            url: elgg.get_site_url() + "actions/b_extended/profile/userfind.php?query=%query" + elgg.security.tokens.__elgg_token
+                            url: elgg.get_site_url() + "userfind?query=%QUERY", //+ elgg.security.addToken("")
+                        //    url: elgg.get_site_url() + "action/b_extended_profile/user_find?query=%QUERY&" + elgg.security.addToken("")
+                            filter: function (response) {
+                                // Map the remote source JSON array to a JavaScript object array
+                                return $.map(response, function (user) {
+                                    return {
+                                        value: user.value,
+                                        guid: user.guid
+                                    };
+                                });
+                            }
                         }
+
+                        // url: elgg.get_site_url() + "mod/b_extended_profile/actions/b_extended_profile/userfind.php?query=%Q
                     });
 
                     userName.initialize();
 
                     $('.userfind').typeahead(null, {
                         name: 'userName',
-                        displayKey: 'value',
+                        displayKey: function(user) {
+                            return user.value;
+                            console.log('User value: ' + user.value);
+                        },
                         limit: 10,
-                        source: userName.ttAdapter()
+                        source: userName.ttAdapter(),
+                        templates: {
+                            suggestion: function (user) {
+                                return '<p>' + user.value + '</p>';
+                            }
+                        }
                     });
+
+                    $('.userfind').on('typeahead:selected', addColleague);
+                    $('.userfind').on('typeahead:autocompleted', addColleague);
+
+                    $('.gcconnex-profile-work-experience-display').hide();
                 });
-            $('.gcconnex-profile-work-experience-display').hide();
-
-
             break;
 
         case 'skills':
@@ -515,7 +538,7 @@ function checkForEnter(event) {
 
         // The new skill being added, as entered by user
         //var newSkill = $('.gcconnex-endorsements-input-skill').val().trim();
-        var newSkill = $('.typeahead').typeahead('val');
+        var newSkill = $('.gcconnex-endorsements-input-skill').typeahead('val');
         // @todo: do data validation to ensure css class-friendly naming (ie: no symbols)
         // @todo: add a max length to newSkill
         addNewSkill(newSkill);
@@ -543,6 +566,23 @@ function toggleEndDate(guid, section) {
     $('.gcconnex-' + section + '-end-year-' + guid).attr('disabled', function(index, attr) {
         return attr == 'disabled' ? null : 'disabled';
     });
+}
+
+/*
+ * Purpose:
+ */
+function addColleague(obj, datum, name) {
+    var colleague = datum.guid;
+    
+    $.get(elgg.normalize_url('ajax/view/b_extended_profile/user_avatar'),
+        {
+            guid: elgg.get_logged_in_user_guid(),
+            colleague: colleague
+        },
+        function(data) {
+            // Output in a DIV with id=somewhere
+            $('.colleagues-list').append('<div class="gcconnex-avatar-in-list temporarily-added">' + data + '</div>');
+        });
 }
 
 /*
@@ -654,7 +694,7 @@ function addMore(identifier) {
                     //prefetch: '../data/films/post_1960.json',
                     //remote: '../data/films/queries/%QUERY.json'
                     remote: {
-                        url: elgg.get_site_url() + 'mod/b_extended_profile/actions/b_extended_profile/userfind.php?query=%QUERY',
+                        url: elgg.get_site_url() + 'action/b_extended_profile/userfind?query=%QUERY',
                     }
                 });
 

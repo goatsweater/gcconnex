@@ -78,6 +78,7 @@ $english = array(
     'gcconnex_profile:experience:present' => 'Present',
     'gcconnex_profile:experience:colleagues' => 'Colleagues: ',
     'gcconnex_profile:experience:empty' => 'Begin entering your work experience by clicking "Edit" in the top right corner of this box.',
+    'gcconnex_profile:experience:colleagues_empty' => 'You haven\'t listed any colleagues for this entry.',
 
     // SKILLS
     'gcconnex_profile:gc_skill:add' => '+ add new skill',

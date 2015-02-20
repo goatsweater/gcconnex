@@ -63,6 +63,9 @@ if (is_array($skill_guids) && elgg_is_logged_in()) {
                 }
             }
         // @todo: add the endorsing user's profile image to the list of endorsers for this skill
+        echo '<div class="gcconnex-skill-endorsements">';
+        echo list_avatars($skill->endorsements, 'tiny', 10);
+        echo '</div>'; // close div class="gcconnex-skill-endorsements"
         echo '</div>'; // close div class=gcconnex-skill-entry
     }
     echo '</div>';  // close div class=gcconnex-endorsements-skills-list-wrapper
