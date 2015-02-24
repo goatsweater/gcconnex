@@ -34,7 +34,6 @@ function b_extended_profile_init() {
     elgg_register_ajax_view('b_extended_profile/education');
     elgg_register_ajax_view('b_extended_profile/work-experience');
     elgg_register_ajax_view('b_extended_profile/endorsements');
-    elgg_register_ajax_view('b_extended_profile/user_avatar');
 
     // edit views
     elgg_register_ajax_view('b_extended_profile/edit_about-me');
@@ -79,8 +78,17 @@ function userfind_page_handler() {
         //error_log('Friend: ' . var_dump($friend));
 
         if (strpos(strtolower($u->get('name')), strtolower($query)) !== FALSE) {
-            $result[] = array('value' => $u->get('name'), 'guid' => $u->get('guid'));
+            $result[] = array(
+                'value' => $u->get('name'),
+                'guid' => $u->get('guid'),
+                'pic' => elgg_view_entity_icon($u, 'tiny', array(
+                    'use_hover' => false,
+                    'href' => false)),
+                'avatar' => elgg_view_entity_icon($u, 'small', array(
+                    'use_hover' => true))
+            );
             //error_log('Result: ' . var_dump($result));
+
         }
     }
     echo json_encode($result);
@@ -89,31 +97,38 @@ function userfind_page_handler() {
 
 /*
  * Purpose: To list colleagues' avatars
+ * Paramaters:
+ * $guids = array of guids of avatars to be listed
+ * $size = tiny, small, medium, large, etc.
+ * $limit = max number of avatars to display
+ * $class = css class for wrapper div
  */
 
-function list_avatars($guids, $size, $limit) {
+function list_avatars($options) {
 
-    if ( $limit == 0 ) {
-        $limit = 999;
+    if ( $options['limit'] == 0 ) {
+        $options['limit'] = 999;
     }
 
     $list = "";
-    $list .= '<div class="list-avatars">';
+    $list .= '<div class="list-avatars' . $options['class'] . '">';
     $list .= '<div class="gcconnex-avatars-expand btn elgg-button">...</div>';
 
-    if ($guids == null) {
+    if ($options['guids'] == null) {
         return false;
     }
     else {
-        if (!is_array($guids)) {
-            $guids = array($guids);
+        if (!is_array($options['guids'])) {
+            $options['guids'] = array($options['guids']);
         }
 
+        $guids = $options['guids'];
+
         // display each avatar, up until the limit is reached
-        for ( $i=0; $i<$limit; $i++) {
+        for ( $i=0; $i<$options['limit']; $i++) {
             if( ($user = get_user($guids[$i])) == true ) {
                 $list .= '<div class="gcconnex-avatar-in-list" data-guid="' . $guids[$i] . '">';
-                $list .= elgg_view_entity_icon($user, $size, array(
+                $list .= elgg_view_entity_icon($user, $options['size'], array(
                     'use_hover' => true,
                 ));
                 $list .= '</div>'; // close div class="gcconnex-avatar-in-list"f

@@ -133,7 +133,9 @@ function editProfile(event) {
                                 return $.map(response, function (user) {
                                     return {
                                         value: user.value,
-                                        guid: user.guid
+                                        guid: user.guid,
+                                        pic: user.pic,
+                                        avatar: user.avatar
                                     };
                                 });
                             }
@@ -154,7 +156,7 @@ function editProfile(event) {
                         source: userName.ttAdapter(),
                         templates: {
                             suggestion: function (user) {
-                                return '<p>' + user.value + '</p>';
+                                return '<p>' + user.pic + '<span class="tt-suggest-username">' + user.value + '</span></p>';
                             }
                         }
                     });
@@ -403,6 +405,19 @@ function saveProfile(event) {
             });
             var $access = $('.gcconnex-work-experience-access').val();
 
+            /*
+            var $remove_colleauge = [];
+            var $add_colleague = [];
+            $('.gcconnex-avatar-in-list').each(function() {
+                if ( $(this).is(":hidden") ) {
+                    $remove_colleague.push($(this).data('guid'));
+                }
+                if ( $(this).hasClass("temporarily-added") ) {
+                    $add_colleague.push($(this).data('guid'));
+                }
+            });
+            */
+
             // save the information the user just edited
             elgg.action('b_extended_profile/edit_profile', {
                 data: {
@@ -572,18 +587,13 @@ function toggleEndDate(guid, section) {
  * Purpose:
  */
 function addColleague(obj, datum, name) {
-    var colleague = datum.guid;
-    
-    $.get(elgg.normalize_url('ajax/view/b_extended_profile/user_avatar'),
-        {
-            guid: elgg.get_logged_in_user_guid(),
-            colleague: colleague
-        },
-        function(data) {
-            // Output in a DIV with id=somewhere
-            $('.colleagues-list').append('<div class="gcconnex-avatar-in-list temporarily-added">' + data + '</div>');
-        });
+    //var colleague = datum.avatar;
+
+    $('.colleagues-list').append('<div class="gcconnex-avatar-in-list temporarily-added" data-guid="' + datum.guid + '">' + datum.avatar + '</div>');
+    $('.userfind').typeahead('val', '');                                           // clear the typeahead box
+
 }
+
 
 /*
  * Purpose: to trigger the submission of a skill that was selected or auto-completed from the typeahead suggestion list

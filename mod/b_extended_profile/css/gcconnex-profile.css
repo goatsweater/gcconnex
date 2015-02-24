@@ -482,6 +482,10 @@ input.userfind {
  * Twitter typeahead.js styling
  */
 
+.tt-suggestion-username {
+    padding-bottom: 5px;
+}
+
 .tt-query, /* UPDATE: newer versions use tt-input instead of tt-query */
 .tt-hint {
     width: 396px;
