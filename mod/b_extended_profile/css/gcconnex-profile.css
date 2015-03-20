@@ -84,9 +84,13 @@
 }
 
 .gcconnex-skill-entry {
-    margin-top: 7px;
     display: inline-block;
     width: 100%;
+    height: 28px;
+}
+
+.gcconnex-profile-skills-display {
+    padding-top: 20px;
 }
 
 .gcconnex-skill-endorsements {
@@ -532,7 +536,6 @@ input.userfind {
     float: right;
     padding-left: 2px;
     padding-right: 2px;
-    height: 18px;
 }
 
 .gcconnex-avatars-expand {
@@ -540,4 +543,30 @@ input.userfind {
     height: 12px;
     width: 12px;
     padding: 4px;
+}
+
+.list-avatars {
+    overflow: hidden;
+
+}
+
+.work-experience-colleagues {
+    margin-top: 10px;
+}
+
+.work-experience-colleagues .gcconnex-avatar-in-list,
+.colleagues-list .list-avatars .gcconnex-avatar-in-list {
+    float: left;
+}
+
+.work-experience-colleagues .gcconnex-avatars-expand {
+    float: none;
+}
+
+.remove-colleague-from-list {
+    position: absolute;
+    z-index: 1;
+    font-size: 24px;
+    display: none;
+    cursor: pointer;
 }

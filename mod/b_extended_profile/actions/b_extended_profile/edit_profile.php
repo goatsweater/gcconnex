@@ -94,21 +94,9 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
             break;
         case 'work-experience':
 
-            $eguid = get_input('eguid', '');
-            $delete = get_input('delete', '');
-
-            $organization = get_input('organization', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0011.');
-            $startdate = get_input('startdate', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0012.');
-            $startyear = get_input('startyear', 'ERROR: Ask your admin to grep: 51325GASFDGGGGGGAA.');
-            $enddate = get_input('enddate', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0013.');
-            $endyear = get_input('endyear', 'ERROR: Ask your admin to grep: 513ADGGGAFDLLLLAA.');
-            $ongoing = get_input('ongoing', 'ERROR: ');
-            $title = get_input('title', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0014.');
-            $responsibilities = get_input('responsibilities', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0015.');
-            $access = get_input('access', 'ERROR: Ask your admin to grep: 5321GDS1111661353BB.');
-
-            // create work experience object
-            $work_experience_guids = array();
+            $work_experience = get_input('work');
+            $edit = $work_experience['edit'];
+            $delete = $work_experience['delete'];
 
             $experience_list = $user->work;
 
@@ -120,7 +108,6 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
                     if ($delete = get_entity($delete_guid)) {
                         $delete->delete();
                     }
-
                     if(($key = array_search($delete_guid, $experience_list)) !== false) {
                         unset($experience_list[$key]);
                     }
@@ -128,31 +115,33 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
             }
 
             $user->work = $experience_list;
+            $work_experience_guids = array();
 
             //create new work experience entries
-            foreach ($eguid as $k => $v) {
-                if ($v == "new") {
+            foreach ($edit as $work) {
+                if ($work['eguid'] == "new") {
                     $experience = new ElggObject();
                     $experience->subtype = "experience";
                     $experience->owner_guid = $user_guid;
                 }
                 else {
-                    $experience = get_entity($v);
+                    $experience = get_entity($work['eguid']);
                 }
 
-                $experience->title = htmlentities($title[$k]);
-                $experience->description = htmlentities($responsibilities[$k]);
+                $experience->title = htmlentities($work['title']);
+                $experience->description = htmlentities($work['responsibilities']);
 
-                $experience->organization = htmlentities($organization[$k]);
-                $experience->startdate = $startdate[$k];
-                $experience->startyear = $startyear[$k];
-                $experience->enddate = $enddate[$k];
-                $experience->endyear = $endyear[$k];
-                $experience->ongoing = $ongoing[$k];
-                $experience->responsibilities = $responsibilities[$k];
+                $experience->organization = htmlentities($work['organization']);
+                $experience->startdate = $work['startdate'];
+                $experience->startyear = $work['startyear'];
+                $experience->enddate = $work['enddate'];
+                $experience->endyear = $work['endyear'];
+                $experience->ongoing = $work['ongoing'];
+                $experience->responsibilities = $work['responsibilities'];
+                $experience->colleagues = $work['colleagues'];
                 $experience->access_id = $access;
 
-                if($v == "new") {
+                if($work['eguid'] == "new") {
                     $work_experience_guids[] = $experience->save();
                 }
                 else {
@@ -173,6 +162,7 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
             }
             $user->work_access = $access;
             $user->save();
+
             break;
 
         case 'skills':

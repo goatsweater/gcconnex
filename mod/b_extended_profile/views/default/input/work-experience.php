@@ -67,10 +67,12 @@ echo 'Year: ' . elgg_view("input/text", $params);
 
 unset($params);
 
+$target = $work_experience->guid ? $work_experience->guid : "new";
+
 $params = array(
     'name' => 'ongoing',
     'class' => 'gcconnex-work-experience-ongoing',
-    'onclick' => 'toggleEndDate(' . $work_experience->guid . ', "work-experience")',
+    'onclick' => 'toggleEndDate(this)',
 );
 if ($work_experience->ongoing == 'true') {
         $params['checked'] = $work_experience->ongoing;
@@ -88,12 +90,30 @@ echo '<br>' . elgg_echo('gcconnex_profile:experience:responsibilities') . elgg_v
 
 
 echo '<div class="colleagues-label">' . elgg_echo('gcconnex_profile:experience:colleagues') . '</div>';
-echo '<div class="colleagues-list">' . list_avatars($work_experience->colleagues, "small", 0) . '</div>';
+echo '<div class="colleagues-list">';
 
+if ( $work_experience->colleagues == null ) {
+    echo '<div class="list-avatars"></div>';
+}
+else {
+    echo list_avatars(array(
+        'guids' => $work_experience->colleagues,
+        'size' => 'small',
+        'limit' => 0,
+        'use_hover' => false,
+        'edit_mode' => true
+    ));
+}
+echo '</div>'; // close div class="colleauges-list"
+
+
+$tid = 'tid-' . rand();
 
 echo elgg_view("input/text", array(
-        'name' => 'colleagues',
-        'class' => 'gcconnex-work-experience-colleagues userfind',
+        'name' => $tid,
+        'class' => 'gcconnex-work-experience-colleagues userfind ' . $tid,
+        'data-guid' => $guid,
+        'data-tid' => $tid,
 ));
 
 // create a delete button for each work experience entry

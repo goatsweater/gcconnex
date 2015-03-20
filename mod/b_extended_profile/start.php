@@ -85,7 +85,8 @@ function userfind_page_handler() {
                     'use_hover' => false,
                     'href' => false)),
                 'avatar' => elgg_view_entity_icon($u, 'small', array(
-                    'use_hover' => true))
+                    'use_hover' => false,
+                    'href' => false))
             );
             //error_log('Result: ' . var_dump($result));
 
@@ -106,15 +107,22 @@ function userfind_page_handler() {
 
 function list_avatars($options) {
 
+    $list = "";
+    $list .= '<div class="list-avatars' . $options['class'] . '">';
+
     if ( $options['limit'] == 0 ) {
         $options['limit'] = 999;
     }
+    else {
+        $list .= '<div class="gcconnex-avatars-expand btn elgg-button">...</div>';
+    }
 
-    $list = "";
-    $list .= '<div class="list-avatars' . $options['class'] . '">';
-    $list .= '<div class="gcconnex-avatars-expand btn elgg-button">...</div>';
 
-    if ($options['guids'] == null) {
+    if ( $options['use_hover'] === null ) {
+        $options['use_hover'] = true;
+    }
+
+    if ( $options['guids'] == null ) {
         return false;
     }
     else {
@@ -127,11 +135,24 @@ function list_avatars($options) {
         // display each avatar, up until the limit is reached
         for ( $i=0; $i<$options['limit']; $i++) {
             if( ($user = get_user($guids[$i])) == true ) {
-                $list .= '<div class="gcconnex-avatar-in-list" data-guid="' . $guids[$i] . '">';
-                $list .= elgg_view_entity_icon($user, $options['size'], array(
-                    'use_hover' => true,
-                ));
-                $list .= '</div>'; // close div class="gcconnex-avatar-in-list"f
+                if ( $options['edit_mode'] == true ) {
+                    $list .= '<div class="gcconnex-avatar-in-list" data-guid="' . $guids[$i] . '" onclick="removeColleague(this)">';
+                    $list .= '<div class="remove-colleague-from-list">X';
+                    $list .= '</div>'; // close div class="remove-colleague-from-list"
+
+                    $list .= elgg_view_entity_icon($user, $options['size'], array(
+                        'use_hover' => $options['use_hover'],
+                        'href' => false
+                    ));
+                    $list .= '</div>'; // close div class="gcconnex-avatar-in-list"
+                }
+                else {
+                    $list .= '<div class="gcconnex-avatar-in-list" data-guid="' . $guids[$i] . '">';
+                    $list .= elgg_view_entity_icon($user, $options['size'], array(
+                        'use_hover' => $options['use_hover'],
+                    ));
+                    $list .= '</div>'; // close div class="gcconnex-avatar-in-list"
+                }
             }
             else {
                 break;
