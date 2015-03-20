@@ -70,6 +70,13 @@ $(document).ready(function() {
             }
         }
     });
+    $(document).on('mouseover', '.gcconnex-avatar-in-list', function() {
+        $(this).find('.remove-colleague-from-list').toggle();
+    });
+    $(document).on('mouseout', '.gcconnex-avatar-in-list', function() {
+        $(this).find('.remove-colleague-from-list').toggle();
+    });
+
 });
 
 /*
@@ -114,6 +121,7 @@ function editProfile(event) {
             break;
         case 'work-experience':
             // Edit the experience for this user
+
             $.get(elgg.normalize_url('ajax/view/b_extended_profile/edit_work-experience'),
                 {
                     guid: elgg.get_logged_in_user_guid()
@@ -121,13 +129,90 @@ function editProfile(event) {
                 function(data) {
                     // Output in a DIV with id=somewhere
                     $('.gcconnex-work-experience').append('<div class="gcconnex-work-experience-edit-wrapper">' + data + '</div>');
+                    //elgg.security.refreshToken();
+
+                    $userFind = [];
+                    $colleagueSelected = [];
+
+                    $('.userfind').each(function() {
+                        var tid = $(this).data("tid");
+                        tidName = tid;
+                        $userSuggest = $('.' + tid);
+
+                        $colleagueSelected[tid] = [];
+
+                    var select = function(e, user, dataset) {
+                        $colleagueSelected[dataset].push(user.value);
+                        $("#selected").text(JSON.stringify($colleagueSelected[dataset]));
+                        $("input.typeahead").typeahead("val", "");
+                    };
+                        //$colleagueSelected[tid] = [];
+                        //$colleagueSelected[tid].push(selected);
+
+                    var filter = function(suggestions, tidName) {
+                        return $.grep(suggestions, function(suggestion, tid) {
+                            return $.inArray(suggestion.value, $colleagueSelected[suggestion.tid]) === -1;
+                        });
+                    };
+
+                    var userName = new Bloodhound({
+                        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+                        queryTokenizer: Bloodhound.tokenizers.whitespace,
+                        remote: {
+                            url: elgg.get_site_url() + "userfind?query=%QUERY",
+                            filter: function (response) {
+                                // Map the remote source JSON array to a JavaScript object array
+                                return $.map(response, function (user) {
+                                    return {
+                                        value: user.value,
+                                        guid: user.guid,
+                                        pic: user.pic,
+                                        avatar: user.avatar,
+                                        tid: tid
+                                    };
+                                });
+                            }
+                        }
+                    });
+
+                    // initialize bloodhound engine for colleague auto-suggest
+                    userName.initialize();
+
+
+
+
+                        var userSearchField = $userSuggest.typeahead(null, {
+                            name: tid,
+                            displayKey: function(user) {
+                                return user.value;
+                            },
+                            limit: Infinity,
+                            //source: userName.ttAdapter(),
+                            source: function(query, cb) {
+                                userName.get(query, function(suggestions) {
+                                    cb(filter(suggestions, tidName));
+                                });
+                            },
+                            templates: {
+                                suggestion: function (user) {
+                                    return '<p>' + user.pic + '<span class="tt-suggest-username">' + user.value + '</span></p>';
+                                }
+                            }
+                        }).bind('typeahead:selected', select);
+
+                        $userSuggest.on('typeahead:selected', addColleague);
+                        $userSuggest.on('typeahead:autocompleted', addColleague);
+                        $userFind.push(userSearchField);
+                    });
+                    $('.gcconnex-profile-work-experience-display').hide();
+
                 });
-            $('.gcconnex-profile-work-experience-display').hide();
             break;
+
         case 'skills':
             // inject the html to add ability to add skills
             $('.gcconnex-skills').append('<div class="gcconnex-endorsements-input-wrapper">' +
-            '<input type="text" class="gcconnex-endorsements-input-skill typeahead" onkeyup="checkForEnter(event)"/>' +
+            '<input type="text" class="gcconnex-endorsements-input-skill" onkeyup="checkForEnter(event)"/>' +
             '<span class="gcconnex-endorsements-add-skill">' + elgg.echo('gcconnex_profile:gc_skill:add') + '</span>' +
             '</div>');
 
@@ -143,15 +228,15 @@ function editProfile(event) {
 
             newSkill.initialize();
 
-            $('.typeahead').typeahead(null, {
+            $('.gcconnex-endorsements-input-skill').typeahead(null, {
                 name: 'newSkill',
                 displayKey: 'value',
                 limit: 10,
                 source: newSkill.ttAdapter()
             });
 
-            $('.typeahead').on('typeahead:selected', skillSubmit);
-            $('.typeahead').on('typeahead:autocompleted', skillSubmit);
+            $('.gcconnex-endorsements-input-skill').on('typeahead:selected', skillSubmit);
+            $('.gcconnex-endorsements-input-skill').on('typeahead:autocompleted', skillSubmit);
 
             // hide the skill entry text box which is only to be shown when toggled by the link
             $('.gcconnex-endorsements-input-skill').hide();
@@ -306,77 +391,45 @@ function saveProfile(event) {
             break;
         case "work-experience":
 
-            var $work_experience_guid = [];
-            var $delete_guid = [];
+            var work_experience = {};
+            var experience = [];
+
+            work_experience.edit = experience;
+            work_experience.delete = [];
 
             $('.gcconnex-work-experience-entry').each(function() {
                 if ( $(this).is(":hidden") ) {
-                    if ( $(this).data('guid') != "new" ) {
-                        $delete_guid.push($(this).data('guid'));
+                    if ($(this).data('guid') != "new") {
+                        work_experience.delete.push($(this).data('guid'));
+                        //$delete_guid.push($(this).data('guid'));
                     }
                 }
                 else {
-                    $work_experience_guid.push($(this).data('guid'));
+                    experience = {
+                        'eguid': $(this).data('guid'),
+                        'organization': $(this).find('.gcconnex-work-experience-organization').val(),
+                        'title': $(this).find('.gcconnex-work-experience-title').val(),
+                        'startdate': $(this).find('.gcconnex-work-experience-startdate').val(),
+                        'startyear': $(this).find('.gcconnex-work-experience-start-year').val(),
+                        'enddate': $(this).find('.gcconnex-work-experience-enddate').val(),
+                        'endyear': $(this).find('.gcconnex-work-experience-end-year').val(),
+                        'ongoing': $(this).find('.gcconnex-work-experience-ongoing').val(),
+                        'responsibilities': $(this).find('.gcconnex-work-experience-responsibilities').val()
+                    };
+                    experience.colleagues = [];
+                    $(this).find('.gcconnex-avatar-in-list').each(function() {
+                        experience.colleagues.push($(this).data('guid'));
+                    });
+                    work_experience.edit.push(experience);
                 }
             });
-
-            var $organization = [];
-            $('.gcconnex-work-experience-organization').not(":hidden").each(function() {
-                $organization.push($(this).val());
-            });
-
-            var $title = [];
-            $('.gcconnex-work-experience-title').not(":hidden").each(function() {
-                $title.push($(this).val());
-            });
-
-            var $startdate = [];
-            $('.gcconnex-work-experience-startdate').not(":hidden").each(function() {
-                $startdate.push($(this).val());
-            });
-
-            var $startyear = [];
-            $('.gcconnex-work-experience-start-year').not(":hidden").each(function() {
-                $startyear.push($(this).val());
-            });
-
-            var $enddate = [];
-            $('.gcconnex-work-experience-enddate').not(":hidden").each(function() {
-                $enddate.push($(this).val());
-            });
-
-            var $endyear = [];
-            $('.gcconnex-work-experience-end-year').not(":hidden").each(function() {
-                $endyear.push($(this).val());
-            });
-
-            var $ongoing = [];
-            $('.gcconnex-work-experience-ongoing').not(":hidden").each(function() {
-                $ongoing.push($(this).prop('checked'));
-            });
-
-            var $responsibilities = [];
-            $('.gcconnex-work-experience-responsibilities').not(":hidden").each(function() {
-                $responsibilities.push($(this).val());
-            });
-            var $access = $('.gcconnex-work-experience-access').val();
 
             // save the information the user just edited
             elgg.action('b_extended_profile/edit_profile', {
                 data: {
                     guid: elgg.get_logged_in_user_guid(),
-                    delete: $delete_guid,
-                    eguid: $work_experience_guid,
-                    section: 'work-experience',
-                    organization: $organization,
-                    title: $title,
-                    startdate: $startdate,
-                    startyear: $startyear,
-                    enddate: $enddate,
-                    endyear: $endyear,
-                    ongoing: $ongoing,
-                    responsibilities: $responsibilities,
-                    access: $access
+                    work: work_experience,
+                    section: 'work-experience'
                 },
                 success: function() {
                     $.get(elgg.normalize_url('ajax/view/b_extended_profile/work-experience'),
@@ -496,7 +549,7 @@ function checkForEnter(event) {
 
         // The new skill being added, as entered by user
         //var newSkill = $('.gcconnex-endorsements-input-skill').val().trim();
-        var newSkill = $('.typeahead').typeahead('val');
+        var newSkill = $('.gcconnex-endorsements-input-skill').typeahead('val');
         // @todo: do data validation to ensure css class-friendly naming (ie: no symbols)
         // @todo: add a max length to newSkill
         addNewSkill(newSkill);
@@ -507,7 +560,7 @@ function checkForEnter(event) {
  * Purpose: Only allow numbers to be entered for the year inputs
  */
 function isNumberKey(evt){
-    var charCode = (evt.which) ? evt.which : event.keyCode;
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
     if (charCode > 31 && (charCode < 48 || charCode > 57))
         return false;
     return true;
@@ -516,7 +569,16 @@ function isNumberKey(evt){
 /*
  * Purpose: disable the end date inputs when a user selects "I'm currently still working here"
  */
-function toggleEndDate(guid, section) {
+function toggleEndDate(evt) {
+
+    $(evt).closest('.gcconnex-work-experience-entry').find('.gcconnex-work-experience-end-year').attr('disabled', function(index, attr) {
+        return attr == 'disabled' ? null : 'disabled';
+    });
+
+    $(evt).closest('.gcconnex-work-experience-entry').find('.gcconnex-work-experience-enddate').attr('disabled', function(index, attr) {
+        return attr == 'disabled' ? null : 'disabled';
+    });
+    /*
     $('.gcconnex-' + section + '-enddate-' + guid).attr('disabled', function(index, attr) {
         return attr == 'disabled' ? null : 'disabled';
     });
@@ -524,13 +586,52 @@ function toggleEndDate(guid, section) {
     $('.gcconnex-' + section + '-end-year-' + guid).attr('disabled', function(index, attr) {
         return attr == 'disabled' ? null : 'disabled';
     });
+    */
+}
+
+/*
+ * Purpose: add colleague to work-experience entry
+ */
+function addColleague(obj, datum, name) {
+    //var colleague = datum.avatar;
+
+    if ($(this).closest('.gcconnex-work-experience-entry').find("[data-guid=" + datum.guid + "]") && $(this).closest('.gcconnex-work-experience-entry').find("[data-guid=" + datum.guid + "]").is(":hidden")) {
+        $(this).closest('.gcconnex-work-experience-entry').find("[data-guid=" + datum.guid + "]").show();
+    }
+    else {
+        $(this).closest('.gcconnex-work-experience-entry').find('.list-avatars').append(
+            '<div class="gcconnex-avatar-in-list temporarily-added" data-guid="' + datum.guid + '" onclick="removeColleague(this)">' +
+            '<div class="remove-colleague-from-list">X</div>' + datum.avatar + '</div>'
+        );
+    }
+    $('.userfind').typeahead('val', '');        // clear the typeahead box
+    // remove colleague from suggestible usernames list
+}
+
+/*
+ * Purpose: When user clicks on the "X" to remove a user from the list of colleagues, animate the removal
+ */
+function removeColleague(identifier) {
+    $(identifier).fadeOut('slow', function() {
+        if ($(identifier).hasClass('temporarily-added')) {
+            $(identifier).remove();
+            tid = $('.gcconnex-work-experience-colleagues').data("tid");
+            console.log($colleagueSelected[tid]);
+            $colleagueSelected[tid].splice($.inArray('Sarah Staniforth', $colleagueSelected[tid]), 1);
+            console.log($colleagueSelected[tid]);
+        }
+        else {
+            $(identifier).hide();
+        }
+    });
+    //add colleague back to suggestible usernames list
 }
 
 /*
  * Purpose: to trigger the submission of a skill that was selected or auto-completed from the typeahead suggestion list
  */
 function skillSubmit() {
-    var myVal = $('.typeahead').typeahead('val');
+    var myVal = $('.gcconnex-endorsements-input-skill').typeahead('val');
     addNewSkill(myVal);
 }
 
@@ -551,7 +652,7 @@ function addNewSkill(newSkill) {
     '<span class="delete-skill" data-type="skill" onclick="deleteEntry(this)">Delete this skill</span></div>');
 
     $('.gcconnex-endorsements-input-skill').val('');                                 // clear the text box
-    $('.typeahead').typeahead('val', '');                                           // clear the typeahead box
+    $('.gcconnex-endorsements-input-skill').typeahead('val', '');                                           // clear the typeahead box
     $('.gcconnex-endorsements-input-skill').hide();                                  // hide the text box
     $('.gcconnex-endorsements-add-skill').show();                                    // show the 'add a new skill' link
     $('.add-endorsements-' + newSkill).on('click', addEndorsement);            // bind the addEndoresement function to the '+'
@@ -616,18 +717,75 @@ function retractEndorsement(identifier) {
  * Purpose: Delete a skill from the list of endorsements
  */
 function deleteSkill() {
-    // We don't _actually_ delete anything yet, since the user still has the ability to click 'Cancel'
+    // We don't _actually_ delete anything yet, since the user still has the ability to click 'Cancel' and bring the skill back,
     // instead, we just hide the skill until the user clicks on 'Save'. See the 'saveChanges' function for
     // the actual code where skills are permanently deleted.
     $(this).parent('.gcconnex-endorsements-skill-wrapper').addClass('endorsements-markedForDelete').hide();
 }
 
+/*
+ * Purpose:
+ */
 function addMore(identifier) {
     var another = $(identifier).data('type');
     $.get(elgg.normalize_url('ajax/view/input/' + another), '',
         function(data) {
             // Output in a DIV with id=somewhere
             $('.gcconnex-' + another + '-all').append(data);
+            if (another == "work-experience") {
+                var tid = $('.gcconnex-work-experience-entry').last().children('input.userfind').data('tid');
+
+                var userName = new Bloodhound({
+                    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+                    //datumTokenizer: function(d) { return Bloodhound.tokenizers.obj.whitespace(d.value); },
+                    queryTokenizer: Bloodhound.tokenizers.whitespace,
+                    //prefetch: '../data/films/post_1960.json',
+                    //remote: '../data/films/queries/%QUERY.json'
+                    remote: {
+                        url: elgg.get_site_url() + "userfind?query=%QUERY", //+ elgg.security.addToken("")
+                        //    url: elgg.get_site_url() + "action/b_extended_profile/user_find?query=%QUERY&" + elgg.security.addToken("")
+                        filter: function (response) {
+                            // Map the remote source JSON array to a JavaScript object array
+                            return $.map(response, function (user) {
+                                return {
+                                    value: user.value,
+                                    guid: user.guid,
+                                    pic: user.pic,
+                                    avatar: user.avatar
+                                };
+                            });
+                        }
+                    }
+
+                    // url: elgg.get_site_url() + "mod/b_extended_profile/actions/b_extended_profile/userfind.php?query=%Q
+                });
+
+                userName.initialize();
+                tid = '.' + tid;
+
+                $(tid).typeahead(null, {
+                    name: 'userName',
+                    displayKey: function(user) {
+                        return user.value;
+                        console.log('User value: ' + user.value);
+                    },
+                    limit: 10,
+                    source: userName.ttAdapter(),
+                    templates: {
+                        suggestion: function (user) {
+                            if ( $(this).closest('.colleagues-list').find('[data-guid="' + user.guid + '"]').length ) {
+                                return null;
+                            }
+                            else {
+                                return '<p>' + user.pic + '<span class="tt-suggest-username">' + user.value + '</span></p>';
+                            }
+                        }
+                    }
+                });
+
+                $(tid).on('typeahead:selected', addColleague);
+                $(tid).on('typeahead:autocompleted', addColleague);
+            }
         });
 }
 
@@ -677,6 +835,7 @@ function escapeHtml(string) {
     });
 }
 
+<<<<<<< HEAD
 function basic_profile_init() {
     $(".gcconnex-basic-profile-edit").fancybox({
         autoDimensions: false,
@@ -684,3 +843,7 @@ function basic_profile_init() {
         width: 760
     });
 }
+=======
+
+
+>>>>>>> json-objects

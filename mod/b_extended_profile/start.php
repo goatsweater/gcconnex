@@ -45,7 +45,7 @@ function b_extended_profile_init() {
     elgg_register_ajax_view('input/work-experience');
 
     // auto-complete
-    elgg_register_ajax_view('input/autoskill');
+//    elgg_register_ajax_view('input/autoskill');
 
     elgg_register_ajax_view('b_extended_profile/edit_basic'); // ajax view for editing the basic profile fields like name, title, department, email, etc.
 
@@ -54,7 +54,114 @@ function b_extended_profile_init() {
     elgg_register_action('b_extended_profile/edit_profile', $action_path . 'edit_profile.php');
     elgg_register_action('b_extended_profile/add_endorsement', $action_path . 'add_endorsement.php');
     elgg_register_action('b_extended_profile/retract_endorsement', $action_path . 'retract_endorsement.php');
+    elgg_register_action('b_extended_profile/user_find', $action_path . 'userfind.php', "public");
 
+    //elgg_register_plugin_hook_handler('cron', 'hourly', 'userfind_updatelist');
+    elgg_register_page_handler('userfind', 'userfind_page_handler');
+}
+
+/*
+ * Purpose: return a list of usernames for user-suggest
+ */
+function userfind_page_handler() {
+
+    //$user_friends = elgg_get_entities_from_relationship(array('guid' => elgg_get_logged_in_user_guid()));
+
+    $user = elgg_get_logged_in_user_entity();
+    $user_friends = get_user_friends(elgg_get_logged_in_user_guid());
+    //error_log(var_dump($user_friends));
+
+
+    $query = htmlspecialchars($_GET['query']);
+
+    foreach ($user_friends as $u) {
+        //error_log('Friend: ' . var_dump($friend));
+
+        if (strpos(strtolower($u->get('name')), strtolower($query)) !== FALSE) {
+            $result[] = array(
+                'value' => $u->get('name'),
+                'guid' => $u->get('guid'),
+                'pic' => elgg_view_entity_icon($u, 'tiny', array(
+                    'use_hover' => false,
+                    'href' => false)),
+                'avatar' => elgg_view_entity_icon($u, 'small', array(
+                    'use_hover' => false,
+                    'href' => false))
+            );
+            //error_log('Result: ' . var_dump($result));
+
+        }
+    }
+    echo json_encode($result);
+    return json_encode($result);
+}
+
+/*
+ * Purpose: To list colleagues' avatars
+ * Paramaters:
+ * $guids = array of guids of avatars to be listed
+ * $size = tiny, small, medium, large, etc.
+ * $limit = max number of avatars to display
+ * $class = css class for wrapper div
+ */
+
+function list_avatars($options) {
+
+    $list = "";
+    $list .= '<div class="list-avatars' . $options['class'] . '">';
+
+    if ( $options['limit'] == 0 ) {
+        $options['limit'] = 999;
+    }
+    else {
+        $list .= '<div class="gcconnex-avatars-expand btn elgg-button">...</div>';
+    }
+
+
+    if ( $options['use_hover'] === null ) {
+        $options['use_hover'] = true;
+    }
+
+    if ( $options['guids'] == null ) {
+        return false;
+    }
+    else {
+        if (!is_array($options['guids'])) {
+            $options['guids'] = array($options['guids']);
+        }
+
+        $guids = $options['guids'];
+
+        // display each avatar, up until the limit is reached
+        for ( $i=0; $i<$options['limit']; $i++) {
+            if( ($user = get_user($guids[$i])) == true ) {
+                if ( $options['edit_mode'] == true ) {
+                    $list .= '<div class="gcconnex-avatar-in-list" data-guid="' . $guids[$i] . '" onclick="removeColleague(this)">';
+                    $list .= '<div class="remove-colleague-from-list">X';
+                    $list .= '</div>'; // close div class="remove-colleague-from-list"
+
+                    $list .= elgg_view_entity_icon($user, $options['size'], array(
+                        'use_hover' => $options['use_hover'],
+                        'href' => false
+                    ));
+                    $list .= '</div>'; // close div class="gcconnex-avatar-in-list"
+                }
+                else {
+                    $list .= '<div class="gcconnex-avatar-in-list" data-guid="' . $guids[$i] . '">';
+                    $list .= elgg_view_entity_icon($user, $options['size'], array(
+                        'use_hover' => $options['use_hover'],
+                    ));
+                    $list .= '</div>'; // close div class="gcconnex-avatar-in-list"
+                }
+            }
+            else {
+                break;
+            }
+        }
+    }
+
+    $list .= '</div>'; // close div class="list-avatars"
+    return $list;
 }
 
 /*
@@ -110,3 +217,20 @@ function sortDate($foo, $bar)
     }
 }
 
+function userfind_updatelist() {
+
+    $user_entitites = elgg_get_entities(array(
+            'types' => 'user',
+            'limit' => false,
+        ));
+
+    $username = array();
+
+    foreach($user_entitites as $ue) {
+        $username[$ue->name] = $ue->guid;
+    }
+    $fp = fopen(elgg_get_plugins_path() . 'b_extended_profile/actions/b_extended_profile/usernames.json', 'w');
+    fwrite($fp, json_encode($username));
+    fclose($fp);
+
+}

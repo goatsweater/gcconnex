@@ -6,7 +6,6 @@
  * Purpose: This is a collection of input fields that are grouped together to create an entry for work experience (designed to be entered for a user's profile).
  */
 
-
 $work_experience = get_entity($vars['guid']); // get the guid of the work experience entry that is being requested for display
 
 $guid = ($work_experience != NULL)? $vars['guid'] : "new"; // if the work experience guid isn't given, this must be a new entry
@@ -68,10 +67,12 @@ echo 'Year: ' . elgg_view("input/text", $params);
 
 unset($params);
 
+$target = $work_experience->guid ? $work_experience->guid : "new";
+
 $params = array(
     'name' => 'ongoing',
     'class' => 'gcconnex-work-experience-ongoing',
-    'onclick' => 'toggleEndDate(' . $work_experience->guid . ', "work-experience")',
+    'onclick' => 'toggleEndDate(this)',
 );
 if ($work_experience->ongoing == 'true') {
         $params['checked'] = $work_experience->ongoing;
@@ -86,6 +87,34 @@ echo '<br>' . elgg_echo('gcconnex_profile:experience:responsibilities') . elgg_v
         'id' => 'textarea',
         'class' => 'gcconnex-work-experience-responsibilities',
         'value' => $work_experience->responsibilities));
+
+
+echo '<div class="colleagues-label">' . elgg_echo('gcconnex_profile:experience:colleagues') . '</div>';
+echo '<div class="colleagues-list">';
+
+if ( $work_experience->colleagues == null ) {
+    echo '<div class="list-avatars"></div>';
+}
+else {
+    echo list_avatars(array(
+        'guids' => $work_experience->colleagues,
+        'size' => 'small',
+        'limit' => 0,
+        'use_hover' => false,
+        'edit_mode' => true
+    ));
+}
+echo '</div>'; // close div class="colleauges-list"
+
+
+$tid = 'tid-' . rand();
+
+echo elgg_view("input/text", array(
+        'name' => $tid,
+        'class' => 'gcconnex-work-experience-colleagues userfind ' . $tid,
+        'data-guid' => $guid,
+        'data-tid' => $tid,
+));
 
 // create a delete button for each work experience entry
 echo '<br><div class="elgg-button elgg-button-action btn" onclick="deleteEntry(this)" data-type="work-experience">' . elgg_echo('gcconnex_profile:experience:delete') . '</div>';

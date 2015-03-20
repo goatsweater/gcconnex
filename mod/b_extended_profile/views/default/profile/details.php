@@ -10,7 +10,19 @@
 elgg_load_js('fancybox');
 elgg_load_js('typeahead');
 ?>
+<<<<<<< HEAD
 
+=======
+<script>
+    $(window).load(function() {
+        $(".gcconnex-basic-profile-edit").fancybox({
+            autoDimensions: false,
+            width: '60%',
+            height: '85%'
+        })
+    });
+</script>
+>>>>>>> json-objects
 <?php
 
 $user = elgg_get_page_owner_entity();
