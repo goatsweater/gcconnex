@@ -131,73 +131,7 @@ function editProfile(event) {
                     $colleagueSelected = [];
 
                     $('.userfind').each(function() {
-                        var tid = $(this).data("tid");
-                        tidName = tid;
-                        $userSuggest = $('.' + tid);
-
-                        $colleagueSelected[tid] = [];
-
-                        var select = function(e, user, dataset) {
-                            $colleagueSelected[dataset].push(user.value);
-                            $("#selected").text(JSON.stringify($colleagueSelected[dataset]));
-                            $("input.typeahead").typeahead("val", "");
-                        };
-                            //$colleagueSelected[tid] = [];
-                            //$colleagueSelected[tid].push(selected);
-
-                        var filter = function(suggestions, tidName) {
-                            return $.grep(suggestions, function(suggestion, tid) {
-                                return $.inArray(suggestion.value, $colleagueSelected[suggestion.tid]) === -1;
-                            });
-                        };
-
-                        var userName = new Bloodhound({
-                            datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
-                            queryTokenizer: Bloodhound.tokenizers.whitespace,
-                            remote: {
-                                url: elgg.get_site_url() + "userfind?query=%QUERY",
-                                filter: function (response) {
-                                    // Map the remote source JSON array to a JavaScript object array
-                                    return $.map(response, function (user) {
-                                        return {
-                                            value: user.value,
-                                            guid: user.guid,
-                                            pic: user.pic,
-                                            avatar: user.avatar,
-                                            tid: tid
-                                        };
-                                    });
-                                }
-                            }
-                        });
-
-                        // initialize bloodhound engine for colleague auto-suggest
-                        userName.initialize();
-
-                        var userSearchField = $userSuggest.typeahead(null, {
-                            name: tid,
-                            displayKey: function(user) {
-                                return user.value;
-                            },
-                            limit: Infinity,
-                            //source: userName.ttAdapter(),
-                            source: function(query, cb) {
-                                userName.get(query, function(suggestions) {
-                                    cb(filter(suggestions, tidName));
-                                });
-                            },
-                            templates: {
-                                suggestion: function (user) {
-                                    return '<p>' + user.pic + '<span class="tt-suggest-username">' + user.value + '</span></p>';
-                                }
-                            }
-                        }).bind('typeahead:selected', select);
-
-                        $userSuggest.on('typeahead:selected', addColleague);
-                        $userSuggest.on('typeahead:autocompleted', addColleague);
-
-                        $userFind.push(userSearchField);
-
+                        user_search_init(this);
                     });
                     $('.gcconnex-profile-work-experience-display').hide();
 
@@ -253,6 +187,75 @@ function editProfile(event) {
         default:
 
     }
+}
+
+function user_search_init(target) {
+    var tid = $(target).data("tid");
+    tidName = tid;
+    $userSuggest = $('.' + tid);
+
+    $colleagueSelected[tid] = [];
+
+    var select = function(e, user, dataset) {
+        $colleagueSelected[dataset].push(user.value);
+        $("#selected").text(JSON.stringify($colleagueSelected[dataset]));
+        $("input.typeahead").typeahead("val", "");
+    };
+    //$colleagueSelected[tid] = [];
+    //$colleagueSelected[tid].push(selected);
+
+    var filter = function(suggestions, tidName) {
+        return $.grep(suggestions, function(suggestion, tid) {
+            return $.inArray(suggestion.value, $colleagueSelected[suggestion.tid]) === -1;
+        });
+    };
+
+    var userName = new Bloodhound({
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        remote: {
+            url: elgg.get_site_url() + "userfind?query=%QUERY",
+            filter: function (response) {
+                // Map the remote source JSON array to a JavaScript object array
+                return $.map(response, function (user) {
+                    return {
+                        value: user.value,
+                        guid: user.guid,
+                        pic: user.pic,
+                        avatar: user.avatar,
+                        tid: tid
+                    };
+                });
+            }
+        }
+    });
+
+    // initialize bloodhound engine for colleague auto-suggest
+    userName.initialize();
+
+    var userSearchField = $userSuggest.typeahead(null, {
+        name: tid,
+        displayKey: function(user) {
+            return user.value;
+        },
+        limit: Infinity,
+        //source: userName.ttAdapter(),
+        source: function(query, cb) {
+            userName.get(query, function(suggestions) {
+                cb(filter(suggestions, tidName));
+            });
+        },
+        templates: {
+            suggestion: function (user) {
+                return '<p>' + user.pic + '<span class="tt-suggest-username">' + user.value + '</span></p>';
+            }
+        }
+    }).bind('typeahead:selected', select);
+
+    $userSuggest.on('typeahead:selected', addColleague);
+    $userSuggest.on('typeahead:autocompleted', addColleague);
+
+    $userFind.push(userSearchField);
 }
 
 /*
@@ -728,8 +731,10 @@ function addMore(identifier) {
             // Output in a DIV with id=somewhere
             $('.gcconnex-' + another + '-all').append(data);
             if (another == "work-experience") {
-                var tid = $('.gcconnex-work-experience-entry').last().children('input.userfind').data('tid');
-
+                var targ = $('.gcconnex-work-experience-entry').last().children('input.userfind');
+                user_search_init(targ);
+                //var tid = $('.gcconnex-work-experience-entry').last().children('input.userfind').data('tid');
+/*
                 var userName = new Bloodhound({
                     datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
                     //datumTokenizer: function(d) { return Bloodhound.tokenizers.obj.whitespace(d.value); },
@@ -780,7 +785,9 @@ function addMore(identifier) {
 
                 $(tid).on('typeahead:selected', addColleague);
                 $(tid).on('typeahead:autocompleted', addColleague);
+            */
             }
+
         });
 }
 
