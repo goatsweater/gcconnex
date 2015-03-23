@@ -137,45 +137,42 @@ function editProfile(event) {
 
                         $colleagueSelected[tid] = [];
 
-                    var select = function(e, user, dataset) {
-                        $colleagueSelected[dataset].push(user.value);
-                        $("#selected").text(JSON.stringify($colleagueSelected[dataset]));
-                        $("input.typeahead").typeahead("val", "");
-                    };
-                        //$colleagueSelected[tid] = [];
-                        //$colleagueSelected[tid].push(selected);
+                        var select = function(e, user, dataset) {
+                            $colleagueSelected[dataset].push(user.value);
+                            $("#selected").text(JSON.stringify($colleagueSelected[dataset]));
+                            $("input.typeahead").typeahead("val", "");
+                        };
+                            //$colleagueSelected[tid] = [];
+                            //$colleagueSelected[tid].push(selected);
 
-                    var filter = function(suggestions, tidName) {
-                        return $.grep(suggestions, function(suggestion, tid) {
-                            return $.inArray(suggestion.value, $colleagueSelected[suggestion.tid]) === -1;
-                        });
-                    };
+                        var filter = function(suggestions, tidName) {
+                            return $.grep(suggestions, function(suggestion, tid) {
+                                return $.inArray(suggestion.value, $colleagueSelected[suggestion.tid]) === -1;
+                            });
+                        };
 
-                    var userName = new Bloodhound({
-                        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
-                        queryTokenizer: Bloodhound.tokenizers.whitespace,
-                        remote: {
-                            url: elgg.get_site_url() + "userfind?query=%QUERY",
-                            filter: function (response) {
-                                // Map the remote source JSON array to a JavaScript object array
-                                return $.map(response, function (user) {
-                                    return {
-                                        value: user.value,
-                                        guid: user.guid,
-                                        pic: user.pic,
-                                        avatar: user.avatar,
-                                        tid: tid
-                                    };
-                                });
+                        var userName = new Bloodhound({
+                            datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+                            queryTokenizer: Bloodhound.tokenizers.whitespace,
+                            remote: {
+                                url: elgg.get_site_url() + "userfind?query=%QUERY",
+                                filter: function (response) {
+                                    // Map the remote source JSON array to a JavaScript object array
+                                    return $.map(response, function (user) {
+                                        return {
+                                            value: user.value,
+                                            guid: user.guid,
+                                            pic: user.pic,
+                                            avatar: user.avatar,
+                                            tid: tid
+                                        };
+                                    });
+                                }
                             }
-                        }
-                    });
+                        });
 
-                    // initialize bloodhound engine for colleague auto-suggest
-                    userName.initialize();
-
-
-
+                        // initialize bloodhound engine for colleague auto-suggest
+                        userName.initialize();
 
                         var userSearchField = $userSuggest.typeahead(null, {
                             name: tid,
@@ -198,7 +195,9 @@ function editProfile(event) {
 
                         $userSuggest.on('typeahead:selected', addColleague);
                         $userSuggest.on('typeahead:autocompleted', addColleague);
+
                         $userFind.push(userSearchField);
+
                     });
                     $('.gcconnex-profile-work-experience-display').hide();
 
