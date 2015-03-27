@@ -545,12 +545,25 @@ function elgg_get_metastring_sql($table, $names = null, $values = null,
 			if (!$name) {
 				$name = '0';
 			}
-			$sanitised_names[] = '\'' . sanitise_string($name) . '\'';
+			//$sanitised_names[] = '\'' . sanitise_string($name) . '\'';
+			$sanitised_names[] = sanitise_string($name);
 		}
 
 		if ($names_str = implode(',', $sanitised_names)) {
-			$return['joins'][] = "JOIN {$db_prefix}metastrings msn on $table.name_id = msn.id";
-			$names_where = "(msn.string IN ($names_str))";
+				$msn_ids = array();
+				foreach ( $sanitised_names as $name_string ){
+					if ( $msid = get_metastring_id( $name_string, false ) ){
+						if ( is_array($msid) )
+							$msn_ids = array_merge ( $msn_ids, $msid );
+						else
+							$msn_ids[] = $msid;
+					}
+					else
+						$msn_ids[] = 0;
+				}
+				$msn_id = implode( ',', $msn_ids );
+				$names_where = "($table.name_id IN ( $msn_id ) )";
+				
 		}
 	}
 
@@ -567,12 +580,25 @@ function elgg_get_metastring_sql($table, $names = null, $values = null,
 			if (!$value) {
 				$value = 0;
 			}
-			$sanitised_values[] = '\'' . sanitise_string($value) . '\'';
+			//$sanitised_values[] = '\'' . sanitise_string($value) . '\'';
+			$sanitised_values[] = sanitise_string($value);
 		}
 
 		if ($values_str = implode(',', $sanitised_values)) {
-			$return['joins'][] = "JOIN {$db_prefix}metastrings msv on $table.value_id = msv.id";
-			$values_where = "({$binary}msv.string IN ($values_str))";
+			//$return['joins'][] = "JOIN {$db_prefix}metastrings msv on $table.value_id = msv.id";
+			$msv_ids = array();
+			foreach ( $sanitised_values as $value_string ){
+				if ( $msvid = get_metastring_id( $value_string, $binary ? true : false ) ){
+					if ( is_array($msvid) )
+						$msv_ids = array_merge ( $msv_ids, $msvid );
+					else
+					$msv_ids[] = $msvid;
+				}
+				else
+					$msv_ids[] = 0;
+			}
+			$msv_id = implode( ',', $msv_ids );
+			$values_where = "($table.value_id IN ($msv_id) )";
 		}
 	}
 

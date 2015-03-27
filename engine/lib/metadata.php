@@ -526,12 +526,22 @@ $owner_guids = NULL) {
 			if (!$name) {
 				$name = '0';
 			}
-			$sanitised_names[] = '\'' . sanitise_string($name) . '\'';
+			//$sanitised_names[] = '\'' . sanitise_string($name) . '\'';
+			$sanitised_names[] = sanitise_string($name);
 		}
 
 		if ($names_str = implode(',', $sanitised_names)) {
-			$return['joins'][] = "JOIN {$CONFIG->dbprefix}metastrings msn on n_table.name_id = msn.id";
-			$names_where = "(msn.string IN ($names_str))";
+			$msn_ids = array();
+			foreach ( $sanitised_names as $name_string ){
+				if ( $msid = get_metastring_id( $name_string, false ) ){
+					if ( is_array($msid) )
+						$msn_ids = array_merge ( $msn_ids, $msid );
+					else
+					$msn_ids[] = $msid;
+				}
+			}
+			$msn_id = implode( ',', $msn_ids );
+			$names_where = "(n_table.name_id IN ( $msn_id ) )";
 		}
 	}
 
@@ -548,12 +558,24 @@ $owner_guids = NULL) {
 			if (!$value) {
 				$value = 0;
 			}
-			$sanitised_values[] = '\'' . sanitise_string($value) . '\'';
+			$sanitised_values[] = sanitise_string($value);
 		}
 
 		if ($values_str = implode(',', $sanitised_values)) {
-			$return['joins'][] = "JOIN {$CONFIG->dbprefix}metastrings msv on n_table.value_id = msv.id";
-			$values_where = "({$binary}msv.string IN ($values_str))";
+			$msv_ids = array();
+			foreach ( $sanitised_values as $value_string ){
+				if ( $msvid = get_metastring_id( $value_string, $binary ? true : false ) ){
+					if ( is_array($msvid) )
+						$msv_ids = array_merge ( $msv_ids, $msvid );
+					else
+					$msv_ids[] = $msvid;
+				}
+				else
+					$msv_ids[] = 0;
+			}
+			$msv_id = implode( ',', $msv_ids );
+			//$test = get_metastring_id( $values_str ) == false ? '0' : 1;
+			$values_where = "(n_table.value_id IN ($msv_id) )";
 		}
 	}
 
