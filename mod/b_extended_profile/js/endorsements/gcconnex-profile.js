@@ -808,6 +808,7 @@ function addMore(identifier) {
     var another = $(identifier).data('type');
     $.get(elgg.normalize_url('ajax/view/input/' + another), '',
         function(data) {
+            // Output in a DIV with id=somewhere
             $('.gcconnex-' + another + '-all').append(data);
             if (another == "work-experience") {
                 var targ = $('.gcconnex-work-experience-entry').last().children('input.userfind');
