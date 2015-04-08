@@ -10,18 +10,28 @@ else {
 $user = get_user($user_guid);
 $education_guid = $user->education;
 
+
+
+
+echo '<div class="gcconnex-profile-section-wrapper gcconnex-education">'; // create the profile section wrapper div for css styling
+echo '<div class="gcconnex-profile-title">' . elgg_echo('gcconnex_profile:education') . '</div>'; // create the profile section title
+
+if (elgg_get_logged_in_user_entity() == elgg_get_page_owner_entity()) {
+    // create the edit/save/cancel toggles for this section
+    echo '<span class="gcconnex-profile-edit-controls">';
+    echo '<span class="edit-control edit-education"><img src="' . elgg_get_site_url() . 'mod/b_extended_profile/img/edit.png">' . elgg_echo('gcconnex_profile:edit') . '</span>';
+    echo '<span class="save-control save-education hidden"><img src="' . elgg_get_site_url() . 'mod/b_extended_profile/img/save.png">' . elgg_echo('gcconnex_profile:save') . '</span>';
+    echo '<span class="cancel-control cancel-education hidden"><img src="' . elgg_get_site_url() . 'mod/b_extended_profile/img/cancel.png">' . elgg_echo('gcconnex_profile:cancel') . '</span>';
+    echo '</span>';
+}
+
 if ($education_guid == NULL || empty($education_guid)) {
-    echo elgg_echo('gcconnex_profile:education:empty') . '</div></div>';
+    echo elgg_echo('gcconnex_profile:education:empty');
 }
 else {
     if (!(is_array($education_guid))) {
         $education_guid = array($education_guid);
     }
-}
-
-
-if (is_array($education_guid)) {
-
     usort($education_guid, "sortDate");
 
     foreach ($education_guid as $guid) {
@@ -44,3 +54,5 @@ if (is_array($education_guid)) {
         echo '</div>';
     }
 }
+
+echo '</div>'; // close div class=gcconnex-profile-section-wrapper

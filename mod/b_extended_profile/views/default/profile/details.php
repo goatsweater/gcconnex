@@ -106,7 +106,7 @@ foreach ($social as $media) {
 }
 echo '</div>'; // close div class="gcconnex-profile-social-media-links"
 
-echo elgg_view("profile/status", array("entity" => $user));
+
 
 
 

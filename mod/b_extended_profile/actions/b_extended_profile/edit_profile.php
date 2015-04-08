@@ -222,6 +222,68 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
         case 'old-skills':
             $user->skillsupgraded = TRUE;
             break;
+        case 'languages':
+            $french = get_input('french', 'ERROR: Ask your admin to grep: ASFDJKGJKG333616.');
+            $english = get_input('english', 'ERROR: Ask your admin to grep: SDFANLVNVNVNVNVNAA31566.');
+            $languagesToAdd = get_input('langadded', 'ERROR: Ask your admin to grep: 5FH13FFSSGAHHHS0021.');
+            $languagesToRemove = get_input('langremoved', 'ERROR: Ask your admin to grep: 5AAAAGGFH13GAH0022.');
+            $access = ACCESS_LOGGED_IN;
+
+            $user->english = $english;
+            $user->french = $french;
+
+            error_log('English: ' . $english);
+            error_log('French: ' . $french);
+            /*
+            $skill_guids = array();
+
+            foreach ($skillsToAdd as $new_skill) {
+                $skill = new ElggObject();
+                $skill->subtype = "MySkill";
+                $skill->title = htmlentities($new_skill);
+                $skill->owner_guid = $user_guid;
+                $skill->access_id = $access;
+                $skill->endorsements = NULL;
+                $skill_guids[] = $skill->save();
+            }
+
+            $skill_list = $user->gc_skills;
+
+            if (!(is_array($skill_list))) { $skill_list = array($skill_list); }
+            if (!(is_array($skillsToRemove))) { $skillsToRemove = array($skillsToRemove); }
+
+            foreach ($skillsToRemove as $remove_guid) {
+                if ($remove_guid != NULL) {
+
+                    if ($remove = get_entity($remove_guid)) {
+                        $remove->delete();
+                    }
+
+                    if (($key = array_search($remove_guid, $skill_list)) !== false) {
+                        unset($skill_list[$key]);
+                    }
+                }
+            }
+
+            $user->gc_skills = $skill_list;
+
+            if ($user->gc_skills == NULL) {
+                $user->gc_skills = $skill_guids;
+            }
+            else {
+                $stack = $user->gc_skills;
+                if (!(is_array($stack))) { $stack = array($stack); }
+
+                if ($skill_guids != NULL) {
+                    $user->gc_skills = array_merge($stack, $skill_guids);
+                }
+            }
+
+            //$user->gc_skills = null; // dev stuff... delete me
+            //$user->skillsupgraded = NULL; // dev stuff.. delete me
+            */
+            $user->save();
+            break;
         default:
             system_message(elgg_echo("profile:saved"));
 

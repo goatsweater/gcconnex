@@ -14,7 +14,7 @@ foreach(array("profile", "dashboard", "groups") as $key => $context){
 			"selected" => $selected,
 			"url" => "admin/widgets/manage?widget_context=" . $context
 		);
-	
+
 	$tabs[] = $tabs_options;
 	
 }

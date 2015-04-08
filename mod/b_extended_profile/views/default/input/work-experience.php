@@ -109,12 +109,16 @@ echo '</div>'; // close div class="colleauges-list"
 
 $tid = 'tid-' . rand();
 
-echo elgg_view("input/text", array(
+echo '<div>';
+
+echo '<span class="colleague-suggest-field">' . elgg_view("input/text", array(
         'name' => $tid,
         'class' => 'gcconnex-work-experience-colleagues userfind ' . $tid,
         'data-guid' => $guid,
         'data-tid' => $tid,
-));
+)) . '</span>';
+echo '<span>' . elgg_echo('gcconnex_profile:experience:colleague_suggest') . '</span>';
+echo '</div>';
 
 // create a delete button for each work experience entry
 echo '<br><div class="elgg-button elgg-button-action btn" onclick="deleteEntry(this)" data-type="work-experience">' . elgg_echo('gcconnex_profile:experience:delete') . '</div>';

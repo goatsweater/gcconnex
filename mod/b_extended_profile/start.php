@@ -26,6 +26,8 @@ function b_extended_profile_init() {
     elgg_register_css('gcconnex-css', $css_url);
     elgg_register_css('font-awesome', 'mod/b_extended_profile/vendors/font-awesome/css/font-awesome.min.css'); // font-awesome icons used for social media and some profile fields
 
+    // register views
+
     // register ajax views for all profile sections that are allowed to be edited and displayed via ajax
 
     // display views
@@ -34,19 +36,22 @@ function b_extended_profile_init() {
     elgg_register_ajax_view('b_extended_profile/education');
     elgg_register_ajax_view('b_extended_profile/work-experience');
     elgg_register_ajax_view('b_extended_profile/endorsements');
+    elgg_register_ajax_view('b_extended_profile/languages');
+    elgg_register_ajax_view('b_extended_profile/publications');
 
     // edit views
     elgg_register_ajax_view('b_extended_profile/edit_about-me');
     elgg_register_ajax_view('b_extended_profile/edit_education');
     elgg_register_ajax_view('b_extended_profile/edit_work-experience');
+    elgg_register_ajax_view('b_extended_profile/edit_languages');
 
     // input views
     elgg_register_ajax_view('input/education');
     elgg_register_ajax_view('input/work-experience');
+    elgg_register_ajax_view('input/languages');
 
     // auto-complete
-//    elgg_register_ajax_view('input/autoskill');
-
+    // elgg_register_ajax_view('input/autoskill');
     elgg_register_ajax_view('b_extended_profile/edit_basic'); // ajax view for editing the basic profile fields like name, title, department, email, etc.
 
     // register the action for saving profile fields
@@ -58,7 +63,57 @@ function b_extended_profile_init() {
 
     //elgg_register_plugin_hook_handler('cron', 'hourly', 'userfind_updatelist');
     elgg_register_page_handler('userfind', 'userfind_page_handler');
+
+    //elgg_unregister_page_handler('profile', 'profile_page_handler');
+    elgg_register_page_handler('profile', 'extended_profile_page_handler');
 }
+
+/*
+ * Purpose:
+*/
+
+function extended_profile_page_handler($page) {
+
+    if (isset($page[0])) {
+        $username = $page[0];
+        $user = get_user_by_username($username);
+        elgg_set_page_owner_guid($user->guid);
+    } elseif (elgg_is_logged_in()) {
+        forward(elgg_get_logged_in_user_entity()->getURL());
+    }
+
+    // short circuit if invalid or banned username
+    if (!$user || ($user->isBanned() && !elgg_is_admin_logged_in())) {
+        register_error(elgg_echo('profile:notfound'));
+        forward();
+    }
+
+    $action = NULL;
+    if (isset($page[1])) {
+        $action = $page[1];
+    }
+
+    if ($action == 'edit') {
+        // use the core profile edit page
+        $base_dir = elgg_get_root_path();
+        require "{$base_dir}pages/profile/edit.php";
+        return true;
+    }
+
+    // main profile page
+    $params = array(
+        'content' => elgg_view('profile/wrapper'),
+        'num_columns' => 3,
+    );
+    $content = elgg_view_layout('profile_widgets', $params);
+
+    $body = elgg_view_layout('one_column', array('content' => $content));
+    echo elgg_view_page($user->name, $body);
+    return true;
+
+    error_log(print_r($arg, true));
+}
+
 
 /*
  * Purpose: return a list of usernames for user-suggest

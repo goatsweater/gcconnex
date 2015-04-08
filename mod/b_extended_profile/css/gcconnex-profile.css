@@ -1,9 +1,17 @@
 .b_extended_profile {
+    margin-top: 20px;
     margin-bottom: 20px;
 }
 
 .gcconnex-profile-name {
-    padding-bottom: 20px;
+/*    padding-bottom: 20px; */
+    height: 36px;
+}
+
+#english_expiry,
+#french_expiry {
+    width: 100px;
+    margin-right: 10px;
 }
 
 .gcconnex-profile-name h1 {
@@ -43,6 +51,19 @@
     text-decoration: none;
 }
 
+
+.gcconnex-profile-wire-post {
+    margin-top: 15px;
+}
+
+.gcconnex-profile-wire-post .elgg-border-plain {
+    border: none;
+}
+.gcconnex-profile-wire-post img {
+    float: left;
+    height: 50px;
+    width: 50px;
+}
 /*
  * Styling for the message box that displays old skills to users for re-entry
  */
@@ -89,8 +110,13 @@
     height: 28px;
 }
 
-.gcconnex-profile-skills-display {
+.gcconnex-profile-skills-display,
+.gcconnex-profile-languages-display {
     padding-top: 20px;
+}
+
+.gcconnex-profile-language-official-languages {
+    margin: 10px;
 }
 
 .gcconnex-skill-endorsements {
@@ -143,7 +169,8 @@
 
 
 .gcconnex-education-entry,
-.gcconnex-work-experience-entry {
+.gcconnex-work-experience-entry,
+.gcconnex-languages-entry {
     margin: 15px;
     background-color: lightgray;
     padding: 15px;
@@ -223,7 +250,8 @@ input.userfind {
 /* education */
 
 .gcconnex-profile-education-display,
-.gcconnex-profile-work-experience-display {
+.gcconnex-profile-work-experience-display,
+.gcconnex-profile-languages-display {
     padding-bottom: 10px;
 }
 
@@ -569,4 +597,25 @@ input.userfind {
     font-size: 24px;
     display: none;
     cursor: pointer;
+}
+
+.first-col {
+    width: 200px;
+}
+
+td.left-col {
+    text-align: right;
+}
+
+.gcconnex-profile-language-official-languages td {
+    vertical-align: middle;
+}
+
+.colleague-suggest-field {
+    float: left;
+    margin-right: 20px;
+}
+
+.gcconnex-profile-languages-display {
+    padding-right: 20px;
 }

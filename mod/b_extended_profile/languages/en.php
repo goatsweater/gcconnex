@@ -9,8 +9,12 @@
 $english = array(
 
     // MAIN PROFILE PAGE
-    'gcconnex_profile:edit_profile' => 'Edit Profile',
+    'gcconnex_profile:edit_profile' => 'Edit',
     'gcconnex_profile:user_content' => 'Personal Content',
+
+    'gcconnex_profile:profile' => 'Profile',
+    'gcconnex_profile:widgets' => 'Widgets',
+    'gcconnex_profile:portfolio' => 'Portfolio',
 
     'gcconnex_profile:about_me' => 'About Me',
     'gcconnex_profile:education' => 'Education',
@@ -79,13 +83,30 @@ $english = array(
     'gcconnex_profile:experience:colleagues' => 'Colleagues: ',
     'gcconnex_profile:experience:empty' => 'Begin entering your work experience by clicking "Edit" in the top right corner of this box.',
     'gcconnex_profile:experience:colleagues_empty' => 'You haven\'t listed any colleagues for this entry.',
-
+    'gcconnex_profile:experience:colleague_suggest' => 'In order to list a colleague for this entry, you must have already added them as a colleague to your profile.',
     // SKILLS
     'gcconnex_profile:gc_skill:add' => '+ add new skill',
     'gcconnex_profile:gc_skill:delete' => 'Delete this skill',
     'gcconnex_profile:gc_skill:save' => 'Are you sure you would like to save changes? Any endorsements that are attached to skills that you have removed will be permanently deleted.',
-    'gcconnex_profile:gc_skill:empty' => 'Begin entering your skills by clicking "Edit" in the top right corner of this box.'
+    'gcconnex_profile:gc_skill:empty' => 'Begin entering your skills by clicking "Edit" in the top right corner of this box.',
     // leftover skills
+
+    // LANGUAGES
+    'gcconnex_profile:langs' => 'Languages',
+    'gcconnex_profile:languages:access' => 'Allow language details to be viewable by: ',
+    'gcconnex_profile:languages:language' => 'Language:',
+    'gcconnex_profile:languages:add' => '+ add more languages',
+    'gcconnex_profile:languages:delete' => 'Delete this entry',
+    'gcconnex_profile:languages:empty' => 'Begin entering your languages by clicking "Edit" in the top right corner of this box.',
+    'gcconnex_profile:languages:writtencomp' => 'Written Comprehension',
+    'gcconnex_profile:languages:writtenexp' => 'Written Expression',
+    'gcconnex_profile:languages:oral' => 'Oral Proficiency',
+    'gcconnex_profile:languages:english' => 'English',
+    'gcconnex_profile:languages:french' => 'French',
+    'gcconnex_profile:languages:expiry' => 'Expiry',
+
+    // PUBLICATIONS
+    'gcconnex_profile:publications:empty' => 'This section will be added soon. Please check back later.'
 
 );
 

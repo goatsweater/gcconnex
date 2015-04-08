@@ -12,7 +12,13 @@
  * Purpose: initialize the script
  */
 $(document).ready(function() {
-    // initialize errythang and hide some of the toggle elements
+    // bootstrap tabs.js functionality..
+    $('#myTab a').click(function (e) {
+        e.preventDefault()
+        $(this).tab('show')
+    })
+
+    // initialize edit/save/cancel buttons and hide some of the toggle elements
     $('.save-control').hide();
     $('.cancel-control').hide();
 
@@ -54,6 +60,11 @@ $(document).ready(function() {
     $('.save-skills').on("click", {section: "skills"}, saveProfile);
     $('.cancel-skills').on("click", {section: "skills"}, cancelChanges);
 
+    $('.edit-languages').on("click", {section: "languages"}, editProfile);
+    $('.save-languages').on("click", {section: "languages"}, saveProfile);
+    $('.cancel-languages').on("click", {section: "languages"}, cancelChanges);
+
+
     $('.gcconnex-education-add-another').on("click", {section: "education"}, addMore);
 
 
@@ -80,7 +91,7 @@ $(document).ready(function() {
  *
  * Porpoise: Porpoises are small cetaceans of the family Phocoenidae; they are related to whales and dolphins.
  *   They are distinct from dolphins, although the word "porpoise" has been used to refer to any small dolphin,
- *   especially by sailors and fishermen.
+ *   especially by sailors and fishermen. This paragraph has nothing to do with this function.
  */
 function editProfile(event) {
 
@@ -184,7 +195,23 @@ function editProfile(event) {
             //$('.delete-skill').show();
 
             break;
+        case 'languages':
+            // Edit the languages for this user
+
+            $.get(elgg.normalize_url('ajax/view/b_extended_profile/edit_languages'),
+                {
+                    guid: elgg.get_logged_in_user_guid()
+                },
+                function(data) {
+                    // Output in a DIV with id=somewhere
+                    $('.gcconnex-languages').append('<div class="gcconnex-languages-edit-wrapper">' + data + '</div>');
+
+                    $('.gcconnex-profile-languages-display').hide();
+
+                });
+            break;
         default:
+            break;
 
     }
 }
@@ -195,9 +222,12 @@ function user_search_init(target) {
     $userSuggest = $('.' + tid);
 
     $colleagueSelected[tid] = [];
+    $(target).siblings('.colleagues-list').find('.gcconnex-avatar-in-list').each(function() {
+        $colleagueSelected[tid].push($(this).data('guid'));
+    });
 
     var select = function(e, user, dataset) {
-        $colleagueSelected[dataset].push(user.value);
+        $colleagueSelected[dataset].push(user.guid);
         $("#selected").text(JSON.stringify($colleagueSelected[dataset]));
         $("input.typeahead").typeahead("val", "");
     };
@@ -206,7 +236,7 @@ function user_search_init(target) {
 
     var filter = function(suggestions, tidName) {
         return $.grep(suggestions, function(suggestion, tid) {
-            return $.inArray(suggestion.value, $colleagueSelected[suggestion.tid]) === -1;
+            return $.inArray(suggestion.guid, $colleagueSelected[suggestion.tid]) === -1;
         });
     };
 
@@ -416,7 +446,9 @@ function saveProfile(event) {
                     };
                     experience.colleagues = [];
                     $(this).find('.gcconnex-avatar-in-list').each(function() {
-                        experience.colleagues.push($(this).data('guid'));
+                        if ($(this).is(':visible')) {
+                            experience.colleagues.push($(this).data('guid'));
+                        }
                     });
                     work_experience.edit.push(experience);
                 }
@@ -493,6 +525,48 @@ function saveProfile(event) {
             //}
             // @todo: show add or retract links based on status of endorsement
             break;
+        case 'languages':
+            var english = [];
+            var french = [];
+
+            $official_langs = $('.gcconnex-profile-language-official-languages');
+
+            english = {
+                'writtencomp': $official_langs.find('.gcconnex-languages-english-writtencomp').val(),
+                'writtenexp': $official_langs.find('.gcconnex-languages-english-writtenexp').val(),
+                'oral': $official_langs.find('.gcconnex-languages-english-oral').val(),
+                'expiry': $official_langs.find('#english_expiry').val()
+            };
+
+            french = {
+                'writtencomp': $official_langs.find('.gcconnex-languages-french-writtencomp').val(),
+                'writtenexp': $official_langs.find('.gcconnex-languages-french-writtenexp').val(),
+                'oral': $official_langs.find('.gcconnex-languages-french-oral').val(),
+                'expiry': $official_langs.find('#french_expiry').val()
+            };
+
+            // save the information the user just edited
+            elgg.action('b_extended_profile/edit_profile', {
+                data: {
+                    guid: elgg.get_logged_in_user_guid(),
+                    section: 'languages',
+                    english: english,
+                    french: french
+                },
+                success: function() {
+                    $.get(elgg.normalize_url('ajax/view/b_extended_profile/languages'),
+                        {
+                            guid: elgg.get_logged_in_user_guid()
+                        },
+                        function(data) {
+                            // Output in a DIV with id=somewhere
+                            $('.gcconnex-profile-languages-display').remove();
+                            $('.gcconnex-languages').append('<div class="gcconnex-profile-languages-display">' + data + '</div>');
+                        });
+                }
+            });
+            $('.gcconnex-languages-edit-wrapper').remove();
+            break;
         default:
             break;
     }
@@ -533,6 +607,10 @@ function cancelChanges(event) {
 
             $('.gcconnex-skills-skill-wrapper').show();
             $('.temporarily-added').remove();
+            break;
+        case 'languages':
+            $('.gcconnex-languages-edit-wrapper').remove();
+            $('.gcconnex-profile-languages-display').show();
             break;
         default:
             break;
@@ -614,12 +692,14 @@ function removeColleague(identifier) {
         if ($(identifier).hasClass('temporarily-added')) {
             $(identifier).remove();
             tid = $('.gcconnex-work-experience-colleagues').data("tid");
-            console.log($colleagueSelected[tid]);
-            $colleagueSelected[tid].splice($.inArray('Sarah Staniforth', $colleagueSelected[tid]), 1);
-            console.log($colleagueSelected[tid]);
+            guid = $(identifier).data('guid');
+            $colleagueSelected[tid].splice($.inArray(guid, $colleagueSelected[tid]), 1);
         }
         else {
             $(identifier).hide();
+            tid = $('.gcconnex-work-experience-colleagues').data("tid");
+            guid = $(identifier).data('guid');
+            $colleagueSelected[tid].splice($.inArray(guid, $colleagueSelected[tid]), 1);
         }
     });
     //add colleague back to suggestible usernames list
@@ -722,72 +802,17 @@ function deleteSkill() {
 }
 
 /*
- * Purpose:
+ * Purpose: add more inputs for the input type
  */
 function addMore(identifier) {
     var another = $(identifier).data('type');
     $.get(elgg.normalize_url('ajax/view/input/' + another), '',
         function(data) {
-            // Output in a DIV with id=somewhere
             $('.gcconnex-' + another + '-all').append(data);
             if (another == "work-experience") {
                 var targ = $('.gcconnex-work-experience-entry').last().children('input.userfind');
                 user_search_init(targ);
-                //var tid = $('.gcconnex-work-experience-entry').last().children('input.userfind').data('tid');
-/*
-                var userName = new Bloodhound({
-                    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
-                    //datumTokenizer: function(d) { return Bloodhound.tokenizers.obj.whitespace(d.value); },
-                    queryTokenizer: Bloodhound.tokenizers.whitespace,
-                    //prefetch: '../data/films/post_1960.json',
-                    //remote: '../data/films/queries/%QUERY.json'
-                    remote: {
-                        url: elgg.get_site_url() + "userfind?query=%QUERY", //+ elgg.security.addToken("")
-                        //    url: elgg.get_site_url() + "action/b_extended_profile/user_find?query=%QUERY&" + elgg.security.addToken("")
-                        filter: function (response) {
-                            // Map the remote source JSON array to a JavaScript object array
-                            return $.map(response, function (user) {
-                                return {
-                                    value: user.value,
-                                    guid: user.guid,
-                                    pic: user.pic,
-                                    avatar: user.avatar
-                                };
-                            });
-                        }
-                    }
-
-                    // url: elgg.get_site_url() + "mod/b_extended_profile/actions/b_extended_profile/userfind.php?query=%Q
-                });
-
-                userName.initialize();
-                tid = '.' + tid;
-
-                $(tid).typeahead(null, {
-                    name: 'userName',
-                    displayKey: function(user) {
-                        return user.value;
-                        console.log('User value: ' + user.value);
-                    },
-                    limit: 10,
-                    source: userName.ttAdapter(),
-                    templates: {
-                        suggestion: function (user) {
-                            if ( $(this).closest('.colleagues-list').find('[data-guid="' + user.guid + '"]').length ) {
-                                return null;
-                            }
-                            else {
-                                return '<p>' + user.pic + '<span class="tt-suggest-username">' + user.value + '</span></p>';
-                            }
-                        }
-                    }
-                });
-
-                $(tid).on('typeahead:selected', addColleague);
-                $(tid).on('typeahead:autocompleted', addColleague);
-            */
             }
-
         });
 }
 
