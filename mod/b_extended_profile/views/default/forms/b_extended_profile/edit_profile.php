@@ -2,13 +2,10 @@
     body {
         font-family: arial;
     }
-<<<<<<< HEAD
-=======
     .c_table {
         border:1px solid #ccc;
         background-color: orangered;
     }
->>>>>>> json-objects
 
     h1 {
         padding: 0px;
@@ -70,22 +67,6 @@
         border-collapse: separate;
     }
 
-<<<<<<< HEAD
-    .basic-profile-standard-field-wrapper,
-    .basic-profile-social-media-wrapper,
-    .basic-profile-micro-assignments,
-    .submit-basic-profile {
-        float: left;
-    }
-
-    .basic-profile-standard-field-wrapper,
-    .basic-profile-social-media-wrapper {
-        width: 375px;
-    }
-
-    .basic-profile-micro-assignments {
-        width: 750px;
-=======
     .basic-profile-standard-field-wrapper,
     .basic-profile-social-media-wrapper,
     .basic-profile-micro-assignments {
@@ -95,7 +76,6 @@
     .basic-profile-standard-field-wrapper,
     .basic-profile-social-media-wrapper {
         width: 375px;
->>>>>>> json-objects
     }
 
     .gcconnex-basic-field {
@@ -106,13 +86,10 @@
         border-top-right-radius: 3px;
         border-bottom-right-radius: 3px;
     }
-<<<<<<< HEAD
-=======
 
     p {
         padding-top: 5px;
     }
->>>>>>> json-objects
 
     .gcconnex-micro-checkbox {
         padding: 5px;
@@ -237,13 +214,7 @@ echo elgg_view('input/button', array(
     'value' => 'Save'));
 
 echo '</div>'; // close div class="submit-basic-profile"
-<<<<<<< HEAD
-echo '</div>'; // close div class="basic-profile"
-
-?>
-=======
 
 echo '</div>'; // close div class="basic-profile-micro-assignments
 
 echo '</div>'; // close div class="basic-profile"
->>>>>>> json-objects

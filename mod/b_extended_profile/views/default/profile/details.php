@@ -7,12 +7,11 @@
  * font-awesome css should be loaded already
  */
 
-elgg_load_js('fancybox');
+elgg_load_js('lightbox'); // overlay for editing the basic profile fields
+elgg_load_css('lightbox'); // css for it..
+elgg_load_js('basic-profile'); // load js file to init the lightbox overlay (sets the width)
 elgg_load_js('typeahead');
 ?>
-<<<<<<< HEAD
-
-=======
 <script>
     $(window).load(function() {
         $(".gcconnex-basic-profile-edit").fancybox({
@@ -22,7 +21,6 @@ elgg_load_js('typeahead');
         })
     });
 </script>
->>>>>>> json-objects
 <?php
 
 $user = elgg_get_page_owner_entity();
@@ -39,13 +37,11 @@ if (elgg_get_logged_in_user_entity() == elgg_get_page_owner_entity()) {
 
     $content = elgg_view('output/url', array(
         'href' => 'ajax/view/b_extended_profile/edit_basic',
-        'id' => 'basic-profile',
         'class' => 'elgg-lightbox gcconnex-basic-profile-edit elgg-button',
         'text' => elgg_echo('gcconnex_profile:edit_profile')
     ));
 
     echo $content;
-    //echo '<a href="ajax/view/b_extended_profile/edit_basic" id="basic-profile" class="elgg-lightbox gcconnex-basic-profile-edit elgg-button">Edit</a>';
 }
 else {
     $menu = elgg_trigger_plugin_hook('register', "menu:user_hover", array('entity' => $user), array());
