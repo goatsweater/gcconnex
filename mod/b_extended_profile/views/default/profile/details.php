@@ -37,6 +37,9 @@ echo 'Logged in entity: ' . elgg_get_logged_in_user_guid();
 $temp_info = elgg_get_page_owner_entity();
 echo 'Page owner entity: ' . elgg_get_page_owner_guid();
 
+if ($user->canEdit()) {
+    echo 'User->canEdit == true';
+}
 if (elgg_get_logged_in_user_entity() == elgg_get_page_owner_entity()) {
 
     $content = elgg_view('output/url', array(
