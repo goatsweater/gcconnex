@@ -32,7 +32,10 @@ $profile_fields = elgg_get_config('profile_fields');
 echo '<div id="profile-details" class="elgg-body pll">';
 echo '<div class="gcconnex-profile-name">';
 echo '<h1><span>' . $user->name . '</span></h1>';
-
+$temp_info = elgg_get_logged_in_user_entity();
+echo 'Logged in entity: ' . var_dump($temp_info->guid);
+$temp_info = elgg_get_page_owner_entity();
+echo 'Page owner entity: ' . var_dump($temp_info->guid);
 if (elgg_get_logged_in_user_entity() == elgg_get_page_owner_entity()) {
 
     $content = elgg_view('output/url', array(
