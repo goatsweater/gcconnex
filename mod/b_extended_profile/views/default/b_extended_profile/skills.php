@@ -5,7 +5,7 @@ $user = get_user($user_guid);
 echo '<div class="gcconnex-profile-section-wrapper gcconnex-skills">'; // create the profile section wrapper div for css styling
 echo '<div class="gcconnex-profile-title">' . elgg_echo('gcconnex_profile:gc_skills') . '</div>'; // create the profile section title
 
-if (elgg_get_logged_in_user_entity() == elgg_get_page_owner_entity()) {
+if ($user->canEdit()) {
     // create the edit/save/cancel toggles for this section
     echo '<span class="gcconnex-profile-edit-controls">';
     echo '<span class="edit-control edit-skills"><img src="' . elgg_get_site_url() . 'mod/b_extended_profile/img/edit.png">' . elgg_echo('gcconnex_profile:edit') . '</span>';
@@ -55,7 +55,7 @@ else {
                 $endorsements = array($endorsements);
             }
 
-            if (elgg_get_page_owner_guid() != elgg_get_logged_in_user_guid()) {
+            if (!($user->canEdit())) {
                 if (in_array(elgg_get_logged_in_user_guid(), $endorsements) == false || empty($endorsements)) {
                     // user has not yet endorsed this skill for this user.. present the option to endorse
 

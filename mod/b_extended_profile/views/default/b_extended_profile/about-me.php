@@ -23,7 +23,7 @@ $sec = 'about-me'; // create a css friendly version of the section name
 echo '<div class="gcconnex-profile-section-wrapper gcconnex-about-me">'; // create the profile section wrapper div for css styling
 echo '<div class="gcconnex-profile-title">' . elgg_echo('gcconnex_profile:about_me') . '</div>'; // create the profile section title
 
-if (elgg_get_logged_in_user_entity() == elgg_get_page_owner_entity()) {
+if ($user->canEdit()) {
     // create the edit/save/cancel toggles for this section
     echo '<span class="gcconnex-profile-edit-controls">';
     echo '<span class="edit-control edit-about-me"><img src="' . elgg_get_site_url() . 'mod/b_extended_profile/img/edit.png">' . elgg_echo('gcconnex_profile:edit') . '</span>';

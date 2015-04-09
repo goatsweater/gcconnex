@@ -16,7 +16,7 @@ $education_guid = $user->education;
 echo '<div class="gcconnex-profile-section-wrapper gcconnex-education">'; // create the profile section wrapper div for css styling
 echo '<div class="gcconnex-profile-title">' . elgg_echo('gcconnex_profile:education') . '</div>'; // create the profile section title
 
-if (can_) {
+if ($user->canEdit()) {
     // create the edit/save/cancel toggles for this section
     echo '<span class="gcconnex-profile-edit-controls">';
     echo '<span class="edit-control edit-education"><img src="' . elgg_get_site_url() . 'mod/b_extended_profile/img/edit.png">' . elgg_echo('gcconnex_profile:edit') . '</span>';

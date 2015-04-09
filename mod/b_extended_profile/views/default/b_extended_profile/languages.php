@@ -21,7 +21,7 @@ $languages_guid = $user->languages;
 echo '<div class="gcconnex-profile-section-wrapper gcconnex-languages">'; // create the profile section wrapper div for css styling
 echo '<div class="gcconnex-profile-title">' . elgg_echo('gcconnex_profile:langs') . '</div>'; // create the profile section title
 
-if (elgg_get_logged_in_user_entity() == elgg_get_page_owner_entity()) {
+if ($user->canEdit()) {
     // create the edit/save/cancel toggles for this section
     echo '<span class="gcconnex-profile-edit-controls">';
     echo '<span class="edit-control edit-languages"><img src="' . elgg_get_site_url() . 'mod/b_extended_profile/img/edit.png">' . elgg_echo('gcconnex_profile:edit') . '</span>';
