@@ -232,8 +232,6 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
             $user->english = $english;
             $user->french = $french;
 
-            error_log('English: ' . $english);
-            error_log('French: ' . $french);
             /*
             $skill_guids = array();
 
