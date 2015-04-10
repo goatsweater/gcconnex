@@ -7,10 +7,7 @@
  * font-awesome css should be loaded already
  */
 
-elgg_load_js('lightbox'); // overlay for editing the basic profile fields
-elgg_load_css('lightbox'); // css for it..
-elgg_load_js('basic-profile'); // load js file to init the lightbox overlay (sets the width)
-elgg_load_js('typeahead');
+
 ?>
 <script>
     $(window).load(function() {
