@@ -42,29 +42,7 @@ elgg_load_css('font-awesome'); // font-awesome icons for social media and some o
 
     <div class="b_extended_profile">
         <?php
-        //@todo: only show sections if they have content
 
-        // pre-populate the sections that are not empty so that we can build the profile
-        $sections = array();
-
-        if ($user = get_user(elgg_get_page_owner_guid()))
-        {
-            if ($user->get("description") != null || elgg_get_page_owner_guid() == elgg_get_logged_in_user_guid()) {
-               // $sections[] = elgg_echo('gcconnex_profile:about_me');
-                }
-            if ($user->get("education") != null || elgg_get_page_owner_guid() == elgg_get_logged_in_user_guid()) {
-               // $sections[] = elgg_echo('gcconnex_profile:education');
-            }
-            if ($user->get("work") != null || elgg_get_page_owner_guid() == elgg_get_logged_in_user_guid()) {
-               // $sections[] = elgg_echo('gcconnex_profile:experience');
-            }
-            if ($user->get("gc_skills") != null || elgg_get_page_owner_guid() == elgg_get_logged_in_user_guid()) {
-               // $sections[] = elgg_echo('gcconnex_profile:gc_skills');
-            }
-            if ($user->get("langs") != null || elgg_get_page_owner_guid() == elgg_get_logged_in_user_guid()) {
-               // $sections[] = elgg_echo('gcconnex_profile:langs');
-            }
-        }
 
         echo '<div role="tabpanel">';
         echo '<ul class="nav nav-tabs" role="tablist">';
@@ -134,10 +112,19 @@ elgg_load_css('font-awesome'); // font-awesome icons for social media and some o
 
             echo '<div role="tabpanel" class="tab-pane" id="profile-display">';
 
+            init_ajax_block(elgg_echo('gcconnex_profile:about_me'), 'about-me', $user);
             echo elgg_view('b_extended_profile/about-me');
+
+            init_ajax_block(elgg_echo('gcconnex_profile:education'), 'education', $user);
             echo elgg_view('b_extended_profile/education');
+
+            init_ajax_block(elgg_echo('gcconnex_profile:experience'), 'work-experience', $user);
             echo elgg_view('b_extended_profile/work-experience');
+
+            init_ajax_block(elgg_echo('gcconnex_profile:gc_skills'), 'skills', $user);
             echo elgg_view('b_extended_profile/skills');
+
+            init_ajax_block(elgg_echo('gcconnex_profile:langs'), 'languages', $user);
             echo elgg_view('b_extended_profile/languages');
 
         // create the div wrappers and edit/save/cancel toggles for each profile section

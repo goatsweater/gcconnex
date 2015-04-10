@@ -2,18 +2,6 @@
 $user_guid = elgg_get_page_owner_guid();
 $user = get_user($user_guid);
 
-echo '<div class="gcconnex-profile-section-wrapper gcconnex-skills">'; // create the profile section wrapper div for css styling
-echo '<div class="gcconnex-profile-title">' . elgg_echo('gcconnex_profile:gc_skills') . '</div>'; // create the profile section title
-
-if ($user->canEdit()) {
-    // create the edit/save/cancel toggles for this section
-    echo '<span class="gcconnex-profile-edit-controls">';
-    echo '<span class="edit-control edit-skills"><img src="' . elgg_get_site_url() . 'mod/b_extended_profile/img/edit.png">' . elgg_echo('gcconnex_profile:edit') . '</span>';
-    echo '<span class="save-control save-skills hidden"><img src="' . elgg_get_site_url() . 'mod/b_extended_profile/img/save.png">' . elgg_echo('gcconnex_profile:save') . '</span>';
-    echo '<span class="cancel-control cancel-skills hidden"><img src="' . elgg_get_site_url() . 'mod/b_extended_profile/img/cancel.png">' . elgg_echo('gcconnex_profile:cancel') . '</span>';
-    echo '</span>';
-}
-
 // if skills isn't empty, display them so that the user can use them as a guide
 if ($user->skills != NULL && $user->skillsupgraded == NULL) {
     echo '<div class="gcconnex-old-skills">';
@@ -35,7 +23,7 @@ $skill_guids = $user->gc_skills;
 echo '<div class="gcconnex-profile-skills-display">';
 echo '<div class="gcconnex-skills-skills-list-wrapper">';
 
-if ($skill_guids == NULL || empty($skill_guids)) {
+if ($user->canEdit && ($work_experience_guid == NULL || empty($work_experience_guid))) {
     echo elgg_echo('gcconnex_profile:gc_skill:empty');
 }
 else {

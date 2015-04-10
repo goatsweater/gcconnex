@@ -16,9 +16,9 @@ function b_extended_profile_init() {
 
     // Register vendor js libraries
     $url = 'mod/b_extended_profile/vendors/';
-    elgg_register_js('typeahead', $url . 'typeahead/dist/typeahead.bundle.js'); // developer version typeahead js file !!! COMMENT THIS OuT AND ENABLE MINIFIED VERSIoN IN PRODcd
+    //elgg_register_js('typeahead', $url . 'typeahead/dist/typeahead.bundle.js'); // developer version typeahead js file !!! COMMENT THIS OuT AND ENABLE MINIFIED VERSIoN IN PRODcd
     elgg_register_js('fancybox', 'vendors/jquery/fancybox/jquery.fancybox-1.3.4.pack.js');
-    // elgg_register_js('typeahead', $url . 'typeahead/dist/typeahead.bundle.min.js'); // minified typeahead js file
+    elgg_register_js('typeahead', $url . 'typeahead/dist/typeahead.bundle.min.js'); // minified typeahead js file
 
 
     // Register the gcconnex profile css libraries
@@ -112,6 +112,24 @@ function extended_profile_page_handler($page) {
     return true;
 
     error_log(print_r($arg, true));
+}
+
+/*
+ * Purpose: Created edit/save/cancel buttons for ajax blocks on profile
+ */
+function init_ajax_block($title, $section, $user) {
+
+    echo '<div class="gcconnex-profile-section-wrapper gcconnex-' . $section . '">'; // create the profile section wrapper div for css styling
+    echo '<div class="gcconnex-profile-title">' . $title . '</div>'; // create the profile section title
+
+    if ($user->canEdit()) {
+        // create the edit/save/cancel toggles for this section
+        echo '<span class="gcconnex-profile-edit-controls">';
+        echo '<span class="edit-control edit-' . $section . '"><img src="' . elgg_get_site_url() . 'mod/b_extended_profile/img/edit.png">' . elgg_echo('gcconnex_profile:edit') . '</span>';
+        echo '<span class="save-control save-' . $section . ' hidden"><img src="' . elgg_get_site_url() . 'mod/b_extended_profile/img/save.png">' . elgg_echo('gcconnex_profile:save') . '</span>';
+        echo '<span class="cancel-control cancel-' . $section . ' hidden"><img src="' . elgg_get_site_url() . 'mod/b_extended_profile/img/cancel.png">' . elgg_echo('gcconnex_profile:cancel') . '</span>';
+        echo '</span>';
+    }
 }
 
 

@@ -153,7 +153,7 @@ function editProfile(event) {
             // inject the html to add ability to add skills
             $('.gcconnex-skills').append('<div class="gcconnex-endorsements-input-wrapper">' +
             '<input type="text" class="gcconnex-endorsements-input-skill" onkeyup="checkForEnter(event)"/>' +
-            '<span class="gcconnex-endorsements-add-skill">' + elgg.echo('gcconnex_profile:gc_skill:add') + '</span>' +
+            '<span class="gcconnex-endorsements-add-skill" >' + elgg.echo('gcconnex_profile:gc_skill:add') + '</span>' +
             '</div>');
 
             var newSkill = new Bloodhound({
@@ -182,7 +182,7 @@ function editProfile(event) {
             $('.gcconnex-endorsements-input-skill').hide();
 
             // the profile owner would like to type in a new skill
-            $('.gcconnex-endorsements-add-skill').click(function () {
+            $('.gcconnex-endorsements-add-skill').on("click", function () {
                 $('.gcconnex-endorsements-input-skill').fadeIn('slowly').focus() ;
                 $('.gcconnex-endorsements-add-skill').hide();
             });

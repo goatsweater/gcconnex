@@ -18,22 +18,9 @@ $english = $user->english;
 $french = $user->french;
 $languages_guid = $user->languages;
 
-echo '<div class="gcconnex-profile-section-wrapper gcconnex-languages">'; // create the profile section wrapper div for css styling
-echo '<div class="gcconnex-profile-title">' . elgg_echo('gcconnex_profile:langs') . '</div>'; // create the profile section title
-
-if ($user->canEdit()) {
-    // create the edit/save/cancel toggles for this section
-    echo '<span class="gcconnex-profile-edit-controls">';
-    echo '<span class="edit-control edit-languages"><img src="' . elgg_get_site_url() . 'mod/b_extended_profile/img/edit.png">' . elgg_echo('gcconnex_profile:edit') . '</span>';
-    echo '<span class="save-control save-languages hidden"><img src="' . elgg_get_site_url() . 'mod/b_extended_profile/img/save.png">' . elgg_echo('gcconnex_profile:save') . '</span>';
-    echo '<span class="cancel-control cancel-languages hidden"><img src="' . elgg_get_site_url() . 'mod/b_extended_profile/img/cancel.png">' . elgg_echo('gcconnex_profile:cancel') . '</span>';
-    echo '</span>';
-}
-
-
 echo '<div class="gcconnex-profile-languages-display">';
 
-if ( $languages_guid == NULL || empty($languages_guid) ) {
+if ($user->canEdit && ($work_experience_guid == NULL || empty($work_experience_guid))) {
     if ( $english == NULL || empty($english) ) {
         // no english entered
         if ( $french == NULL || empty($french) )  {
