@@ -153,7 +153,7 @@ function editProfile(event) {
             // inject the html to add ability to add skills
             $('.gcconnex-skills').append('<div class="gcconnex-endorsements-input-wrapper">' +
             '<input type="text" class="gcconnex-endorsements-input-skill" onkeyup="checkForEnter(event)"/>' +
-            '<span class="gcconnex-endorsements-add-skill" >' + elgg.echo('gcconnex_profile:gc_skill:add') + '</span>' +
+            '<span class="gcconnex-endorsements-add-skill">' + elgg.echo("gcconnex_profile:gc_skill:add", null, null) + '</span>' +
             '</div>');
 
             var newSkill = new Bloodhound({
@@ -189,7 +189,7 @@ function editProfile(event) {
 
             // create a "delete this skill" link for each skill
             $('.gcconnex-endorsements-skill').each(function(){
-                $(this).after('<img class="delete-skill-img" src="' + elgg.get_site_url() + 'mod/b_extended_profile/img/delete.png"><span class="delete-skill" onclick="deleteEntry(this)" data-type="skill">' + elgg.echo('gcconnex_profile:gc_skill:delete') + '</span>'); //goes in here i think..
+                $(this).after('<img class="delete-skill-img" src="' + elgg.get_site_url() + 'mod/b_extended_profile/img/delete.png"><span class="delete-skill" onclick="deleteEntry(this)" data-type="skill">' + elgg.echo("gcconnex_profile:gc_skill:delete", null, null) + '</span>'); //goes in here i think..
             });
 
             //$('.delete-skill').show();
@@ -727,7 +727,7 @@ function addNewSkill(newSkill) {
     '<span title="Number of endorsements" class="gcconnex-endorsements-count" data-skill="' + newSkill + '">0</span>' +
     '<span data-skill="' + newSkill + '" class="gcconnex-endorsements-skill">' + newSkill + '</span>' +
     '<img class="delete-skill-img" src="' + elgg.get_site_url() + 'mod/b_extended_profile/img/delete.png">' +
-    '<span class="delete-skill" data-type="skill" onclick="deleteEntry(this)">Delete this skill</span></div>');
+    '<span class="delete-skill" data-type="skill" onclick="deleteEntry(this)">' + elgg.echo("gcconnex_profile:gc_skill:delete", null, null) + '</span></div>');
 
     $('.gcconnex-endorsements-input-skill').val('');                                 // clear the text box
     $('.gcconnex-endorsements-input-skill').typeahead('val', '');                                           // clear the typeahead box
