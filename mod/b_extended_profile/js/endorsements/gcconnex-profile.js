@@ -151,9 +151,10 @@ function editProfile(event) {
 
         case 'skills':
             // inject the html to add ability to add skills
+            var christineFix = elgg.echo("gcconnex_profile:gc_skill:add", null, null);
             $('.gcconnex-skills').append('<div class="gcconnex-endorsements-input-wrapper">' +
             '<input type="text" class="gcconnex-endorsements-input-skill" onkeyup="checkForEnter(event)"/>' +
-            '<span class="gcconnex-endorsements-add-skill">' + elgg.echo("gcconnex_profile:gc_skill:add", null, null) + '</span>' +
+            '<span class="gcconnex-endorsements-add-skill">' + christineFix + '</span>' +
             '</div>');
 
             var newSkill = new Bloodhound({

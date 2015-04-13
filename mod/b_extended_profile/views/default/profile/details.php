@@ -40,7 +40,7 @@ if ($user->canEdit()) {
 
     echo $content;
 }
-else {
+elseif (elgg_get_page_owner_guid() != elgg_get_logged_in_user_guid()) {
     $menu = elgg_trigger_plugin_hook('register', "menu:user_hover", array('entity' => $user), array());
     $builder = new ElggMenuBuilder($menu);
     $menu = $builder->getMenu();
@@ -54,8 +54,8 @@ else {
         }
     }
     echo $profile_actions;
-
 }
+
 echo '</div>'; // close div class="gcconnex-profile-name"
 echo '<h3>' . $user->title . '</h3>';
 echo '<div class="gcconnex-profile-dept">' . $user->department . '</div>';

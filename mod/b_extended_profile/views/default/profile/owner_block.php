@@ -31,12 +31,13 @@ if (!$user) {
 
 // @todo: create a link to edit the user profile picture
 if (elgg_get_logged_in_user_guid() == elgg_get_page_owner_guid()) {
+    /*
     $blicon = elgg_view('output/img', array(
         'src' => $user->getIconURL('large'),
         'alt' => 'test',
         'title' => 'test',
         'class' => 'test',
-    ));
+    ));*/
     $icon = elgg_view_entity_icon($user, 'large', array(
         'use_hover' => false,
         'href' => 'avatar/edit/' . $user->username,
