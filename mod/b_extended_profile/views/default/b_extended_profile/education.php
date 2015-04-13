@@ -10,6 +10,7 @@ else {
 $user = get_user($user_guid);
 $education_guid = $user->education;
 
+echo '<div class="gcconnex-profile-education-display">';
 
 if ($user->canEdit() && ($education_guid == NULL || empty($education_guid))) {
     echo elgg_echo('gcconnex_profile:education:empty');
@@ -41,4 +42,5 @@ else {
     }
 }
 
-echo '</div>'; // close div class=gcconnex-profile-section-wrapper
+echo '</div>'; // close div class="gcconnex-profile-education-display"
+echo '</div>'; // close div class="gcconnex-profile-section-wrapper"

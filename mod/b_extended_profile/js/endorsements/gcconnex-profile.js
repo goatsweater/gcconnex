@@ -129,6 +129,7 @@ function editProfile(event) {
         case 'work-experience':
             // Edit the experience for this user
 
+
             $.get(elgg.normalize_url('ajax/view/b_extended_profile/edit_work-experience'),
                 {
                     guid: elgg.get_logged_in_user_guid()
@@ -223,7 +224,7 @@ function user_search_init(target) {
     $userSuggest = $('.' + tid);
 
     $colleagueSelected[tid] = [];
-    $(target).siblings('.colleagues-list').find('.gcconnex-avatar-in-list').each(function() {
+    $(target).closest('.gcconnex-work-experience-entry').find('.gcconnex-avatar-in-list').each(function() {
         $colleagueSelected[tid].push($(this).data('guid'));
     });
 
@@ -278,7 +279,7 @@ function user_search_init(target) {
         },
         templates: {
             suggestion: function (user) {
-                return '<p>' + user.pic + '<span class="tt-suggest-username">' + user.value + '</span></p>';
+                return '<div class="tt-suggest-avatar">' + user.pic + '</div><div class="tt-suggest-username">' + user.value + '</div><br>';
             }
         }
     }).bind('typeahead:selected', select);

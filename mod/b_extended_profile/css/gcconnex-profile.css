@@ -321,7 +321,7 @@ input.userfind {
     padding: 5px;
     background-color: #3C698E;
     border: 1px solid lightgray;
-    width: 100px;
+    min-width: 100px;
     left: 10px;
     color: white;
     z-index: 1;
@@ -550,10 +550,19 @@ input.userfind {
     line-height: 24px;
 }
 
-.tt-suggestion.tt-is-under-cursor { /* UPDATE: newer versions use .tt-suggestion.tt-cursor */
+.tt-suggestion.tt-is-under-cursor,
+.tt-suggestion.tt-cursor { /* UPDATE: newer versions use .tt-suggestion.tt-cursor */
     color: #fff;
     background-color: #0097cf;
+}
 
+.tt-suggest-username {
+    float: left;
+    padding-left: 15px;
+}
+.tt-suggest-avatar {
+    float: left;
+    height: 20px;
 }
 
 .tt-suggestion p {

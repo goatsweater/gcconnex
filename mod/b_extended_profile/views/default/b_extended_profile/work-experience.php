@@ -9,6 +9,8 @@ else {
 $user = get_user($user_guid);
 $work_experience_guid = $user->work;
 
+echo '<div class="gcconnex-profile-work-experience-display">';
+
 if ($user->canEdit() && ($work_experience_guid == NULL || empty($work_experience_guid))) {
     echo elgg_echo('gcconnex_profile:experience:empty');
 }
@@ -54,4 +56,5 @@ else {
         }
 }
 
+echo '</div>'; // close div class="gcconnex-profile-work-experience-display
 echo '</div>'; // close div class=gcconnex-profile-section-wrapper
