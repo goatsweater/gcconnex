@@ -11,7 +11,7 @@ $user = get_user($user_guid);
 $education_guid = $user->education;
 
 
-if ($user->canEdit && ($work_experience_guid == NULL || empty($work_experience_guid))) {
+if ($user->canEdit() && ($education_guid == NULL || empty($education_guid))) {
     echo elgg_echo('gcconnex_profile:education:empty');
 }
 else {

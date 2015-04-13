@@ -23,7 +23,7 @@ $skill_guids = $user->gc_skills;
 echo '<div class="gcconnex-profile-skills-display">';
 echo '<div class="gcconnex-skills-skills-list-wrapper">';
 
-if ($user->canEdit && ($work_experience_guid == NULL || empty($work_experience_guid))) {
+if ($user->canEdit() && ($skill_guids == NULL || empty($skill_guids))) {
     echo elgg_echo('gcconnex_profile:gc_skill:empty');
 }
 else {

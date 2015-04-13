@@ -20,7 +20,7 @@ $languages_guid = $user->languages;
 
 echo '<div class="gcconnex-profile-languages-display">';
 
-if ($user->canEdit && ($work_experience_guid == NULL || empty($work_experience_guid))) {
+if ($user->canEdit() && ($work_experience_guid == NULL || empty($work_experience_guid))) {
     if ( $english == NULL || empty($english) ) {
         // no english entered
         if ( $french == NULL || empty($french) )  {
