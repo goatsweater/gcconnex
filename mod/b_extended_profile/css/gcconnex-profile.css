@@ -386,7 +386,7 @@ input.userfind {
     display: inline;
     float: right;
     border-left: 3px solid #EEE;
-    height: 229px;
+    height: 250px;
     padding-top: 5px;
 }
 
@@ -416,7 +416,7 @@ input.userfind {
 
 #profile-details {
     display: inline-block;
-    width: 400px;
+    width: 275px;
     padding-bottom: 5px;
 }
 
@@ -627,4 +627,32 @@ td.left-col {
 
 .gcconnex-profile-languages-display {
     padding-right: 20px;
+}
+
+#profile-owner-block {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    width: 250px;
+    height: 250px;
+}
+
+.avatar-profile-page {
+    width: 250px;
+    height: 250px;
+    border-top-left-radius: 8px;
+}
+
+.avatar-hover-edit {
+    background-color: rgba(3,3,3, 0.5);
+    bottom: 25px;
+    color: white;
+    display: none;
+    font-weight: bold;
+    padding-bottom: 6px;
+    padding-top: 6px;
+    position: absolute;
+    text-align: center;
+    text-decoration: none;
+    width: 100%;
 }

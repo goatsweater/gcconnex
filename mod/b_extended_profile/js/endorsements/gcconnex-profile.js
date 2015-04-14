@@ -14,9 +14,13 @@
 $(document).ready(function() {
     // bootstrap tabs.js functionality..
     $('#myTab a').click(function (e) {
-        e.preventDefault()
-        $(this).tab('show')
-    })
+        e.preventDefault();
+        $(this).tab('show');
+    });
+
+    $('.avatar-profile-edit').hover(function() {
+        $('.avatar-hover-edit').fadeToggle('slow');
+    });
 
     // initialize edit/save/cancel buttons and hide some of the toggle elements
     $('.save-control').hide();

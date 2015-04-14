@@ -187,7 +187,12 @@ function list_avatars($options) {
         $options['limit'] = 999;
     }
     else {
-        $list .= '<div class="gcconnex-avatars-expand btn elgg-button">...</div>';
+        $list .= '<div class="gcconnex-avatars-expand btn elgg-button"><a href="">...</a></div>';
+        $link = elgg_view('output/url', array(
+            'href' => 'ajax/view/b_extended_profile/edit_basic',
+            'class' => 'elgg-lightbox gcconnex-basic-profile-edit elgg-button',
+            'text' => elgg_echo('gcconnex_profile:edit_profile')
+        ));
     }
 
 

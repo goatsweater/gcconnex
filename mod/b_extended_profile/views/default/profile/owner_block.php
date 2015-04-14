@@ -38,10 +38,23 @@ if (elgg_get_logged_in_user_guid() == elgg_get_page_owner_guid()) {
         'title' => 'test',
         'class' => 'test',
     ));*/
+    /*
     $icon = elgg_view_entity_icon($user, 'large', array(
         'use_hover' => false,
         'href' => 'avatar/edit/' . $user->username,
     ));
+    */
+    $iconimg = '<div class="avatar-hover-edit">Edit Avatar</div><img src="';
+    $iconimg .= $user->getIcon('large') . '" class="avatar-profile-page">';
+
+    $icon = elgg_view('output/url', array(
+            'text' => $iconimg,
+            'href' => 'avatar/edit/' . $user->username,
+            'class' => "avatar-profile-edit"
+        )
+    );
+
+
 }
 else {
     $icon = elgg_view_entity_icon($user, 'large', array(
