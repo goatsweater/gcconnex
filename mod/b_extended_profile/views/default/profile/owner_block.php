@@ -57,9 +57,13 @@ if (elgg_get_logged_in_user_guid() == elgg_get_page_owner_guid()) {
 
 }
 else {
+    $icon = '<img src="';
+    $icon .= $user->getIcon('large') . '" class="avatar-profile-page">';
+
+    /*
     $icon = elgg_view_entity_icon($user, 'large', array(
         'use_hover' => false,
-    ));
+    ));*/
 }
 
 

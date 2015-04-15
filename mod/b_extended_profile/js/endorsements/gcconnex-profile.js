@@ -132,8 +132,6 @@ function editProfile(event) {
             break;
         case 'work-experience':
             // Edit the experience for this user
-
-
             $.get(elgg.normalize_url('ajax/view/b_extended_profile/edit_work-experience'),
                 {
                     guid: elgg.get_logged_in_user_guid()
@@ -150,7 +148,6 @@ function editProfile(event) {
                         user_search_init(this);
                     });
                     $('.gcconnex-profile-work-experience-display').hide();
-
                 });
             break;
 
