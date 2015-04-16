@@ -20,9 +20,11 @@ $(document).ready(function() {
 
     $('.avatar-profile-edit').hover(
         function() {
+            $('.avatar-hover-edit').stop(true,true);
             $('.avatar-hover-edit').fadeIn('slow');
         },
         function() {
+            $('.avatar-hover-edit').stop(true,true);
             $('.avatar-hover-edit').fadeOut('slow');
         }
     );
