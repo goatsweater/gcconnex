@@ -18,9 +18,15 @@ $(document).ready(function() {
         $(this).tab('show');
     });
 
-    $('.avatar-profile-edit').hover(function() {
-        $('.avatar-hover-edit').fadeToggle('slow');
-    });
+    $('.avatar-profile-edit').hover(
+        function() {
+            $('.avatar-hover-edit').fadeIn('slow');
+        },
+        function() {
+            $('.avatar-hover-edit').fadeOut('slow');
+        }
+    );
+
 
     // initialize edit/save/cancel buttons and hide some of the toggle elements
     $('.save-control').hide();
