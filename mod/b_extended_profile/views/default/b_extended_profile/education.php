@@ -16,6 +16,7 @@ if ($user->canEdit() && ($education_guid == NULL || empty($education_guid))) {
     echo elgg_echo('gcconnex_profile:education:empty');
 }
 else {
+var_dump($education_guid);
     if (!(is_array($education_guid))) {
         $education_guid = array($education_guid);
     }
@@ -23,22 +24,23 @@ else {
 
     foreach ($education_guid as $guid) {
 
-        $education = get_entity($guid);
+        if ($education = get_entity($guid)) {
 
-        echo '<div class="gcconnex-profile-education-display gcconnex-education-' . $education->guid . '">';
-        echo '<div class="gcconnex-profile-label education-dates">' . $education->startdate . ', ' . $education->startyear . ' - ';
-        if ($education->ongoing == 'true') {
-            echo elgg_echo('gcconnex_profile:education:present');
-        }
-        else {
-            echo $education->enddate . ', ' . $education->endyear;
-        }
-        echo '</div>';
+            echo '<div class="gcconnex-profile-education-display gcconnex-education-' . $education->guid . '">';
+            echo '<div class="gcconnex-profile-label education-dates">' . $education->startdate . ', ' . $education->startyear . ' - ';
 
-        echo '<div class="gcconnex-profile-label education-school">' . $education->school . '</div>';
-        echo '<div class="gcconnex-profile-label education-degree"><ul><li>' . $education->program . '</li></ul></div>';
-        echo '<div class="gcconnex-profile-label education-field">' . $education->field . '</div>';
-        echo '</div>';
+            if ($education->ongoing == 'true') {
+                echo elgg_echo('gcconnex_profile:education:present');
+            } else {
+                echo $education->enddate . ', ' . $education->endyear;
+            }
+            echo '</div>';
+
+            echo '<div class="gcconnex-profile-label education-school">' . $education->school . '</div>';
+            echo '<div class="gcconnex-profile-label education-degree"><ul><li>' . $education->program . '</li></ul></div>';
+            echo '<div class="gcconnex-profile-label education-field">' . $education->field . '</div>';
+            echo '</div>';
+        }
     }
 }
 

@@ -32,11 +32,15 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
     // handle $education_guid differently depending on whether it's an array or not
     if (is_array($education_guid)) {
         foreach ($education_guid as $guid) { // display the input/education view for each education entry
-            echo elgg_view('input/education', array('guid' => $guid));
+            if ( $guid != null ) {
+                echo elgg_view('input/education', array('guid' => $guid));
+            }
         }
     }
     else {
-        echo elgg_view('input/education', array('guid' => $education_guid));
+        if ($education_guid != null && !empty($education_guid)) {
+            echo elgg_view('input/education', array('guid' => $education_guid));
+        }
     }
 
 

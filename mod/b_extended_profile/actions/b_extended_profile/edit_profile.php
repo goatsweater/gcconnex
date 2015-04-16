@@ -35,8 +35,13 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
                     if ($delete = get_entity($delete_guid)) {
                         $delete->delete();
                     }
-                    if(($key = array_search($delete_guid, $education_list)) !== false) {
-                        unset($education_list[$key]);
+                    if (is_array($education_list)) {
+                        if(($key = array_search($delete_guid, $education_list)) !== false) {
+                            unset($education_list[$key]);
+                        }
+                    }
+                    elseif ($education_list == $delete_guid) {
+                        $education_list = null;
                     }
                 }
             }
@@ -98,6 +103,8 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
             $edit = $work_experience['edit'];
             $delete = $work_experience['delete'];
 
+            error_log(print_r($delete, 1));
+
             $experience_list = $user->work;
 
             if (!(is_array($delete))) { $delete = array($delete); }
@@ -108,8 +115,13 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
                     if ($delete = get_entity($delete_guid)) {
                         $delete->delete();
                     }
-                    if(($key = array_search($delete_guid, $experience_list)) !== false) {
-                        unset($experience_list[$key]);
+                    if (is_array($experience_list)) {
+                        if (($key = array_search($delete_guid, $experience_list)) !== false) {
+                            unset($experience_list[$key]);
+                        }
+                    }
+                    elseif ($experience_list == $delete_guid) {
+                        $experience_list = null;
                     }
                 }
             }

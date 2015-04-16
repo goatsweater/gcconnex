@@ -430,10 +430,10 @@ function saveProfile(event) {
 
             $('.gcconnex-work-experience-entry').each(function() {
                 if ( $(this).is(":hidden") ) {
-                    if ($(this).data('guid') != "new") {
+                    //if ($(this).data('guid') != "new") {
                         work_experience.delete.push($(this).data('guid'));
                         //$delete_guid.push($(this).data('guid'));
-                    }
+                   // }
                 }
                 else {
                     experience = {
@@ -471,8 +471,8 @@ function saveProfile(event) {
                         },
                         function(data) {
                             // Output in a DIV with id=somewhere
-                            $('.gcconnex-work-experience-display').remove();
-                            $('.gcconnex-work-experience').append('<div class="gcconnex-work-experience-display">' + data + '</div>');
+                            $('.gcconnex-profile-work-experience-display').remove();
+                            $('.gcconnex-work-experience').append('<div class="gcconnex-profile-work-experience-display"><div class="gcconnex-work-experience-display">' + data + '</div></div>');
                         });
                 }
             });

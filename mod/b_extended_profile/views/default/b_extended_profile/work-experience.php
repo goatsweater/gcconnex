@@ -21,17 +21,16 @@ else {
 
     usort($work_experience_guid, "sortDate");
 
-        foreach ($work_experience_guid as $guid) {
+    foreach ($work_experience_guid as $guid) {
 
-            $experience = get_entity($guid);
+        if ($experience = get_entity($guid)) {
 
             echo '<div class="gcconnex-profile-work-experience-display gcconnex-work-experience-' . $experience->guid . '">';
-            echo '<div class="gcconnex-profile-label work-experience-dates">' .$experience->startdate . ', ' . $experience->startyear . ' - ';
+            echo '<div class="gcconnex-profile-label work-experience-dates">' . $experience->startdate . ', ' . $experience->startyear . ' - ';
 
             if ($experience->ongoing == 'true') {
                 echo elgg_echo('gcconnex_profile:experience:present');
-            }
-            else {
+            } else {
                 echo $experience->enddate . ', ' . $experience->endyear;
             }
 
@@ -41,7 +40,7 @@ else {
             echo '<div class="gcconnex-profile-label work-experience-responsibilities">' . $experience->responsibilities . '</div>';
 
             echo '<div class="gcconnex-profile-label work-experience-colleagues">';
-            $colleagues =  $experience->colleagues;
+            $colleagues = $experience->colleagues;
             if (is_array($colleagues)) {
                 echo list_avatars(array(
                     'guids' => $colleagues,
@@ -52,8 +51,8 @@ else {
             echo '</div>'; // close div class="gcconnex-profile-label work-experience-colleagues"
 
             echo '</div>';
-
         }
+    }
 }
 
 echo '</div>'; // close div class="gcconnex-profile-work-experience-display
