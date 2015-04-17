@@ -8,9 +8,9 @@
 	//register_action("togglelang");
 	
     // Toggle language 
-	global $SESSION;
+	//global $SESSION;
 	
-	if ($SESSION['language'] == 'en') {
+	if (_elgg_services()->session->get('language') == 'en') {
 		$_SESSION['language'] = "fr";
 	} else {
 		$_SESSION['language'] = "en";

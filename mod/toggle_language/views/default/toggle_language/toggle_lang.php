@@ -1,6 +1,6 @@
 <div>
 	<?php
-		global $SESSION;
+		//global $SESSION;
 	?>
 
 	<div class="lang_toggle">
@@ -70,7 +70,7 @@
 		
 	
 	</script>
-		<form action="<?php echo $vars['url']; ?>action/toggle_language/toggle" method="post" id="formtoggle">
+		<form action="<?php echo elgg_get_site_url(); ?>action/toggle_language/toggle" method="post" id="formtoggle">
 			
 		<?php
 		// security tokens.
@@ -82,7 +82,7 @@
 			//$log = fopen(dirname( __FILE__ ) . "/cyu - session conditional statement.txt", 'w');
 			//fwrite($log, "start logging - session language" . "\r\n" );
 
-			if ($SESSION['language'] == 'en') { 
+			if (_elgg_services()->session->get('language') == 'en') { 
 			//if ($_COOKIE["cc_lang"] == 'en'){
 				//fwrite($log, "session is in english" . "\r\n" );
 
