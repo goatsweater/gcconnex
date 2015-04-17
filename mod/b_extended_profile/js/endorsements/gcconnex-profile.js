@@ -826,11 +826,11 @@ function addMore(identifier) {
         function(data) {
             // Output in a DIV with id=somewhere
             $('.gcconnex-' + another + '-all').append(data);
-            if (another == "work-experience") {
-                var targ = $('.gcconnex-work-experience-entry').last().children('input.userfind');
-                user_search_init(targ);
-            }
         });
+    if (another == "work-experience") {
+        var targ = $('.gcconnex-work-experience-entry.new').find('.userfind');
+        user_search_init(targ);
+    }
 }
 
 /*
