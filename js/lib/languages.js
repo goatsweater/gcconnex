@@ -22,11 +22,19 @@ elgg.add_translation = function(lang, translations) {
  * @return {String}
  */
 elgg.get_language = function() {
-	var user = elgg.get_logged_in_user_entity();
+	/*var user = elgg.get_logged_in_user_entity();
 
 	if (user && user.language) {
 		return user.language;
-	}
+	}*/
+	if ( isset($_COOKIE["connex_lang"]) )
+  		_elgg_services()->session->set( 'language', $_COOKIE["connex_lang"] );
+ 	else
+  		_elgg_services()->session->set( 'language', 'en' );
+  
+
+  	if ( _elgg_services()->session->get('language') )
+   		return _elgg_services()->session->get('language');
 
 	return elgg.config.language;
 };

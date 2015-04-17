@@ -149,8 +149,18 @@ class Translator {
 	function getLanguage() {
 		$user = _elgg_services()->session->getLoggedInUser();
 		$language = false;
+
+		if ( isset($_COOKIE["connex_lang"]) )
+  			_elgg_services()->session->set( 'language', $_COOKIE["connex_lang"] );
+ 		else
+  			_elgg_services()->session->set( 'language', 'en' );
+  
+
+  		if ( _elgg_services()->session->get('language') )
+   			$language = _elgg_services()->session->get('language');
+
 	
-		if (($user) && ($user->language)) {
+		if ((!$language) && ($user) && ($user->language)) {
 			$language = $user->language;
 		}
 	
