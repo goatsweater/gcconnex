@@ -658,6 +658,10 @@ function isNumberKey(evt){
  */
 function toggleEndDate(evt) {
 
+    $(evt).closest('.gcconnex-work-experience-entry').find('.gcconnex-work-experience-end-year').attr('disabled', evt.checked)
+    $(evt).closest('.gcconnex-work-experience-entry').find('.gcconnex-work-experience-enddate').attr('disabled', evt.checked)
+
+    /*
     $(evt).closest('.gcconnex-work-experience-entry').find('.gcconnex-work-experience-end-year').attr('disabled', function(index, attr) {
         return attr == 'disabled' ? null : 'disabled';
     });
@@ -665,6 +669,7 @@ function toggleEndDate(evt) {
     $(evt).closest('.gcconnex-work-experience-entry').find('.gcconnex-work-experience-enddate').attr('disabled', function(index, attr) {
         return attr == 'disabled' ? null : 'disabled';
     });
+    */
     /*
     $('.gcconnex-' + section + '-enddate-' + guid).attr('disabled', function(index, attr) {
         return attr == 'disabled' ? null : 'disabled';

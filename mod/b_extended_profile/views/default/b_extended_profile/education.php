@@ -16,7 +16,6 @@ if ($user->canEdit() && ($education_guid == NULL || empty($education_guid))) {
     echo elgg_echo('gcconnex_profile:education:empty');
 }
 else {
-var_dump($education_guid);
     if (!(is_array($education_guid))) {
         $education_guid = array($education_guid);
     }
