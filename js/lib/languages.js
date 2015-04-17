@@ -27,14 +27,10 @@ elgg.get_language = function() {
 	if (user && user.language) {
 		return user.language;
 	}*/
-	if ( isset($_COOKIE["connex_lang"]) )
-  		_elgg_services()->session->set( 'language', $_COOKIE["connex_lang"] );
- 	else
-  		_elgg_services()->session->set( 'language', 'en' );
-  
+	var lang_cookie = $.cookie("connex_lang");
 
-  	if ( _elgg_services()->session->get('language') )
-   		return _elgg_services()->session->get('language');
+	if ( lang_cookie )
+		return lang_cookie;
 
 	return elgg.config.language;
 };
