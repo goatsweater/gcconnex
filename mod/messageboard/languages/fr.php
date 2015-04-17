@@ -1,72 +1,70 @@
 <?php
 
-$french = array(
+return array(
 
 	/**
 	 * Menu items and titles
 	 */
 
-	'messageboard:board' => "Panneau de message",
-	'messageboard:messageboard' => "panneau de message",
-	'messageboard:viewall' => "voir tous",
-	'messageboard:postit' => "poster",
-	'messageboard:history:title' => "Histoire",
-	'messageboard:none' => "Il n'y a rien sur ce forum pour le momentt",
+	'messageboard:board' => "Forum",
+	'messageboard:messageboard' => "forum",
+	'messageboard:viewall' => "Voir tout",
+	'messageboard:postit' => "Envoyer",
+	'messageboard:history:title' => "Historique",
+	'messageboard:none' => "Il n'y a encore rien dans le forum",
 	'messageboard:num_display' => "Nombre de messages à afficher",
-	'messageboard:desc' => "C'est un babillard que vous pouvez mettre sur votre profil lequel les autres utilisateurs peuvent faire des commentaires.",
+	'messageboard:desc' => "Ceci est un forum que vous pouvez ajouter sur votre profil, et où les autres utilisateurs peuvent laisse un message.",
 
-	'messageboard:user' => "%s's panneau de message",
+	'messageboard:user' => "forum de %s",
 
-	'messageboard:replyon' => 'répondre sur',
-	'messageboard:history' => "histoire",
+	'messageboard:replyon' => 'réponse sur',
+	'messageboard:history' => "historique",
 
-	'messageboard:owner' => '%s\'s panneau de message',
-	'messageboard:owner_history' => '%s\'s posts on %s\'s message board',
+	'messageboard:owner' => 'forum de %s',
+	'messageboard:owner_history' => '%s a envoyé un message sur le forum de %s',
 
 	/**
 	 * Message board widget river
 	 */
-	'river:messageboard:user:default' => "%s posted on %s's message board",
+	'river:messageboard:user:default' => "%s a envoyé un message sur le forum de %s",
 
 	/**
 	 * Status messages
 	 */
 
-	'messageboard:posted' => "You successfully posted on the message board.",
-	'messageboard:deleted' => "You successfully deleted the message.",
+	'messageboard:posted' => "Votre message a bien été envoyé sur le forum.",
+	'messageboard:deleted' => "Votre message a bien été supprimé.",
 
 	/**
 	 * Email messages
 	 */
 
-	'messageboard:email:subject' => 'Vous avez un nouveau babillard commentaire!',
-	'messageboard:email:body' => "Vous avez un nouveau commentairesur votre babillard! %s. Il lit:
+	'messageboard:email:subject' => 'Vous avez un nouveau message sur le forum !',
+	'messageboard:email:body' => "Vous avez reçu un nouveau message de %s sur votre forum. Il est écrit :
 
 
 %s
 
 
-To view your message board comments, click here:
+Pour voir vos messages de forum, cliquez sur :
 
 	%s
 
-To view %s's profile, click here:
+Pour voir le profil de %s, cliquez sur :
 
 	%s
 
-You cannot reply to this email.",
+Vous ne pouvez pas répondre à cet email.",
 
 	/**
 	 * Error messages
 	 */
 
-	'messageboard:blank' => "Sorry; you need to actually put something in the message area before we can save it.",
-	'messageboard:notfound' => "Sorry; we could not find the specified item.",
-	'messageboard:notdeleted' => "Sorry; we could not delete this message.",
-	'messageboard:somethingwentwrong' => "Something went wrong when trying to save your message, make sure you actually wrote a message.",
+	'messageboard:blank' => "Désolé, vous devez écrire quelque chose dans le corps du message avant de pouvoir l'enregistrer.",
+	'messageboard:notfound' => "Désolé, l'élément spécifié n'a pu être trouvé.",
+	'messageboard:notdeleted' => "Désolé, ce message n'a pu être effacé.",
+	'messageboard:somethingwentwrong' => "Quelque chose a tourné court lors de l'enregistrement de votre message, veuillez vérifier que vous avez bien écrit un message.",
 
-	'messageboard:failure' => "An unexpected error occurred when adding your message. Please try again.",
+	'messageboard:failure' => "Une erreur imprévue s'est produite lors de l'ajout de votre message. Veuillez réeessayer.",
 
 );
-
-add_translation("fr", $french);

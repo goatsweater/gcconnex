@@ -1,21 +1,14 @@
 <?php
-/**
- * Embed French language strings
- *
- */
-
-$french = array(
-	'embed:embed' => 'Incorporer',
-	'embed:media' => 'Incorporer du contenu',
-	'embed:instructions' => "Cliquez sur un fichier pour l'intégrer dans votre contenu.",
-	'embed:upload' => 'Envoyez médias',
-	'embed:upload_type' => 'type de transfert: ',
+return array(
+	'embed:embed' => 'Importé',
+	'embed:media' => 'Fichier importé',
+	'embed:instructions' => 'Cliquez sur le fichier de votre choix pour l\'importer dans votre contenu.',
+	'embed:upload' => 'Envoyer des médias',
+	'embed:upload_type' => 'Envoyer type : ',
 
 	// messages
-	'embed:no_upload_content' => 'Aucun contenu de téléchargement!',
-	'embed:no_section_content' => 'Aucun article trouvé.',
+	'embed:no_upload_content' => 'Aucun fichier téléchargé !',
+	'embed:no_section_content' => 'Pas d\'éléments trouvés.',
 
-	'embed:no_sections' => "Aucun plugin soutenus trouvé. Demandez à l'administrateur du site afin de permettre un plugin avec un support intégré.",
+	'embed:no_sections' => 'Aucun plugin gérant l\'intégration de fichier média n\'a été trouvé. Demander à l\'administrateur du site d\'activer un plugin gérant l\'intégration de fichier média.',
 );
-
-add_translation("fr", $french);

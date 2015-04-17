@@ -1,304 +1,311 @@
 <?php
-/**
- * Elgg groups plugin language pack
- * 
- * @package ElggGroups
- * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU Public License version 2
- * @author Curverider Ltd
- * @copyright Curverider Ltd 2008-2009
- * @link http://elgg.com/
- */
-
-$french = array(
+return array(
 
 	/**
-	* Menu items and titles
-	*/
+	 * Menu items and titles
+	 */
 	'groups' => "Groupes",
-	'groups:owned' => "Groupes dont vous êtes propriétaire",
-	'groups:owned:user' => 'Groups %s owns', //translate
-	'groups:yours' => "Vos groupes",
-	'groups:user' => "Groupes de %s",
-	'groups:all' => "Tous les groupes du site",
+	'groups:owned' => "Les groupes que je possède",
+	'groups:owned:user' => 'Les groupes que %s possède',
+	'groups:yours' => "Mes groupes",
+	'groups:user' => "Les groupes de %s",
+	'groups:all' => "Tous les groupes",
 	'groups:add' => "Créer un nouveau groupe",
-	'groups:edit' => "Gérer le groupe",
+	'groups:edit' => "Modifier le groupe",
 	'groups:delete' => 'Supprimer le groupe',
-	'groups:membershiprequests' => "Gérer les demandes d'adhésion",
-	'groups:invitations' => 'Invitations de groupe',
+	'groups:membershiprequests' => 'Gérer les membres souhaitant se joindre au groupe',
+	'groups:membershiprequests:pending' => 'Gérer les membres souhaitant se joindre au groupe (%s)',
+	'groups:invitations' => 'Invitations du groupe',
+	'groups:invitations:pending' => 'Invitations du groupe (%s)',
 
-	'groups:icon' => 'Icône de groupe (laisser tel quel ou laisser en blanc)',
-	'groups:name' => 'Nom de groupe',
-	'groups:username' => 'Nom de groupe abrégé (affiché dans les URL, caractères alphanumériques seulement)',
+	'groups:icon' => 'Icone du groupe (ne rien inscrire pour laisser inchangé)',
+	'groups:name' => 'Nom du groupe',
+	'groups:username' => 'Nom court du goupe (Qui s\'affichera dans l\'URL : en caractères alphanumériques)',
 	'groups:description' => 'Description',
-	'groups:briefdescription' => 'Description brève',
-	'groups:interests' => 'Intérêts',
-	'groups:website' => 'Site Web',
+	'groups:briefdescription' => 'Brève description',
+	'groups:interests' => 'Tags',
+	'groups:website' => 'Site web',
 	'groups:members' => 'Membres du groupe',
-	'groups:members:title' => 'Members of %s', //translate
+	'groups:my_status' => 'Mon status',
+	'groups:my_status:group_owner' => 'Vous possédez ce groupe',
+	'groups:my_status:group_member' => 'Vous êtes dans ce groupe',
+	'groups:subscribed' => 'Notifications du groupe actif',
+	'groups:unsubscribed' => 'Notifications du groupe inactif',
+
+	'groups:members:title' => 'Les membres de %s',
 	'groups:members:more' => "Voir tous les membres",
-	'groups:membership' => "Autorisations aux membres du groupe ",
-	'groups:access' => "Autorisations d'accès",
+	'groups:membership' => "Permissions d'accès au groupe",
+	'groups:content_access_mode' => "Accessibilité au contenu du groupe",
+	'groups:content_access_mode:warning' => "Attention: la modification de ce paramètre ne changera pas l'autorisation d'accès au contenu du groupe existant.",
+	'groups:content_access_mode:unrestricted' => "Sans restriction - L'accès dépend des réglages au niveau du contenu",
+	'groups:content_access_mode:membersonly' => "Membres seulement - Les non-membres ne peuvent pas accéder au contenu du groupe",
+	'groups:access' => "Permissions d'accès",
 	'groups:owner' => "Propriétaire",
+	'groups:owner:warning' => "Attention: si vous changez cette valeur, vous ne serez plus le propriétaire du groupe.",
 	'groups:widget:num_display' => 'Nombre de groupes à afficher',
-	'groups:widget:membership' => 'Appartenance aux groupes',
-	'groups:widgets:description' => 'Afficher les groupes dont vous faites partie dans votre profil',
-	'groups:noaccess' => "Pas d'accès au groupe",
+	'groups:widget:membership' => 'Adhésion au groupe',
+	'groups:widgets:description' => 'Afficher les groupes dont vous êtes membre dans votre profil',
+
+	'groups:widget:group_activity:title' => 'Activité du Groupe',
+	'groups:widget:group_activity:description' => 'Afficher l\'activité dans un de vos groupes',
+	'groups:widget:group_activity:edit:select' => 'Sélectionnez un groupe',
+	'groups:widget:group_activity:content:noactivity' => 'Il n\'y a pas d\'activité dans ce groupe',
+	'groups:widget:group_activity:content:noselect' => 'Editez ce widget pour sélectionner un groupe',
+
+	'groups:noaccess' => 'Vous n\'avez pas accès au groupe',
+	'groups:permissions:error' => 'Vous n\'avez pas les autorisations pour çà',
+	'groups:ingroup' => 'dans le groupe',
+	'groups:cantcreate' => 'Vous ne pouvez créer un groupe. Seul les administrateurs peuvent.',
 	'groups:cantedit' => 'Vous ne pouvez pas modifier ce groupe',
 	'groups:saved' => 'Groupe enregistré',
-	'groups:featured' => 'Groupes en vedette',
-	'groups:makeunfeatured' => 'Supprimer des groupes en vedette',
-	'groups:makefeatured' => 'Mettre un groupe en vedette',
-	'groups:featuredon' => 'Vous avez fait de ce groupe un groupe en vedette.',
-	'groups:unfeature' => 'Vous avez supprimé ce groupe de la liste des groupes en vedette',
-	'groups:featured_error' => 'Invalid group.', //translate
-	'groups:joinrequest' => 'Demander de devenir membre',
-	'groups:join' => 'Devenir membre du groupe',
+	'groups:featured' => 'Les groupes à la une',
+	'groups:makeunfeatured' => 'Enlever de la une',
+	'groups:makefeatured' => 'Mettre à la une',
+	'groups:featuredon' => '%s est maintenant un groupe à la une.',
+	'groups:unfeatured' => 's% a été enlevé par les groupes à la une.',
+	'groups:featured_error' => 'Groupe invalide.',
+	'groups:nofeatured' => 'Pas de groupes à la une',
+	'groups:joinrequest' => 'Demander une adhésion au groupe',
+	'groups:join' => 'Rejoindre le groupe',
 	'groups:leave' => 'Quitter le groupe',
-	'groups:invite' => 'Inviter des collègues',
-	'groups:invite:title' => 'Invite friends to this group', //translate
-	'groups:inviteto' => "Inviter des collègues à '%s'",
-	'groups:nofriends' => "Tous vos collègues ont été invités à faire partie de ce groupe.",
-	'groups:nofriendsatall' => 'You have no friends to invite!', //translate
-	'groups:viagroups' => "par l'intermédiaire de groupes",
+	'groups:invite' => 'Inviter des contacts',
+	'groups:invite:title' => 'Invitez des amis à ce groupe',
+	'groups:inviteto' => "Inviter des contacts au groupe '%s'",
+	'groups:nofriends' => "Vous n'avez plus de contacts à inviter à ce groupe.",
+	'groups:nofriendsatall' => 'Vous n\'avez pas d\'amis à inviter !',
+	'groups:viagroups' => "Via les groupes",
 	'groups:group' => "Groupe",
-	'groups:notfound' => "Groupe introuvable",
-	'groups:notfound:details' => "Le groupe demandé est inexistant ou vous n'y avez pas accès",
-	'groups:requests:none' => "Il n'y a actuellement aucune demande d'adhésion en attente.",
-	'groups:search:tags' => "tag",
-	'groups:search:title' => "Rechercher des groupes ayant les mots-clés '%s'",
-	'groups:search:none' => "Aucun groupe n’a été trouvé avec ces critères de recherche",
-	'groups:search_in_group' => "Rechercher dans ce groupe",
-	'groups:acl' => "Group: %s",
-	'groups:permissions:error' => 'You do not have the permissions for this',
-	'groups:ingroup' => 'in the group',
+	'groups:search:tags' => "Tag",
+	'groups:search:title' => "Rechercher des groupes qui contiennent le tag '% s'",
+	'groups:search:none' => "Aucun groupe correspondant n'a été trouvé",
+	'groups:search_in_group' => "Chercher dans ce groupe",
+	'groups:acl' => "Groupe : %s",
 
-	'discussion:notification:topic:subject' => 'Nouvelle discussion de groupe', //translate
-	'groups:notification' =>
-		'%s a ajouté un nouveau sujet de discussion à %s:
+	'discussion:topic:notify:summary' => 'Nouveau sujet de discussion appelé %s',
+	'discussion:topic:notify:subject' => 'Nouveau sujet de discussion: %s',
+	'discussion:topic:notify:body' =>
+'%s a ajouté un nouveau sujet de discussion au groupe %s:
 
-		%s
-		%s
-
-		Afficher et répondre à la discussion:
-		%s
-	',
-
-	'discussion:notification:reply:body' =>
-'%s a répondu à la question de discussion %s dans le groupe %s:
+Titre: %s
 
 %s
 
-Afficher et répondre à la discussion:
+Afficher et répondre au sujet de discussion:
 %s
-', //translate
-	
-	'groups:activity' => "L'activité du Groupe",
-	'groups:enableactivity' => 'Activer activité de groupe',
-	'groups:activity:none' => "Il n'y a pas encore de l'activité de groupe",
+',
 
-	'groups:notfound' => "Group not found", //translate
-	'groups:notfound:details' => "The requested group either does not exist or you do not have access to it", //translate
+	'discussion:reply:notify:summary' => 'Nouvelle réponse au sujet: %s',
+	'discussion:reply:notify:subject' => 'Nouvelle réponse au sujet: %s',
+	'discussion:reply:notify:body' =>
+'%s a répondu au sujet de discussion %s dans le groupe %s:
 
-	'groups:requests:none' => 'There are no current membership requests.', //translate
+%s
 
-	'groups:invitations:none' => "Il n’y a aucune invitation pour l’instant.", //translate
+Voir et répondre à la discussion :
+%s
+',
+
+	'groups:activity' => "Activité du Groupe",
+	'groups:enableactivity' => 'Rendre disponible Activité de groupe',
+	'groups:activity:none' => "Il n'y a pas encore d'activité de groupe",
+
+	'groups:notfound' => "Le groupe n'a pas été trouvé",
+	'groups:notfound:details' => "Le groupe que vous recherchez n'existe pas, ou alors vous n'avez pas la permission d'y accéder",
+
+	'groups:requests:none' => 'Il n\'y a pas de membre demandant de rejoindre le groupe en ce moment.',
+
+	'groups:invitations:none' => 'Il n\'y a pas d\'invitations en attente.',
 
 	'item:object:groupforumtopic' => "Sujets de discussion",
+	'item:object:discussion_reply' => "Réponses à la discussion",
 
-	'groupforumtopic:new' => "Nouvel article de discussion",
+	'groupforumtopic:new' => "Ajouter un message à la discussion",
 
-	'groups:count' => "groupes créés",
+	'groups:count' => "groupe créé",
 	'groups:open' => "groupe ouvert",
 	'groups:closed' => "groupe fermé",
 	'groups:member' => "membres",
-	'groups:searchtag' => "Recherche de groupes par mot-clé",
+	'groups:searchtag' => "Rechercher des groupes par des mots-clé",
 
-	'groups:more' => 'Plus de groupes', //translate
+	'groups:more' => 'Plus de groupes',
 	'groups:none' => 'Aucun groupe',
 
-	/*
-	* Access
-	*/
+	/**
+	 * Access
+	 */
 	'groups:access:private' => 'Fermé - Les utilisateurs doivent être invités',
-	'groups:access:public' => 'Ouvert - Tout utilisateur peut participer',
+	'groups:access:public' => 'Ouvert - N\'importe quel utilisateur peut rejoindre le groupe',
 	'groups:access:group' => 'Membres du groupe seulement',
-	'groups:closedgroup' => "Ce groupe est fermé. Pour y être ajouté, cliquez sur le lien de menu 'demande d'ajout au groupe'.",
-	'groups:closedgroup:request' => 'To ask to be added, click the "request membership" menu link.', //translate
-	'groups:visibility' => 'Qui peut voir le groupe?',
+	'groups:closedgroup' => "L'adhésion à ce groupe est fermé.",
+	'groups:closedgroup:request' => 'Pour être membre, clicker sur "Demande d\'adhésion" sur le menu.',
+	'groups:closedgroup:membersonly' => "Les inscriptions à ce groupe sont fermées et son contenu est accessible uniquement aux membres.",
+	'groups:opengroup:membersonly' => "Le contenu de ce groupe est accessible uniquement à ses membres.",
+	'groups:opengroup:membersonly:join' => 'Pour faire partie des membres, cliquez sur le lien du menu "Rejoindre le groupe".',
+	'groups:visibility' => 'Qui peut voir ce groupe ?',
 
-	/*
-	Group tools
-	*/
-	'groups:enablepages' => 'Activer les pages de groupe',
-	'groups:enableforum' => 'Activer la discussion de groupe',
-	'groups:enablefiles' => 'Activer les fichiers de groupe',
-	'groups:yes' => 'oui',
-	'groups:no' => 'non',
-	'group:created' => '%s a été créé avec %d articles',
+	/**
+	 * Group tools
+	 */
+	'groups:enableforum' => 'Activer le module \'discussion\' du groupe',
 	'groups:lastupdated' => 'Dernière mise à jour le %s par %s',
-	'groups:lastcomment' => 'Last comment %s by %s', //translate
-	'groups:pages' => 'Pages de groupe',
-	'groups:files' => 'Fichiers de groupe',
+	'groups:lastcomment' => 'Dernier commentaire %s by %s',
 
-	/*
-	Group discussion
-	*/
+	/**
+	 * Group discussion
+	 */
 	'discussion' => 'Discussion',
-	'discussion:add' => 'Ajouter le sujet de discussion',
+	'discussion:add' => 'Ajouter un sujet de discussion',
 	'discussion:latest' => 'Dernière discussion',
-	'discussion:group' => 'Discussion de groupe',
-	'discussion:none' => 'Pas de discussion',
-	'discussion:reply:title' => 'Répondre par %s',
+	'discussion:group' => 'Groupe de discussion',
+	'discussion:none' => 'Aucune discussion',
+	'discussion:reply:title' => 'Réponse par %s',
 
 	'discussion:topic:created' => 'Le sujet de discussion a été créé.',
 	'discussion:topic:updated' => 'Le sujet de discussion a été mis à jour.',
-	'discussion:topic:deleted' => 'Sujet de discussion a été supprimé.',
+	'discussion:topic:deleted' => 'Le sujet de discussion a été supprimée.',
 
-	'discussion:topic:notfound' => 'Sujet de discussion introuvable',
-	'discussion:error:notsaved' => "Impossible d'enregistrer ce sujet",
-	'discussion:error:missing' => 'Le titre et le message sont des champs obligatoires',
-	'discussion:error:permissions' => "Vous n'avez pas d'autorisations d'effectuer cette action",
-	'discussion:error:notdeleted' => 'Impossible de supprimer sujet de discussion',
+	'discussion:topic:notfound' => 'Le sujet de discussion est introuvable',
+	'discussion:error:notsaved' => 'Impossible d\'enregistrer ce sujet',
+	'discussion:error:missing' => 'Les deux champs \'titre\' et \'message\' sont obligatoires',
+	'discussion:error:permissions' => 'Vous n\'avez pas les autorisations pour effectuer cette action',
+	'discussion:error:notdeleted' => 'Impossible de supprimer le sujet de discussion',
 
-	'discussion:reply:deleted' => 'Réponse de discussion a été supprimé.',
-	'discussion:reply:error:notdeleted' => 'Impossible de supprimer la réponse de discussion',
+	'discussion:reply:edit' => 'Modifier la réponse',
+	'discussion:reply:deleted' => 'La réponse de la discussion a été supprimée.',
+	'discussion:reply:error:notfound' => 'La réponse à cette discussion n\'a pas été trouvée',
+	'discussion:reply:error:notdeleted' => 'Impossible de supprimer la réponse de la discussion',
 
-	'reply:this' => 'Reply to this', //translate
+	'admin:groups' => 'Groupes',
+
+	'reply:this' => 'Répondre à çà',
 
 	'group:replies' => 'Réponses',
-	'groups:forum' => 'Discussion de groupe',
-	'groups:forum:created' => 'Created %s with %d comments', //translate
-	'groups:forum:created:single' => 'Created %s with %d reply', //translate
+	'groups:forum:created' => 'Créé %s avec %d commentaires',
+	'groups:forum:created:single' => 'Créé %s avec %d réponse',
+	'groups:forum' => 'Discussion',
 	'groups:addtopic' => 'Ajouter un sujet',
 	'groups:forumlatest' => 'Dernière discussion',
 	'groups:latestdiscussion' => 'Dernière discussion',
-	'groups:newest' => 'La plus récente',
-	'groups:popular' => 'Populaire',
-	'groupspost:success' => 'Votre commentaire a été publié avec succès',
+	'groupspost:success' => 'Votre réponse a été publié avec succès',
+	'groupspost:failure' => 'Il y a eu un problème lors de la publication de votre réponse',
 	'groups:alldiscussion' => 'Dernière discussion',
-	'groups:edittopic' => 'Modifier un sujet',
-	'groups:topicmessage' => 'Message relatif au sujet',
-	'groups:topicstatus' => 'État du sujet',
+	'groups:edittopic' => 'Modifier le sujet',
+	'groups:topicmessage' => 'Message du sujet',
+	'groups:topicstatus' => 'Statut du sujet',
 	'groups:reply' => 'Publier un commentaire',
-	'groups:topic' => 'Sujet',
-	'groups:posts' => 'Articles',
+	'groups:topic' => 'Sujets',
+	'groups:posts' => 'Posts',
 	'groups:lastperson' => 'Dernière personne',
 	'groups:when' => 'Quand',
-	'grouptopic:notcreated' => "Aucun sujet n'a été créé.",
-	'groups:topicopen' => 'Ouvert',
+	'grouptopic:notcreated' => 'Aucun sujet n\'a été créé.',
 	'groups:topicclosed' => 'Fermé',
-	'groups:topicresolved' => 'Résolu',
 	'grouptopic:created' => 'Votre sujet a été créé.',
-	'groupstopic:deleted' => 'Le sujet a été supprimé.',
-	'groups:topicsticky' => 'Difficile',
-	'groups:topicisclosed' => 'Ce sujet est fermé.',
-	'groups:topiccloseddesc' => 'Ce sujet est maintenant fermé. Les commentaires ne sont plus acceptés.',
-	'grouptopic:error' => 'Impossible de créer votre sujet de discussion de groupe. Veuillez réessayer ou communiquer avec un administrateur système.',
-	'groups:forumpost:edited' => "Vous avez modifié l'article de discussion avec succès.",
-	'groups:forumpost:error' => "Un problème est survenu dans la modification de l'article de discussion.",
-	'groups:privategroup' => "Ce groupe est privé; demande d'ajout en cours",
+	'groups:topicsticky' => 'Sticky',
+	'groups:topicisclosed' => 'Cette discussion sujet est fermée.',
+	'groups:topiccloseddesc' => 'Cette discussion a été fermée et n\'accepte plus de nouveaux commentaires.',
+	'grouptopic:error' => 'Votre sujet n\'a pas pu être créé. Merci d\'essayer plus tard ou de contacter un administrateur du système.',
+	'groups:forumpost:edited' => "Vous avez modifié ce billet avec succés.",
+	'groups:forumpost:error' => "Il y a eu un problème lors de la modification du billet.",
+
+	'groups:privategroup' => 'Ce groupe est privé. Il est nécessaire de demander une adhésion.',
 	'groups:notitle' => 'Les groupes doivent avoir un titre',
-	'groups:cantjoin' => 'Impossible de se joindre au groupe',
-	'groups:cantleave' => 'Impossible de quitter le groupe',
+	'groups:cantjoin' => 'N\'a pas pu rejoindre le groupe',
+	'groups:cantleave' => 'N\'a pas pu quitter le groupe',
 	'groups:removeuser' => 'Retirer du groupe',
-	'groups:cantremove' => 'Cannot remove user from group', //translate
-	'groups:removed' => '%s a été retiré du groupe',
-	'groups:addedtogroup' => 'Utilisateur ajouté avec succès au groupe',
-	'groups:joinrequestnotmade' => "Impossible d'exécuter la demande d'ajout au groupe",
-	'groups:joinrequestmade' => "Demande d'ajout au groupe exécutée avec succès",
-	'groups:joined' => 'Ajout au groupe exécuté avec succès!',
-	'groups:left' => 'Sortie du groupe exécutée avec succès',
-	'groups:notowner' => "Désolé, vous n'êtes pas le propriétaire de ce groupe.",
-	'groups:notmember' => 'Sorry, you are not a member of this group.', //translate
-	'groups:alreadymember' => 'Vous êtes déjà membre de ce groupe!',
-	'groups:userinvited' => "L'utilisateur a été invité.",
-	'groups:usernotinvited' => "Il a été impossible d'inviter l'utilisateur.",
-	'groups:useralreadyinvited' => "L'utilisateur a déjà été invité",
-	'groups:invite:subject' => "%s vous avez été invité à vous joindre à %s!",
-	'groups:updated' => "Dernier commentaire",
-	'groups:started' => "Démarré par",
-	'groups:joinrequest:remove:check' => "Êtes-vous certain de vouloir supprimer cette demande d'ajout au groupe?",
-	'groups:invite:remove:check' => 'Are you sure you want to remove this invite?', //translate
+	'groups:cantremove' => 'Ne peut retirer l\'utilisateur du groupe',
+	'groups:removed' => 'Retiré du groupe %s avec succès',
+	'groups:addedtogroup' => 'A ajouté avec succés l\'utilisateur au groupe',
+	'groups:joinrequestnotmade' => 'La demande d\'adhésion n\'a pas pu être réalisée',
+	'groups:joinrequestmade' => 'La demande d\'adhésion s\'est déroulée avec succés',
+	'groups:joined' => 'Vous avez rejoint le groupe avec succés !',
+	'groups:left' => 'Vous avez quitter le groupe avec succés',
+	'groups:notowner' => 'Désolé, vous n\'êtes pas le propriétaire du groupe.',
+	'groups:notmember' => 'Désolé, vous n\'êtes pas membre de ce groupe.',
+	'groups:alreadymember' => 'Vous êtes déjà membre de ce groupe !',
+	'groups:userinvited' => 'L\'utilisateur a été invité.',
+	'groups:usernotinvited' => 'L\'utilisateur n\'a pas pu être invité',
+	'groups:useralreadyinvited' => 'L\'utilisateur a déjà été invité',
+	'groups:invite:subject' => "%s vous avez été invité(e) à rejoindre %s !",
+	'groups:updated' => "Derniere réponse par %s %s",
+	'groups:started' => "Démarré par %s",
+	'groups:joinrequest:remove:check' => 'Etes-vous sûr de vouloir supprimer cette demande d\'adhésion ?',
+	'groups:invite:remove:check' => 'Etes-vous sûr de vouloir supprimer cette invitation ?',
 	'groups:invite:body' => "Bonjour %s,
 
-Vous êtes invité(e) à vous joindre au groupe '%s'; cliquez ci-dessous pour confirmer :
+Vous avez été invité(e) à rejoindre le groupe '%s' cliquez sur le lien ci-dessous pour confirmer:
 
 %s",
 
-	'groups:welcome:subject' => "Bienvenue dans le groupe %s!",
-	'groups:welcome:body' => "Bonjour %s!
-
-Vous êtes maintenant membre du groupe '%s'! Cliquez ci-dessous pour commencer à publier!
+	'groups:welcome:subject' => "Bienvenue dans le groupe %s !",
+	'groups:welcome:body' => "Bonjour %s !
+		
+Vous êtes maintenant membre du groupe '%s' ! Cliquez le lien ci-dessous pour commencer à participer !
 
 %s",
 
-	'groups:request:subject' => "%s a demandé de faire partie de %s",
+	'groups:request:subject' => "%s a demandé une adhésion à %s",
 	'groups:request:body' => "Bonjour %s,
 
-%s a demandé de faire partie du groupe '%s'; cliquez ci-dessous pour afficher son profil :
+%s a demandé à rejoindre le groupe '%s', cliquez le lien ci-dessous pour voir son profil :
 
 %s
 
-ou cliquez ci-dessous pour confirmer la demande :
+ou cliquez le lien ci-dessous pour confirmer son adhésion :
 
 %s",
 
-	/*
-	Forum river items
-	*/
-	'groups:river:member' => 'fait maintenant partie de',
-	'groupforum:river:updated' => '%s a mis à jour',
-	'groupforum:river:update' => 'ce sujet de discussion',
-	'groupforum:river:created' => '%s a créé',
-	'groupforum:river:create' => 'un nouveau sujet de discussion intitulé',
-	'groupforum:river:posted' => '%s a publié un nouveau commentaire',
-	'groupforum:river:annotate:create' => 'sur ce sujet de discussion',
-	'groupforum:river:postedtopic' => '%s a démarré un nouveau sujet de discussion intitulé',
-	'groups:river:member' => '%s fait maintenant partie de',
+	/**
+	 * Forum river items
+	 */
 
-	'river:create:group:default' => '%s a créé le groupe %s', //translate
-	'river:join:group:default' => '%s s’est joint(e) au groupe %s',
-	'river:create:object:groupforumtopic' => '%s added a new discussion topic %s', //translate
-	'river:reply:object:groupforumtopic' => '%s a répondu dans le fil de discussion %s', //translate
+	'river:create:group:default' => '%s a créé le groupe %s',
+	'river:join:group:default' => '%s a rejoint le groupe %s',
+	'river:create:object:groupforumtopic' => '%s a ajouté un nouveau sujet de discussion %s',
+	'river:reply:object:groupforumtopic' => '%s a répondu sur le sujet de discussion %s',
+	'river:reply:view' => 'afficher la réponse',
 
-	'groups:nowidgets' => "Aucun widget n'a été défini pour ce groupe.",
+	'groups:nowidgets' => 'Aucun widget n\'ont été défini pour ce groupe.',
+
 
 	'groups:widgets:members:title' => 'Membres du groupe',
-	'groups:widgets:members:description' => "Présente la liste des membres d'un groupe.",
-	'groups:widgets:members:label:displaynum' => "Présente la liste des membres d'un groupe.",
-	'groups:widgets:members:label:pleaseedit' => 'Veuillez configurer ce widget.',
+	'groups:widgets:members:description' => 'Lister les membres d\'un groupe.',
+	'groups:widgets:members:label:displaynum' => 'Lister les membres d\'un groupe.',
+	'groups:widgets:members:label:pleaseedit' => 'Merci de configurer ce widget.',
 
 	'groups:widgets:entities:title' => "Objets dans le groupe",
-	'groups:widgets:entities:description' => "Présente la liste des objets enregistrés dans ce groupe",
-	'groups:widgets:entities:label:displaynum' => "Présente la liste des objets d'un groupe.",
-	'groups:widgets:entities:label:pleaseedit' => 'Veuillez configurer ce widget.',
+	'groups:widgets:entities:description' => "Lister les objets enregistré dans ce groupe",
+	'groups:widgets:entities:label:displaynum' => 'Lister les objets d\'un groupe.',
+	'groups:widgets:entities:label:pleaseedit' => 'Merci de configurer ce widget.',
 
-	'groups:forumtopic:edited' => 'Sujet de discussion de groupe mis à jour avec succès.',
+	'groups:forumtopic:edited' => 'Sujet du forum modifié avec succés.',
 
-	'groups:allowhiddengroups' => 'Do you want to allow private (invisible) groups?', //translate
+	'groups:allowhiddengroups' => 'Voulez-vous permettre les groupes privés (invisibles) ?',
+	'groups:whocancreate' => 'Qui peut créer un nouveau groupe ?',
 
 	/**
-	* Action messages
-	*/
-	'group:deleted' => 'Groupe et contenu du groupe supprimés',
-	'group:notdeleted' => 'Il a été impossible de supprimer le groupe',
+	 * Action messages
+	 */
+	'group:deleted' => 'Contenus du groupe et groupe supprimés',
+	'group:notdeleted' => 'Le groupe n\'a pas pu être supprimé',
 
-	'group:notfound' => 'Could not find the group', //translate
-	'grouppost:deleted' => 'Publication du groupe supprimée avec succès',
-	'grouppost:notdeleted' => 'Il a été impossible de supprimer le groupe',
-	'groupstopic:deleted' => 'Sujet supprimé',
-	'groupstopic:notdeleted' => 'Sujet non supprimé',
-	'grouptopic:blank' => "Il n'y a pas de sujet de discussion",
-	'grouptopic:notfound' => 'Could not find the topic', //translate
-	'grouppost:nopost' => 'Empty post', //translate
-	'groups:deletewarning' => "Êtes-vous certain de vouloir supprimer ce groupe? L'opération ne peut être annulée!",
+	'group:notfound' => 'Impossible de trouver le groupe',
+	'grouppost:deleted' => 'La publication dans le groupe a été effacée',
+	'grouppost:notdeleted' => 'La publication dans le groupe n\'a pas pu être effacée',
+	'groupstopic:deleted' => 'Sujet supprimé.',
+	'groupstopic:notdeleted' => 'Le sujet n\'a pas pu être supprimé',
+	'grouptopic:blank' => 'Pas de sujet',
+	'grouptopic:notfound' => 'Le sujet n\'a pu être trouvé',
+	'grouppost:nopost' => 'Pas d\'articles',
+	'groups:deletewarning' => "Etes-vous sur de vouloir supprimer ce groupe ? Cette action est irréversible !",
 
-	'groups:invitekilled' => 'The invite has been deleted.', //translate
-	'groups:joinrequestkilled' => "La demande d'ajout au groupe a été supprimée.",
+	'groups:invitekilled' => 'L\'invitation a été supprimée',
+	'groups:joinrequestkilled' => 'La demande d\'adhésion a été supprimée.',
+	'groups:error:addedtogroup' => "Impossible d'ajouter %s au groupe",
+	'groups:add:alreadymember' => "%s est déjà un membre de ce groupe",
 
-	// ecml
-	'groups:ecml:discussion' => 'Group Discussions', //translate
-	'groups:ecml:groupprofile' => 'Group profiles', //translate
+	/**
+	 * ecml
+	 */
+	'groups:ecml:discussion' => 'Discussions de groupe',
+	'groups:ecml:groupprofile' => 'Les profils de groupe',
 );
-
-add_translation("fr",$french);

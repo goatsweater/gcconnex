@@ -1,21 +1,20 @@
 <?php
 
-$french = array(
-	'search:enter_term' => 'Entrez un critère de recherche:',
+return array(
+	'search:enter_term' => 'Entrer un terme de recherche :',
 	'search:no_results' => 'Aucun résultat.',
-	'search:matched' => 'Matched: ',
+	'search:matched' => 'Correspondant: ',
 	'search:results' => 'Résultats pour %s',
-	'search:no_query' => "S'il vous plaît entrer une requête de recherche.",
+	'search:no_query' => 'Veuillez entrer une requête de recherche.',
 	'search:search_error' => 'Erreur',
 
 	'search:more' => '+%s plus %s',
 
-	'search_types:tags' => 'Mots clés',
+	'search_types:tags' => 'Tags',
 
 	'search_types:comments' => 'Commentaires',
-	'search:comment_on' => 'Commentaires sur "%s"',
-	'search:comment_by' => 'by',
-	'search:unavailable_entity' => 'Entité Non disponible',
+	'search:comment_on' => 'Commentaire sur \'%s\'',
+	'search:comment_by' => 'par',
+	'search:unavailable_entity' => 'Entité indisponible',
+	'search:unknown_entity' => 'Type d\'entité inconnu',
 );
-
-add_translation('fr', $french);

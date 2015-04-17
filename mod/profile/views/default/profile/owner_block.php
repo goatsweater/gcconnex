@@ -14,9 +14,8 @@ if (!$user) {
 $icon = elgg_view_entity_icon($user, 'large', array(
 	'use_hover' => false,
 	'use_link' => false,
+	'img_class' => 'photo u-photo',
 ));
-
-$icon .= '<font style="font-variant:small-caps;">Last logged in:<br/>'.(string)date("Y-m-d H:i:s",$user->last_login).'</font><br/>';
 
 // grab the actions and admin menu items from user hover
 $menu = elgg_trigger_plugin_hook('register', "menu:user_hover", array('entity' => $user), array());
@@ -29,7 +28,8 @@ $profile_actions = '';
 if (elgg_is_logged_in() && $actions) {
 	$profile_actions = '<ul class="elgg-menu profile-action-menu mvm">';
 	foreach ($actions as $action) {
-		$profile_actions .= '<li>' . $action->getContent(array('class' => 'elgg-button elgg-button-action')) . '</li>';
+		$item = elgg_view_menu_item($action, array('class' => 'elgg-button elgg-button-action'));
+		$profile_actions .= "<li class=\"{$action->getItemClass()}\">$item</li>";
 	}
 	$profile_actions .= '</ul>';
 }

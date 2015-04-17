@@ -1,26 +1,24 @@
 <?php
 
-$french = array(
+return array(
 
-	'friends:all' => "Tous vos contacts",
+	'friends:all' => 'Tous les contacts',
 
-	'notifications:subscriptions:personal:description' => "Recevoir une notification lorsqu’il y a une action sur votre contenu.",
+	'notifications:subscriptions:personal:description' => 'Recevoir des notifications quand des actions concernent vos contenus',
 	'notifications:subscriptions:personal:title' => 'Notifications personnelles',
 
-	'notifications:subscriptions:friends:title' => "Contacts",
-	'notifications:subscriptions:friends:description' => "Vos cercles de contacts se trouvent ci-après. Pour activer les notifications liées aux utilisateurs qui forment un cercle donné, sélectionnez le ou les modes de notification souhaités à côté du nom du cercle.",
-	'notifications:subscriptions:collections:edit' => "To edit your shared access notifications, click here.",
+	'notifications:subscriptions:friends:title' => 'Amis',
+	'notifications:subscriptions:friends:description' => 'Ce qui suit est une collection automatique faite à partie de vos amis. Pour recevoir les mises à jour choisissez ci-dessous. Cela affectera, pour les utilisateurs correspondant, le panneau principal des paramètres de notifications, en bas de la page.',
+	'notifications:subscriptions:collections:edit' => 'Pour éditer vos notifications d\'accès partagés, cliquez ici.',
 
-	'notifications:subscriptions:changesettings' => "Notifications",
-	'notifications:subscriptions:changesettings:groups' => "Notifications de groupe ",
+	'notifications:subscriptions:changesettings' => 'Notifications',
+	'notifications:subscriptions:changesettings:groups' => 'Notifications pour les groupes',
 
-	'notifications:subscriptions:title' => "Notifications par utilisateur ",
-	'notifications:subscriptions:description' => "Pour recevoir une notification lorsque l’un de vos contacts crée un nouveau contenu, trouvez-le grâce à la liste alphabétique puis sélectionnez le ou les modes de notification souhaités à côté de son nom.",
+	'notifications:subscriptions:title' => 'Notifications par utilisateur',
+	'notifications:subscriptions:description' => 'Pour recevoir des notifications de vos contacts (sur une base individuelle) quand ils créent de nouveaux contenus, trouvez-les ci-dessous, et choisissez le mode de notifications que vous souhaitez utiliser.',
 
-	'notifications:subscriptions:groups:description' => "Pour recevoir une notification lorsque du contenu est ajouté à un groupe dont vous êtes membre, sélectionnez le ou les modes de notification souhaités à côté du nom du groupe.",
+	'notifications:subscriptions:groups:description' => 'Pour recevoir des notifications lorsque de nouveaux contenus sont ajoutés à un groupe auquel vous appartenez, sélectionnez-les ci-dessous, et choisissez le mode de notifications que vous souhaitez utiliser.',
 
-	'notifications:subscriptions:success' => "Vos paramètres de notifications ont été enregistrées.",
+	'notifications:subscriptions:success' => 'Vos paramètres de notifications ont bien été enregistrés.',
 
 );
-
-	add_translation("fr", $french);
