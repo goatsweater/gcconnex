@@ -656,10 +656,10 @@ function isNumberKey(evt){
 /*
  * Purpose: disable the end date inputs when a user selects "I'm currently still working here"
  */
-function toggleEndDate(evt) {
+function toggleEndDate(section, evt) {
 
-    $(evt).closest('.gcconnex-work-experience-entry').find('.gcconnex-work-experience-end-year').attr('disabled', evt.checked)
-    $(evt).closest('.gcconnex-work-experience-entry').find('.gcconnex-work-experience-enddate').attr('disabled', evt.checked)
+    $(evt).closest('.gcconnex-' + section + '-entry').find('.gcconnex-' + section + '-end-year').attr('disabled', evt.checked);
+    $(evt).closest('.gcconnex-' + section + '-entry').find('.gcconnex-' + section + '-enddate').attr('disabled', evt.checked);
 
     /*
     $(evt).closest('.gcconnex-work-experience-entry').find('.gcconnex-work-experience-end-year').attr('disabled', function(index, attr) {

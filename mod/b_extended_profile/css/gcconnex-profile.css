@@ -657,3 +657,10 @@ td.left-col {
     text-decoration: none;
     width: 100%;
 }
+
+.gcconnex-profile-field-title {
+    width: 150px;
+    display: inline-block;
+    text-align: right;
+    padding-right: 10px;
+}

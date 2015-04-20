@@ -14,13 +14,17 @@ $guid = ($education != NULL)? $vars['guid'] : "new"; // if the education guid is
 echo '<div class="gcconnex-education-entry" data-guid="' . $guid . '">'; // education entry wrapper for css styling
 
     // enter school name
-    echo elgg_echo('gcconnex_profile:education:school') . elgg_view("input/text", array(
+    echo '<span class="gcconnex-profile-field-title">';
+    echo elgg_echo('gcconnex_profile:education:school') . '</span>';
+    echo elgg_view("input/text", array(
             'name' => 'education',
             'class' => 'gcconnex-education-school',
             'value' => $education->school));
 
     // enter start date
-    echo '<br>' . elgg_echo('gcconnex_profile:education:start_month') . elgg_view("input/pulldown", array(
+    echo '<br><span class="gcconnex-profile-field-title">' . elgg_echo('gcconnex_profile:education:start_month') . '</span>';
+
+    echo elgg_view("input/pulldown", array(
             'name' => 'startdate',
             'class' => 'gcconnex-education-startdate',
             'options' => array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'),
@@ -42,7 +46,8 @@ echo '<div class="gcconnex-education-entry" data-guid="' . $guid . '">'; // educ
         $params['disabled'] = 'true';
     }
 
-    echo '<br>' . elgg_echo('gcconnex_profile:education:end_month') . elgg_view("input/pulldown", $params);
+    echo '<br><span class="gcconnex-profile-field-title">' . elgg_echo('gcconnex_profile:education:end_month') . '</span>';
+    echo elgg_view("input/pulldown", $params);
 
     unset($params);
 
@@ -63,7 +68,7 @@ echo '<div class="gcconnex-education-entry" data-guid="' . $guid . '">'; // educ
     $params = array(
         'name' => 'ongoing',
         'class' => 'gcconnex-education-ongoing',
-        'onclick' => 'toggleEndDate(' . $education->guid . ', "education")',
+        'onclick' => 'toggleEndDate("education", this)',
     );
     if ($education->ongoing == 'true') {
         $params['checked'] = $education->ongoing;
@@ -76,13 +81,15 @@ echo '<div class="gcconnex-education-entry" data-guid="' . $guid . '">'; // educ
 
 
     // enter program
-    echo '<br>' . elgg_echo('gcconnex_profile:education:program') . elgg_view("input/text", array(
+    echo '<br><span class="gcconnex-profile-field-title">' . elgg_echo('gcconnex_profile:education:program') . '</span>';
+    echo elgg_view("input/text", array(
             'name' => 'program',
             'class' => 'gcconnex-education-program',
             'value' => $education->program));
 
     // enter field  of study
-    echo '<br>' . elgg_echo('gcconnex_profile:education:field') . elgg_view("input/text", array(
+    echo '<br><span class="gcconnex-profile-field-title">' . elgg_echo('gcconnex_profile:education:field') . '</span>';
+    echo elgg_view("input/text", array(
             'name' => 'fieldofstudy',
             'class' => 'gcconnex-education-field',
             'value' => $education->field));

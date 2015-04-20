@@ -13,25 +13,38 @@ $guid = ($work_experience != NULL)? $vars['guid'] : "new"; // if the work experi
 echo '<div class="gcconnex-work-experience-entry ' . $guid . '" data-guid="' . $guid . '">'; // work experience entry wrapper for css styling
 
 // enter organization name
-echo elgg_echo('gcconnex_profile:experience:organization') . elgg_view("input/text", array(
+echo '<span class="gcconnex-profile-field-title">';
+
+echo elgg_echo('gcconnex_profile:experience:organization') . '</span>';
+
+echo '<span class="gcconnex-profile-field-input">';
+
+echo elgg_view("input/text", array(
         'name' => 'work-experience',
         'class' => 'gcconnex-work-experience-organization',
         'value' => $work_experience->organization));
+echo '</span>';
 
 // enter title
-echo '<br>' . elgg_echo('gcconnex_profile:experience:title') . elgg_view("input/text", array(
+echo '<br>';
+echo '<span class="gcconnex-profile-field-title">' . elgg_echo('gcconnex_profile:experience:title') . '</span>';
+
+echo elgg_view("input/text", array(
         'name' => 'title',
         'class' => 'gcconnex-work-experience-title',
         'value' => $work_experience->title));
 
 // enter start date
-echo '<br>' . elgg_echo('gcconnex_profile:experience:start_month') .  elgg_view("input/pulldown", array(
+echo '<br><span class="gcconnex-profile-field-title">' . elgg_echo('gcconnex_profile:experience:start_month') .  '</span>';
+
+echo elgg_view("input/pulldown", array(
         'name' => 'startdate',
         'class' => 'gcconnex-work-experience-startdate',
         'options' => array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'),
         'value' => $work_experience->startdate));
 
-echo elgg_echo('gcconnex_profile:experience:year') .  elgg_view("input/text", array(
+echo elgg_echo('gcconnex_profile:experience:year');
+echo elgg_view("input/text", array(
         'name' => 'start-year',
         'class' => 'gcconnex-work-experience-start-year',
         'maxlength' => 4,
@@ -49,7 +62,9 @@ if ($work_experience->ongoing == 'true') {
         $params['disabled'] = 'true';
 }
 
-echo '<br>' . elgg_echo('gcconnex_profile:experience:end_month') . elgg_view("input/pulldown", $params);
+echo '<br><span class="gcconnex-profile-field-title">' . elgg_echo('gcconnex_profile:experience:end_month') . '</span>';
+
+echo elgg_view("input/pulldown", $params);
 
 unset($params);
 
@@ -72,7 +87,7 @@ $target = $work_experience->guid ? $work_experience->guid : "new";
 $params = array(
     'name' => 'ongoing',
     'class' => 'gcconnex-work-experience-ongoing',
-    'onclick' => 'toggleEndDate(this)',
+    'onclick' => 'toggleEndDate("work-experience", this)',
 );
 if ($work_experience->ongoing == 'true') {
         $params['checked'] = $work_experience->ongoing;
