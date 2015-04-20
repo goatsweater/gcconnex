@@ -824,7 +824,6 @@ function addMore(identifier) {
     another = $(identifier).data('type');
     $.when( $.get(elgg.normalize_url('ajax/view/input/' + another), '',
         function(data) {
-            // Output in a DIV with id=somewhere
             $('.gcconnex-' + another + '-all').append(data);
         })).done(function() {
         if (another == "work-experience") {

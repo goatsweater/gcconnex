@@ -103,8 +103,6 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
             $edit = $work_experience['edit'];
             $delete = $work_experience['delete'];
 
-            error_log(print_r($delete, 1));
-
             $experience_list = $user->work;
 
             if (!(is_array($delete))) { $delete = array($delete); }
@@ -151,6 +149,7 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
                 $experience->ongoing = $work['ongoing'];
                 $experience->responsibilities = $work['responsibilities'];
                 $experience->colleagues = $work['colleagues'];
+                error_log(print_r($work['colleagues'], 1));
                 $experience->access_id = $access;
 
                 if($work['eguid'] == "new") {

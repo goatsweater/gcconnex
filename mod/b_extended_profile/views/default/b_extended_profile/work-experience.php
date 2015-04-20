@@ -41,13 +41,15 @@ else {
 
             echo '<div class="gcconnex-profile-label work-experience-colleagues">';
             $colleagues = $experience->colleagues;
-            if (is_array($colleagues)) {
-                echo list_avatars(array(
-                    'guids' => $colleagues,
-                    'size' => 'small',
-                    'limit' => 0,
-                ));
+            if (!(is_array($colleagues))) {
+                $colleagues = array($colleagues);
             }
+            echo list_avatars(array(
+                'guids' => $colleagues,
+                'size' => 'small',
+                'limit' => 0,
+            ));
+
             echo '</div>'; // close div class="gcconnex-profile-label work-experience-colleagues"
 
             echo '</div>';
