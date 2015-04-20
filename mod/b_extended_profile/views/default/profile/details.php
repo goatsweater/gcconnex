@@ -40,7 +40,7 @@ if ($user->canEdit()) {
 
     echo $content;
 }
-elseif (elgg_get_page_owner_guid() != elgg_get_logged_in_user_guid()) {
+if (elgg_get_page_owner_guid() != elgg_get_logged_in_user_guid()) {
     $menu = elgg_trigger_plugin_hook('register', "menu:user_hover", array('entity' => $user), array());
     $builder = new ElggMenuBuilder($menu);
     $menu = $builder->getMenu();

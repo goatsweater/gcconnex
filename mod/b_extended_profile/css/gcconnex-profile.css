@@ -415,9 +415,10 @@ input.userfind {
 }
 
 #profile-details {
-    display: inline-block;
-    width: 275px;
     padding-bottom: 5px;
+    float: left;
+    display: inline;
+    width: 45%;
 }
 
 .elgg-input-text[name='education'] {

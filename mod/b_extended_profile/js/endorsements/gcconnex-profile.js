@@ -821,16 +821,19 @@ function deleteSkill() {
  * Purpose: add more inputs for the input type
  */
 function addMore(identifier) {
-    var another = $(identifier).data('type');
-    $.get(elgg.normalize_url('ajax/view/input/' + another), '',
+    another = $(identifier).data('type');
+    $.when( $.get(elgg.normalize_url('ajax/view/input/' + another), '',
         function(data) {
             // Output in a DIV with id=somewhere
             $('.gcconnex-' + another + '-all').append(data);
-        });
-    if (another == "work-experience") {
-        var targ = $('.gcconnex-work-experience-entry.new').find('.userfind');
-        user_search_init(targ);
-    }
+        })).done(function() {
+        if (another == "work-experience") {
+            $temp = $('.gcconnex-work-experience-entry.new').find('.userfind');
+            $temp.each(function() {
+                user_search_init(this);
+            });
+        }
+    });
 }
 
 /*
@@ -878,6 +881,3 @@ function escapeHtml(string) {
         return entityMap[s];
     });
 }
-
-
-
