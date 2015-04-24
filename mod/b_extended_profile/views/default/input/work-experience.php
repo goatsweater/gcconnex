@@ -10,7 +10,7 @@ $work_experience = get_entity($vars['guid']); // get the guid of the work experi
 
 $guid = ($work_experience != NULL)? $vars['guid'] : "new"; // if the work experience guid isn't given, this must be a new entry
 
-echo '<div class="gcconnex-work-experience-entry ' . $guid . '" data-guid="' . $guid . '">'; // work experience entry wrapper for css styling
+echo '<div class="gcconnex-work-experience-entry ' . $guid . ' well" data-guid="' . $guid . '">'; // work experience entry wrapper for css styling
 
 // enter organization name
 echo '<span class="gcconnex-profile-field-title">';

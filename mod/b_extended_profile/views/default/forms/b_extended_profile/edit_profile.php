@@ -99,7 +99,7 @@
 
 
 <?php
-
+echo '<div class="gcconnex-b-extended-profile-edit-profile">';
 
 $guid = elgg_get_logged_in_user_guid();
 $user = get_user($guid);
@@ -206,7 +206,14 @@ echo elgg_view('input/checkbox', array(
 echo elgg_echo('gcconnex_profile:basic:micro_checkbox') . '</div>'; // close div class="gcconnex-micro-checkbox"
 
 
-echo '<div class="submit-basic-profile">'; // container for css styling, used to group profile content and display them seperately from other fields
+echo 'Manager: <span class="gcconnex-basic-field-manager">';
+echo elgg_view("input/text", array(
+    'name' => "manager",
+    'class' => "manager typeahead"
+));
+echo '</span>';
+
+echo '<div class="submit-basic-profile">'; // container for css styling, used to group profile content and display them separately from other fields
 
 // create the save button for saving user profile
 echo elgg_view('input/button', array(
@@ -218,3 +225,5 @@ echo '</div>'; // close div class="submit-basic-profile"
 echo '</div>'; // close div class="basic-profile-micro-assignments
 
 echo '</div>'; // close div class="basic-profile"
+
+echo '</div>'; // cloase div class="gcconnex-b-extended-profile-edit-profile"

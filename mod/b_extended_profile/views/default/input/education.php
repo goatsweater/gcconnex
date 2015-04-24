@@ -11,7 +11,7 @@ $education = get_entity($vars['guid']); // get the guid of the education entry t
 
 $guid = ($education != NULL)? $vars['guid'] : "new"; // if the education guid isn't given, this must be a new entry
 
-echo '<div class="gcconnex-education-entry" data-guid="' . $guid . '">'; // education entry wrapper for css styling
+echo '<div class="gcconnex-education-entry well" data-guid="' . $guid . '">'; // education entry wrapper for css styling
 
     // enter school name
     echo '<span class="gcconnex-profile-field-title">';

@@ -137,6 +137,8 @@ elgg_load_js('basic-profile'); // load js file to init the lightbox overlay (set
 
 
             echo '<div role="tabpanel" class="tab-pane" id="publications">';
+
+                init_ajax_block(elgg_echo('gcconnex_profile:portfolio'), 'portfolio', $user);
                 echo elgg_view('b_extended_profile/publications'); // call the proper view for the section
             echo '</div>'; // close div id="#publications"
 

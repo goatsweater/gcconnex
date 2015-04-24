@@ -11,13 +11,100 @@
 /*
  * Purpose: initialize the script
  */
+
+function initFancyProfileBox() {
+    var tid = $(target).data("tid");
+    tidName = tid;
+    $userSuggest = $('.' + tid);
+
+    $(target).closest('.gcconnex-work-experience-entry').find('.gcconnex-avatar-in-list').each(function() {
+        $colleagueSelected = $(this).data('guid');
+    });
+
+    var select = function(e, user) {
+        $colleagueSelected = user.guid;
+        $("#selected").text(JSON.stringify($colleagueSelected));
+        $("input.typeahead").typeahead("val", "");
+    };
+
+    var filter = function(suggestions) {
+        return $.grep(suggestions, function(suggestion) {
+            return $.inArray(suggestion.guid, $colleagueSelected) === -1; // if suggestion.guid == $colleagueSelected
+        });
+    };
+
+    var userName = new Bloodhound({
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        remote: {
+            url: elgg.get_site_url() + "userfind?query=%QUERY",
+            filter: function (response) {
+                // Map the remote source JSON array to a JavaScript object array
+                return $.map(response, function (user) {
+                    return {
+                        value: user.value,
+                        guid: user.guid,
+                        pic: user.pic,
+                        avatar: user.avatar,
+                    };
+                });
+            }
+        }
+    });
+
+    // initialize bloodhound engine for colleague auto-suggest
+    userName.initialize();
+
+    var userSearchField = $userSuggest.typeahead(null, {
+        name: 'manager',
+        displayKey: function(user) {
+            return user.value;
+        },
+        limit: Infinity,
+        //source: userName.ttAdapter(),
+        source: function(query, cb) {
+            userName.get(query, function(suggestions) {
+                cb(filter(suggestions));
+            });
+        },
+        templates: {
+            suggestion: function (user) {
+                return '<div class="tt-suggest-avatar">' + user.pic + '</div><div class="tt-suggest-username">' + user.value + '</div><br>';
+            }
+        }
+    }).bind('typeahead:selected', select);
+
+    $userSuggest.on('typeahead:selected', addColleague);
+    $userSuggest.on('typeahead:autocompleted', addColleague);
+
+    $userFind.push(userSearchField);
+}
+
+
+
 $(document).ready(function() {
     // bootstrap tabs.js functionality..
     $('#myTab a').click(function (e) {
         e.preventDefault();
         $(this).tab('show');
     });
+    $('#fancybox-content').bind("DOMSubtreeModified",function(){
+        alert('changed');
+    });
+    // testing
+    /*
+    $('.gcconnex-basic-field-manager').load(function() {
+        alert('test');
+    });
+    */
+/*
+    $(".gcconnex-basic-profile-edit").onComplete(function() {
+        alert('test');
+    });
+*/
 
+
+    // show "edit profile picture" overlay on hover
     $('.avatar-profile-edit').hover(
         function() {
             $('.avatar-hover-edit').stop(true,true);
@@ -228,11 +315,12 @@ function editProfile(event) {
 }
 
 function user_search_init(target) {
+
     var tid = $(target).data("tid");
     tidName = tid;
     $userSuggest = $('.' + tid);
-
     $colleagueSelected[tid] = [];
+
     $(target).closest('.gcconnex-work-experience-entry').find('.gcconnex-avatar-in-list').each(function() {
         $colleagueSelected[tid].push($(this).data('guid'));
     });

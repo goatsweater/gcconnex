@@ -106,7 +106,8 @@ $english = array(
     'gcconnex_profile:languages:expiry' => 'Expiry',
 
     // PUBLICATIONS
-    'gcconnex_profile:publications:empty' => 'This section will be added soon. Please check back later.'
+    'gcconnex_profile:portfolio' => 'Portfolio',
+    'gcconnex_profile:portfolio:empty' => 'Begin adding to your portfolio by clicking "Edit" in the top right corner of this box.'
 
 );
 

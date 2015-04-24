@@ -13,8 +13,9 @@
     $(window).load(function() {
         $(".gcconnex-basic-profile-edit").fancybox({
             autoDimensions: false,
-            width: '60%',
-            height: '85%'
+            width: '800',
+            height: '580',
+            onComplete : initFancyProfileBox
         })
     });
 </script>
