@@ -38,10 +38,7 @@ elgg_load_js('basic-profile'); // load js file to init the lightbox overlay (set
             echo '<img class="profile-icons double-quotes" src="' . elgg_get_site_url() . 'mod/b_extended_profile/img/double-quotes.png">';
             echo elgg_view("profile/status", array("entity" => $user));
         }
-        else {
-            error_log('false');
-        }
-        error_log(print_r($latest_wire, 1)); ?>
+        ?>
     </div>
 
     <div class="b_extended_profile">
@@ -52,7 +49,7 @@ elgg_load_js('basic-profile'); // load js file to init the lightbox overlay (set
         echo '<ul class="nav nav-tabs" role="tablist">';
         echo '<li role="presentation" class="active"><a href="#splashboard" aria-controls="splashboard" role="tab" data-toggle="tab">' . elgg_echo('gcconnex_profile:widgets') . '</a></li>';
         echo '<li role="presentation"><a href="#profile-display" aria-controls="profile-display" role="tab" data-toggle="tab">' . elgg_echo('gcconnex_profile:profile') . '</a></li>';
-        echo '<li role="presentation"><a href="#publications" aria-controls="publications" role="tab" data-toggle="tab">' . elgg_echo('gcconnex_profile:portfolio') . '</a></li>';
+        echo '<li role="presentation"><a href="#portfolio" aria-controls="portfolio" role="tab" data-toggle="tab">' . elgg_echo('gcconnex_profile:portfolio') . '</a></li>';
         echo '</ul>';
         echo '<div class="tab-content">';
             echo '<div role="tabpanel" class="tab-pane active" id="splashboard">';
@@ -136,11 +133,11 @@ elgg_load_js('basic-profile'); // load js file to init the lightbox overlay (set
             echo '</div>'; //close div id=#profile-display
 
 
-            echo '<div role="tabpanel" class="tab-pane" id="publications">';
+            echo '<div role="tabpanel" class="tab-pane" id="portfolio">';
 
                 init_ajax_block(elgg_echo('gcconnex_profile:portfolio'), 'portfolio', $user);
-                echo elgg_view('b_extended_profile/publications'); // call the proper view for the section
-            echo '</div>'; // close div id="#publications"
+                echo elgg_view('b_extended_profile/portfolio'); // call the proper view for the section
+            echo '</div>'; // close div id="#portfolio"
 
 
             echo '</div>'; // close div class="tab-content'

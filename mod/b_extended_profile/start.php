@@ -37,7 +37,7 @@ function b_extended_profile_init() {
     elgg_register_ajax_view('b_extended_profile/work-experience');
     elgg_register_ajax_view('b_extended_profile/endorsements');
     elgg_register_ajax_view('b_extended_profile/languages');
-    elgg_register_ajax_view('b_extended_profile/publications');
+    elgg_register_ajax_view('b_extended_profile/portfolio');
 
     // edit views
     elgg_register_ajax_view('b_extended_profile/edit_about-me');
@@ -110,8 +110,6 @@ function extended_profile_page_handler($page) {
     $body = elgg_view_layout('one_column', array('content' => $content));
     echo elgg_view_page($user->name, $body);
     return true;
-
-    error_log(print_r($arg, true));
 }
 
 /*
@@ -254,11 +252,9 @@ function cmpStartDate($foo, $bar)
         return (0);
     }
     else if ($a->startyear > $b->startyear) {
-        error_log($a->startyear . " is more than " . $b->startyear);
         return (-1);
     }
     else if ($a->startyear < $b->startyear) {
-        error_log($a->startyear . " is less than " . $b->startyear);
         return (1);
     }
 }

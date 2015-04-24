@@ -102,7 +102,6 @@ $french = array(
     'gcconnex_profile:languages:expiry' => 'Expiration',
 
     // PUBLICATIONS
-    'gcconnex_profile:publications:empty' => 'This section will be added soon. Please check back later.'
 
 );
 

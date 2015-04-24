@@ -149,7 +149,6 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
                 $experience->ongoing = $work['ongoing'];
                 $experience->responsibilities = $work['responsibilities'];
                 $experience->colleagues = $work['colleagues'];
-                error_log(print_r($work['colleagues'], 1));
                 $experience->access_id = $access;
 
                 if($work['eguid'] == "new") {
@@ -329,4 +328,3 @@ else {  // In case this view will be called via the elgg_view_form() action, the
 
     forward($user->getURL());
 }
-?>
