@@ -75,7 +75,12 @@ if ($user->email != null) {
 }
 
 if ($user->website != null) {
-    echo '<img class="profile-icons profile-detail-icon" src="' . elgg_get_site_url() . 'mod/b_extended_profile/img/globe.png"><a href=' . $user->website . '>' . $user->website . '</a><br>';
+    echo '<img class="profile-icons profile-detail-icon" src="' . elgg_get_site_url() . 'mod/b_extended_profile/img/globe.png">';
+    echo elgg_view('output/url', array(
+        'href' => $user->website,
+        'text' => $user->website
+    ));
+    echo '<br>';
 }
 
 echo '</div>'; // close div class="gcconnex-profile-contact-info"

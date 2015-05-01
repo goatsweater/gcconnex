@@ -702,3 +702,8 @@ td.left-col {
 .gcconnex-profile-portfolio-display {
     padding-top: 10px;
 }
+
+.manager.tt-query,
+.manager.tt-hint {
+    width: 100%;
+}

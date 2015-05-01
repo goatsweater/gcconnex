@@ -331,7 +331,7 @@ else {  // In case this view will be called via the elgg_view_form() action, the
     $user_guid = elgg_get_logged_in_user_guid(); //get_input('guid');
     $user = get_user($user_guid);
 
-    $fields = array('name', 'title', 'department', 'phone', 'mobile', 'email');
+    $fields = array('name', 'title', 'department', 'phone', 'mobile', 'email', 'manager');
 
     foreach ($fields as $field) {
         $value = get_input($field);

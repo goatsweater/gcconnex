@@ -13,14 +13,7 @@
  */
 
 function initFancyProfileBox() {
-    var tid = $(target).data("tid");
-    tidName = tid;
-    $userSuggest = $('.' + tid);
-
-    $(target).closest('.gcconnex-work-experience-entry').find('.gcconnex-avatar-in-list').each(function() {
-        $colleagueSelected = $(this).data('guid');
-    });
-
+/*
     var select = function(e, user) {
         $colleagueSelected = user.guid;
         $("#selected").text(JSON.stringify($colleagueSelected));
@@ -32,8 +25,8 @@ function initFancyProfileBox() {
             return $.inArray(suggestion.guid, $colleagueSelected) === -1; // if suggestion.guid == $colleagueSelected
         });
     };
-
-    var userName = new Bloodhound({
+*/
+    var manager = new Bloodhound({
         datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
         queryTokenizer: Bloodhound.tokenizers.whitespace,
         remote: {
@@ -53,31 +46,33 @@ function initFancyProfileBox() {
     });
 
     // initialize bloodhound engine for colleague auto-suggest
-    userName.initialize();
+    manager.initialize();
 
-    var userSearchField = $userSuggest.typeahead(null, {
+    $('#manager').typeahead(null, {
         name: 'manager',
         displayKey: function(user) {
             return user.value;
         },
         limit: Infinity,
-        //source: userName.ttAdapter(),
+        source: manager.ttAdapter(),
+        /*
         source: function(query, cb) {
-            userName.get(query, function(suggestions) {
+            manager.get(query, function(suggestions) {
                 cb(filter(suggestions));
             });
         },
+        */
         templates: {
             suggestion: function (user) {
                 return '<div class="tt-suggest-avatar">' + user.pic + '</div><div class="tt-suggest-username">' + user.value + '</div><br>';
             }
         }
-    }).bind('typeahead:selected', select);
+    }); //.bind('typeahead:selected', select);
 
-    $userSuggest.on('typeahead:selected', addColleague);
-    $userSuggest.on('typeahead:autocompleted', addColleague);
+    //$userSuggest.on('typeahead:selected', addColleague);
+    //$userSuggest.on('typeahead:autocompleted', addColleague);
 
-    $userFind.push(userSearchField);
+    //$userFind.push(userSearchField);
 }
 
 

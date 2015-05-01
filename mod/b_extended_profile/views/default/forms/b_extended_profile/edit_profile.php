@@ -134,7 +134,16 @@ foreach ($fields as $field) { // create a label and input box for each field on 
 
     echo '</div>'; //close div class = basic-profile-field-wrapper
 }
-
+echo '<div class="basic-profile-field-wrapper">';
+echo '<div class="basic-profile-label">Manager: </div><div class="basic-profile-field">';
+echo elgg_view("input/text", array(
+    'id' => "manager",
+    'name' => "manager",
+    'class' => "manager typeahead",
+    'value' => $user->get('manager')
+));
+echo '</div>';
+echo '</div>';
 echo '</div>';
 
 echo '<div class="basic-profile-social-media-wrapper">'; // container for css styling, used to group profile content and display them seperately from other fields
@@ -206,12 +215,7 @@ echo elgg_view('input/checkbox', array(
 echo elgg_echo('gcconnex_profile:basic:micro_checkbox') . '</div>'; // close div class="gcconnex-micro-checkbox"
 
 
-echo 'Manager: <span class="gcconnex-basic-field-manager">';
-echo elgg_view("input/text", array(
-    'name' => "manager",
-    'class' => "manager typeahead"
-));
-echo '</span>';
+
 
 echo '<div class="submit-basic-profile">'; // container for css styling, used to group profile content and display them separately from other fields
 
