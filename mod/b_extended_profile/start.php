@@ -44,11 +44,13 @@ function b_extended_profile_init() {
     elgg_register_ajax_view('b_extended_profile/edit_education');
     elgg_register_ajax_view('b_extended_profile/edit_work-experience');
     elgg_register_ajax_view('b_extended_profile/edit_languages');
+    elgg_register_ajax_view('b_extended_profile/edit_portfolio');
 
     // input views
     elgg_register_ajax_view('input/education');
     elgg_register_ajax_view('input/work-experience');
     elgg_register_ajax_view('input/languages');
+    elgg_register_ajax_view('input/portfolio');
 
     // auto-complete
     // elgg_register_ajax_view('input/autoskill');

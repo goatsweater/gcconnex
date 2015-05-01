@@ -170,7 +170,8 @@
 
 .gcconnex-education-entry,
 .gcconnex-work-experience-entry,
-.gcconnex-languages-entry {
+.gcconnex-languages-entry,
+.gcconnex-portfolio-entry {
     margin: 15px;
     background-color: lightgray;
     padding: 15px;
@@ -251,7 +252,8 @@ input.userfind {
 
 .gcconnex-profile-education-display,
 .gcconnex-profile-work-experience-display,
-.gcconnex-profile-languages-display {
+.gcconnex-profile-languages-display,
+.gcconnex-profile-portfolio-display {
     padding-bottom: 10px;
 }
 
@@ -663,4 +665,40 @@ td.left-col {
     display: inline-block;
     text-align: right;
     padding-right: 10px;
+    font-weight: bold;
+}
+
+.gcconnex-portfolio-title {
+    width: 300px;
+}
+
+.gcconnex-portfolio-entry .hasDatepicker {
+    width: 100px;
+    margin-bottom: 0;
+}
+
+.gcconnex-portfolio-description {
+    max-width: 500px;
+    height: 100px;
+}
+
+.gcconnex-portfolio-label-datestamped {
+    position: relative;
+    left: 165px;
+    padding-bottom: 10px;
+}
+
+.gcconnex-portfolio-link {
+    width: 300px;
+}
+
+.portfolio-title,
+.portfolio-publicationdate,
+.portfolio-link,
+.portfolio-description {
+    display: inline;
+}
+
+.gcconnex-profile-portfolio-display {
+    padding-top: 10px;
 }

@@ -105,10 +105,18 @@ $english = array(
     'gcconnex_profile:languages:french' => 'French',
     'gcconnex_profile:languages:expiry' => 'Expiry',
 
-    // PUBLICATIONS
+    // PORTFOLIO
     'gcconnex_profile:portfolio' => 'Portfolio',
-    'gcconnex_profile:portfolio:empty' => 'Begin adding to your portfolio by clicking "Edit" in the top right corner of this box.'
+    'gcconnex_profile:portfolio:empty' => 'Begin adding to your portfolio by clicking "Edit" in the top right corner of this box.',
+    'gcconnex_profile:portfolio:access' => 'Allow portfolio to be viewable by: ',
+    'gcconnex_profile:portfolio:add' => '+ add more to portfolio',
+    'gcconnex_profile:portfolio:title' => 'Title: ',
+    'gcconnex_profile:portfolio:link' => 'Link: ',
+    'gcconnex_profile:portfolio:publication_date' => 'Publication Date: ',
+    'gcconnex_profile:portfolio:datestamp' => 'No publish date',
+    'gcconnex_profile:portfolio:description' => 'Description: ',
+    'gcconnex_profile:portfolio:delete' => 'Delete this entry'
 
 );
 
-add_translation("en",$english);
+add_translation("en", $english);

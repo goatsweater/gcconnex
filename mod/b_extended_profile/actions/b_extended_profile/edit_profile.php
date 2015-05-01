@@ -242,56 +242,82 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
             $user->english = $english;
             $user->french = $french;
 
-            /*
-            $skill_guids = array();
-
-            foreach ($skillsToAdd as $new_skill) {
-                $skill = new ElggObject();
-                $skill->subtype = "MySkill";
-                $skill->title = htmlentities($new_skill);
-                $skill->owner_guid = $user_guid;
-                $skill->access_id = $access;
-                $skill->endorsements = NULL;
-                $skill_guids[] = $skill->save();
-            }
-
-            $skill_list = $user->gc_skills;
-
-            if (!(is_array($skill_list))) { $skill_list = array($skill_list); }
-            if (!(is_array($skillsToRemove))) { $skillsToRemove = array($skillsToRemove); }
-
-            foreach ($skillsToRemove as $remove_guid) {
-                if ($remove_guid != NULL) {
-
-                    if ($remove = get_entity($remove_guid)) {
-                        $remove->delete();
-                    }
-
-                    if (($key = array_search($remove_guid, $skill_list)) !== false) {
-                        unset($skill_list[$key]);
-                    }
-                }
-            }
-
-            $user->gc_skills = $skill_list;
-
-            if ($user->gc_skills == NULL) {
-                $user->gc_skills = $skill_guids;
-            }
-            else {
-                $stack = $user->gc_skills;
-                if (!(is_array($stack))) { $stack = array($stack); }
-
-                if ($skill_guids != NULL) {
-                    $user->gc_skills = array_merge($stack, $skill_guids);
-                }
-            }
-
-            //$user->gc_skills = null; // dev stuff... delete me
-            //$user->skillsupgraded = NULL; // dev stuff.. delete me
-            */
             $user->save();
             break;
+        case 'portfolio':
+            $portfolio = get_input('portfolio');
+            $edit = $portfolio['edit'];
+            $delete = $portfolio['delete'];
+
+            $portfolio_list = $user->portfolio;
+
+            if (!(is_array($delete))) { $delete = array($delete); }
+
+            foreach ($delete as $delete_guid) {
+                if ($delete_guid != NULL) {
+
+                    if ($delete = get_entity($delete_guid)) {
+                        $delete->delete();
+                    }
+                    if (is_array($portfolio_list)) {
+                        if (($key = array_search($delete_guid, $portfolio_list)) !== false) {
+                            unset($portfolio_list[$key]);
+                        }
+                    }
+                    elseif ($portfolio_list == $delete_guid) {
+                        $portfolio_list = null;
+                    }
+                }
+            }
+
+            $user->portfolio = $portfolio_list;
+            $portfolio_list_guids = array();
+
+            //create new work experience entries
+            foreach ($edit as $portfolio_edit) {
+                if ($portfolio_edit['eguid'] == "new") {
+                    $entry = new ElggObject();
+                    $entry->subtype = "portfolio";
+                    $entry->owner_guid = $user_guid;
+                }
+                else {
+                    $entry = get_entity($portfolio_edit['eguid']);
+                }
+
+                $entry->title = htmlentities($portfolio_edit['title']);
+                $entry->description = htmlentities($portfolio_edit['description']);
+
+                $entry->link = $portfolio_edit['link'];
+                $entry->pubdate = $portfolio_edit['pubdate'];
+                $entry->datestamped = $portfolio_edit['datestamped'];
+
+                $entry->access_id = $access;
+
+                if($portfolio_edit['eguid'] == "new") {
+                    $portfolio_list_guids[] = $entry->save();
+                }
+                else {
+                    $entry->save();
+                }
+            }
+
+            if ($user->portfolio == NULL) {
+                $user->portfolio = $portfolio_list_guids;
+            }
+            else {
+                $stack = $user->portfolio;
+                if (!(is_array($stack))) { $stack = array($stack); }
+
+                if ($portfolio_list_guids != NULL) {
+                    $user->portfolio = array_merge($stack, $portfolio_list_guids);
+                }
+            }
+            //$user->portfolio = null;
+            $user->portfolio_access = $access;
+            $user->save();
+
+            break;
+
         default:
             system_message(elgg_echo("profile:saved"));
 

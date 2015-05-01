@@ -163,6 +163,9 @@ $(document).ready(function() {
     $('.save-languages').on("click", {section: "languages"}, saveProfile);
     $('.cancel-languages').on("click", {section: "languages"}, cancelChanges);
 
+    $('.edit-portfolio').on("click", {section: "portfolio"}, editProfile);
+    $('.save-portfolio').on("click", {section: "portfolio"}, saveProfile);
+    $('.cancel-portfolio').on("click", {section: "portfolio"}, cancelChanges);
 
     $('.gcconnex-education-add-another').on("click", {section: "education"}, addMore);
 
@@ -308,6 +311,16 @@ function editProfile(event) {
 
                 });
             break;
+        case 'portfolio':
+            $.get(elgg.normalize_url('ajax/view/b_extended_profile/edit_portfolio'),
+                {
+                    guid: elgg.get_logged_in_user_guid()
+                },
+            function(data) {
+                // Output the 'edit portfolio' page somewhere
+                $('.gcconnex-portfolio').append('<div class="gcconnex-portfolio-edit-wrapper">' + data + '</div>');
+                $('.gcconnex-profile-portfolio-display').hide();
+            });
         default:
             break;
 
@@ -666,6 +679,51 @@ function saveProfile(event) {
             });
             $('.gcconnex-languages-edit-wrapper').remove();
             break;
+        case 'portfolio':
+            // Save the portfolio
+            var portfolio = {};
+            var entry = [];
+
+            portfolio.edit = entry;
+            portfolio.delete = [];
+
+            $('.gcconnex-portfolio-entry').each(function() {
+                if ( $(this).is(":hidden") ) {
+                    portfolio.delete.push($(this).data('guid'));
+                }
+                else {
+                    entry = {
+                        'eguid': $(this).data('guid'),
+                        'title': $(this).find('.gcconnex-portfolio-title').val(),
+                        'link': $(this).find('.gcconnex-portfolio-link').val(),
+                        'pubdate': $(this).find('#pubdate').val(),
+                        'datestamped': $(this).find('.gcconnex-portfolio-datestamped').val(),
+                        'description': $(this).find('.gcconnex-portfolio-description').val(),
+                    };
+                    portfolio.edit.push(entry);
+                }
+            });
+
+            elgg.action('b_extended_profile/edit_profile', {
+                data: {
+                    guid: elgg.get_logged_in_user_guid(),
+                    section: 'portfolio',
+                    portfolio: portfolio
+                },
+                success: function() {
+                    $.get(elgg.normalize_url('ajax/view/b_extended_profile/portfolio'),
+                        {
+                            guid: elgg.get_logged_in_user_guid()
+                        },
+                        function (data) {
+                            // Output portfolio here
+                            $('.gcconnex-profile-portfolio-display').remove();
+                            $('.gcconnex-portfolio').append('<div class="gcconnex-profile-portfolio-display">' + data + '</div>');
+                        });
+                }
+            });
+            $('.gcconnex-portfolio-edit-wrapper').remove();
+            break;
         default:
             break;
     }
@@ -710,6 +768,10 @@ function cancelChanges(event) {
         case 'languages':
             $('.gcconnex-languages-edit-wrapper').remove();
             $('.gcconnex-profile-languages-display').show();
+            break;
+        case 'portfolio':
+            $('.gcconnex-portfolio-edit-wrapper').remove();
+            $('.gcconnex-profile-portfolio-display').show();
             break;
         default:
             break;
