@@ -13,13 +13,12 @@
  */
 
 function initFancyProfileBox() {
-/*
-    var select = function(e, user) {
-        $colleagueSelected = user.guid;
-        $("#selected").text(JSON.stringify($colleagueSelected));
-        $("input.typeahead").typeahead("val", "");
-    };
 
+    var select = function(e, user) {
+        //alert('User: ' + user.guid);
+        $('#manager-id').val(user.guid);
+    };
+/*
     var filter = function(suggestions) {
         return $.grep(suggestions, function(suggestion) {
             return $.inArray(suggestion.guid, $colleagueSelected) === -1; // if suggestion.guid == $colleagueSelected
@@ -67,7 +66,7 @@ function initFancyProfileBox() {
                 return '<div class="tt-suggest-avatar">' + user.pic + '</div><div class="tt-suggest-username">' + user.value + '</div><br>';
             }
         }
-    }); //.bind('typeahead:selected', select);
+    }).bind('typeahead:selected', select);
 
     //$userSuggest.on('typeahead:selected', addColleague);
     //$userSuggest.on('typeahead:autocompleted', addColleague);

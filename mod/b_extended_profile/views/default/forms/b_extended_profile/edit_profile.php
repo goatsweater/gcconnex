@@ -136,11 +136,24 @@ foreach ($fields as $field) { // create a label and input box for each field on 
 }
 echo '<div class="basic-profile-field-wrapper">';
 echo '<div class="basic-profile-label">Manager: </div><div class="basic-profile-field">';
+
+$manager_id = $user->get('manager-id');
+$manager = get_user($manager_id);
+
 echo elgg_view("input/text", array(
     'id' => "manager",
     'name' => "manager",
     'class' => "manager typeahead",
-    'value' => $user->get('manager')
+    'value' => $manager->name
+));
+
+
+
+echo elgg_view("input/text", array(
+    'id' => "manager-id",
+    'name' => "manager-id",
+    'class' => "manager-id",
+    'value' => $user->get('manager-id')
 ));
 echo '</div>';
 echo '</div>';

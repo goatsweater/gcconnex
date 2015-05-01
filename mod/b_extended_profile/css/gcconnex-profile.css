@@ -707,3 +707,7 @@ td.left-col {
 .manager.tt-hint {
     width: 100%;
 }
+
+#manager-id {
+    display: none;
+}
