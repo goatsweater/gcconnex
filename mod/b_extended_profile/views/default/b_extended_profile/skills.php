@@ -32,39 +32,40 @@ else {
     }
 // if the skill list isn't empty, and a logged-in user is viewing this page... show skills
     if (elgg_is_logged_in()) {
-        foreach ($skill_guids as $skill_guid) {
-            $skill = get_entity($skill_guid);
-            $skill_class = str_replace(' ', '-', strtolower($skill->title));
-            echo '<div class="gcconnex-skill-entry" data-guid="' . $skill_guid . '">';
-            echo '<div class="gcconnex-endorsements-count gcconnex-endorsements-count-' . $skill_class . '">' . count($skill->endorsements) . '</div><div class="gcconnex-endorsements-skill" data-type="skill">' . $skill->title . '</div>';
+        for ($i=0; $i<20; $i++) {
+            $skill_guid = $skill_guids[$i];
+            if ($skill = get_entity($skill_guid)) {
+                $skill_class = str_replace(' ', '-', strtolower($skill->title));
+                echo '<div class="gcconnex-skill-entry" data-guid="' . $skill_guid . '">';
+                echo '<div class="gcconnex-endorsements-count gcconnex-endorsements-count-' . $skill_class . '">' . count($skill->endorsements) . '</div><div class="gcconnex-endorsements-skill" data-type="skill">' . $skill->title . '</div>';
 
-            $endorsements = $skill->endorsements;
-            if (!(is_array($endorsements))) {
-                $endorsements = array($endorsements);
-            }
-
-            if (!($user->canEdit())) {
-                if (in_array(elgg_get_logged_in_user_guid(), $endorsements) == false || empty($endorsements)) {
-                    // user has not yet endorsed this skill for this user.. present the option to endorse
-
-                    echo '<span class="gcconnex-endorsement-add elgg-button" onclick="addEndorsement(this)" data-guid="' . $skill->guid . '" data-skill="' . $skill->title . '">Endorse</span>';
-                } else {
-                    // user has endorsed this skill for this user.. present the option to retract endorsement
-                    echo '<span class="gcconnex-endorsement-retract elgg-button" onclick="retractEndorsement(this)" data-guid="' . $skill->guid . '" data-skill="' . $skill->title . '">Retract Endorsement</span>';
-
+                $endorsements = $skill->endorsements;
+                if (!(is_array($endorsements))) {
+                    $endorsements = array($endorsements);
                 }
-            }
-            // @todo: add the endorsing user's profile image to the list of endorsers for this skill
-            echo '<div class="gcconnex-skill-endorsements">';
-            echo list_avatars(array(
-                'guids' => $skill->endorsements,
-                'size' => 'tiny',
-                'limit' => 10
-            ));
-            echo '</div>'; // close div class="gcconnex-skill-endorsements"
-            echo '</div>'; // close div class=gcconnex-skill-entry
-        }
 
+                if (!($user->canEdit())) {
+                    if (in_array(elgg_get_logged_in_user_guid(), $endorsements) == false || empty($endorsements)) {
+                        // user has not yet endorsed this skill for this user.. present the option to endorse
+
+                        echo '<span class="gcconnex-endorsement-add elgg-button" onclick="addEndorsement(this)" data-guid="' . $skill->guid . '" data-skill="' . $skill->title . '">Endorse</span>';
+                    } else {
+                        // user has endorsed this skill for this user.. present the option to retract endorsement
+                        echo '<span class="gcconnex-endorsement-retract elgg-button" onclick="retractEndorsement(this)" data-guid="' . $skill->guid . '" data-skill="' . $skill->title . '">Retract Endorsement</span>';
+
+                    }
+                }
+                // @todo: add the endorsing user's profile image to the list of endorsers for this skill
+                echo '<div class="gcconnex-skill-endorsements">';
+                echo list_avatars(array(
+                    'guids' => $skill->endorsements,
+                    'size' => 'tiny',
+                    'limit' => 10
+                ));
+                echo '</div>'; // close div class="gcconnex-skill-endorsements"
+                echo '</div>'; // close div class=gcconnex-skill-entry
+            }
+        }
     }
 }
 

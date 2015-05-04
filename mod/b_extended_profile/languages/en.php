@@ -12,10 +12,12 @@ $english = array(
     'gcconnex_profile:edit_profile' => 'Edit',
     'gcconnex_profile:user_content' => 'Personal Content',
 
+    // MAIN PROFILE TABS
     'gcconnex_profile:profile' => 'Profile',
     'gcconnex_profile:widgets' => 'Widgets',
     'gcconnex_profile:portfolio' => 'Portfolio',
 
+    // PROFILE
     'gcconnex_profile:about_me' => 'About Me',
     'gcconnex_profile:education' => 'Education',
     'gcconnex_profile:experience' => 'Work Experience',
@@ -27,7 +29,7 @@ $english = array(
     'gcconnex_profile:about_me:empty' => 'Begin entering a description about yourself by clicking "Edit" in the top right corner of this box.',// prompt to add first skill
 
 
-    // BASIC PROFILE FORM
+    // BASIC INFORMATION PROFILE FORM
     'gcconnex_profile:basic:header' => 'Edit Basic Profile',
     'gcconnex_profile:basic:name' => 'Name: ',
     'gcconnex_profile:basic:title' => 'Title: ',

@@ -547,7 +547,7 @@ function saveProfile(event) {
                         'startyear': $(this).find('.gcconnex-work-experience-start-year').val(),
                         'enddate': $(this).find('.gcconnex-work-experience-enddate').val(),
                         'endyear': $(this).find('.gcconnex-work-experience-end-year').val(),
-                        'ongoing': $(this).find('.gcconnex-work-experience-ongoing').val(),
+                        'ongoing': $(this).find('.gcconnex-work-experience-ongoing').prop('checked'),
                         'responsibilities': $(this).find('.gcconnex-work-experience-responsibilities').val()
                     };
                     experience.colleagues = [];
