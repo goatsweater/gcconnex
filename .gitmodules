@@ -1,0 +1,3 @@
+[submodule "mod/c_notification_messages"]
+	path = mod/c_notification_messages
+	url = https://github.com/Pandurx-Elgg/c_notification_messages.git
