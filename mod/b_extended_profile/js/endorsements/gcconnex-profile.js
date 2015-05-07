@@ -15,7 +15,6 @@
 function initFancyProfileBox() {
 
     var select = function(e, user) {
-        //alert('User: ' + user.guid);
         $('#manager-id').val(user.guid);
     };
 /*
@@ -77,26 +76,31 @@ function initFancyProfileBox() {
 
 
 $(document).ready(function() {
+/*
+    var tour = new Tour({
+        steps: [
+            {
+                element: "#profile-details",
+                title: "Test",
+                content: "This is a test"
+            },
+            {
+                element: ".b_user_menu",
+                title: "Another",
+                content: "Muahahaha"
+            }
+        ]
+    });
+    tour.init();
+    tour.start();
+    */
+
+
     // bootstrap tabs.js functionality..
     $('#myTab a').click(function (e) {
         e.preventDefault();
         $(this).tab('show');
     });
-    $('#fancybox-content').bind("DOMSubtreeModified",function(){
-        alert('changed');
-    });
-    // testing
-    /*
-    $('.gcconnex-basic-field-manager').load(function() {
-        alert('test');
-    });
-    */
-/*
-    $(".gcconnex-basic-profile-edit").onComplete(function() {
-        alert('test');
-    });
-*/
-
 
     // show "edit profile picture" overlay on hover
     $('.avatar-profile-edit').hover(
@@ -500,7 +504,7 @@ function saveProfile(event) {
                     section: 'education',
                     school: $school,
                     startdate: $startdate,
-                    startyear: $startyear,
+                    startyear: $startyearS,
                     enddate: $enddate,
                     endyear: $endyear,
                     ongoing: $ongoing,
@@ -588,50 +592,48 @@ function saveProfile(event) {
 
         case "skills":
 
-            var $skills_added = [];
-            var $delete_guid = [];
-
-            if ($('.gcconnex-endorsements-input-skill').is(":visible")) {
-                skillSubmit();
+            if ( $('.gcconnex-skill-entry:visible').length >= 15 ) {
+                alert('Too many!');
+                // toggle the edit, save, cancel buttons
+                $('.edit-' + $section).hide();
+                $('.save-' + $section).show();
+                $('.cancel-' + $section).show();
             }
+            else {
+                var $skills_added = [];
+                var $delete_guid = [];
 
-            $('.gcconnex-skill-entry').each(function() {
-                if ( $(this).is(":hidden") ) {
-                    $delete_guid.push($(this).data('guid'));
+                if ($('.gcconnex-endorsements-input-skill').is(":visible")) {
+                    skillSubmit();
                 }
-                if ( $(this).hasClass("temporarily-added") ) {
-                    $skills_added.push($(this).data('skill'));
-                }
-            });
 
-            //if ($delete_guid.length !== 0) {
-                if (confirm("Are you sure you would like to save changes? Any endorsements that are attached to skills that you have removed will be permanently deleted.")) {
-                    // save the information the user just edited
+                $('.gcconnex-skill-entry').each(function () {
+                    if ($(this).is(":hidden")) {
+                        $delete_guid.push($(this).data('guid'));
+                    }
+                    if ($(this).hasClass("temporarily-added")) {
+                        $skills_added.push($(this).data('skill'));
+                    }
+                });
 
-                    elgg.action('b_extended_profile/edit_profile', {
-                        guid: elgg.get_logged_in_user_guid(),
-                        section: 'skills',
-                        skillsadded: $skills_added,
-                        skillsremoved: $delete_guid
-                    });
+                // save the information the user just edited
 
-                    $('.delete-skill-img').remove();
-                    $('.delete-skill').remove();
-                    $('.gcconnex-endorsements-input-wrapper').remove();
-                    $('.gcconnex-skill-entry').removeClass('temporarily-added');
+                elgg.action('b_extended_profile/edit_profile', {
+                    guid: elgg.get_logged_in_user_guid(),
+                    section: 'skills',
+                    skillsadded: $skills_added,
+                    skillsremoved: $delete_guid
+                });
 
-                }
-                else {
-                    // show() the skills that have been hidden() (marked for deletion)
-                    $('.gcconnex-enxorsement-skill-wrapper').show();
-                    $('.edit-' + $section).hide();
-                    $('.save-' + $section).show();
-                    $('.cancel-' + $section).show();
-                }
-            //}
-            // @todo: show add or retract links based on status of endorsement
+                $('.delete-skill-img').remove();
+                $('.delete-skill').remove();
+                $('.gcconnex-endorsements-input-wrapper').remove();
+                $('.gcconnex-skill-entry').removeClass('temporarily-added');
+            }
             break;
+
         case 'languages':
+
             var english = [];
             var french = [];
 

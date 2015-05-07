@@ -15,7 +15,8 @@ elgg_load_css('font-awesome'); // font-awesome icons for social media and some o
 elgg_load_js('lightbox'); // overlay for editing the basic profile fields
 elgg_load_css('lightbox'); // css for it..
 elgg_load_js('basic-profile'); // load js file to init the lightbox overlay (sets the width)
-
+//elgg_load_js('bootstrap-tour');
+//elgg_load_css('bootstrap-tour-css');
 ?>
 
 <div class="profile elgg-col-3of3">

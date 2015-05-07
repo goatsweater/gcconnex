@@ -62,6 +62,24 @@ else {
                     'size' => 'tiny',
                     'limit' => 10
                 ));
+                echo '<div class="modal hide" id="myModal">
+                      <div class="modal-header">
+                        <button class="close" data-dismiss="modal">×</button>
+                        <h3>Endorsements</h3>
+                      </div>
+                      <div class="modal-body">
+                        <p>';
+                echo list_avatars(array(
+                    'guids' => $skill->endorsements,
+                    'size' => 'medium',
+                    'limit' => 0
+                ));
+                echo '</p>
+                      </div>
+                      <div class="modal-footer">
+                        <a href="#" class="btn" data-dismiss="modal">Close</a>
+                      </div>
+                    </div>';
                 echo '</div>'; // close div class="gcconnex-skill-endorsements"
                 echo '</div>'; // close div class=gcconnex-skill-entry
             }
