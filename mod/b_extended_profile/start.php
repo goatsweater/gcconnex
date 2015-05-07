@@ -141,14 +141,14 @@ function userfind_page_handler() {
     //$user_friends = elgg_get_entities_from_relationship(array('guid' => elgg_get_logged_in_user_guid()));
 
     $user = elgg_get_logged_in_user_entity();
-    $user_friends = get_user_friends(elgg_get_logged_in_user_guid());
+    $user_friends = get_user_friends(elgg_get_logged_in_user_guid(), null, 0);
     //error_log(var_dump($user_friends));
 
 
     $query = htmlspecialchars($_GET['query']);
 
     foreach ($user_friends as $u) {
-        //error_log('Friend: ' . var_dump($friend));
+        //error_log('Friend: ' . $u->get('name'   ));
 
         if (strpos(strtolower($u->get('name')), strtolower($query)) !== FALSE) {
             $result[] = array(
@@ -291,22 +291,4 @@ function sortDate($foo, $bar)
             return (1);
         }
     }
-}
-
-function userfind_updatelist() {
-
-    $user_entitites = elgg_get_entities(array(
-            'types' => 'user',
-            'limit' => false,
-        ));
-
-    $username = array();
-
-    foreach($user_entitites as $ue) {
-        $username[$ue->name] = $ue->guid;
-    }
-    $fp = fopen(elgg_get_plugins_path() . 'b_extended_profile/actions/b_extended_profile/usernames.json', 'w');
-    fwrite($fp, json_encode($username));
-    fclose($fp);
-
 }
