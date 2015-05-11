@@ -95,6 +95,11 @@
         padding: 5px;
         font-weight: bold;
     }
+
+    ::-webkit-input-placeholder { color:#ccc; }
+    ::-moz-placeholder { color:#ccc; } /* firefox 19+ */
+    :-ms-input-placeholder { color:#ccc; } /* ie */
+    input:-moz-placeholder { color:#ccc; }
 </style>
 
 
