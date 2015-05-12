@@ -504,7 +504,7 @@ function saveProfile(event) {
                     section: 'education',
                     school: $school,
                     startdate: $startdate,
-                    startyear: $startyearS,
+                    startyear: $startyear,
                     enddate: $enddate,
                     endyear: $endyear,
                     ongoing: $ongoing,

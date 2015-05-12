@@ -302,8 +302,7 @@ input.userfind {
     padding-bottom: 10px;
 }
 
-
-.gcconnex-profile-section-wrapper {
+.gcconnex-profile-section-frame-wrapper {
     position: relative;
     padding: 10px;
     padding-top: 20px;
@@ -374,13 +373,18 @@ input.userfind {
     padding: 5px 15px 5px 5px;
     position: relative;
     background-color: rgb(208, 208, 208);
-    border-bottom: 1px solid darkgray;
     border-left: 1px solid darkgray;
 }
 
 .edit-control,
 .cancel-control {
     border-top-right-radius: 5px;
+    border-bottom: 1px solid darkgray;
+}
+
+.save-control {
+    border-top: 1px solid darkgray;
+    border-bottom-right-radius: 5px;
 }
 
 

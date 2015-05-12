@@ -29,57 +29,63 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
 
             $education_list = $user->education;
 
-            foreach ($delete as $delete_guid) {
-                if ($delete_guid != NULL) {
+            if ($delete != null && !is_array($delete)) {
+                $delete = array( $delete );
+            }
 
-                    if ($delete = get_entity($delete_guid)) {
-                        $delete->delete();
-                    }
-                    if (is_array($education_list)) {
-                        if(($key = array_search($delete_guid, $education_list)) !== false) {
-                            unset($education_list[$key]);
+            if ( is_array($delete) ) {
+                foreach ($delete as $delete_guid) {
+                    if ($delete_guid != NULL) {
+
+                        if ($delete = get_entity($delete_guid)) {
+                            $delete->delete();
+                        }
+                        if (is_array($education_list)) {
+                            if (($key = array_search($delete_guid, $education_list)) !== false) {
+                                unset($education_list[$key]);
+                            }
+                        } elseif ($education_list == $delete_guid) {
+                            $education_list = null;
                         }
                     }
-                    elseif ($education_list == $delete_guid) {
-                        $education_list = null;
+                }
+            }
+            $user->education = $education_list;
+
+            if ($eguid != null && !is_array($eguid)) {
+                $eguid = array( $eguid );
+            }
+            //create new education entries
+            if (is_array($eguid)) {
+                foreach ($eguid as $k => $v) {
+                    if ($v == "new") {
+                        $education = new ElggObject();
+                        $education->subtype = "education";
+                        $education->owner_guid = $user_guid;
+                    } else {
+                        $education = get_entity($v);
+                    }
+
+                    $education->title = htmlentities($school[$k]);
+                    $education->description = htmlentities($program[$k]);
+
+                    $education->school = htmlentities($school[$k]);
+                    $education->startdate = $startdate[$k];
+                    $education->startyear = $startyear[$k];
+                    $education->enddate = $enddate[$k];
+                    $education->endyear = $endyear[$k];
+                    $education->ongoing = $ongoing[$k];
+                    $education->program = htmlentities($program[$k]);
+                    $education->field = htmlentities($field[$k]);
+                    $education->access_id = $access;
+
+                    if ($v == "new") {
+                        $education_guids[] = $education->save();
+                    } else {
+                        $education->save();
                     }
                 }
             }
-
-            $user->education = $education_list;
-
-            //create new education entries
-            foreach ($eguid as $k => $v) {
-                if ($v == "new") {
-                    $education = new ElggObject();
-                    $education->subtype = "education";
-                    $education->owner_guid = $user_guid;
-                }
-                else {
-                    $education = get_entity($v);
-                }
-
-                $education->title = htmlentities($school[$k]);
-                $education->description = htmlentities($program[$k]);
-
-                $education->school = htmlentities($school[$k]);
-                $education->startdate = $startdate[$k];
-                $education->startyear = $startyear[$k];
-                $education->enddate = $enddate[$k];
-                $education->endyear = $endyear[$k];
-                $education->ongoing = $ongoing[$k];
-                $education->program = htmlentities($program[$k]);
-                $education->field = htmlentities($field[$k]);
-                $education->access_id = $access;
-
-                if($v == "new") {
-                    $education_guids[] = $education->save();
-                }
-                else {
-                    $education->save();
-                }
-            }
-
             if ($user->education == NULL) {
                 $user->education = $education_guids;
             }
@@ -127,35 +133,38 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
             $user->work = $experience_list;
             $work_experience_guids = array();
 
+            if ($edit != null && !is_array($edit)) {
+                $edit = array( $edit );
+            }
             //create new work experience entries
-            foreach ($edit as $work) {
-                if ($work['eguid'] == "new") {
-                    $experience = new ElggObject();
-                    $experience->subtype = "experience";
-                    $experience->owner_guid = $user_guid;
-                }
-                else {
-                    $experience = get_entity($work['eguid']);
-                }
+            if ( is_array($edit) ) {
+                foreach ($edit as $work) {
+                    if ($work['eguid'] == "new") {
+                        $experience = new ElggObject();
+                        $experience->subtype = "experience";
+                        $experience->owner_guid = $user_guid;
+                    } else {
+                        $experience = get_entity($work['eguid']);
+                    }
 
-                $experience->title = htmlentities($work['title']);
-                $experience->description = htmlentities($work['responsibilities']);
+                    $experience->title = htmlentities($work['title']);
+                    $experience->description = htmlentities($work['responsibilities']);
 
-                $experience->organization = htmlentities($work['organization']);
-                $experience->startdate = $work['startdate'];
-                $experience->startyear = $work['startyear'];
-                $experience->enddate = $work['enddate'];
-                $experience->endyear = $work['endyear'];
-                $experience->ongoing = $work['ongoing'];
-                $experience->responsibilities = $work['responsibilities'];
-                $experience->colleagues = $work['colleagues'];
-                $experience->access_id = $access;
+                    $experience->organization = htmlentities($work['organization']);
+                    $experience->startdate = $work['startdate'];
+                    $experience->startyear = $work['startyear'];
+                    $experience->enddate = $work['enddate'];
+                    $experience->endyear = $work['endyear'];
+                    $experience->ongoing = $work['ongoing'];
+                    $experience->responsibilities = $work['responsibilities'];
+                    $experience->colleagues = $work['colleagues'];
+                    $experience->access_id = $access;
 
-                if($work['eguid'] == "new") {
-                    $work_experience_guids[] = $experience->save();
-                }
-                else {
-                    $experience->save();
+                    if ($work['eguid'] == "new") {
+                        $work_experience_guids[] = $experience->save();
+                    } else {
+                        $experience->save();
+                    }
                 }
             }
 

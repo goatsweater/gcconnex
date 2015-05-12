@@ -119,6 +119,7 @@ function extended_profile_page_handler($page) {
  */
 function init_ajax_block($title, $section, $user) {
 
+    echo '<div class="gcconnex-profile-section-frame-wrapper">';
     echo '<div class="gcconnex-profile-section-wrapper gcconnex-' . $section . '">'; // create the profile section wrapper div for css styling
     echo '<div class="gcconnex-profile-title">' . $title . '</div>'; // create the profile section title
 
@@ -126,10 +127,16 @@ function init_ajax_block($title, $section, $user) {
         // create the edit/save/cancel toggles for this section
         echo '<span class="gcconnex-profile-edit-controls">';
         echo '<span class="edit-control edit-' . $section . '"><img src="' . elgg_get_site_url() . 'mod/b_extended_profile/img/edit.png">' . elgg_echo('gcconnex_profile:edit') . '</span>';
-        echo '<span class="save-control save-' . $section . ' hidden"><img src="' . elgg_get_site_url() . 'mod/b_extended_profile/img/save.png">' . elgg_echo('gcconnex_profile:save') . '</span>';
+//        echo '<span class="save-control save-' . $section . ' hidden"><img src="' . elgg_get_site_url() . 'mod/b_extended_profile/img/save.png">' . elgg_echo('gcconnex_profile:save') . '</span>';
         echo '<span class="cancel-control cancel-' . $section . ' hidden"><img src="' . elgg_get_site_url() . 'mod/b_extended_profile/img/cancel.png">' . elgg_echo('gcconnex_profile:cancel') . '</span>';
         echo '</span>';
     }
+}
+
+function finit_ajax_block($section) {
+    echo '</div>';
+    echo '<span class="gcconnex-profile-edit-controls save-control save-' . $section . ' hidden"><img src="' . elgg_get_site_url() . 'mod/b_extended_profile/img/save.png">' . elgg_echo('gcconnex_profile:save') . '</span>';
+    echo '</div>';
 }
 
 
@@ -167,6 +174,23 @@ function userfind_page_handler() {
     }
     echo json_encode($result);
     return json_encode($result);
+}
+
+/*
+ * Purpose: check if a profile section has content, so that we know whether or not we should prepare ajax for display
+ */
+function has_content($user, $section) {
+    if ( $user->$section != null ) {
+        return true;
+    }
+    else {
+        if ( $user->canEdit() ) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 }
 
 /*

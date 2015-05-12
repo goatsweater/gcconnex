@@ -114,21 +114,35 @@ elgg_load_js('basic-profile'); // load js file to init the lightbox overlay (set
 
             echo '<div role="tabpanel" class="tab-pane" id="profile-display">';
 
+        if ( has_content($user, 'description') ) {
             init_ajax_block(elgg_echo('gcconnex_profile:about_me'), 'about-me', $user);
             echo elgg_view('b_extended_profile/about-me');
+            finit_ajax_block('about-me');
+        }
 
+        if ( has_content($user, 'education') ) {
             init_ajax_block(elgg_echo('gcconnex_profile:education'), 'education', $user);
             echo elgg_view('b_extended_profile/education');
+            finit_ajax_block('education');
+        }
 
+        if ( has_content($user, 'work') ) {
             init_ajax_block(elgg_echo('gcconnex_profile:experience'), 'work-experience', $user);
             echo elgg_view('b_extended_profile/work-experience');
+            finit_ajax_block('work-experience');
+        }
 
+        if ( has_content($user, 'gc_skills') ) {
             init_ajax_block(elgg_echo('gcconnex_profile:gc_skills'), 'skills', $user);
             echo elgg_view('b_extended_profile/skills');
+            finit_ajax_block('skills');
+        }
 
+        if ( has_content($user, 'english' || has_content($user, 'french')) ) {
             init_ajax_block(elgg_echo('gcconnex_profile:langs'), 'languages', $user);
             echo elgg_view('b_extended_profile/languages');
-
+            finit_ajax_block('languages');
+        }
         // create the div wrappers and edit/save/cancel toggles for each profile section
 
             echo '</div>'; //close div id=#profile-display
@@ -138,6 +152,7 @@ elgg_load_js('basic-profile'); // load js file to init the lightbox overlay (set
 
                 init_ajax_block(elgg_echo('gcconnex_profile:portfolio'), 'portfolio', $user);
                 echo elgg_view('b_extended_profile/portfolio'); // call the proper view for the section
+                finit_ajax_block('portfolio');
             echo '</div>'; // close div id="#portfolio"
 
 

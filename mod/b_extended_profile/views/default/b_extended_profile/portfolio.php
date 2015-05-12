@@ -50,4 +50,4 @@ else {
 
 
 echo '</div>'; // close div class="gcconnex-profile-portfolio-display"
-echo '</div>'; // close div class="gcconnex-profile-section-wrapper gcconnex-portfolio
+//echo '</div>'; // close div class="gcconnex-profile-section-wrapper gcconnex-portfolio

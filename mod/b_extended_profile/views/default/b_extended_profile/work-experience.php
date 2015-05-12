@@ -58,4 +58,4 @@ else {
 }
 
 echo '</div>'; // close div class="gcconnex-profile-work-experience-display
-echo '</div>'; // close div class=gcconnex-profile-section-wrapper
+//echo '</div>'; // close div class=gcconnex-profile-section-wrapper

@@ -90,4 +90,4 @@ else {
 //echo '</div></div><div class="endorsements-message"></div>';
 echo '</div>';
 echo '</div>';
-echo '</div>'; // close div class=gcconnex-profile-section-wrapper
+//echo '</div>'; // close div class=gcconnex-profile-section-wrapper
