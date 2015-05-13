@@ -13,6 +13,16 @@ $guid = ($work_experience != NULL)? $vars['guid'] : "new"; // if the work experi
 echo '<div class="gcconnex-work-experience-entry ' . $guid . ' well" data-guid="' . $guid . '">'; // work experience entry wrapper for css styling
 
 // enter organization name
+echo '<span class="gcconnex-profile-field-title">' . elgg_echo('gcconnex_profile:experience:title') . '</span>';
+
+echo elgg_view("input/text", array(
+    'name' => 'title',
+    'class' => 'gcconnex-work-experience-title',
+    'value' => $work_experience->title));
+
+
+// enter title
+echo '<br>';
 echo '<span class="gcconnex-profile-field-title">';
 
 echo elgg_echo('gcconnex_profile:experience:organization') . '</span>';
@@ -20,19 +30,10 @@ echo elgg_echo('gcconnex_profile:experience:organization') . '</span>';
 echo '<span class="gcconnex-profile-field-input">';
 
 echo elgg_view("input/text", array(
-        'name' => 'work-experience',
-        'class' => 'gcconnex-work-experience-organization',
-        'value' => $work_experience->organization));
+    'name' => 'work-experience',
+    'class' => 'gcconnex-work-experience-organization',
+    'value' => $work_experience->organization));
 echo '</span>';
-
-// enter title
-echo '<br>';
-echo '<span class="gcconnex-profile-field-title">' . elgg_echo('gcconnex_profile:experience:title') . '</span>';
-
-echo elgg_view("input/text", array(
-        'name' => 'title',
-        'class' => 'gcconnex-work-experience-title',
-        'value' => $work_experience->title));
 
 // enter start date
 echo '<br><span class="gcconnex-profile-field-title">' . elgg_echo('gcconnex_profile:experience:start_month') .  '</span>';

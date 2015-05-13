@@ -199,7 +199,6 @@ function editProfile(event) {
 
     // toggle the edit, save, cancel buttons
     $('.edit-' + $section).hide();
-    $('.save-' + $section).show();
     $('.cancel-' + $section).show();
 
     switch ($section) {
@@ -211,6 +210,7 @@ function editProfile(event) {
                 },
                 function(data) {
                     $('.gcconnex-about-me').append('<div class="gcconnex-about-me-edit-wrapper">' + data + '</div>');
+                    $('.save-' + $section).show();
                 });
             $('.gcconnex-profile-about-me-display').hide();
             break;
@@ -223,6 +223,7 @@ function editProfile(event) {
                 function(data) {
                     // Output in a DIV with id=somewhere
                     $('.gcconnex-education').append('<div class="gcconnex-education-edit-wrapper">' + data + '</div>');
+                    $('.save-' + $section).show();
                 });
             $('.gcconnex-profile-education-display').hide();
             break;
@@ -244,6 +245,7 @@ function editProfile(event) {
                         user_search_init(this);
                     });
                     $('.gcconnex-profile-work-experience-display').hide();
+                    $('.save-' + $section).show();
                 });
             break;
 
@@ -290,6 +292,7 @@ function editProfile(event) {
             $('.gcconnex-endorsements-skill').each(function(){
                 $(this).after('<img class="delete-skill-img" src="' + elgg.get_site_url() + 'mod/b_extended_profile/img/delete.png"><span class="delete-skill" onclick="deleteEntry(this)" data-type="skill">' + elgg.echo("gcconnex_profile:gc_skill:delete", null, null) + '</span>'); //goes in here i think..
             });
+            $('.save-' + $section).show();
 
             //$('.delete-skill').show();
 
@@ -304,9 +307,8 @@ function editProfile(event) {
                 function(data) {
                     // Output in a DIV with id=somewhere
                     $('.gcconnex-languages').append('<div class="gcconnex-languages-edit-wrapper">' + data + '</div>');
-
                     $('.gcconnex-profile-languages-display').hide();
-
+                    $('.save-' + $section).show();
                 });
             break;
         case 'portfolio':
@@ -318,10 +320,10 @@ function editProfile(event) {
                 // Output the 'edit portfolio' page somewhere
                 $('.gcconnex-portfolio').append('<div class="gcconnex-portfolio-edit-wrapper">' + data + '</div>');
                 $('.gcconnex-profile-portfolio-display').hide();
+                $('.save-' + $section).show();
             });
         default:
             break;
-
     }
 }
 

@@ -57,11 +57,11 @@ $english = array(
     'gcconnex_profile:month:december' => 'December',
 
     // EDUCATION
-    'gcconnex_profile:education:school' => 'School Name: ',
+    'gcconnex_profile:education:school' => 'Institution Name: ',
     'gcconnex_profile:education:start_month' => 'Start Month: ',
     'gcconnex_profile:education:year' => 'Year: ',
     'gcconnex_profile:education:end_month' => 'End Month: ',
-    'gcconnex_profile:education:ongoing' => 'I still go to school here',
+    'gcconnex_profile:education:ongoing' => 'Present',
     'gcconnex_profile:education:program' => 'Program: ',
     'gcconnex_profile:education:field' => 'Field of Study: ',
     'gcconnex_profile:education:delete' => 'Delete this entry',
@@ -76,7 +76,7 @@ $english = array(
     'gcconnex_profile:experience:start_month' => 'Start Month: ',
     'gcconnex_profile:experience:year' => 'Year: ',
     'gcconnex_profile:experience:end_month' => 'End Month: ',
-    'gcconnex_profile:experience:ongoing' => 'I still work here',
+    'gcconnex_profile:experience:ongoing' => 'Present',
     'gcconnex_profile:experience:responsibilities' => 'Responsibilities',
     'gcconnex_profile:experience:delete' => 'Delete this entry',
     'gcconnex_profile:experience:add' => '+ add more work experience',
