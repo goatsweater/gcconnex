@@ -16,9 +16,9 @@ function b_extended_profile_init() {
 
     // Register vendor js libraries
     $url = 'mod/b_extended_profile/vendors/';
-    //elgg_register_js('typeahead', $url . 'typeahead/dist/typeahead.bundle.js'); // developer version typeahead js file !!! COMMENT THIS OuT AND ENABLE MINIFIED VERSIoN IN PRODcd
+    elgg_register_js('typeahead', $url . 'typeahead/dist/typeahead.bundle.js'); // developer version typeahead js file !!! COMMENT THIS OuT AND ENABLE MINIFIED VERSIoN IN PRODcd
     elgg_register_js('fancybox', 'vendors/jquery/fancybox/jquery.fancybox-1.3.4.pack.js');
-    elgg_register_js('typeahead', $url . 'typeahead/dist/typeahead.bundle.min.js'); // minified typeahead js file
+//    elgg_register_js('typeahead', $url . 'typeahead/dist/typeahead.bundle.min.js'); // minified typeahead js file
 //    elgg_register_js('bootstrap-tour', $url . 'bootstrap-tour/build/js/bootstrap-tour.js');
 
     // Register the gcconnex profile css libraries
@@ -144,9 +144,8 @@ function finit_ajax_block($section) {
  * Purpose: return a list of usernames for user-suggest
  */
 function userfind_page_handler() {
-
     //$user_friends = elgg_get_entities_from_relationship(array('guid' => elgg_get_logged_in_user_guid()));
-
+/*
     $user = elgg_get_logged_in_user_entity();
     $user_friends = get_user_friends(elgg_get_logged_in_user_guid(), null, 0);
     //error_log(var_dump($user_friends));
@@ -171,7 +170,83 @@ function userfind_page_handler() {
             //error_log('Result: ' . var_dump($result));
 
         }
+    }/*
+    foreach ( $result as $r ) {
+        $order =
+    }*/
+
+    $user_friends = get_user_friends(elgg_get_logged_in_user_guid(), null, 0);
+    $query = htmlspecialchars($_GET['query']);
+    $result = array();
+
+    foreach ($user_friends as $u) {
+
+        if (strpos(strtolower(' ' . $u['value']) . ' ', ' ' . strtolower($query) . ' ') !== FALSE) {
+            $result[] = array(
+                'value' => $u->get('name'),
+                'guid' => $u->get('guid'),
+                'pic' => elgg_view_entity_icon($u, 'tiny', array(
+                    'use_hover' => false,
+                    'href' => false)),
+                'avatar' => elgg_view_entity_icon($u, 'small', array(
+                    'use_hover' => false,
+                    'href' => false)),
+                'pos' => 1
+            );
+            //error_log('Result: ' . var_dump($result));
+        }
+
+        elseif (strpos(strtolower(' ' . $u['value']), ' ' . strtolower($query)) !== FALSE) {
+            $result[] = array(
+                'value' => $u->get('name'),
+                'guid' => $u->get('guid'),
+                'pic' => elgg_view_entity_icon($u, 'tiny', array(
+                    'use_hover' => false,
+                    'href' => false)),
+                'avatar' => elgg_view_entity_icon($u, 'small', array(
+                    'use_hover' => false,
+                    'href' => false)),
+                'pos' => 2
+            );
+            //error_log('Result: ' . var_dump($result));
+        }
+
+        elseif (strpos(strtolower($u['value']), strtolower($query)) !== FALSE) {
+            $result[] = array(
+                'value' => $u->get('name'),
+                'guid' => $u->get('guid'),
+                'pic' => elgg_view_entity_icon($u, 'tiny', array(
+                    'use_hover' => false,
+                    'href' => false)),
+                'avatar' => elgg_view_entity_icon($u, 'small', array(
+                    'use_hover' => false,
+                    'href' => false)),
+                'pos' => 3
+            );
+            //error_log('Result: ' . var_dump($result));
+        }
     }
+    $high_relevance = array();
+    $med_relevance = array();
+    $low_relevance = array();
+
+    foreach ( $result as $r ) {
+        if ( $r['pos'] == 1 ) {
+            $high_relevance[] = $r;
+        }
+        elseif ( $r['pos'] == 2 ) {
+            $med_relevance[] = $r;
+        }
+        elseif ( $r['pos'] == 3 ) {
+            $low_relevance[] = $r;
+        }
+    }
+
+    $result = $high_relevance;
+    $result[] = $med_relevance;
+    $result[] = $low_relevance;
+
+    error_log(print_r('Result: ' . $result, true));
     echo json_encode($result);
     return json_encode($result);
 }
