@@ -181,7 +181,7 @@ function userfind_page_handler() {
 
     foreach ($user_friends as $u) {
 
-        if (strpos(strtolower(' ' . $u['value']) . ' ', ' ' . strtolower($query) . ' ') !== FALSE) {
+        if (strpos(strtolower(' ' . $u['name']) . ' ', ' ' . strtolower($query) . ' ') !== FALSE) {
             $result[] = array(
                 'value' => $u->get('name'),
                 'guid' => $u->get('guid'),
@@ -196,7 +196,7 @@ function userfind_page_handler() {
             //error_log('Result: ' . var_dump($result));
         }
 
-        elseif (strpos(strtolower(' ' . $u['value']), ' ' . strtolower($query)) !== FALSE) {
+        elseif (strpos(strtolower(' ' . $u['name']), ' ' . strtolower($query)) !== FALSE) {
             $result[] = array(
                 'value' => $u->get('name'),
                 'guid' => $u->get('guid'),
@@ -211,7 +211,7 @@ function userfind_page_handler() {
             //error_log('Result: ' . var_dump($result));
         }
 
-        elseif (strpos(strtolower($u['value']), strtolower($query)) !== FALSE) {
+        elseif (strpos(strtolower($u['name']), strtolower($query)) !== FALSE) {
             $result[] = array(
                 'value' => $u->get('name'),
                 'guid' => $u->get('guid'),
@@ -242,11 +242,10 @@ function userfind_page_handler() {
         }
     }
 
-    $result = $high_relevance;
-    $result[] = $med_relevance;
-    $result[] = $low_relevance;
+    $result = array_merge($high_relevance, $med_relevance, $low_relevance);
 
-    error_log(print_r('Result: ' . $result, true));
+    //error_log(print_r('Result: ' . $result, true));
+    //error_log(print_r($med_relevance, true));
     echo json_encode($result);
     return json_encode($result);
 }
