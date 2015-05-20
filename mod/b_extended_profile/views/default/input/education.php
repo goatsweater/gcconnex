@@ -80,12 +80,21 @@ echo '<div class="gcconnex-education-entry well" data-guid="' . $guid . '">'; //
 
 
 
+// enter degree
+echo '<br><span class="gcconnex-profile-field-title">' . elgg_echo('gcconnex_profile:education:degree') . '</span>';
+echo elgg_view("input/text", array(
+    'name' => 'degree',
+    'class' => 'gcconnex-education-degree',
+    'value' => $education->degree));
+
+/*
     // enter program
     echo '<br><span class="gcconnex-profile-field-title">' . elgg_echo('gcconnex_profile:education:program') . '</span>';
     echo elgg_view("input/text", array(
             'name' => 'program',
             'class' => 'gcconnex-education-program',
             'value' => $education->program));
+*/
 
     // enter field  of study
     echo '<br><span class="gcconnex-profile-field-title">' . elgg_echo('gcconnex_profile:education:field') . '</span>';

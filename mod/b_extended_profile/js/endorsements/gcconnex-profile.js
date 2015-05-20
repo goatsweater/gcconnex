@@ -477,7 +477,7 @@ function saveProfile(event) {
             });
 
             var $endyear = [];
-            $('.gcconnex-education-start-year').not(":hidden").each(function() {
+            $('.gcconnex-education-end-year').not(":hidden").each(function() {
                 $endyear.push($(this).val());
             });
 
@@ -486,9 +486,16 @@ function saveProfile(event) {
                 $ongoing.push($(this).prop('checked'));
             });
 
+            /*
             var $program = [];
             $('.gcconnex-education-program').not(":hidden").each(function() {
                 $program.push($(this).val());
+            });
+            */
+
+            var $degree = [];
+            $('.gcconnex-education-degree').not(":hidden").each(function() {
+                $degree.push($(this).val());
             });
 
             var $field = [];
@@ -510,7 +517,8 @@ function saveProfile(event) {
                     enddate: $enddate,
                     endyear: $endyear,
                     ongoing: $ongoing,
-                    program: $program,
+                    //program: $program,
+                    degree: $degree,
                     field: $field,
                     access: $access
                 },

@@ -139,6 +139,8 @@ foreach ($fields as $field) { // create a label and input box for each field on 
 
     echo '</div>'; //close div class = basic-profile-field-wrapper
 }
+
+/*
 echo '<div class="basic-profile-field-wrapper">';
 echo '<div class="basic-profile-label">Manager: </div><div class="basic-profile-field">';
 
@@ -162,6 +164,7 @@ echo elgg_view("input/text", array(
 ));
 echo '</div>';
 echo '</div>';
+*/
 echo '</div>';
 
 echo '<div class="basic-profile-social-media-wrapper">'; // container for css styling, used to group profile content and display them seperately from other fields
@@ -222,6 +225,9 @@ foreach ($fields as $field => $field_link) { // create a label and input box for
 
 echo '</div>'; // close div class="basic-profile-social-media-wrapper"
 
+
+// THIS BLOCK COMMENTED OUT UNTIL MICRO-MISSIONS ARE ENABLED
+/*
 echo '<div class="basic-profile-micro-assignments">'; // container for css styling, used to group profile content and display them seperately from other fields
 
 echo elgg_echo('gcconnex_profile:basic:micro_confirmation');
@@ -232,7 +238,7 @@ echo elgg_view('input/checkbox', array(
     'checked' => ($user->micro == "on") ? "on" : FALSE)); // elgg has a hard time saving checkbox status natively, so check the string value instead
 echo elgg_echo('gcconnex_profile:basic:micro_checkbox') . '</div>'; // close div class="gcconnex-micro-checkbox"
 
-
+*/
 
 
 echo '<div class="submit-basic-profile">'; // container for css styling, used to group profile content and display them separately from other fields

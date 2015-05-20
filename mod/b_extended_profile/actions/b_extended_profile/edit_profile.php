@@ -20,7 +20,8 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
             $enddate = get_input('enddate', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0004.');
             $endyear = get_input('endyear');
             $ongoing = get_input('ongoing');
-            $program = get_input('program', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0005.');
+            //$program = get_input('program', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0005.');
+            $degree = get_input('degree');
             $field = get_input('field', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0006.');
             $access = get_input('access', 'ERROR: Ask your admin to grep: 5321GDS1111661353BB.');
 
@@ -67,7 +68,7 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
                     }
 
                     $education->title = htmlentities($school[$k]);
-                    $education->description = htmlentities($program[$k]);
+                    $education->description = htmlentities($degree[$k]);
 
                     $education->school = htmlentities($school[$k]);
                     $education->startdate = $startdate[$k];
@@ -75,7 +76,8 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
                     $education->enddate = $enddate[$k];
                     $education->endyear = $endyear[$k];
                     $education->ongoing = $ongoing[$k];
-                    $education->program = htmlentities($program[$k]);
+                    //$education->program = htmlentities($program[$k]);
+                    $education->degree = htmlentities($degree[$k]);
                     $education->field = htmlentities($field[$k]);
                     $education->access_id = $access;
 

@@ -36,7 +36,8 @@ else {
             echo '</div>';
 
             echo '<div class="gcconnex-profile-label education-school">' . $education->school . '</div>';
-            echo '<div class="gcconnex-profile-label education-degree"><ul><li>' . $education->program . '</li></ul></div>';
+            echo '<div class="gcconnex-profile-label education-degree"><ul><li>' . $education->degree . '</li></ul></div>';
+            //echo '<div class="gcconnex-profile-label education-program"><ul><li>' . $education->program . '</li></ul></div>';
             echo '<div class="gcconnex-profile-label education-field">' . $education->field . '</div>';
             echo '</div>';
         }

@@ -453,7 +453,9 @@ input.userfind {
 .elgg-input-text[name='fieldofstudy'] {
     width: 300px;
 }
-
+.elgg-input-text[name='degree'] {
+    width: 300px;
+}
 /*
  Colouring and styling for the "font-awesome" social media links on gcconnex profiles.
  */
@@ -566,6 +568,8 @@ input.userfind {
 .tt-suggest-username {
     float: left;
     padding-left: 15px;
+    max-width: 200px;
+    overflow: hidden;
 }
 .tt-suggest-avatar {
     float: left;
@@ -574,6 +578,8 @@ input.userfind {
 
 .tt-suggestion p {
     margin: 0;
+    max-width: 200px;
+    overflow: hidden;
 }
 
 .gcconnex-avatar-in-list {

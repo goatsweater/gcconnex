@@ -62,6 +62,7 @@ $english = array(
     'gcconnex_profile:education:year' => 'Year: ',
     'gcconnex_profile:education:end_month' => 'End Month: ',
     'gcconnex_profile:education:ongoing' => 'Present',
+    'gcconnex_profile:education:degree' => 'Degree: ',
     'gcconnex_profile:education:program' => 'Program: ',
     'gcconnex_profile:education:field' => 'Field of Study: ',
     'gcconnex_profile:education:delete' => 'Delete this entry',
