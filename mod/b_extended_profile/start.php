@@ -145,18 +145,15 @@ function finit_ajax_block($section) {
  */
 function userfind_page_handler() {
     //$user_friends = elgg_get_entities_from_relationship(array('guid' => elgg_get_logged_in_user_guid()));
-/*
-    $user = elgg_get_logged_in_user_entity();
+
     $user_friends = get_user_friends(elgg_get_logged_in_user_guid(), null, 0);
-    //error_log(var_dump($user_friends));
-
-
     $query = htmlspecialchars($_GET['query']);
+    $result = array();
 
     foreach ($user_friends as $u) {
-        //error_log('Friend: ' . $u->get('name'   ));
 
-        if (strpos(strtolower($u->get('name')), strtolower($query)) !== FALSE) {
+        // Complete match for first name
+        if (strpos(strtolower(' ' . $u['name']) . ' ', ' ' . strtolower($query) . ' ') === 0 ) {
             $result[] = array(
                 'value' => $u->get('name'),
                 'guid' => $u->get('guid'),
@@ -165,23 +162,14 @@ function userfind_page_handler() {
                     'href' => false)),
                 'avatar' => elgg_view_entity_icon($u, 'small', array(
                     'use_hover' => false,
-                    'href' => false))
+                    'href' => false)),
+                'pos' => 0
             );
             //error_log('Result: ' . var_dump($result));
-
         }
-    }/*
-    foreach ( $result as $r ) {
-        $order =
-    }*/
 
-    $user_friends = get_user_friends(elgg_get_logged_in_user_guid(), null, 0);
-    $query = htmlspecialchars($_GET['query']);
-    $result = array();
-
-    foreach ($user_friends as $u) {
-
-        if (strpos(strtolower(' ' . $u['name']) . ' ', ' ' . strtolower($query) . ' ') !== FALSE) {
+        // Complete match for name (first, middle or last)
+        elseif (strpos(strtolower(' ' . $u['name']) . ' ', ' ' . strtolower($query) . ' ') !== FALSE) {
             $result[] = array(
                 'value' => $u->get('name'),
                 'guid' => $u->get('guid'),
@@ -196,7 +184,8 @@ function userfind_page_handler() {
             //error_log('Result: ' . var_dump($result));
         }
 
-        elseif (strpos(strtolower(' ' . $u['name']), ' ' . strtolower($query)) !== FALSE) {
+        // Partial match beginning at start of first name
+        elseif (strpos(strtolower(' ' . $u['name']), ' ' . strtolower($query)) === 0 ) {
             $result[] = array(
                 'value' => $u->get('name'),
                 'guid' => $u->get('guid'),
@@ -211,7 +200,8 @@ function userfind_page_handler() {
             //error_log('Result: ' . var_dump($result));
         }
 
-        elseif (strpos(strtolower($u['name']), strtolower($query)) !== FALSE) {
+        // Partial match beginning at start of some name (middle, last)
+        elseif (strpos(strtolower(' ' . $u['name']), ' ' . strtolower($query)) !== FALSE) {
             $result[] = array(
                 'value' => $u->get('name'),
                 'guid' => $u->get('guid'),
@@ -225,13 +215,35 @@ function userfind_page_handler() {
             );
             //error_log('Result: ' . var_dump($result));
         }
+
+        // Partial match somewhere within some name
+        elseif (strpos(strtolower($u['name']), strtolower($query)) !== FALSE) {
+            $result[] = array(
+                'value' => $u->get('name'),
+                'guid' => $u->get('guid'),
+                'pic' => elgg_view_entity_icon($u, 'tiny', array(
+                    'use_hover' => false,
+                    'href' => false)),
+                'avatar' => elgg_view_entity_icon($u, 'small', array(
+                    'use_hover' => false,
+                    'href' => false)),
+                'pos' => 4
+            );
+            //error_log('Result: ' . var_dump($result));
+        }
     }
+
+    $highest_relevance = array();
     $high_relevance = array();
     $med_relevance = array();
     $low_relevance = array();
+    $lowest_relevance = array();
 
     foreach ( $result as $r ) {
-        if ( $r['pos'] == 1 ) {
+        if ( $r['pos'] == 0 ) {
+            $highest_relevance[] = $r;
+        }
+        elseif ( $r['pos'] == 1 ) {
             $high_relevance[] = $r;
         }
         elseif ( $r['pos'] == 2 ) {
@@ -240,9 +252,12 @@ function userfind_page_handler() {
         elseif ( $r['pos'] == 3 ) {
             $low_relevance[] = $r;
         }
+        elseif ( $r['pos'] == 4 ) {
+            $lowest_relevance[] = $r;
+        }
     }
 
-    $result = array_merge($high_relevance, $med_relevance, $low_relevance);
+    $result = array_merge($highest_relevance, $high_relevance, $med_relevance, $low_relevance, $lowest_relevance);
 
     //error_log(print_r('Result: ' . $result, true));
     //error_log(print_r($med_relevance, true));
