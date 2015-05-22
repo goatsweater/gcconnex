@@ -1,5 +1,5 @@
 Accountability
-Accounting
+cd ..Accounting
 Accounts Payable
 Accounts Receivable
 Achat

@@ -16,15 +16,15 @@ function b_extended_profile_init() {
 
     // Register vendor js libraries
     $url = 'mod/b_extended_profile/vendors/';
-    elgg_register_js('typeahead', $url . 'typeahead/dist/typeahead.bundle.js'); // developer version typeahead js file !!! COMMENT THIS OuT AND ENABLE MINIFIED VERSIoN IN PRODcd
+ //   elgg_register_js('typeahead', $url . 'typeahead/dist/typeahead.bundle.js'); // developer version typeahead js file !!! COMMENT THIS OuT AND ENABLE MINIFIED VERSIoN IN PRODcd
     elgg_register_js('fancybox', 'vendors/jquery/fancybox/jquery.fancybox-1.3.4.pack.js');
-//    elgg_register_js('typeahead', $url . 'typeahead/dist/typeahead.bundle.min.js'); // minified typeahead js file
+    elgg_register_js('typeahead', $url . 'typeahead/dist/typeahead.bundle.min.js'); // minified typeahead js file
 //    elgg_register_js('bootstrap-tour', $url . 'bootstrap-tour/build/js/bootstrap-tour.js');
 
     // Register the gcconnex profile css libraries
     $css_url = 'mod/b_extended_profile/css/gcconnex-profile.css';
     elgg_register_css('gcconnex-css', $css_url);
-    elgg_register_css('font-awesome', 'mod/b_extended_profile/vendors/font-awesome/css/font-awesome.min.css'); // font-awesome icons used for social media and some profile fields
+ //   elgg_register_css('font-awesome', 'mod/b_extended_profile/vendors/font-awesome/css/font-awesome.min.css'); // font-awesome icons used for social media and some profile fields
 //    elgg_register_css('bootstrap-tour-css', 'mod/b_extended_profile/vendors/bootstrap-tour/build/css/bootstrap-tour.css');
     // register views
 

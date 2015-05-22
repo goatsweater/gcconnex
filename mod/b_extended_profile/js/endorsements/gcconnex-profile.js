@@ -380,7 +380,7 @@ function user_search_init(target) {
         displayKey: function(user) {
             return user.value;
         },
-        limit: Infinity,
+        limit: 0,
         //source: userName.ttAdapter(),
         source: function(query, cb) {
             userName.get(query, function(suggestions) {
