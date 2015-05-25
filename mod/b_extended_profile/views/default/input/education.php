@@ -27,7 +27,20 @@ echo '<div class="gcconnex-education-entry well" data-guid="' . $guid . '">'; //
     echo elgg_view("input/pulldown", array(
             'name' => 'startdate',
             'class' => 'gcconnex-education-startdate',
-            'options' => array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'),
+            'options_values' => array(
+                1 => elgg_echo('gcconnex_profile:month:january'),
+                2 => elgg_echo('gcconnex_profile:month:february'),
+                3 => elgg_echo('gcconnex_profile:month:march'),
+                4 => elgg_echo('gcconnex_profile:month:april'),
+                5 => elgg_echo('gcconnex_profile:month:may'),
+                6 => elgg_echo('gcconnex_profile:month:june'),
+                7 => elgg_echo('gcconnex_profile:month:july'),
+                8 => elgg_echo('gcconnex_profile:month:august'),
+                9 => elgg_echo('gcconnex_profile:month:september'),
+                10 => elgg_echo('gcconnex_profile:month:october'),
+                11 => elgg_echo('gcconnex_profile:month:november'),
+                12 => elgg_echo('gcconnex_profile:month:december'),
+            ),
             'value' => $education->startdate));
 
     echo elgg_echo('gcconnex_profile:education:year') . elgg_view("input/text", array(
@@ -40,7 +53,20 @@ echo '<div class="gcconnex-education-entry well" data-guid="' . $guid . '">'; //
     $params = array(
         'name' => 'enddate',
         'class' => 'gcconnex-education-enddate gcconnex-education-enddate-' . $education->guid,
-        'options' => array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'),
+        'options_values' => array(
+            1 => elgg_echo('gcconnex_profile:month:january'),
+            2 => elgg_echo('gcconnex_profile:month:february'),
+            3 => elgg_echo('gcconnex_profile:month:march'),
+            4 => elgg_echo('gcconnex_profile:month:april'),
+            5 => elgg_echo('gcconnex_profile:month:may'),
+            6 => elgg_echo('gcconnex_profile:month:june'),
+            7 => elgg_echo('gcconnex_profile:month:july'),
+            8 => elgg_echo('gcconnex_profile:month:august'),
+            9 => elgg_echo('gcconnex_profile:month:september'),
+            10 => elgg_echo('gcconnex_profile:month:october'),
+            11 => elgg_echo('gcconnex_profile:month:november'),
+            12 => elgg_echo('gcconnex_profile:month:december'),
+        ),
         'value' => $education->enddate);
     if ($education->ongoing == 'true') {
         $params['disabled'] = 'true';

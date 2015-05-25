@@ -41,8 +41,22 @@ echo '<br><span class="gcconnex-profile-field-title">' . elgg_echo('gcconnex_pro
 echo elgg_view("input/pulldown", array(
         'name' => 'startdate',
         'class' => 'gcconnex-work-experience-startdate',
-        'options' => array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'),
-        'value' => $work_experience->startdate));
+        'options_values' => array(
+            1 => elgg_echo('gcconnex_profile:month:january'),
+            2 => elgg_echo('gcconnex_profile:month:february'),
+            3 => elgg_echo('gcconnex_profile:month:march'),
+            4 => elgg_echo('gcconnex_profile:month:april'),
+            5 => elgg_echo('gcconnex_profile:month:may'),
+            6 => elgg_echo('gcconnex_profile:month:june'),
+            7 => elgg_echo('gcconnex_profile:month:july'),
+            8 => elgg_echo('gcconnex_profile:month:august'),
+            9 => elgg_echo('gcconnex_profile:month:september'),
+            10 => elgg_echo('gcconnex_profile:month:october'),
+            11 => elgg_echo('gcconnex_profile:month:november'),
+            12 => elgg_echo('gcconnex_profile:month:december'),
+        ),
+        'value' => $work_experience->startdate)
+);
 
 echo elgg_echo('gcconnex_profile:experience:year');
 echo elgg_view("input/text", array(
@@ -57,8 +71,23 @@ echo elgg_view("input/text", array(
 $params = array(
     'name' => 'enddate',
     'class' => 'gcconnex-work-experience-enddate gcconnex-work-experience-enddate-' . $work_experience->guid,
-    'options' => array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'),
-    'value' => $work_experience->enddate);
+    'options_values' => array(
+        1 => elgg_echo('gcconnex_profile:month:january'),
+        2 => elgg_echo('gcconnex_profile:month:february'),
+        3 => elgg_echo('gcconnex_profile:month:march'),
+        4 => elgg_echo('gcconnex_profile:month:april'),
+        5 => elgg_echo('gcconnex_profile:month:may'),
+        6 => elgg_echo('gcconnex_profile:month:june'),
+        7 => elgg_echo('gcconnex_profile:month:july'),
+        8 => elgg_echo('gcconnex_profile:month:august'),
+        9 => elgg_echo('gcconnex_profile:month:september'),
+        10 => elgg_echo('gcconnex_profile:month:october'),
+        11 => elgg_echo('gcconnex_profile:month:november'),
+        12 => elgg_echo('gcconnex_profile:month:december'),
+    ),
+    'value' => $work_experience->enddate
+);
+
 if ($work_experience->ongoing == 'true') {
         $params['disabled'] = 'true';
 }

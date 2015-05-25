@@ -246,7 +246,7 @@ echo '<div class="submit-basic-profile">'; // container for css styling, used to
 // create the save button for saving user profile
 echo elgg_view('input/button', array(
     'type' => 'submit',
-    'value' => 'Save'));
+    'value' => elgg_echo('gcconnex_profile:basic:save')));
 
 echo '</div>'; // close div class="submit-basic-profile"
 

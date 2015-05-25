@@ -44,7 +44,7 @@ if (elgg_get_logged_in_user_guid() == elgg_get_page_owner_guid()) {
         'href' => 'avatar/edit/' . $user->username,
     ));
     */
-    $iconimg = '<div class="avatar-hover-edit">Edit Avatar</div><img src="';
+    $iconimg = '<div class="avatar-hover-edit">' . elgg_echo('gcconnex_profile:profile:edit_avatar') . '</div><img src="';
     $iconimg .= $user->getIcon('large') . '" class="avatar-profile-page">';
 
     $icon = elgg_view('output/url', array(

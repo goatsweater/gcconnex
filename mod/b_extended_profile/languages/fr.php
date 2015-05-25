@@ -11,9 +11,16 @@ $french = array(
     // MAIN PROFILE PAGE
     'gcconnex_profile:edit_profile' => 'Modifier',
     'gcconnex_profile:user_content' => 'Contenu personnel',
+    'gcconnex_profile:profile:edit_avatar' => 'Modifier mon avatar',
 
+    // MAIN PROFILE TABS
+    'gcconnex_profile:profile' => 'Profil',
+    'gcconnex_profile:widgets' => 'Widgets',
+    'gcconnex_profile:portfolio' => 'Portfolio',
+
+    // PROFILE
     'gcconnex_profile:about_me' => 'À mon sujet',
-    'gcconnex_profile:education' => 'Études',
+    'gcconnex_profile:education' => 'Éducation',
     'gcconnex_profile:experience' => 'Expérience de travail',
     'gcconnex_profile:gc_skills' => 'Compétences',
     'gcconnex_profile:edit' => 'Modifier',
@@ -51,16 +58,17 @@ $french = array(
     'gcconnex_profile:month:december' => 'Décembre',
 
     // EDUCATION
-    'gcconnex_profile:education:school' => 'SNom de l\'établissement d\'enseignement : ',
+    'gcconnex_profile:education:school' => 'Nom de l\'établissement : ',
     'gcconnex_profile:education:start_month' => 'Mois de début : ',
     'gcconnex_profile:education:year' => 'Année : ',
     'gcconnex_profile:education:end_month' => 'Mois de fin : ',
     'gcconnex_profile:education:ongoing' => 'J\'étudie encore dans cet établissement d\'enseignement',
+    'gcconnex_profile:education:degree' => 'Diplôme obtenu : ',
     'gcconnex_profile:education:program' => 'Programme : ',
     'gcconnex_profile:education:field' => 'Domaine d\'études : ',
     'gcconnex_profile:education:delete' => 'Supprimer cette entrée',
     'gcconnex_profile:education:add' => '+ ajouter d\'autres études',
-    'gcconnex_profile:education:access' => 'Permettre l\'affichage des renseignements sur les études par : ',
+    'gcconnex_profile:education:access' => 'Accès des renseignements sur les études par : ',
     'gcconnex_profile:education:present' => 'à présent',
     'gcconnex_profile:education:empty' => 'Saisissez les renseignements sur vos études en cliquant sur "Modifier" dans le coin supérieur droit de cette zone de saisie.',
 
@@ -74,7 +82,7 @@ $french = array(
     'gcconnex_profile:experience:responsibilities' => 'Responsabilités',
     'gcconnex_profile:experience:delete' => 'Supprimer cette entrée',
     'gcconnex_profile:experience:add' => '+ ajouter d\'autres renseignements sur l\'expérience de travail',
-    'gcconnex_profile:experience:access' => 'Permettre l\'affichage des renseignements sur l\'expérience de travail par : ',
+    'gcconnex_profile:experience:access' => 'Accès des renseignements sur l\'expérience de travail par : ',
     'gcconnex_profile:experience:present' => 'à présent',
     'gcconnex_profile:experience:colleagues' => 'Collègues : ',
     'gcconnex_profile:experience:empty' => 'Saisissez les renseignements sur votre expérience de travail en cliquant sur "Modifier" dans le coin supérieur droit de cette zone de saisie.',
@@ -86,10 +94,12 @@ $french = array(
     'gcconnex_profile:gc_skill:save' => 'Voulez-vous vraiment enregistrer ces modifications? Toutes les recommandations relatives aux compétences que vous avez supprimées seront effacées de façon permanente.',
     'gcconnex_profile:gc_skill:empty' => 'Saisissez les renseignements sur vos compétences en cliquant sur "Modifier" dans le coin supérieur droit de cette zone de saisie.',
     // leftover skills
+    'gcconnex_profile:gc_skill:leftover' => 'Vous avez précédemment ajouté des compétences à votre profil GCconnex. Veuillez réviser les compétences ci-dessous et les ajouter dans ce nouveau gabarit, au besoin. Lorsque vous ajoutez des compétences à votre profil, assurez-vous que ces dernières soient actuelles, précises, professionnelles, et qu’elles permettent aux personnes qui consultent votre profil d’obtenir de l’information utile, claire, et enrichissante à propos de vous (essayez d’éviter les expressions telles que « plein d’choses » et «accomplir plein de tâches»). ',
+    'gcconnex_profile:gc_skill:stop_showing' => 'Arrêter de me montrer ce message',
 
     // LANGUAGES
     'gcconnex_profile:langs' => 'Langues',
-    'gcconnex_profile:languages:access' => 'Permettre l\'affichage des renseignements sur les langues par : ',
+    'gcconnex_profile:languages:access' => 'Accès des renseignements sur les langues par : ',
     'gcconnex_profile:languages:language' => 'Langue :',
     'gcconnex_profile:languages:add' => '+ ajouter d\'autres langues',
     'gcconnex_profile:languages:delete' => 'Supprimer cette entrée',

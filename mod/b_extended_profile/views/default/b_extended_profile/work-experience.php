@@ -24,14 +24,27 @@ else {
     foreach ($work_experience_guid as $guid) {
 
         if ($experience = get_entity($guid)) {
-
+            $cal_month = array(
+                1 => elgg_echo('gcconnex_profile:month:january'),
+                2 => elgg_echo('gcconnex_profile:month:february'),
+                3 => elgg_echo('gcconnex_profile:month:march'),
+                4 => elgg_echo('gcconnex_profile:month:april'),
+                5 => elgg_echo('gcconnex_profile:month:may'),
+                6 => elgg_echo('gcconnex_profile:month:june'),
+                7 => elgg_echo('gcconnex_profile:month:july'),
+                8 => elgg_echo('gcconnex_profile:month:august'),
+                9 => elgg_echo('gcconnex_profile:month:september'),
+                10 => elgg_echo('gcconnex_profile:month:october'),
+                11 => elgg_echo('gcconnex_profile:month:november'),
+                12 => elgg_echo('gcconnex_profile:month:december')
+            );
             echo '<div class="gcconnex-profile-work-experience-display gcconnex-work-experience-' . $experience->guid . '">';
-            echo '<div class="gcconnex-profile-label work-experience-dates">' . $experience->startdate . ', ' . $experience->startyear . ' - ';
+            echo '<div class="gcconnex-profile-label work-experience-dates">' . $cal_month[$experience->startdate] . ', ' . $experience->startyear . ' - ';
 
             if ($experience->ongoing == 'true') {
                 echo elgg_echo('gcconnex_profile:experience:present');
             } else {
-                echo $experience->enddate . ', ' . $experience->endyear;
+                echo $caal_month[$experience->enddate] . ', ' . $experience->endyear;
             }
 
             echo '</div>';
