@@ -95,7 +95,6 @@ $(document).ready(function() {
     tour.start();
     */
 
-
     // bootstrap tabs.js functionality..
     $('#myTab a').click(function (e) {
         e.preventDefault();
@@ -251,7 +250,7 @@ function editProfile(event) {
 
         case 'skills':
             // inject the html to add ability to add skills
-            var christineFix = elgg.echo("gcconnex_profile:gc_skill:add", null, null);
+            var christineFix = elgg.echo("gcconnex_profile:gc_skill:add", null, 'en');
             $('.gcconnex-skills').append('<div class="gcconnex-endorsements-input-wrapper">' +
             '<input type="text" class="gcconnex-endorsements-input-skill" onkeyup="checkForEnter(event)"/>' +
             '<span class="gcconnex-endorsements-add-skill">' + christineFix + '</span>' +
@@ -290,7 +289,7 @@ function editProfile(event) {
 
             // create a "delete this skill" link for each skill
             $('.gcconnex-endorsements-skill').each(function(){
-                $(this).after('<img class="delete-skill-img" src="' + elgg.get_site_url() + 'mod/b_extended_profile/img/delete.png"><span class="delete-skill" onclick="deleteEntry(this)" data-type="skill">' + elgg.echo("gcconnex_profile:gc_skill:delete", null, null) + '</span>'); //goes in here i think..
+                $(this).after('<img class="delete-skill-img" src="' + elgg.get_site_url() + 'mod/b_extended_profile/img/delete.png"><span class="delete-skill" onclick="deleteEntry(this)" data-type="skill">' + elgg.echo("gcconnex_profile:gc_skill:delete", null, 'en') + '</span>'); //goes in here i think..
             });
             $('.save-' + $section).show();
 
@@ -899,7 +898,7 @@ function addNewSkill(newSkill) {
     '<span title="Number of endorsements" class="gcconnex-endorsements-count" data-skill="' + newSkill + '">0</span>' +
     '<span data-skill="' + newSkill + '" class="gcconnex-endorsements-skill">' + newSkill + '</span>' +
     '<img class="delete-skill-img" src="' + elgg.get_site_url() + 'mod/b_extended_profile/img/delete.png">' +
-    '<span class="delete-skill" data-type="skill" onclick="deleteEntry(this)">' + elgg.echo("gcconnex_profile:gc_skill:delete", null, null) + '</span></div>');
+    '<span class="delete-skill" data-type="skill" onclick="deleteEntry(this)">' + elgg.echo("gcconnex_profile:gc_skill:delete", null, 'en') + '</span></div>');
 
     $('.gcconnex-endorsements-input-skill').val('');                                 // clear the text box
     $('.gcconnex-endorsements-input-skill').typeahead('val', '');                                           // clear the typeahead box
