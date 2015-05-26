@@ -118,26 +118,31 @@ echo '<div class="basic-profile-standard-field-wrapper">'; // container for css 
 
 
 foreach ($fields as $field) { // create a label and input box for each field on the basic profile (see $fields above)
-
     echo '<div class="basic-profile-field-wrapper">'; // field wrapper for css styling
 
-        $field = strtolower($field);
-        echo '<br><div class="basic-profile-label ' . $field . '-label">' . elgg_echo('gcconnex_profile:basic:' . $field) . '</div>'; // field label
+    $field = strtolower($field);
+    echo '<br><div class="basic-profile-label ' . $field . '-label">' . elgg_echo('gcconnex_profile:basic:' . $field) . '</div>'; // field label
 
-        $value = $user->get($field);
+    $value = $user->get($field);
 
-        // setup the input for this field
-        $params = array(
-            'name' => $field,
-            'class' => 'gcconnex-basic-' . $field,
-            'value' => $value,
-        );
+    // setup the input for this field
+    $params = array(
+        'name' => $field,
+        'class' => 'gcconnex-basic-' . $field,
+        'value' => $value,
+    );
 
+    if ($field == 'department') {
+        echo '<div id="bloodhound" class="basic-profile-field">'; // field wrapper for css styling
+    }
+    else {
         echo '<div class="basic-profile-field">'; // field wrapper for css styling
-            echo elgg_view("input/text", $params); // input field
+    }
+        echo elgg_view("input/text", $params); // input field
         echo '</div>'; //close div class = basic-profile-field
 
-    echo '</div>'; //close div class = basic-profile-field-wrapper
+        echo '</div>'; //close div class = basic-profile-field-wrapper
+
 }
 
 /*

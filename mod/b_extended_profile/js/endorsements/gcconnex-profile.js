@@ -17,13 +17,7 @@ function initFancyProfileBox() {
     var select = function(e, user) {
         $('#manager-id').val(user.guid);
     };
-/*
-    var filter = function(suggestions) {
-        return $.grep(suggestions, function(suggestion) {
-            return $.inArray(suggestion.guid, $colleagueSelected) === -1; // if suggestion.guid == $colleagueSelected
-        });
-    };
-*/
+
     var manager = new Bloodhound({
         datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
         queryTokenizer: Bloodhound.tokenizers.whitespace,
@@ -67,10 +61,24 @@ function initFancyProfileBox() {
         }
     }).bind('typeahead:selected', select);
 
-    //$userSuggest.on('typeahead:selected', addColleague);
-    //$userSuggest.on('typeahead:autocompleted', addColleague);
+    var departments = new Bloodhound({
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        //prefetch: '../data/films/post_1960.json',
+        //remote: '../data/films/queries/%QUERY.json'
+        remote: {
+            url: elgg.get_site_url() + 'mod/b_extended_profile/actions/b_extended_profile/autodept.php?query=%QUERY',
+        }
+    });
 
-    //$userFind.push(userSearchField);
+    departments.initialize();
+
+    $('.gcconnex-basic-department').typeahead(null, {
+        name: 'department',
+        displayKey: 'value',
+        limit: 10,
+        source: departments.ttAdapter()
+    });
 }
 
 
@@ -388,7 +396,7 @@ function user_search_init(target) {
         },
         templates: {
             suggestion: function (user) {
-                return '<div class="tt-suggest-avatar">' + user.pic + '</div><div class="tt-suggest-username">' + user.value + '</div><br>';
+                return '<div class="tt-suggest-username-wrapper"><div class="tt-suggest-avatar">' + user.pic + '</div><div class="tt-suggest-username">' + user.value + '</div></div>';
             }
         }
     }).bind('typeahead:selected', select);

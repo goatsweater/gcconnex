@@ -553,6 +553,10 @@ input.userfind {
     box-shadow: 0 5px 10px rgba(0,0,0,.2);
 }
 
+.tt-suggest-username-wrapper {
+    padding-top: 3px;
+}
+
 .tt-suggestion {
     padding: 3px 20px;
     font-size: 18px;
@@ -568,7 +572,8 @@ input.userfind {
 .tt-suggest-username {
     float: left;
     padding-left: 15px;
-    max-width: 200px;
+    width: 220px;
+    height: 24px;
     overflow: hidden;
 }
 .tt-suggest-avatar {
@@ -576,10 +581,10 @@ input.userfind {
     height: 20px;
 }
 
-.tt-suggestion p {
+.colleague-suggest-field .tt-suggestion {
     margin: 0;
-    max-width: 200px;
     overflow: hidden;
+    height: 30px;
 }
 
 .gcconnex-avatar-in-list {
@@ -713,6 +718,7 @@ td.left-col {
     padding-top: 10px;
 }
 
+.gcconnex-basic-department.tt-hint,
 .manager.tt-query,
 .manager.tt-hint {
     width: 100%;
