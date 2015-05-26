@@ -28,6 +28,7 @@ $french = array(
     'gcconnex_profile:save' => 'Enregistrer',
     'gcconnex_profile:present' => 'à présent', // for work and education time ranges.. from XX date to Present
     'gcconnex_profile:about_me:empty' => 'Saisissez une description de vous-même en cliquant sur "Modifier" dans le coin supérieur droit de cette zone de saisie.',// prompt to add first skill
+    'gcconnex_profile:about_me:access' => 'Accès des renseignements sur mon sujet par : ',
 
 
     // BASIC PROFILE FORM

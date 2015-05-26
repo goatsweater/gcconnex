@@ -12,19 +12,25 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
     $user_guid = $_GET["guid"];
     $user = get_user($user_guid);
 
+    //$profile_fields = elgg_get_config('profile_fields');
     // allow the user to edit the access settings for education entries
-    // echo elgg_echo('gcconnex_profile:about_me:access');
-/*
-    $access_id = $user->about_access;
+    echo elgg_echo('gcconnex_profile:about_me:access');
+
+    $metadata = elgg_get_metadata(array(
+        'guid' => $user_guid,
+        'metadata_name' => 'description',
+        'limit' => false
+    ));
+
     // access is granted the same as the rest of the user profile
     $params = array(
         'name' => "accesslevel['aboutme']",
-        'value' => $access_id,
-        'class' => 'gcconnex-aboutme-access'
+        'value' => $metadata[0]['access_id'],
+        'class' => 'gcconnex-about-me-access'
     );
-*/
 
     echo elgg_view('input/access', $params);
+
 
     // get the about-me text (saved in ->description)
     $value = $user->description;

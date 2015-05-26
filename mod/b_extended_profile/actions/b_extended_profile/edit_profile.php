@@ -8,9 +8,12 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
 
     switch ($section) {
         case 'about-me':
-            $user->description = get_input('description', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0001.');
+            //$user->description = get_input('description', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0001.');
+
+            error_log(print_r("access: " . get_input('access')));
+            create_metadata($user_guid, 'description', get_input('description', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0001.'), 'text', 0, get_input('access'));
+
             $user->save();
-            break;
         case 'education':
             $eguid = get_input('eguid', '');
             $delete = get_input('delete', '');
@@ -249,7 +252,7 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
             $english = get_input('english', 'ERROR: Ask your admin to grep: SDFANLVNVNVNVNVNAA31566.');
             $languagesToAdd = get_input('langadded', 'ERROR: Ask your admin to grep: 5FH13FFSSGAHHHS0021.');
             $languagesToRemove = get_input('langremoved', 'ERROR: Ask your admin to grep: 5AAAAGGFH13GAH0022.');
-            $access = ACCESS_LOGGED_IN;
+            $access = get_input('access');
 
             $user->english = $english;
             $user->french = $french;
@@ -260,6 +263,7 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
             $portfolio = get_input('portfolio');
             $edit = $portfolio['edit'];
             $delete = $portfolio['delete'];
+            $access = get_input('access');
 
             $portfolio_list = $user->portfolio;
 

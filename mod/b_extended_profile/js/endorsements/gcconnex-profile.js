@@ -428,7 +428,8 @@ function saveProfile(event) {
                 data: {
                     guid: elgg.get_logged_in_user_guid(),
                     section: 'about-me',
-                    description: $about_me
+                    description: $about_me,
+                    access: access
                 },
                 success: function() {            // fetch and display the information we just saved
                     $.get(elgg.normalize_url('ajax/view/b_extended_profile/about-me'),
@@ -699,6 +700,7 @@ function saveProfile(event) {
             // Save the portfolio
             var portfolio = {};
             var entry = [];
+            var access = $('.gcconnex-portfolio-access').val();
 
             portfolio.edit = entry;
             portfolio.delete = [];
@@ -724,7 +726,8 @@ function saveProfile(event) {
                 data: {
                     guid: elgg.get_logged_in_user_guid(),
                     section: 'portfolio',
-                    portfolio: portfolio
+                    portfolio: portfolio,
+                    access: access
                 },
                 success: function() {
                     $.get(elgg.normalize_url('ajax/view/b_extended_profile/portfolio'),

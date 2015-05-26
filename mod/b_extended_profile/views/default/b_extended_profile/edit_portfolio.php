@@ -7,6 +7,9 @@
  */
 
 if (elgg_is_xhr()) {  //This is an Ajax call!
+    $user_guid = $_GET["guid"];
+    $user = get_user($user_guid);
+
     // allow the user to edit the access settings for portfolio entries
     echo elgg_echo('gcconnex_profile:portfolio:access');
 
@@ -19,8 +22,6 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
     );
 
     echo elgg_view('input/access', $params);
-    $user_guid = $_GET["guid"];
-    $user = get_user($user_guid);
 
     //get the array of user portfolio entities
     $portfolio_guid = $user->portfolio;
