@@ -30,17 +30,17 @@ else {
 
         if ($entry = get_entity($guid)) {
             echo '<div class="gcconnex-profile-portfolio-display gcconnex-portfolio-' . $entry->guid . '">';
-            echo '<div class="gcconnex-profile-field-title">Title: </div><div class="portfolio-title">' . $entry->title . '</div>';
-            echo '<br><div class="gcconnex-profile-field-title">Link: </div><div class="portfolio-link">';
+            echo '<div class="gcconnex-profile-field-title">' . elgg_echo('gcconnex_profile:portfolio:title') . '</div><div class="portfolio-title">' . $entry->title . '</div>';
+            echo '<br><div class="gcconnex-profile-field-title">' . elgg_echo('gcconnex_profile:portfolio:link') . '</div><div class="portfolio-link">';
             echo elgg_view('output/url', array(
                 'href' => $entry->link,
                 'text' => $entry->link
             ));
             echo '</div>';
             if ( $entry->datestamped == true ) {
-                echo '<br><div class="gcconnex-profile-field-title">Published on: </div><div class="portfolio-publicationdate">' . $entry->pubdate . '</div>';
+                echo '<br><div class="gcconnex-profile-field-title">' . elgg_echo('gcconnex_profile:portfolio:publication_date') . '</div><div class="portfolio-publicationdate">' . $entry->pubdate . '</div>';
             }
-            echo '<br><div class="gcconnex-profile-field-title">Description: </div><div class="portfolio-description">' . $entry->description . '</div>';
+            echo '<br><div class="gcconnex-profile-field-title">' . elgg_echo('gcconnex_profile:portfolio:description') . '</div><div class="portfolio-description">' . $entry->description . '</div>';
             echo '</div>'; // close div class="gcconnex-profile-portfolio-display gcconnex-portfolio-'...
         }
     }

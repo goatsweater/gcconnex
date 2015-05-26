@@ -28,7 +28,7 @@ $english = array(
     'gcconnex_profile:save' => 'Save',
     'gcconnex_profile:present' => 'Present', // for work and education time ranges.. from XX date to Present
     'gcconnex_profile:about_me:empty' => 'Begin entering a description about yourself by clicking "Edit" in the top right corner of this box.',// prompt to add first skill
-    'gcconnex_profile:about_me:access' => 'Allow about me details to be viewable by: ',
+    'gcconnex_profile:about_me:access' => 'Who can see my description:',
 
 
     // BASIC INFORMATION PROFILE FORM
@@ -69,7 +69,7 @@ $english = array(
     'gcconnex_profile:education:field' => 'Field of Study: ',
     'gcconnex_profile:education:delete' => 'Delete this entry',
     'gcconnex_profile:education:add' => '+ add more education',
-    'gcconnex_profile:education:access' => 'Allow education details to be viewable by: ',
+    'gcconnex_profile:education:access' => 'Who can see my education entries:',
     'gcconnex_profile:education:present' => 'Present',
     'gcconnex_profile:education:empty' => 'Begin entering your education details by clicking "Edit" in the top right corner of this box.',
 
@@ -83,7 +83,7 @@ $english = array(
     'gcconnex_profile:experience:responsibilities' => 'Responsibilities',
     'gcconnex_profile:experience:delete' => 'Delete this entry',
     'gcconnex_profile:experience:add' => '+ add more work experience',
-    'gcconnex_profile:experience:access' => 'Allow work experience details to be viewable by: ',
+    'gcconnex_profile:experience:access' => 'Who can see my work experience entries: ',
     'gcconnex_profile:experience:present' => 'Present',
     'gcconnex_profile:experience:colleagues' => 'Colleagues: ',
     'gcconnex_profile:experience:empty' => 'Begin entering your work experience by clicking "Edit" in the top right corner of this box.',
@@ -100,7 +100,7 @@ $english = array(
 
     // LANGUAGES
     'gcconnex_profile:langs' => 'Languages',
-    'gcconnex_profile:languages:access' => 'Allow language details to be viewable by: ',
+    'gcconnex_profile:languages:access' => 'Who can see my language entries:',
     'gcconnex_profile:languages:language' => 'Language:',
     'gcconnex_profile:languages:add' => '+ add more languages',
     'gcconnex_profile:languages:delete' => 'Delete this entry',
@@ -115,11 +115,11 @@ $english = array(
     // PORTFOLIO
     'gcconnex_profile:portfolio' => 'Portfolio',
     'gcconnex_profile:portfolio:empty' => 'Begin adding to your portfolio by clicking "Edit" in the top right corner of this box.',
-    'gcconnex_profile:portfolio:access' => 'Allow portfolio to be viewable by: ',
+    'gcconnex_profile:portfolio:access' => 'Who can see my portfolio entries:',
     'gcconnex_profile:portfolio:add' => '+ add more to portfolio',
     'gcconnex_profile:portfolio:title' => 'Title: ',
     'gcconnex_profile:portfolio:link' => 'Link: ',
-    'gcconnex_profile:portfolio:publication_date' => 'Publication Date: ',
+    'gcconnex_profile:portfolio:publication_date' => 'Published on: ',
     'gcconnex_profile:portfolio:datestamp' => 'No publish date',
     'gcconnex_profile:portfolio:description' => 'Description: ',
     'gcconnex_profile:portfolio:delete' => 'Delete this entry'
