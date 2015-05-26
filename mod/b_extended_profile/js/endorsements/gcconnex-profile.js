@@ -422,6 +422,7 @@ function saveProfile(event) {
     switch ($section) {
         case "about-me":
             var $about_me = tinyMCE.activeEditor.getContent();
+            var access = $('.gcconnex-about-me-access').val();
             // save the information the user just edited
             elgg.action('b_extended_profile/edit_profile', {
                 data: {
@@ -551,6 +552,7 @@ function saveProfile(event) {
 
             work_experience.edit = experience;
             work_experience.delete = [];
+            var access = $('.gcconnex-work-experience-access').val();
 
             $('.gcconnex-work-experience-entry').each(function() {
                 if ( $(this).is(":hidden") ) {
@@ -586,7 +588,8 @@ function saveProfile(event) {
                 data: {
                     guid: elgg.get_logged_in_user_guid(),
                     work: work_experience,
-                    section: 'work-experience'
+                    section: 'work-experience',
+                    access: access
                 },
                 success: function() {
                     $.get(elgg.normalize_url('ajax/view/b_extended_profile/work-experience'),

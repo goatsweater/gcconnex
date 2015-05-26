@@ -25,7 +25,7 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
     $user = get_user($user_guid);
 
     //get the array of user languages entities
-    $languages_guid = $user->langs;
+    //$languages_guid = $user->langs;
     $english = $user->english;
     $french = $user->french;
 
