@@ -656,9 +656,10 @@ td.left-col {
 }
 
 .avatar-profile-page {
-    width: 250px;
-    height: 250px;
+    width: 255px;
+    height: 255px;
     border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
 }
 
 .avatar-hover-edit {
