@@ -5,7 +5,7 @@ $user = get_user($user_guid);
 // if skills isn't empty, display them so that the user can use them as a guide
 if ($user->skills != NULL && $user->skillsupgraded == NULL) {
     echo '<div class="gcconnex-old-skills">';
-    echo '<div class="gcconnex-old-skills-message">' . elgg_echo() . '</div>';
+    echo '<div class="gcconnex-old-skills-message">' . elgg_echo('gcconnex_profile:gc_skill:leftover') . '</div>';
     echo '<div class="gcconnex-old-skills-display">';
 
     if (is_array($user->skills)) {
