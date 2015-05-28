@@ -34,7 +34,7 @@ $french = array(
     // BASIC PROFILE FORM
     'gcconnex_profile:basic:header' => 'Modifier le profil de base',
     'gcconnex_profile:basic:name' => 'Nom : ',
-    'gcconnex_profile:basic:title' => 'Titre : ',
+    'gcconnex_profile:basic:job' => 'Titre : ',
     'gcconnex_profile:basic:department' => 'Ministère : ',
     'gcconnex_profile:basic:phone' => 'Téléphone : ',
     'gcconnex_profile:basic:mobile' => 'Cellulaire : ',

@@ -58,7 +58,7 @@ if (elgg_get_page_owner_guid() != elgg_get_logged_in_user_guid()) {
 }
 
 echo '</div>'; // close div class="gcconnex-profile-name"
-echo '<h3>' . $user->title . '</h3>';
+echo '<h3>' . $user->job . '</h3>';
 echo '<div class="gcconnex-profile-dept">' . $user->department . '</div>';
 echo '<div class="gcconnex-profile-contact-info">';
 

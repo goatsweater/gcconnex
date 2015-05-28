@@ -34,7 +34,7 @@ $english = array(
     // BASIC INFORMATION PROFILE FORM
     'gcconnex_profile:basic:header' => 'Edit Basic Profile',
     'gcconnex_profile:basic:name' => 'Name: ',
-    'gcconnex_profile:basic:title' => 'Title: ',
+    'gcconnex_profile:basic:job' => 'Title: ',
     'gcconnex_profile:basic:department' => 'Department: ',
     'gcconnex_profile:basic:phone' => 'Phone: ',
     'gcconnex_profile:basic:mobile' => 'Mobile: ',
