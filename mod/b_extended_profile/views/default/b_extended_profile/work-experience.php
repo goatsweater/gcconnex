@@ -44,7 +44,7 @@ else {
             if ($experience->ongoing == 'true') {
                 echo elgg_echo('gcconnex_profile:experience:present');
             } else {
-                echo $caal_month[$experience->enddate] . ', ' . $experience->endyear;
+                echo $cal_month[$experience->enddate] . ', ' . $experience->endyear;
             }
 
             echo '</div>';

@@ -44,7 +44,7 @@ else {
                     $endorsements = array($endorsements);
                 }
 
-                if (!($user->canEdit())) {
+                if ( elgg_get_logged_in_user_guid() != elgg_get_page_owner_guid() ) {
                     if (in_array(elgg_get_logged_in_user_guid(), $endorsements) == false || empty($endorsements)) {
                         // user has not yet endorsed this skill for this user.. present the option to endorse
 

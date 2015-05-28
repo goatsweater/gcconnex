@@ -97,6 +97,7 @@ $english = array(
     // leftover skills
     'gcconnex_profile:gc_skill:leftover' => 'You have previously entered skills which may need to be re-entered in the system. Please review your previously entered skills below and re-enter them as needed. When entering or re-entering a skill, <b>please make sure they are actual  skills that you believe you possess, that they are specific, professional and that they provide viewers of your profile with clear, meaningful and useful information</b> (ie: Not "A bunch of things.. " or "Getting things done!").',
     'gcconnex_profile:gc_skill:stop_showing' => 'Stop showing me this message',
+    '' => '',
 
     // LANGUAGES
     'gcconnex_profile:langs' => 'Languages',
