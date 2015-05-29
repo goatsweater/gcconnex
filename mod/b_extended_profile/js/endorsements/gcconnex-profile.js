@@ -27,10 +27,10 @@ function initFancyProfileBox() {
                 // Map the remote source JSON array to a JavaScript object array
                 return $.map(response, function (user) {
                     return {
-                        value: user.value,
-                        guid: user.guid,
-                        pic: user.pic,
-                        avatar: user.avatar,
+                        'value': user.value,
+                        'guid': user.guid,
+                        'pic': user.pic,
+                        'avatar': user.avatar
                     };
                 });
             }
@@ -67,7 +67,7 @@ function initFancyProfileBox() {
         //prefetch: '../data/films/post_1960.json',
         //remote: '../data/films/queries/%QUERY.json'
         remote: {
-            url: elgg.get_site_url() + 'mod/b_extended_profile/actions/b_extended_profile/autodept.php?query=%QUERY',
+            url: elgg.get_site_url() + 'mod/b_extended_profile/actions/b_extended_profile/autodept.php?query=%QUERY'
         }
     });
 
@@ -276,7 +276,7 @@ function editProfile(event) {
                 //prefetch: '../data/films/post_1960.json',
                 //remote: '../data/films/queries/%QUERY.json'
                 remote: {
-                    url: elgg.get_site_url() + 'mod/b_extended_profile/actions/b_extended_profile/autoskill.php?query=%QUERY',
+                    url: elgg.get_site_url() + 'mod/b_extended_profile/actions/b_extended_profile/autoskill.php?query=%QUERY'
                 }
             });
 
@@ -722,7 +722,7 @@ function saveProfile(event) {
                         'link': $(this).find('.gcconnex-portfolio-link').val(),
                         'pubdate': $(this).find('#pubdate').val(),
                         'datestamped': $(this).find('.gcconnex-portfolio-datestamped').val(),
-                        'description': $(this).find('.gcconnex-portfolio-description').val(),
+                        'description': $(this).find('.gcconnex-portfolio-description').val()
                     };
                     portfolio.edit.push(entry);
                 }
