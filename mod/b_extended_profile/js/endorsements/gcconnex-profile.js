@@ -84,6 +84,12 @@ function initFancyProfileBox() {
 
 
 $(document).ready(function() {
+        $(".gcconnex-basic-profile-edit").fancybox({
+            autoDimensions: false,
+            width: '800',
+            height: '580',
+            onComplete : initFancyProfileBox
+        })
 /*
     var tour = new Tour({
         steps: [

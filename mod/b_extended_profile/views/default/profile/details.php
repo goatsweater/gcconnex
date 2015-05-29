@@ -7,20 +7,6 @@
  * font-awesome css should be loaded already
  */
 
-
-?>
-<script>
-    $(window).load(function() {
-        $(".gcconnex-basic-profile-edit").fancybox({
-            autoDimensions: false,
-            width: '800',
-            height: '580',
-            onComplete : initFancyProfileBox
-        })
-    });
-</script>
-<?php
-
 $user = elgg_get_page_owner_entity();
 
 $profile_fields = elgg_get_config('profile_fields');
