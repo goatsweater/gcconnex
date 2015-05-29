@@ -85,11 +85,11 @@ function initFancyProfileBox() {
 
 $(document).ready(function() {
         $(".gcconnex-basic-profile-edit").fancybox({
-            autoDimensions: false,
-            width: '800',
-            height: '580',
-            onComplete : initFancyProfileBox
-        })
+            'autoDimensions': false,
+            'width': '800',
+            'height': '580',
+            'onComplete': initFancyProfileBox
+        });
 /*
     var tour = new Tour({
         steps: [
@@ -374,11 +374,11 @@ function user_search_init(target) {
                 // Map the remote source JSON array to a JavaScript object array
                 return $.map(response, function (user) {
                     return {
-                        value: user.value,
-                        guid: user.guid,
-                        pic: user.pic,
-                        avatar: user.avatar,
-                        tid: tid
+                        'value': user.value,
+                        'guid': user.guid,
+                        'pic': user.pic,
+                        'avatar': user.avatar,
+                        'tid': tid
                     };
                 });
             }
@@ -432,15 +432,15 @@ function saveProfile(event) {
             // save the information the user just edited
             elgg.action('b_extended_profile/edit_profile', {
                 data: {
-                    guid: elgg.get_logged_in_user_guid(),
-                    section: 'about-me',
-                    description: $about_me,
-                    access: access
+                    'guid': elgg.get_logged_in_user_guid(),
+                    'section': 'about-me',
+                    'description': $about_me,
+                    'access': access
                 },
                 success: function() {            // fetch and display the information we just saved
                     $.get(elgg.normalize_url('ajax/view/b_extended_profile/about-me'),
                         {
-                            guid: elgg.get_logged_in_user_guid()
+                            'guid': elgg.get_logged_in_user_guid()
                         },
                         function(data) {
                             // Output in a DIV with id=somewhere
@@ -522,25 +522,25 @@ function saveProfile(event) {
             // save the information the user just edited
             elgg.action('b_extended_profile/edit_profile', {
                 data: {
-                    guid: elgg.get_logged_in_user_guid(),
-                    delete: $delete_guid,
-                    eguid: $education_guid,
-                    section: 'education',
-                    school: $school,
-                    startdate: $startdate,
-                    startyear: $startyear,
-                    enddate: $enddate,
-                    endyear: $endyear,
-                    ongoing: $ongoing,
-                    //program: $program,
-                    degree: $degree,
-                    field: $field,
-                    access: $access
+                    'guid': elgg.get_logged_in_user_guid(),
+                    'delete': $delete_guid,
+                    'eguid': $education_guid,
+                    'section': 'education',
+                    'school': $school,
+                    'startdate': $startdate,
+                    'startyear': $startyear,
+                    'enddate': $enddate,
+                    'endyear': $endyear,
+                    'ongoing': $ongoing,
+                    //'program': $program,
+                    'degree': $degree,
+                    'field': $field,
+                    'access': $access
                 },
                 success: function() {            // fetch and display the information we just saved
                     $.get(elgg.normalize_url('ajax/view/b_extended_profile/education'),
                         {
-                            guid: elgg.get_logged_in_user_guid()
+                            'guid': elgg.get_logged_in_user_guid()
                         },
                         function(data) {
                             // Output in a DIV with id=somewhere
@@ -593,15 +593,15 @@ function saveProfile(event) {
             // save the information the user just edited
             elgg.action('b_extended_profile/edit_profile', {
                 data: {
-                    guid: elgg.get_logged_in_user_guid(),
-                    work: work_experience,
-                    section: 'work-experience',
-                    access: access
+                    'guid': elgg.get_logged_in_user_guid(),
+                    'work': work_experience,
+                    'section': 'work-experience',
+                    'access': access
                 },
                 success: function() {
                     $.get(elgg.normalize_url('ajax/view/b_extended_profile/work-experience'),
                         {
-                            guid: elgg.get_logged_in_user_guid()
+                            'guid': elgg.get_logged_in_user_guid()
                         },
                         function(data) {
                             // Output in a DIV with id=somewhere
@@ -646,10 +646,10 @@ function saveProfile(event) {
                 // save the information the user just edited
 
                 elgg.action('b_extended_profile/edit_profile', {
-                    guid: elgg.get_logged_in_user_guid(),
-                    section: 'skills',
-                    skillsadded: $skills_added,
-                    skillsremoved: $delete_guid
+                    'guid': elgg.get_logged_in_user_guid(),
+                    'section': 'skills',
+                    'skillsadded': $skills_added,
+                    'skillsremoved': $delete_guid
                 });
 
                 $('.delete-skill-img').remove();
@@ -683,10 +683,10 @@ function saveProfile(event) {
             // save the information the user just edited
             elgg.action('b_extended_profile/edit_profile', {
                 data: {
-                    guid: elgg.get_logged_in_user_guid(),
-                    section: 'languages',
-                    english: english,
-                    french: french
+                    'guid': elgg.get_logged_in_user_guid(),
+                    'section': 'languages',
+                    'english': english,
+                    'french': french
                 },
                 success: function() {
                     $.get(elgg.normalize_url('ajax/view/b_extended_profile/languages'),
@@ -730,15 +730,15 @@ function saveProfile(event) {
 
             elgg.action('b_extended_profile/edit_profile', {
                 data: {
-                    guid: elgg.get_logged_in_user_guid(),
-                    section: 'portfolio',
-                    portfolio: portfolio,
-                    access: access
+                    'guid': elgg.get_logged_in_user_guid(),
+                    'section': 'portfolio',
+                    'portfolio': portfolio,
+                    'access': access
                 },
                 success: function() {
                     $.get(elgg.normalize_url('ajax/view/b_extended_profile/portfolio'),
                         {
-                            guid: elgg.get_logged_in_user_guid()
+                            'guid': elgg.get_logged_in_user_guid()
                         },
                         function (data) {
                             // Output portfolio here
@@ -835,25 +835,6 @@ function toggleEndDate(section, evt) {
 
     $(evt).closest('.gcconnex-' + section + '-entry').find('.gcconnex-' + section + '-end-year').attr('disabled', evt.checked);
     $(evt).closest('.gcconnex-' + section + '-entry').find('.gcconnex-' + section + '-enddate').attr('disabled', evt.checked);
-
-    /*
-    $(evt).closest('.gcconnex-work-experience-entry').find('.gcconnex-work-experience-end-year').attr('disabled', function(index, attr) {
-        return attr == 'disabled' ? null : 'disabled';
-    });
-
-    $(evt).closest('.gcconnex-work-experience-entry').find('.gcconnex-work-experience-enddate').attr('disabled', function(index, attr) {
-        return attr == 'disabled' ? null : 'disabled';
-    });
-    */
-    /*
-    $('.gcconnex-' + section + '-enddate-' + guid).attr('disabled', function(index, attr) {
-        return attr == 'disabled' ? null : 'disabled';
-    });
-
-    $('.gcconnex-' + section + '-end-year-' + guid).attr('disabled', function(index, attr) {
-        return attr == 'disabled' ? null : 'disabled';
-    });
-    */
 }
 
 /*
@@ -963,8 +944,8 @@ function retractEndorsement(identifier) {
     var skill_guid = $(identifier).data('guid');
 
     elgg.action('b_extended_profile/retract_endorsement', {
-        guid: elgg.get_logged_in_user_guid(),
-        skill: skill_guid
+        'guid': elgg.get_logged_in_user_guid(),
+        'skill': skill_guid
     });
 
 
@@ -1032,8 +1013,8 @@ function deleteEntry(identifier) {
 function removeOldSkills() {
     elgg.action('b_extended_profile/edit_profile', {
         data: {
-            guid: elgg.get_logged_in_user_guid(),
-            section: 'old-skills'
+            'guid': elgg.get_logged_in_user_guid(),
+            'section': 'old-skills'
         },
         success: function() {
             $('.gcconnex-old-skills').remove();
