@@ -112,7 +112,7 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
 
             $work_experience = get_input('work');
             $edit = $work_experience['edit'];
-            $delete = $work_experience['delete'];
+            $delete = $work_experience['delete_guids'];
             $access = get_input('access');
 
             $experience_list = $user->work;
@@ -262,7 +262,7 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
         case 'portfolio':
             $portfolio = get_input('portfolio');
             $edit = $portfolio['edit'];
-            $delete = $portfolio['delete'];
+            $delete = $portfolio['delete_guids'];
             $access = get_input('access');
 
             $portfolio_list = $user->portfolio;

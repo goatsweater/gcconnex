@@ -558,13 +558,13 @@ function saveProfile(event) {
             var experience = [];
 
             work_experience.edit = experience;
-            work_experience.delete = [];
+            work_experience.delete_guids = [];
             var access = $('.gcconnex-work-experience-access').val();
 
             $('.gcconnex-work-experience-entry').each(function() {
                 if ( $(this).is(":hidden") ) {
                     //if ($(this).data('guid') != "new") {
-                        work_experience.delete.push($(this).data('guid'));
+                        work_experience.delete_guids.push($(this).data('guid'));
                         //$delete_guid.push($(this).data('guid'));
                    // }
                 }
@@ -709,11 +709,11 @@ function saveProfile(event) {
             var access = $('.gcconnex-portfolio-access').val();
 
             portfolio.edit = entry;
-            portfolio.delete = [];
+            portfolio.delete_guids = [];
 
             $('.gcconnex-portfolio-entry').each(function() {
                 if ( $(this).is(":hidden") ) {
-                    portfolio.delete.push($(this).data('guid'));
+                    portfolio.delete_guids.push($(this).data('guid'));
                 }
                 else {
                     entry = {
