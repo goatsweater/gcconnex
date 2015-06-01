@@ -111,8 +111,13 @@ $user = get_user($guid);
 
 // pre-populate which fields to display on the "edit basic profile" overlay
 $fields = array('Name', 'Job', 'Department', 'Phone', 'Mobile', 'Email', 'Website');
+echo '<div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>';
 
-echo '<h1>' . elgg_echo('gcconnex_profile:basic:header') . '</h1>';
+echo '<h1 class="modal-title">' . elgg_echo('gcconnex_profile:basic:header') . '</h1>';
+echo '</div>';
+
+echo '<div class="modal-body">';
 echo '<div class="basic-profile">'; // outer container for all content (except the form title above) for css styling
 echo '<div class="basic-profile-standard-field-wrapper">'; // container for css styling, used to group profile content and display them seperately from other fields
 
@@ -259,3 +264,16 @@ echo '</div>'; // close div class="basic-profile-micro-assignments
 echo '</div>'; // close div class="basic-profile"
 
 echo '</div>'; // cloase div class="gcconnex-b-extended-profile-edit-profile"
+
+echo '</div>'; // close modal-body
+
+echo '<div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->';
