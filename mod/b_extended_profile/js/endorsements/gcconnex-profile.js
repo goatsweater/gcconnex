@@ -118,7 +118,7 @@ $(document).ready(function() {
     // bootstrap modal functionality for edit basic profile
     $('#editProfile').on('show.bs.modal', function() {
         $.get(elgg.normalize_url("ajax/view/b_extended_profile/edit_basic"), function(data){
-            $('#editProfile').find('.modal-content').html(data);
+            $('#editProfile').find('.modal-body').html(data);
         });
     });
 
