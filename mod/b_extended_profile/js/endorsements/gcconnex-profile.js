@@ -470,10 +470,11 @@ function saveProfile(event) {
                 },
                 success: function() {
                     // close the modal
+                    window.location.replace(window.location.href);
                 }
             });
 
-            $('#editProfile').modal('hide');
+            //$('#editProfile').modal('hide');
 
             break;
         case "about-me":
