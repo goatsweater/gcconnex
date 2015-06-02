@@ -48,7 +48,7 @@ else {
                     if (in_array(elgg_get_logged_in_user_guid(), $endorsements) == false || empty($endorsements)) {
                         // user has not yet endorsed this skill for this user.. present the option to endorse
 
-                        echo '<span class="gcconnex-endorsement-add elgg-button" onclick="addEndorsement(this)" data-guid="' . $skill->guid . '" data-skill="' . $skill->title . '">Endorse</span>';
+                        echo '<span class="gcconnex-endorsement-add elgg-button" onclick="addEndorsement(this)" data-guid="' . $skill->guid . '" data-skill="' . $skill->title . '">' . elgg_echo('gcconnex_profile:gc_skill:endorse') . '</span>';
                     } else {
                         // user has endorsed this skill for this user.. present the option to retract endorsement
                         echo '<span class="gcconnex-endorsement-retract elgg-button" onclick="retractEndorsement(this)" data-guid="' . $skill->guid . '" data-skill="' . $skill->title . '">Retract Endorsement</span>';

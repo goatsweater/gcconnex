@@ -18,7 +18,7 @@ echo '<div class="gcconnex-profile-name">';
 echo '<h1><span>' . $user->name . '</span></h1>';
 
 if ($user->canEdit()) {
-    echo '<button type="button" data-toggle="modal" data-target="#editProfile">Launch modal</button>';
+    echo '<button type="button" class="elgg-button btn" data-toggle="modal" data-target="#editProfile">' . elgg_echo('gcconnex_profile:edit_profile') . '</button>';
     echo '<!-- Modal -->
 <div class="modal hidden" id="editProfile" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -124,8 +124,8 @@ if ($user->canEdit()) {
 
     </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary save-profile">Save changes</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">' . elgg_echo('gcconnex_profile:cancel') . '</button>
+                <button type="button" class="btn btn-primary save-profile">' . elgg_echo('gcconnex_profile:basic:save') . '</button>
             </div>
         </div>
         <!-- /.modal-content -->
@@ -143,6 +143,7 @@ if ($user->canEdit()) {
     echo $content;
 */
 }
+echo '</div>'; // close div class="gcconnex-profile-name"
 
 if (elgg_get_page_owner_guid() != elgg_get_logged_in_user_guid()) {
     $menu = elgg_trigger_plugin_hook('register', "menu:user_hover", array('entity' => $user), array());
@@ -160,7 +161,6 @@ if (elgg_get_page_owner_guid() != elgg_get_logged_in_user_guid()) {
     echo $profile_actions;
 }
 
-echo '</div>'; // close div class="gcconnex-profile-name"
 echo '<h3>' . $user->job . '</h3>';
 echo '<div class="gcconnex-profile-dept">' . $user->department . '</div>';
 echo '<div class="gcconnex-profile-contact-info">';

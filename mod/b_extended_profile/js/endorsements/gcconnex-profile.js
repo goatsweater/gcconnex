@@ -442,7 +442,7 @@ function saveProfile(event) {
 
             profile.name = $(".gcconnex-basic-name").val();
             profile.job = $(".gcconnex-basic-job").val();
-            profile.department = $(".gcconnex-basic-department").val();
+            profile.department = $('.gcconnex-basic-department.tt-input').val();
             profile.phone = $(".gcconnex-basic-phone").val();
             profile.mobile = $(".gcconnex-basic-mobile").val();
             profile.email = $(".gcconnex-basic-email").val();
@@ -460,6 +460,7 @@ function saveProfile(event) {
             social_media.instagram = $(".gcconnex-basic-instagram").val();
             social_media.flickr = $(".gcconnex-basic-flickr").val();
             social_media.youtube = $(".gcconnex-basic-youtube").val();
+
 
             elgg.action('b_extended_profile/edit_profile', {
                 data: {
