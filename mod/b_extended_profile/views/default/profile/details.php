@@ -20,14 +20,109 @@ echo '<h1><span>' . $user->name . '</span></h1>';
 if ($user->canEdit()) {
     echo '<button type="button" data-toggle="modal" data-target="#editProfile">Launch modal</button>';
     echo '<!-- Modal -->
-<div class="modal fade" id="editProfile" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal hidden" id="editProfile" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <div class="modal-header">';
+    echo '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>';
+    echo '<div class="modal-title"><h3>' . elgg_echo('gcconnex_profile:basic:header') . '</h3></div>';
+    echo '</div>';
+    echo
+            '<div class="modal-body">';
+    echo '<div class="basic-profile-standard-field-wrapper">'; // container for css styling, used to group profile content and display them seperately from other fields
 
-            </div>
-            <div class="modal-body"><div class="te"></div></div>
+    $fields = array('Name', 'Job', 'Department', 'Phone', 'Mobile', 'Email', 'Website');
+
+    foreach ($fields as $field) { // create a label and input box for each field on the basic profile (see $fields above)
+        echo '<div class="basic-profile-field-wrapper">'; // field wrapper for css styling
+
+        $field = strtolower($field);
+        echo '<div class="basic-profile-label ' . $field . '-label">' . elgg_echo('gcconnex_profile:basic:' . $field) . '</div>'; // field label
+
+        $value = $user->get($field);
+        // setup the input for this field
+        $params = array(
+            'name' => $field,
+            'class' => 'gcconnex-basic-' . $field,
+            'value' => $value,
+        );
+
+        if ($field == 'department') {
+            echo '<div id="bloodhound" class="basic-profile-field">'; // field wrapper for css styling
+        }
+        else {
+            echo '<div class="basic-profile-field">'; // field wrapper for css styling
+        }
+        echo elgg_view("input/text", $params); // input field
+        echo '</div>'; //close div class = basic-profile-field
+
+        echo '</div>'; //close div class = basic-profile-field-wrapper
+
+    }
+
+    echo '</div>'; // close div class="basic-profile-standard-field-wrapper"
+    echo '<div class="basic-profile-social-media-wrapper">'; // container for css styling, used to group profile content and display them seperately from other fields
+
+// pre-populate the social media fields and their prepended link for user profiles
+    $fields = array('Facebook' => "http://www.facebook.com/",
+        'Google Plus' => "http://www.google.com/",
+        'GitHub' => "https://github.com/",
+        'Twitter' => "https://twitter.com/",
+        'Linkedin' => "http://ca.linkedin.com/in/",
+        'Pinterest' => "http://www.pinterest.com/",
+        'Tumblr' => "https://www.tumblr.com/blog/",
+        'Instagram' => "http://instagram.com/",
+        'Flickr' => "http://flickr.com/",
+        'Youtube' => "http://www.youtube.com/");
+
+    foreach ($fields as $field => $field_link) { // create a label and input box for each social media field on the basic profile
+
+        echo '<div class="basic-profile-field-wrapper social-media-field-wrapper">'; //field wrapper for css styling
+
+        //echo '<div class="basic-profile-label social-media-label ' . $field . '-label">' . $field . ': </div>';
+        $field = str_replace(' ', '-', $field); // create a css friendly version of the section name
+
+        $field = strtolower($field);
+        if ($field == "google-plus") { $field = "google"; }
+        $value = $user->get($field);
+
+        echo '<div class="input-group">'; // input wrapper for prepended link and input box, excludes the input label
+
+        echo '<span class="input-group-addon">' . $field_link . "</span>"; // prepended link
+
+        // setup the input for this field
+        $placeholder = "test";
+        if ($field == "facebook") { $placeholder = "User.Name"; }
+        if ($field == "google") { $placeholder = "############"; }
+        if ($field == "github") { $placeholder = "User"; }
+        if ($field == "twitter") { $placeholder = "@user"; }
+        if ($field == "linkedin") { $placeholder = "CustomURL"; }
+        if ($field == "pinterest") { $placeholder = "Username"; }
+        if ($field == "tumblr") { $placeholder = "Username"; }
+        if ($field == "instagram") { $placeholder = "@user"; }
+        if ($field == "flickr") { $placeholder = "Username"; }
+        if ($field == "youtube") { $placeholder = "Username"; }
+
+        $params = array(
+            'name' => $field,
+            'class' => 'form-control gcconnex-basic-field gcconnex-social-media gcconnex-basic-' . $field,
+            'placeholder' => $placeholder,
+            'value' => $value
+        );
+
+        echo elgg_view("input/text", $params); // input field
+
+        echo '</div>'; // close div class="input-group"
+
+        echo '</div>'; // close div class = basic-profile-field-wrapper
+    }
+
+    echo '</div>'; // close div class="basic-profile-social-media-wrapper"
+
+
+    echo '
+
+    </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary">Save changes</button>

@@ -729,3 +729,79 @@ td.left-col {
     display: none;
 }
 
+.basic-profile-label {
+    margin: 5px;
+    float: left;
+    text-align: right;
+    width: 120px;
+    padding-top: 4px;
+}
+
+
+.basic-profile-field {
+    margin: 3px;
+    float: left;
+}
+
+
+.basic-profile-standard-field-wrapper,
+.basic-profile-social-media-wrapper,
+.basic-profile-micro-assignments {
+    float: left;
+}
+
+.basic-profile-field-wrapper,
+.basic-profile-social-media-wrapper {
+    width: 375px;
+}
+
+body #editProfile {
+    width: 800px;
+    margin-left: -400px;
+}
+
+.input-group-addon {
+    padding: 6px 0px 6px 12px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1;
+    color: #555;
+    text-align: center;
+    background-color: #EEE;
+    border: 1px solid #CCC;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    display: table-cell;
+    white-space: nowrap;
+    vertical-align: middle;
+    float: left;
+}
+
+.input-group {
+    border-collapse: separate;
+}
+
+.social-media-label {
+    float: inherit;
+    text-align: left;
+}
+
+.elgg-input-text.form-control.gcconnex-basic-field.gcconnex-social-media {
+    height: 16px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
+
+.gcconnex-basic-field {
+    width: 150px;
+    height: 28px;
+    margin-left: -1px;
+    border: 1px solid lightgray;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+::-webkit-input-placeholder { color:#ccc; }
+::-moz-placeholder { color:#ccc; } /* firefox 19+ */
+:-ms-input-placeholder { color:#ccc; } /* ie */
+input:-moz-placeholder { color:#ccc; }

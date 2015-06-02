@@ -61,24 +61,7 @@ function initFancyProfileBox() {
         }
     }).bind('typeahead:selected', select);
 
-    var departments = new Bloodhound({
-        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
-        queryTokenizer: Bloodhound.tokenizers.whitespace,
-        //prefetch: '../data/films/post_1960.json',
-        //remote: '../data/films/queries/%QUERY.json'
-        remote: {
-            url: elgg.get_site_url() + 'mod/b_extended_profile/actions/b_extended_profile/autodept.php?query=%QUERY'
-        }
-    });
 
-    departments.initialize();
-
-    $('.gcconnex-basic-department').typeahead(null, {
-        name: 'department',
-        displayKey: 'value',
-        limit: 10,
-        source: departments.ttAdapter()
-    });
 }
 
 
@@ -117,14 +100,37 @@ $(document).ready(function() {
 
     // bootstrap modal functionality for edit basic profile
     $('#editProfile').on('show.bs.modal', function() {
-        $.get(elgg.normalize_url("ajax/view/b_extended_profile/edit_basic"), null, function(data){
-            $('#editProfile').find('.modal-content').html(data);
+
+        var departments = new Bloodhound({
+            datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+            queryTokenizer: Bloodhound.tokenizers.whitespace,
+            //prefetch: '../data/films/post_1960.json',
+            //remote: '../data/films/queries/%QUERY.json'
+            remote: {
+                url: elgg.get_site_url() + 'mod/b_extended_profile/actions/b_extended_profile/autodept.php?query=%QUERY'
+            }
+        });
+
+        departments.initialize();
+
+        $('.gcconnex-basic-department').typeahead(null, {
+            name: 'department',
+            displayKey: 'value',
+            limit: 10,
+            source: departments.ttAdapter()
         });
     });
-
+/*
+    $('#editProfile').on('show.bs.modal', function() {
+        $.get(elgg.normalize_url("ajax/view/b_extended_profile/edit_basic"), null, function(data){
+            data = data.toString();
+            $('#editProfile').find('.modal-body').html(data);
+        });
+    });
+*/
     // show "edit profile picture" overlay on hover
     $('.avatar-profile-edit').hover(
-        function() {
+        function() {<<
             $('.avatar-hover-edit').stop(true,true);
             $('.avatar-hover-edit').fadeIn('slow');
         },

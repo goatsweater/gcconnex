@@ -7,7 +7,6 @@
  * to be in lowercases, named the same as what you populate $sections with, but replacing spaces with dashes.
  * IE: "About Me" becomes "about-me.php"
  */
-
 elgg_load_js('typeahead');
 elgg_load_js('gcconnex-profile'); // js file for handling the edit/save/cancel toggles
 elgg_load_css('gcconnex-css'); // main css styling sheet
