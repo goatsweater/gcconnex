@@ -96,6 +96,7 @@ $french = array(
     'gcconnex_profile:gc_skill:save' => 'Voulez-vous vraiment enregistrer ces modifications? Toutes les recommandations relatives aux compétences que vous avez supprimées seront effacées de façon permanente.',
     'gcconnex_profile:gc_skill:empty' => 'Ajoutez les renseignements sur vos compétences en cliquant sur "Modifier" dans le coin supérieur droit de cette zone de saisie.',
     'gcconnex_profile:gc_skill:endorse' => 'Valider',
+    'gcconnex_profile:gc_skill:limit' => 'Vous pouvez ajouter un maximum de 15 compétences.',
 
     // leftover skills
     'gcconnex_profile:gc_skill:leftover' => 'Vous avez précédemment ajouté des compétences à votre profil GCconnex. Veuillez réviser les compétences ci-dessous et les ajouter dans ce nouveau gabarit, au besoin. Lorsque vous ajoutez des compétences à votre profil, assurez-vous que ces dernières soient actuelles, précises, professionnelles, et qu’elles permettent aux personnes qui consultent votre profil d’obtenir de l’information utile, claire, et enrichissante à propos de vous (essayez d’éviter les expressions telles que « plein d’choses » et «accomplir plein de tâches»). ',

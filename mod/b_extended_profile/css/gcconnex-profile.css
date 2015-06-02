@@ -108,6 +108,10 @@
     height: 28px;
 }
 
+.gcconnex-skill-limit {
+    padding-bottom: 20px;
+}
+
 .gcconnex-profile-skills-display,
 .gcconnex-profile-languages-display {
     padding-top: 20px;

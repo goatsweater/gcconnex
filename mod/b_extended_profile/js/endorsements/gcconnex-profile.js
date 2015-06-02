@@ -272,11 +272,13 @@ function editProfile(event) {
 
         case 'skills':
             // inject the html to add ability to add skills
-            var christineFix = elgg.echo("gcconnex_profile:gc_skill:add", null, 'en');
-            $('.gcconnex-skills').append('<div class="gcconnex-endorsements-input-wrapper">' +
-            '<input type="text" class="gcconnex-endorsements-input-skill" onkeyup="checkForEnter(event)"/>' +
-            '<span class="gcconnex-endorsements-add-skill">' + ' + add skill / ajouter des compétences ' + '</span>' +
-            '</div>');
+            if ( $('.gcconnex-skill-entry:visible').length < 15 ) {
+                var christineFix = elgg.echo("gcconnex_profile:gc_skill:add", null, 'en');
+                $('.gcconnex-skills').append('<div class="gcconnex-endorsements-input-wrapper">' +
+                '<input type="text" class="gcconnex-endorsements-input-skill" onkeyup="checkForEnter(event)"/>' +
+                '<span class="gcconnex-endorsements-add-skill">' + ' + add skill / ajouter des compétences ' + '</span>' +
+                '</div>');
+            }
 
             var newSkill = new Bloodhound({
                 datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
@@ -314,6 +316,7 @@ function editProfile(event) {
                 $(this).after('<img class="delete-skill-img" src="' + elgg.get_site_url() + 'mod/b_extended_profile/img/delete.png"><span class="delete-skill" onclick="deleteEntry(this)" data-type="skill">' + 'Delete / Supprimer' + '</span>'); //goes in here i think..
             });
             $('.save-' + $section).show();
+            $('.gcconnex-skill-limit').show();
 
             //$('.delete-skill').show();
 
@@ -699,6 +702,8 @@ function saveProfile(event) {
             $('.delete-skill').remove();
             $('.gcconnex-endorsements-input-wrapper').remove();
             $('.gcconnex-skill-entry').removeClass('temporarily-added');
+            $('.gcconnex-skill-limit').hide();
+
             break;
 
         case 'languages':
@@ -824,7 +829,7 @@ function cancelChanges(event) {
             break;
         case "skills":
             $('.gcconnex-endorsements-input-wrapper').remove();
-
+            $('.gcconnex-skill-limit').hide();
             $('.delete-skill').remove();
             $('.delete-skill-img').remove();
             $('.gcconnex-skills-skill-wrapper').removeClass('endorsements-markedForDelete');

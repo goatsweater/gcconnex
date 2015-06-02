@@ -27,6 +27,7 @@ if ($user->canEdit() && ($skill_guids == NULL || empty($skill_guids))) {
     echo elgg_echo('gcconnex_profile:gc_skill:empty');
 }
 else {
+    echo '<div class="gcconnex-skill-limit hidden">' . elgg_echo('gcconnex_profile:gc_skill:limit') . '</div>';
     if (!(is_array($skill_guids))) {
         $skill_guids = array($skill_guids);
     }
