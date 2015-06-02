@@ -300,7 +300,7 @@ function list_avatars($options) {
         $options['limit'] = 999;
     }
     else {
-        $list .= '<a class="btn gcconnex-avatars-expand" data-toggle="modal" href="#myModal" >...</a>';
+        $list .= '<a class="btn gcconnex-avatars-expand" data-toggle="modal" href="#' . $options['id'] . '" >...</a>';
         $link = elgg_view('output/url', array(
             'href' => 'ajax/view/b_extended_profile/edit_basic',
             'class' => 'elgg-lightbox gcconnex-basic-profile-edit elgg-button',

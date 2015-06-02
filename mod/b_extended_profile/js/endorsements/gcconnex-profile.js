@@ -670,45 +670,35 @@ function saveProfile(event) {
             break;
 
         case "skills":
+            var $skills_added = [];
+            var $delete_guid = [];
 
-            if ( $('.gcconnex-skill-entry:visible').length >= 15 ) {
-                alert('Too many!');
-                // toggle the edit, save, cancel buttons
-                $('.edit-' + $section).hide();
-                $('.save-' + $section).show();
-                $('.cancel-' + $section).show();
+            if ($('.gcconnex-endorsements-input-skill').is(":visible")) {
+                skillSubmit();
             }
-            else {
-                var $skills_added = [];
-                var $delete_guid = [];
 
-                if ($('.gcconnex-endorsements-input-skill').is(":visible")) {
-                    skillSubmit();
+            $('.gcconnex-skill-entry').each(function () {
+                if ($(this).is(":hidden")) {
+                    $delete_guid.push($(this).data('guid'));
                 }
+                if ($(this).hasClass("temporarily-added")) {
+                    $skills_added.push($(this).data('skill'));
+                }
+            });
 
-                $('.gcconnex-skill-entry').each(function () {
-                    if ($(this).is(":hidden")) {
-                        $delete_guid.push($(this).data('guid'));
-                    }
-                    if ($(this).hasClass("temporarily-added")) {
-                        $skills_added.push($(this).data('skill'));
-                    }
-                });
+            // save the information the user just edited
 
-                // save the information the user just edited
+            elgg.action('b_extended_profile/edit_profile', {
+                'guid': elgg.get_logged_in_user_guid(),
+                'section': 'skills',
+                'skillsadded': $skills_added,
+                'skillsremoved': $delete_guid
+            });
 
-                elgg.action('b_extended_profile/edit_profile', {
-                    'guid': elgg.get_logged_in_user_guid(),
-                    'section': 'skills',
-                    'skillsadded': $skills_added,
-                    'skillsremoved': $delete_guid
-                });
-
-                $('.delete-skill-img').remove();
-                $('.delete-skill').remove();
-                $('.gcconnex-endorsements-input-wrapper').remove();
-                $('.gcconnex-skill-entry').removeClass('temporarily-added');
-            }
+            $('.delete-skill-img').remove();
+            $('.delete-skill').remove();
+            $('.gcconnex-endorsements-input-wrapper').remove();
+            $('.gcconnex-skill-entry').removeClass('temporarily-added');
             break;
 
         case 'languages':
@@ -945,18 +935,18 @@ function addNewSkill(newSkill) {
     //var newSkillDashed = newSkill.replace(/\s+/g, '-').toLowerCase(); // replace spaces with '-' for css classes
 
     newSkill = escapeHtml(newSkill);
-    // @todo: cap the list of skills at ~8-10 in order not to have "too many" on each profile
     // inject HTML for newly added skill
     $('.gcconnex-skills-skills-list-wrapper').append('<div class="gcconnex-skill-entry temporarily-added" data-skill="' + newSkill + '">' +
     '<span title="Number of endorsements" class="gcconnex-endorsements-count" data-skill="' + newSkill + '">0</span>' +
     '<span data-skill="' + newSkill + '" class="gcconnex-endorsements-skill">' + newSkill + '</span>' +
     '<img class="delete-skill-img" src="' + elgg.get_site_url() + 'mod/b_extended_profile/img/delete.png">' +
     '<span class="delete-skill" data-type="skill" onclick="deleteEntry(this)">' + 'Delete / Supprimer' + '</span></div>');
-
     $('.gcconnex-endorsements-input-skill').val('');                                 // clear the text box
     $('.gcconnex-endorsements-input-skill').typeahead('val', '');                                           // clear the typeahead box
     $('.gcconnex-endorsements-input-skill').hide();                                  // hide the text box
-    $('.gcconnex-endorsements-add-skill').show();                                    // show the 'add a new skill' link
+    if ( $('.gcconnex-skill-entry:visible').length < 15 ) {
+        $('.gcconnex-endorsements-add-skill').show();                                    // show the 'add a new skill' link
+    }
     $('.add-endorsements-' + newSkill).on('click', addEndorsement);            // bind the addEndoresement function to the '+'
     $('.retract-endorsements-' + newSkill).on('click', retractEndorsement);    // bind the retractEndorsement function to the '-'
     $('.delete-' + newSkill).on('click', deleteSkill);                        // bind the deleteSkill function to the 'Delete this skill' link
