@@ -130,7 +130,7 @@ $(document).ready(function() {
 */
     // show "edit profile picture" overlay on hover
     $('.avatar-profile-edit').hover(
-        function() {<<
+        function() {
             $('.avatar-hover-edit').stop(true,true);
             $('.avatar-hover-edit').fadeIn('slow');
         },
