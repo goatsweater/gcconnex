@@ -73,7 +73,8 @@ $(document).ready(function() {
             'height': '580',
             'onComplete': initFancyProfileBox
         });
-/*
+
+    /*
     var tour = new Tour({
         steps: [
             {
@@ -88,6 +89,7 @@ $(document).ready(function() {
             }
         ]
     });
+
     tour.init();
     tour.start();
     */
@@ -99,35 +101,26 @@ $(document).ready(function() {
     });
 
     // bootstrap modal functionality for edit basic profile
-    $('#editProfile').on('show.bs.modal', function() {
 
-        var departments = new Bloodhound({
-            datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
-            queryTokenizer: Bloodhound.tokenizers.whitespace,
-            //prefetch: '../data/films/post_1960.json',
-            //remote: '../data/films/queries/%QUERY.json'
-            remote: {
-                url: elgg.get_site_url() + 'mod/b_extended_profile/actions/b_extended_profile/autodept.php?query=%QUERY'
-            }
-        });
-
-        departments.initialize();
-
-        $('.gcconnex-basic-department').typeahead(null, {
-            name: 'department',
-            displayKey: 'value',
-            limit: 10,
-            source: departments.ttAdapter()
-        });
+    var departments = new Bloodhound({
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        //prefetch: '../data/films/post_1960.json',
+        //remote: '../data/films/queries/%QUERY.json'
+        remote: {
+            url: elgg.get_site_url() + 'mod/b_extended_profile/actions/b_extended_profile/autodept.php?query=%QUERY'
+        }
     });
-/*
-    $('#editProfile').on('show.bs.modal', function() {
-        $.get(elgg.normalize_url("ajax/view/b_extended_profile/edit_basic"), null, function(data){
-            data = data.toString();
-            $('#editProfile').find('.modal-body').html(data);
-        });
+
+    departments.initialize();
+
+    $('.gcconnex-basic-department').typeahead(null, {
+        name: 'department',
+        displayKey: 'value',
+        limit: 10,
+        source: departments.ttAdapter()
     });
-*/
+
     // show "edit profile picture" overlay on hover
     $('.avatar-profile-edit').hover(
         function() {
@@ -190,6 +183,8 @@ $(document).ready(function() {
     $('.edit-portfolio').on("click", {section: "portfolio"}, editProfile);
     $('.save-portfolio').on("click", {section: "portfolio"}, saveProfile);
     $('.cancel-portfolio').on("click", {section: "portfolio"}, cancelChanges);
+
+    $('.save-profile').on('click', { section: "profile" }, saveProfile);
 
     $('.gcconnex-education-add-another').on("click", {section: "education"}, addMore);
 
@@ -434,11 +429,53 @@ function saveProfile(event) {
     var $section = event.data.section;
 
     // toggle the edit, save, cancel buttons
-    $('.edit-' + $section).show();
-    $('.save-' + $section).hide();
-    $('.cancel-' + $section).hide();
+    if ($section != "profile") {
+        $('.edit-' + $section).show();
+        $('.save-' + $section).hide();
+        $('.cancel-' + $section).hide();
+    }
 
     switch ($section) {
+        case "profile":
+
+            var profile = {};
+
+            profile.name = $(".gcconnex-basic-name").val();
+            profile.job = $(".gcconnex-basic-job").val();
+            profile.department = $(".gcconnex-basic-department").val();
+            profile.phone = $(".gcconnex-basic-phone").val();
+            profile.mobile = $(".gcconnex-basic-mobile").val();
+            profile.email = $(".gcconnex-basic-email").val();
+            profile.website = $(".gcconnex-basic-website").val();
+
+            var social_media = {};
+
+            social_media.facebook = $(".gcconnex-basic-facebook").val();
+            social_media.google = $(".gcconnex-basic-google").val();
+            social_media.github = $(".gcconnex-basic-github").val();
+            social_media.twitter = $(".gcconnex-basic-twitter").val();
+            social_media.linkedin = $(".gcconnex-basic-linkedin").val();
+            social_media.pinterest = $(".gcconnex-basic-pinterest").val();
+            social_media.tumblr = $(".gcconnex-basic-tumblr").val();
+            social_media.instagram = $(".gcconnex-basic-instagram").val();
+            social_media.flickr = $(".gcconnex-basic-flickr").val();
+            social_media.youtube = $(".gcconnex-basic-youtube").val();
+
+            elgg.action('b_extended_profile/edit_profile', {
+                data: {
+                    'guid': elgg.get_logged_in_user_guid(),
+                    'section': "profile",
+                    'profile': profile,
+                    'social_media': social_media
+                },
+                success: function() {
+                    // close the modal
+                }
+            });
+
+            $('#editProfile').modal('hide');
+
+            break;
         case "about-me":
             var $about_me = tinyMCE.activeEditor.getContent();
             var access = $('.gcconnex-about-me-access').val();

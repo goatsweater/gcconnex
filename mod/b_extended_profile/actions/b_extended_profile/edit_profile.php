@@ -7,6 +7,27 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
     $section = get_input('section');
 
     switch ($section) {
+        case "profile":
+            $profile_fields = get_input('profile');
+            $social_media = get_input('social_media');
+
+            foreach ( $profile_fields as $f => $v ) {
+                $user->set($f, $v);
+            }
+
+            foreach ( $social_media as $f => $v ) {
+                $link = $v;
+                if (filter_var($link, FILTER_VALIDATE_URL) == false) {
+                    $user->set($f, $link);
+                }
+            }
+
+            //$user->micro = get_input('micro');
+            $user->save();
+
+            //forward($user->getURL());
+
+            break;
         case 'about-me':
             //$user->description = get_input('description', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0001.');
 
@@ -14,6 +35,8 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
             create_metadata($user_guid, 'description', get_input('description', 'ERROR: Ask your admin to grep: 5FH13GAHHHS0001.'), 'text', 0, get_input('access'));
 
             $user->save();
+
+            break;
         case 'education':
             $eguid = get_input('eguid', '');
             $delete = get_input('delete', '');
@@ -344,29 +367,5 @@ if (elgg_is_xhr()) {  //This is an Ajax call!
 }
 else {  // In case this view will be called via the elgg_view_form() action, then we know it's the basic profile only
 
-    $user_guid = elgg_get_logged_in_user_guid(); //get_input('guid');
-    $user = get_user($user_guid);
 
-    $fields = array('name', 'job', 'department', 'phone', 'mobile', 'email', 'manager-id');
-
-    foreach ($fields as $field) {
-        $value = get_input($field);
-        $user->set($field, $value);
-    }
-
-    $weblink = array('website', 'facebook', 'google', 'github', 'twitter', 'linkedin', 'pinterest', 'tumblr', 'instagram', 'flickr', 'youtube');
-
-    foreach ($weblink as $link) {
-        $value = get_input($link);
-        if (filter_var($value, FILTER_VALIDATE_URL) == false) {
-            $user->set($link, $value);
-        }
-    }
-
-    $user->micro = get_input('micro');
-    $user->save();
-
-    system_message(elgg_echo("profile:saved"));
-
-    forward($user->getURL());
 }
