@@ -33,7 +33,7 @@ echo '<div class="gcconnex-portfolio-entry well" data-guid="' . $guid . '">'; //
     echo elgg_view("input/datepicker_popup", array(
             'name' => 'pubdate-' . $portfolio->guid,
             'class' => 'gcconnex-portfolio-pubdate',
-            'value' => $portfolio->pubdate
+            'value' => $portfolio->pubdate,
     ));
 
     unset($params);
