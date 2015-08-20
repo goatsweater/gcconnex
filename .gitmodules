@@ -28,12 +28,6 @@
 [submodule "mod/b_extended_profile"]
 	path = mod/b_extended_profile
 	url = https://github.com/Pandurx-Elgg/b_extended_profile.git
-[submodule "c_profile_changes"]
-	path = c_profile_changes
-	url = https://github.com/Pandurx-Elgg/c_profile_changes.git
-[submodule "sphinx"]
-	path = sphinx
-	url = https://github.com/Pandurx-Elgg/sphinx.git
 [submodule "mod/sphinx"]
 	path = mod/sphinx
 	url = https://github.com/Pandurx-Elgg/sphinx.git
