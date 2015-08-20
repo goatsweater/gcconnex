@@ -10,3 +10,6 @@
 [submodule "mod/hypeforum"]
 	path = mod/hypeforum
 	url = https://github.com/Pandurx-Elgg/hypeforum.git
+[submodule "mod/friend_request"]
+	path = mod/friend_request
+	url = https://github.com/Pandurx-Elgg/friend_request.git
