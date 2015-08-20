@@ -4,3 +4,9 @@
 [submodule "mod/c_members_byDepartment"]
 	path = mod/c_members_byDepartment
 	url = https://github.com/Pandurx-Elgg/c_members_byDepartment.git
+[submodule "mod/hypeframework"]
+	path = mod/hypeframework
+	url = https://github.com/Pandurx-Elgg/hypeframework.git
+[submodule "mod/hypeforum"]
+	path = mod/hypeforum
+	url = https://github.com/Pandurx-Elgg/hypeforum.git
