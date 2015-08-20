@@ -1,9 +1,3 @@
 [submodule "mod/c_notification_messages"]
 	path = mod/c_notification_messages
 	url = https://github.com/Pandurx-Elgg/c_notification_messages.git
-[submodule "c_members_byDepartment"]
-	path = c_members_byDepartment
-	url = https://github.com/Pandurx-Elgg/c_members_byDepartment.git
-[submodule "mod/c_members_byDepartment"]
-	path = mod/c_members_byDepartment
-	url = https://github.com/Pandurx-Elgg/c_members_byDepartment.git
