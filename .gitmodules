@@ -28,3 +28,6 @@
 [submodule "mod/gcRegistration"]
 	path = mod/gcRegistration
 	url = https://github.com/Pandurx-Elgg/gcRegistration.git
+[submodule "mod/b_extended_profile"]
+	path = mod/b_extended_profile
+	url = https://github.com/Pandurx-Elgg/b_extended_profile.git
