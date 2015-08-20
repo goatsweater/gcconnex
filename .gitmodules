@@ -31,3 +31,6 @@
 [submodule "mod/sphinx"]
 	path = mod/sphinx
 	url = https://github.com/Pandurx-Elgg/sphinx.git
+[submodule "mod/c_profile_changes"]
+	path = mod/c_profile_changes
+	url = https://github.com/Pandurx-Elgg/c_profile_changes.git
