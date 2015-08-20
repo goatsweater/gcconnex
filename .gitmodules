@@ -13,3 +13,15 @@
 [submodule "mod/friend_request"]
 	path = mod/friend_request
 	url = https://github.com/Pandurx-Elgg/friend_request.git
+[submodule "mod/c_module_dump"]
+	path = mod/c_module_dump
+	url = https://github.com/Pandurx-Elgg/c_module_dump.git
+[submodule "mod/widget_manager_accessibility"]
+	path = mod/widget_manager_accessibility
+	url = https://github.com/Pandurx-Elgg/widget_manager_accessibility.git
+[submodule "mod/c_profile_changes"]
+	path = mod/c_profile_changes
+	url = https://github.com/Pandurx-Elgg/c_profile_changes.git
+[submodule "mod/c_trendy_cloud"]
+	path = mod/c_trendy_cloud
+	url = https://github.com/Pandurx-Elgg/c_trendy_cloud.git
