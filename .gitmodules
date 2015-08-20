@@ -19,9 +19,6 @@
 [submodule "mod/widget_manager_accessibility"]
 	path = mod/widget_manager_accessibility
 	url = https://github.com/Pandurx-Elgg/widget_manager_accessibility.git
-[submodule "mod/c_profile_changes"]
-	path = mod/c_profile_changes
-	url = https://github.com/Pandurx-Elgg/c_profile_changes.git
 [submodule "mod/c_trendy_cloud"]
 	path = mod/c_trendy_cloud
 	url = https://github.com/Pandurx-Elgg/c_trendy_cloud.git
@@ -31,3 +28,9 @@
 [submodule "mod/b_extended_profile"]
 	path = mod/b_extended_profile
 	url = https://github.com/Pandurx-Elgg/b_extended_profile.git
+[submodule "c_profile_changes"]
+	path = c_profile_changes
+	url = https://github.com/Pandurx-Elgg/c_profile_changes.git
+[submodule "sphinx"]
+	path = sphinx
+	url = https://github.com/Pandurx-Elgg/sphinx.git
