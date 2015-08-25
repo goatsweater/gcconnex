@@ -1,4 +1,7 @@
-<<<<<<< HEAD
+This branch contains Submodules...
+To get the full code, use the following command:
+git clone --recursive git://github.com/foo/bar.git
+
 <h1>GCconnex</h1>
 GCconnex is a project forked from Elgg by the federal government of Canada.
 
