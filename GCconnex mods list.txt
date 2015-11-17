@@ -2,6 +2,7 @@ Mod list in the order they appear / load on production
 
 ** indicates disabled mod
 
+Friend Request
 Garbage Collector
 Groups
 Log Rotate
@@ -10,73 +11,65 @@ Blog
 Bookmarks
 phloorLogo
 User Dashboard
-**Elgg Developer Tools
 phloorFramework
 Diagnostics
 Site Pages
 File
 Embed
-GC Registration
-Glee Theme Framework
-GC_Glee_Theme
+Glee Theme Framework (will be replaced with WET)
+GC Glee Theme (will be replaced with WET)
 Groups Operators
 HTMLawed
 Invite Friends
 Likes
 Log Browser
 Members
-**Message Boards
 Messages
-Mobalize GC
-MSOffice Mime Types Patch 1.0 - GC
+Mobilize GC
+MSOffice Mime Types Patch
 Notifications
-**OAuth API
 phloorFavicon
 phloorTopbarLogo
 phloorLogoManager
 Polls
 Profile
 Rename Friends
-**Reported Content
 Search
-**TagCloud
-Tasks Fx
-TheWire
-Toggle Language
-Twitter Widget
-User Validation by Email
+Tasks
+The Wire
+Toggle Language (may be replaced with WET)
+User Validation Email
 Unvalidatedemailchange
 Widget Manager
 Zaudio
-galliStatus
-GC_Help
-AU Sub-Groups
-Custom index widgets
+GC Help
+AU subgroup
+Custom index widget
 File Tools
 Event Calendar
 Login As
 HTML Email Handler
-Blueprint 2020 Ideas -GC
+Blueprint 2020 Ideas
 Maintenance
-**Set No Notifications
-**Unvalidated user cleanup
-**Site-wide Categories
-**Custom Index
 Pages
-**TinyMCE
-**Twitter API
-Group Duscussion Sort
-Google Analytics
-Bulk User Admin
+Group Discussion Sort
 Tidypics Photo Gallery
-Sphinx Search
-CSV User Import
-**Notification Manager
 Translation Editor
+Sphinx Search
 GC Profile Picture Badges
+CSV User Import
 Domain Manager
+GC Registration
 Module Dump
-**TheWire Tools
 Extended TinyMCE
 Advanced Notifications
-**Department Binning
+Trendy Cloud (this is no longer required in 1.12)
+hypeForum
+hypeFramework
+Widget Manager Accessibility
+Bulk User Admin
+Extended Profile
+Department Binning
+Notification Email Messages
+Bryden Profile Changes (this will no longer required in 1.12)
+Twitter Widgets
