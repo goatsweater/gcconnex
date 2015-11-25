@@ -35,7 +35,6 @@ class FGContactForm
     var $name;
     var $email;
     var $message;
-    var $select;
     var $from_address;
     var $form_random_key;
     var $conditional_field;
@@ -181,8 +180,10 @@ class FGContactForm
         $this->mailer->From = $this->GetFromAddress();
 
         $this->mailer->FromName = $this->name;
-
+        
         $this->mailer->AddReplyTo($this->email);
+
+        $this->mailer->AddCC($this->email);
 
         $message = $this->ComposeFormtoEmail();
 
@@ -302,7 +303,7 @@ class FGContactForm
     {
         $header = $this->GetHTMLHeaderPart();
         $formsubmission = $this->FormSubmissionToMail();
-        $extra_info = $this->ExtraInfoToMail();
+       // $extra_info = $this->ExtraInfoToMail();
         $footer = $this->GetHTMLFooterPart();
 
         $message = $header."Submission from 'contact us' form:<p>$formsubmission</p><hr/>$extra_info".$footer;
@@ -362,7 +363,7 @@ class FGContactForm
         }
         
         //select validations
-        if(($_POST['text']) =='Select a reason')
+        if((($_POST['reason']) =='Select...') || (($_POST['reason']) == "Choisir..."))
         {
             $this->add_error();
             register_error("Choose a reason");

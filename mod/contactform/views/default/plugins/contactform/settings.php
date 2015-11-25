@@ -38,21 +38,21 @@ echo "</div>";
 
 
 
-// elgg_log('cyu - add ext:'.$vars['entity']->db_add_ext, 'NOTICE');
-// elgg_log('cyu - add dept:'.$vars['entity']->db_add_dept, 'NOTICE');
+// elgg_log('cyu - add ext:'.$vars['entity']->db_add_eng, 'NOTICE');
+// elgg_log('cyu - add dept:'.$vars['entity']->db_add_fr, 'NOTICE');
 
-if (($vars['entity']->db_add_ext === '' || !isset($vars['entity']->db_add_ext)) 
-	&& ($vars['entity']->db_add_dept === '' || !isset($vars['entity']->db_add_dept)))
+if (($vars['entity']->db_add_eng === '' || !isset($vars['entity']->db_add_eng)) 
+	&& ($vars['entity']->db_add_fr === '' || !isset($vars['entity']->db_add_fr)))
 {
 	//system_message('c_ext:missing_param');
 } else {
-	addExtension2($vars['entity']->db_add_ext, $vars['entity']->db_add_dept);
+	addExtension2($vars['entity']->db_add_eng, $vars['entity']->db_add_fr);
 	//system_message('c_ext:successfully_added');
 }
 
 
-$vars['entity']->db_add_ext = '';
-$vars['entity']->db_add_dept = '';
+$vars['entity']->db_add_eng = '';
+$vars['entity']->db_add_fr = '';
 
 
 elgg_load_library('contact_lib');
@@ -67,7 +67,7 @@ $result = getExtension2();
 if (count($result) > 0)
 {
 	echo "<table name='display_extensions' width='100%' cellpadding='0' cellspacing='0' class='db-table'>";
-	echo '<tr> <th></th> <th width="16%">'.elgg_echo('setting:id').'</th> <th>'.elgg_echo('setting:eng').'</th> <th>'.elgg_echo('setting:fr').'</th></tr>';
+	echo '<tr> <th></th> <th>'.elgg_echo('setting:eng').'</th> <th>'.elgg_echo('setting:fr').'</th></tr>';
 	while ($row = mysqli_fetch_array($result))
 	{
 		$delete_from_db = "action/contactform/delete?id=".$row['id'];
@@ -78,9 +78,9 @@ if (count($result) > 0)
 
 		echo '<tr>'; 
 		echo '<td> '.''.$delete_btn.' </td>';
-		echo '<td> '.$row['id'].' </td>';
-		echo '<td> '.$row['ext'].' </td>';
-		echo '<td> '.$row['dept'].' </td>';
+		
+		echo '<td> '.$row['english'].' </td>';
+		echo '<td> '.$row['francais'].' </td>';
 		echo '</tr>';
 	}
 	echo "</table>";
@@ -97,18 +97,21 @@ $add_btn = elgg_view('output/confirmlink', array(
 	'class' => 'elgg-button'));
 
 $add_ext_field = elgg_view('input/text', array(
-	'name' => 'params[db_add_ext]',
-	'value' => $vars['entity']->db_add_ext));
+	'name' => 'params[db_add_eng]',
+    'id' => 'eng',
+	'value' => $vars['entity']->db_add_eng));
 
 $add_dept_field = elgg_view('input/text', array(
-	'name' => 'params[db_add_dept]',
-	'value' => $vars['entity']->db_add_dept));
+	'name' => 'params[db_add_fr]',
+    'id' => 'fr',
+	'value' => $vars['entity']->db_add_fr));
+    
 
 echo "<table name='add_extensions' width='100%' cellpadding='0' cellspacing='0' class='db-table'>";
 echo '<tr> <th>'.elgg_echo('setting:field').'</th> </tr>';
 echo '<tr><td>';
-echo elgg_echo('setting:eng').':'.$add_ext_field.'<br/>';
-echo elgg_echo('setting:fr').':'.$add_dept_field.'<br/>';
+echo '<label for="eng">'.elgg_echo('setting:eng').'</label>:'.$add_ext_field.'<br/>';
+echo '<label for="fr">'.elgg_echo('setting:fr').'</label>:'.$add_dept_field.'<br/>';
 //echo $add_btn.'<br/>';
 echo '</td></tr>';
 echo '<br/>';
