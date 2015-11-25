@@ -7,11 +7,7 @@
 
 $group = $vars['entity'];
 
-if(elgg_get_context() == 'widgets' || elgg_get_context() == 'custom_index_widgets'){
-    $icon = elgg_view_entity_icon($group, 'small', $vars);
-} else {
-    $icon = elgg_view_entity_icon($group, 'medium', $vars);
-}
+$icon = elgg_view_entity_icon($group, 'tiny', $vars);
 
 $metadata = elgg_view_menu('entity', array(
 	'entity' => $group,

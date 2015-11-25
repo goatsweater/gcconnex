@@ -22,8 +22,6 @@ $count = elgg_extract('count', $vars);
 $pagination = elgg_extract('pagination', $vars, true);
 $position = elgg_extract('position', $vars, 'after');
 $no_results = elgg_extract('no_results', $vars, '');
-$item_class = elgg_extract('item_class', $vars, '');
-$photoContext = false; //check for the photo context
 
 if (!$items && $no_results) {
 	if ($no_results instanceof Closure) {
@@ -37,27 +35,15 @@ if (!$items && $no_results) {
 if (!is_array($items) || count($items) == 0) {
 	return;
 }
-//check photo context before gallery context is forced
-if((elgg_get_context() == 'photos')){
-  $photoContext = true;  
-}
 
 elgg_push_context('gallery');
-echo $items->getType;
-$list_classes = ['clearfix'];
+
+$list_classes = ['elgg-gallery'];
 if (isset($vars['gallery_class'])) {
 	$list_classes[] = $vars['gallery_class'];
 }
 
-//if the boolean is false (not photo context) stack them normally
-if(!$photoContext){
-   $item_classes = ['pull-left  elgg-item clearfix '];
-}else{
- //if the boolean is true (is photo context) add col class :)
-    $item_classes = ['  elgg-item clearfix col-xs-6 col-sm-3  '];
-        $list_classes = ['clearfix wb-eqht'];
-}
-
+$item_classes = ['elgg-item'];
 if (isset($vars['item_class'])) {
 	$item_classes[] = $vars['item_class'];
 }

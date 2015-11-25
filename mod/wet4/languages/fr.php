@@ -5,16 +5,16 @@ return array(
  * User Menu
  */
     
-    'userMenu:profile' => "Mon profil",
-    'userMenu:account' => "Paramètres",
-    'userMenu:messages' => "Mes messages",
-    'userMenu:colleagues' => "Mes collègues",
+    'userMenu:profile' => "My Profile",
+    'userMenu:account' => "Account Settings",
+    'userMenu:messages' => "My Messages",
+    'userMenu:colleagues' => "My Colleagues",
     
   /**
  * Group Profile
  */     
     
-    'gprofile:about' => "À propos",
+    'gprofile:about' => "About",
     'gprofile:discussion' => "Discussion",
     'gprofile:files' => "Fichiers",
     'gprofile:blogs' => "Blogues",
@@ -26,12 +26,8 @@ return array(
     'gprofile:tasks' => "Tâches",
     'gprofile:photos' => "Photos",
     'gprofile:photoCatch' => "photos",
-    'gprofile:albums' => "Albums",
-    'gprofile:albumsCatch' => "Albums",
     'gprofile:ideas' => "Idées",
     'gprofile:more' => "Plus",
-    
-    'gprofile:create' => "Create Group",
     
 /**
  * Sites
@@ -232,7 +228,7 @@ return array(
  * Friends
  */
 
-	'friends' => "Mes collègues",//Contacts
+	'friends' => "Contacts",
 	'friends:yours' => "Vos contacts",
 	'friends:owned' => "Les contacts de %s",
 	'friend:add' => "Ajouter un contact",

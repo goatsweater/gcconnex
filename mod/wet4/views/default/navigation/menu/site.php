@@ -14,22 +14,16 @@ foreach ($default_items as $menu_item) {
 	echo elgg_view('navigation/menu/elements/item', array('item' => $menu_item));
 }
 
-// Wet 4 more menu items - You can un-comment this code below to add the more menu back in
-
 /*
 if ($more_items) {
-    
-	echo '<li class="elgg-more ">';
+	echo '<li class="elgg-more">';
 
 	$more = elgg_echo('more');
-	echo '<a href="#moreCont" class="item" role="menuItem" aria-haspopup="true" >More</a>';
+	echo "<a href=\"#\">$more</a>";
 	
 	echo elgg_view('navigation/menu/elements/section', array(
-		'class' => ' sm list-unstyled ', 
-        'id' => 'moreCont',
-        'role' => 'menu',
+		'class' => 'elgg-menu elgg-menu-site elgg-menu-site-more', 
 		'items' => $more_items,
-        
 	));
 	
 	echo '</li>';

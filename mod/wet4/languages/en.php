@@ -28,13 +28,9 @@ return array(
     'gprofile:polls' => "Polls",
     'gprofile:tasks' => "Tasks",
     'gprofile:photos' => "Photos",
-    'gprofile:photoCatch' => "Images",
-    'gprofile:albums' => "Albums",
-    'gprofile:albumsCatch' => "Photo Albums",
+    'gprofile:photoCatch' => "recent",
     'gprofile:ideas' => "Ideas",
     'gprofile:more' => "More",
-    
-    'gprofile:create' => "Create Group",
     
 /**
  * Sites
@@ -233,7 +229,7 @@ return array(
     'group_tools:groups:sorting:alphabetical' => 'Alphabetical',
     'groups:own' => 'Groups I own',
     'groups:personal' => 'Personal',
-    'groups:feature' => 'Featured',
+    'groups:feature' => 'Feature',
     'groups:popular' => 'Popular',
     'groups:suggested' => 'Suggested',
 /**
@@ -247,7 +243,7 @@ return array(
  * Friends
  */
 
-	'friends' => "My Colleagues", //Friends
+	'friends' => "Friends",
 	'friends:yours' => "Your friends",
 	'friends:owned' => "%s's friends",
 	'friend:add' => "Add friend",
@@ -814,8 +810,6 @@ These changes will only affect new users on the site.',
 	'friends:icon_size' => "Icon size",
 	'friends:tiny' => "tiny",
 	'friends:small' => "small",
-    
-    'custom_index_widgets:latest_groups_index' => "My Groups",
 
 /**
  * Icons

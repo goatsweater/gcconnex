@@ -20,18 +20,16 @@
 
 //check which page module will be rendering on for styling
 $checkPage = elgg_get_context();
-//echo $checkPage;
+
 $type = elgg_extract('type', $vars, false);
 $title = elgg_extract('title', $vars, '');
 $body = elgg_extract('body', $vars, '');
 $footer = elgg_extract('footer', $vars, '');
 $show_inner = elgg_extract('show_inner', $vars, false);
-$item_class = elgg_extract('item_class', $vars, '');
+
 $attrs = [
 	'id' => elgg_extract('id', $vars),
 	'class' => (array) elgg_extract('class', $vars, []),
-    //'item_class' => (array) elgg_extract('item_class', $vars, []),
-    
 ];
 
 
@@ -46,13 +44,13 @@ $attrs = [
 if($checkPage == 'group_profile' && $type == 'GPmod'){
   
     if ($type) {
-        $attrs['class'][] = "elgg-module-$type ";
+        $attrs['class'][] = "elgg-module-$type";
     }
 
 
-    $body = elgg_format_element('div', ['class' => 'clearfix'], $body);
+    $body = elgg_format_element('div', ['class' => ''], $body);
     if ($footer) {
-        $footer = elgg_format_element('div', ['class' => 'text-right panel-footer clearfix'], $footer);
+        $footer = elgg_format_element('div', ['class' => 'text-right panel-footer'], $footer);
     }
 
     $contents = $header . $body . $footer;
@@ -62,36 +60,7 @@ if($checkPage == 'group_profile' && $type == 'GPmod'){
 
     echo elgg_format_element('div', $attrs, $contents);
 
-} else if ($checkPage =='gallery'){
-    // check to see if the page is a photo gallery to style the photo stuff :)
-    
-        $attrs['class'][] = 'panel panel-custom hght-inhrt ';
-    if ($type) {
-        $attrs['class'][] = "elgg-module-$type";
-    }
-
-    $header = elgg_extract('header', $vars);
-    if ($title) {
-        $header = elgg_format_element('h4', ['class' => ''], $title);
-    }
-
-    if ($header !== null) {
-        $header = elgg_format_element('div', ['class' => 'panel-heading'], $header);
-    }
-    $body = elgg_format_element('div', ['class' => 'panel-body-gallery  clearfix'], $body);
-    if ($footer) {
-        $footer = elgg_format_element('div', ['class' => 'panel-body-gallery'], $footer);
-    }
-
-    $contents =  $body  .$footer ;
-    if ($show_inner) {
-        $contents = elgg_format_element('div', ['class' => 'elgg-inner'], $contents);
-    }
-
-    echo elgg_format_element('div', $attrs, $contents);
-    
-    
-}else{ //Normal Style Below
+} else { //Normal Style Below
     
     $attrs['class'][] = 'panel panel-custom';
     if ($type) {
@@ -104,9 +73,9 @@ if($checkPage == 'group_profile' && $type == 'GPmod'){
     }
 
     if ($header !== null) {
-        $header = elgg_format_element('div', ['class' => 'panel-heading'], $header);
+        $header = elgg_format_element('div', ['class' => 'panel-heading clearfix'], $header);
     }
-    $body = elgg_format_element('div', ['class' => 'panel-body clearfix'], $body);
+    $body = elgg_format_element('div', ['class' => 'panel-body'], $body);
     if ($footer) {
         $footer = elgg_format_element('div', ['class' => 'panel-footer text-right'], $footer);
     }
@@ -117,6 +86,5 @@ if($checkPage == 'group_profile' && $type == 'GPmod'){
     }
 
     echo elgg_format_element('div', $attrs, $contents);
-    //echo $checkPage;
 
 }

@@ -26,14 +26,13 @@ if (isset($vars['class'])) {
         /*
         echo elgg_extract('nav', $vars, elgg_view('navigation/breadcrumbs'));
         */
-
-    //main section
     ?>
+    
     <section class="col-md-8 mrgn-bttm-md" id="wb-cont">
         <div class=" clearfix">
 		<?php
 			
-			//echo elgg_get_context();
+			
 			echo elgg_view('page/layouts/elements/header', $vars);
             // This basically moves the "page menu" element to the tabs on pages where the side bar links are now tabs :)
 			if((elgg_get_context() == 'friends' || elgg_get_context() == 'messages' || elgg_get_context() == 'settings')){
@@ -67,8 +66,6 @@ if (isset($vars['class'])) {
 		?>
         </div>
 	</section>
-    
-    <?php //sidebar ?>
 	<section class="col-md-4">
 		<?php
 			

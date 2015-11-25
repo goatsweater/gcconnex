@@ -31,7 +31,7 @@ $jsLocation = $site_url . "mod/wet4/views/default/js/wet-boew.js";
 
 $messages = elgg_view('page/elements/messages', array('object' => $vars['sysmessages']));
 
-
+$header = elgg_view('page/elements/header', $vars);
 $lang = elgg_view('page/elements/chng-lang', $vars);
 $navbar = elgg_view('page/elements/navbar', $vars);
 $content = elgg_view('page/elements/body', $vars);
@@ -39,16 +39,9 @@ $footer = elgg_view('page/elements/footer', $vars);
 //$acion
 $topcanbar = elgg_view('page/elements/topcanbar', $vars);
 $wavyblue = elgg_view('page/elements/wavyblue', $vars);
-$site_brand = elgg_view('page/elements/site-brand', $vars);
 $tabskip = elgg_view('page/elements/tabskip', $vars);
 
 $breadcrumbs = elgg_view('navigation/breadcrumbs');
-
-
-//WIP development banner
-if(elgg_is_active_plugin('GoC_dev_banner')){
-    $alert = elgg_view('banner/dev_banner');
-}
 
 $body = <<<__BODY
     $tabskip
@@ -62,13 +55,12 @@ $userMenu = elgg_view('page/elements/topbar_wrapper', $vars);
 
 $body .= <<<__BODY
 	<header class="" role="banner">
-    $alert
+    
     <div class="elgg-inner">
 			$lang
 		</div>
     	<div id="wb-bnr">
             $wavyblue
-            $site_brand
 	   </div>   
     
 		

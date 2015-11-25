@@ -10432,7 +10432,7 @@ a.shr-opn, a.shr-opn:hover {
  * Site menu
  */
 #wb-sm {
-  background: #606060; }
+  background: #055959; }
   #wb-sm .menu {
     display: table;
     margin-bottom: 0;
@@ -10590,7 +10590,7 @@ a.shr-opn, a.shr-opn:hover {
 
 .user-menu{
     min-width: 400px;
-
+    min-height: 200px;
    
     /*position: relative;*/
 }
@@ -10659,12 +10659,6 @@ a.shr-opn, a.shr-opn:hover {
 /*This is where the elgg icons get loaded!*/
 <?php echo elgg_view('css/elements/icons - Copy', $vars); ?> 
 
-
-.profile-info-head {
-    margin: 5px 0;
-    border-bottom: 1px solid #af3c43;
-}
-
     /****************************************/
     
     /******************** Custom Button Styles ********************/
@@ -10683,11 +10677,6 @@ a.shr-opn, a.shr-opn:hover {
     
     .btn-custom:hover {
         background: #cfd1d5;
-    }
-
-    .btn-custom:focus {
-        background: #cfd1d5;
-        border-color: lightblue;
     }
     
     .btn-custom-cta {
@@ -10709,11 +10698,6 @@ a.shr-opn, a.shr-opn:hover {
     .form-control {
         border-radius: 0;
     }
-
-.dropdown a:focus {
-   outline: 5px auto -webkit-focus-ring-color;;
-    border-radius: 2px;
-}
     
     .dropdown-menu {
         border-radius: 0;
@@ -10766,10 +10750,6 @@ a.shr-opn, a.shr-opn:hover {
     
     .breadcrumb {
         margin-bottom: 5px;
-    }
-
-    .elgg-form-group-operators-add fieldset {
-        width: 100%;   
     }
     
     .userControlDisc {
@@ -10901,9 +10881,7 @@ a.shr-opn, a.shr-opn:hover {
     border:none;
 }   
 
-.removeMe {
-    display: none;
-}
+
 
 /*** Messages ***/
 
@@ -11050,116 +11028,6 @@ details.elgg-state-success:before {
 .edit-comment form fieldset{
     width:100%;   
 }
-
-
-/** Photo Gallery Custom Classes**/
-
-.panel-body-gallery {
- padding:7px;   
-}
-
-/****** New Header style stuff *******/
-#app-brand{
-    background-color: #047177; 
-    color: #fff;
-    min-height: 45px;
-    /*padding-top: 5px;*/
-}
-
-#app-brand a{
-   text-decoration: none;
-    color: #fff;
-}
-
-#app-brand li a{
-   text-decoration: none;
-    color: black;
-    padding: 30px 35px;
-}
-.app-name{
-    font-size: 1.6em;
-    padding-top:5px;
-    padding-left: 20px;
-    background-color: #055959;
-    min-height: 45px;
-    max-width: 165px;
-   margin-left:-5px;
-}
-
-.app-name:before{
-       content: '';
-    display: block;
-    position: absolute;
-    left: 165px;
-    top: 0;
-    width: 0;
-    height: 0;
-	border-top: 22.5px solid transparent;
-	border-bottom: 22.5px solid transparent;
-	
-	border-left: 20px solid #055959;
-    clear: both;     
-}
-
-
-.bold-gc{
-    font-weight: 800;   
-}
-
-
-.tools-navigator{
-    font-size: 1.1em;
-    margin-top:10px;
-    
-}
-
-.tools-navigator-menu{
-    top:35px;   
-}
-
-.tools-navigator-menu:after{
-       content: '';
-    display: block;
-    position: absolute;
-    left: 80%;
-    top: -10px;
-    width: 0;
-    height: 0;
-	border-left: 12px solid transparent;
-	border-right: 12px solid transparent;
-	
-	border-bottom: 12px solid #fff;
-    clear: both;    
-}
-.tools-navigator-menu:before{
-       content: '';
-    display: block;
-    position: absolute;
-    left: 80%;
-    top: -12px;
-    width: 0;
-    height: 0;
-	border-left: 12px solid transparent;
-	border-right: 12px solid transparent;
-	
-	border-bottom: 12px solid rgba(0, 0, 0, 0.15) ;
-    clear: both;     
-}
-
-#tools-dropdown{
-    cursor: pointer;
-}
-
-.tools-dropdown-holder{
-    min-width: 300px;
-    color: black;
-    padding: 10px;
-}
-.tools-navigator-menu li a{
-    color:black;   
-}
-
-
 
 /*
  * Mobile panel
