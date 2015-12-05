@@ -171,11 +171,19 @@ class FGContactForm
 
     function SendFormSubmission()
     {
+        if(empty($_POST['subject']))
+           {
+           $subject = "$this->name contact you about ". $_POST['reason'];
+           }else{
+           $subject = $_POST['subject'];
+           }
+        
+        
         $this->CollectConditionalReceipients();
 
         $this->mailer->CharSet = 'utf-8';
         
-        $this->mailer->Subject = "Contact form submission from $this->name";
+        $this->mailer->Subject = $subject;
 
         $this->mailer->From = $this->GetFromAddress();
 
@@ -305,8 +313,7 @@ class FGContactForm
         $formsubmission = $this->FormSubmissionToMail();
        // $extra_info = $this->ExtraInfoToMail();
         $footer = $this->GetHTMLFooterPart();
-
-        $message = $header."Submission from 'contact us' form:<p>$formsubmission</p><hr/>$extra_info".$footer;
+       $message = $header."Submission from 'contact us' form:<p>$formsubmission</p><hr/>$extra_info".$footer;
 
         return $message;
     }
@@ -368,6 +375,16 @@ class FGContactForm
             $this->add_error();
             register_error("Choose a reason");
             $ret = false;
+        }
+        
+        if (($_POST['reason'] == 'Other question')|| ($_POST['reason'] == 'Autre question'))
+        {
+            if (empty($_POST['subject']))
+            {
+            $this->add_error();
+           register_error("Please provide a subject");
+            $ret = false;
+            }
         }
 
         //name validations

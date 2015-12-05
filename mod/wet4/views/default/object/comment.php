@@ -32,6 +32,11 @@ $entity_title = $entity->title ? $entity->title : elgg_echo('untitled');
 $entity_link = "<a href=\"{$entity->getURL()}\">$entity_title</a>";
 
 if ($full_view) {
+<<<<<<< HEAD
+=======
+    
+    
+>>>>>>> tbs-sct/gcconnex-upgrade
 	$anchor = "<a name=\"comment-{$comment->getGUID()}\"></a>";
 
 	$menu = elgg_view_menu('entity', array(

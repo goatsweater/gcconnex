@@ -1216,11 +1216,11 @@ ol {
 .list-inline {
   padding-left: 0;
   list-style: none;
-  margin-left: -5px; }
+  margin-left: -10px; }
   .list-inline > li {
     display: inline-block;
-    padding-left: 15px;
-    padding-right: 15px; }
+    padding-left: 10px;
+    padding-right: 10px; }
 
 dl {
   margin-top: 0;
@@ -3972,7 +3972,7 @@ tbody.collapse.in {
     .pagination > li > span {
       position: relative;
       float: left;
-      padding: 6px 12px;
+      padding: 10px 16px;
       line-height: 1.4375;
       text-decoration: none;
       color: #335075;
@@ -4580,10 +4580,10 @@ a.list-group-item-danger {
 .panel-title {
   margin-top: 0;
   margin-bottom: 0;
-  font-size: 18px;
+  font-size: 20px;
   color: inherit; }
   .panel-title > a {
-    color: inherit; }
+    color: #055959; }
 
 .panel-footer {
   padding: 10px 15px;
@@ -10186,7 +10186,7 @@ header .brand {
  Site information
 */
 #wb-info {
-  background: #e1e4e7;
+  background: #f5f5f5;
   position: relative;
   z-index: 5; }
   #wb-info a {
@@ -10195,8 +10195,8 @@ header .brand {
     #wb-info a.wb-navcurr {
       font-weight: 800; }
   #wb-info .brand {
-    background: #f8f8f8;
-    border-top: 4px solid #055959;
+    background: #fcfcfc;
+    border-top: 4px solid #047177;
     line-height: 30px; }
     #wb-info .brand object,
     #wb-info .brand img {
@@ -10504,6 +10504,14 @@ a.shr-opn, a.shr-opn:hover {
     min-height:50px;
 }
     
+.list-break{
+    border-bottom: 1px solid #d6eae6;   
+}
+
+.list-break:last-child{
+    border-bottom:none;   
+}
+
     /****************************************/
     
     /******************** user menu ********************/
@@ -10590,10 +10598,22 @@ a.shr-opn, a.shr-opn:hover {
 
 .user-menu{
     min-width: 400px;
+<<<<<<< HEAD
     min-height: 200px;
    
+=======
+
+
+    
+>>>>>>> tbs-sct/gcconnex-upgrade
     /*position: relative;*/
 }
+
+/** Sizing the Images to make medium images slightly smaller. They scale with the responsive class so it's all good **/
+ .elgg-avatar-medium-wet4{
+     max-width:80px;  
+     padding-left:5px;
+ }
 
 .elgg-menu-user-menu-subMenu {
     padding: 0;
@@ -10808,6 +10828,67 @@ a.shr-opn, a.shr-opn:hover {
     }  
 
 /*Here are my custom styles for this prototype*/
+#thewire-tools-reshare-wrapper-wet4 {
+    max-width: 600px;
+}
+
+.elgg-menu-hz .removeMe {
+    display: none;
+}
+.list-inline .removeMe {
+    display: none;
+}
+/******Padding Classes********/
+/*
+.pad-lft-0 {
+    padding-left: 0;
+}
+.pad-lft-xs {
+    padding-left: 5px;
+}
+.pad-lft-sm {
+    padding-left: 10px;
+}
+.pad-lft-md {
+    padding-left: 15px;
+}
+
+.pad-rght-0 {
+    padding-right: 0;
+}
+.pad-rght-xs {
+    padding-right: 5px;
+}
+.pad-rght-sm {
+    padding-right: 10px;
+}
+.pad-rght-md {
+    padding-right: 15px;
+}
+*/
+.list-inline .pad-rght-xs {
+    padding-right: 5px;
+}
+
+.list-inline .pad-lft-0 {
+    padding-left: 0;
+}
+
+
+/* Red Flag */
+.red {
+    background: red;
+}
+
+.replyContainer {
+    max-width: 510px;
+
+}
+
+.thewire-characters-remaining {
+    background: none;
+}
+
 .img-tn{
     width:60px;
     height: 60px;
@@ -11029,6 +11110,119 @@ details.elgg-state-success:before {
     width:100%;   
 }
 
+<<<<<<< HEAD
+=======
+
+/** Photo Gallery Custom Classes**/
+
+.panel-body-gallery {
+ padding:7px;   
+}
+
+/****** New Header style stuff *******/
+#app-brand{
+    background-color: #047177; 
+    color: #fff;
+    min-height: 45px;
+    /*padding-top: 5px;*/
+}
+
+#app-brand a{
+   text-decoration: none;
+    color: #fff;
+}
+
+#app-brand li a{
+   text-decoration: none;
+    color: black;
+    padding: 30px 35px;
+}
+.app-name{
+    font-size: 1.6em;
+    padding-top:5px;
+    padding-left: 20px;
+    background-color: #055959;
+    min-height: 45px;
+    max-width: 165px;
+   margin-left:-5px;
+}
+
+.app-name:before{
+       content: '';
+    display: block;
+    position: absolute;
+    left: 165px;
+    top: 0;
+    width: 0;
+    height: 0;
+	border-top: 22.5px solid transparent;
+	border-bottom: 22.5px solid transparent;
+	
+	border-left: 20px solid #055959;
+    clear: both;     
+}
+
+
+.bold-gc{
+    font-weight: 800;   
+}
+
+
+.tools-navigator{
+    font-size: 1.1em;
+    margin-top:10px;
+    
+}
+
+.tools-navigator-menu{
+    top:35px;   
+}
+
+.tools-navigator-menu:before{
+       content: '';
+    display: block;
+    position: absolute;
+    left: 80%;
+    top: -10px;
+    width: 0;
+    height: 0;
+	border-left: 12px solid transparent;
+	border-right: 12px solid transparent;
+	
+	border-bottom: 12px solid #fff;
+    clear: both;    
+}
+.tools-navigator-menu:after{
+       content: '';
+    display: block;
+    position: absolute;
+    left: 80%;
+    top: -12px;
+    width: 0;
+    height: 0;
+	border-left: 12px solid transparent;
+	border-right: 12px solid transparent;
+	
+	border-bottom: 12px solid rgba(0, 0, 0, 0.15) ;
+    clear: both;     
+}
+
+#tools-dropdown{
+    cursor: pointer;
+}
+
+.tools-dropdown-holder{
+    min-width: 300px;
+    color: black;
+    padding: 10px;
+}
+.tools-navigator-menu li a{
+    color:black;   
+}
+
+
+
+>>>>>>> tbs-sct/gcconnex-upgrade
 /*
  * Mobile panel
  */
