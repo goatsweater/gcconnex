@@ -1,0 +1,3 @@
+[submodule "mod/mentions"]
+	path = mod/mentions
+	url = https://github.com/goatsweater/mentions
