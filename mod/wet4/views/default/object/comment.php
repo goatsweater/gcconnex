@@ -22,7 +22,7 @@ $friendlytime = elgg_view_friendly_time($comment->time_created);
 if(elgg_get_context() !== 'widgets'){
 $commenter_icon = elgg_view_entity_icon($commenter, 'medium');
 }else{
-  $commenter_icon = elgg_view_entity_icon($commenter, 'small');  
+  $commenter_icon = elgg_view_entity_icon($commenter, 'small');
 }
 
 
@@ -32,11 +32,8 @@ $entity_title = $entity->title ? $entity->title : elgg_echo('untitled');
 $entity_link = "<a href=\"{$entity->getURL()}\">$entity_title</a>";
 
 if ($full_view) {
-<<<<<<< HEAD
-=======
-    
-    
->>>>>>> tbs-sct/gcconnex-upgrade
+
+
 	$anchor = "<a name=\"comment-{$comment->getGUID()}\"></a>";
 
 	$menu = elgg_view_menu('entity', array(
@@ -45,7 +42,7 @@ if ($full_view) {
 		'sort_by' => 'priority',
 		'class' => 'elgg-menu-hz float-alt',
 	));
-	
+
 	if (elgg_in_context('activity')) {
 
 		$comment_text = '<div class="elgg-output elgg-inner" data-role="comment-text">';
