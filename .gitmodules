@@ -1,3 +1,9 @@
 [submodule "mod/mentions"]
 	path = mod/mentions
 	url = https://github.com/goatsweater/mentions
+[submodule "mod/elgg-activitas"]
+	path = mod/elgg-activitas
+	url = http://github.com/goatsweater/elgg-activitas
+[submodule "mod/elgg-infinitescroll"]
+	path = mod/elgg-infinitescroll
+	url = http://github.com/goatsweater/elgg-infinitescroll
